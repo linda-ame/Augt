@@ -105,13 +105,32 @@ function DateSwitcher({ date, dates }: { date: string; dates: string[] }) {
 function ReadingBody({ reading }: { reading: ScriptureReading }) {
   const role = reading.role;
   if (role === "psalm") {
-    const p = parsePsalmDisplay(reading.text);
+    const { refrain, stanzas } = parsePsalmDisplay(reading.text);
     return (
-      <div className="space-y-4 leading-relaxed whitespace-pre-wrap">
-        {p.antiphon && (
-          <p className="italic text-[var(--ink-soft)]">{p.antiphon}</p>
+      <div className="space-y-6 leading-relaxed">
+        {refrain && (
+          <p>
+            <span className="font-semibold text-[var(--accent-deep)]">
+              Refrēns:{" "}
+            </span>
+            <span className="italic">{refrain}</span>
+          </p>
         )}
-        <p>{p.body}</p>
+        {stanzas.map((lines, i) => (
+          <div key={i} className="space-y-0">
+            {lines.map((line, j) => {
+              const isLast = j === lines.length - 1;
+              return (
+                <p key={j} className="m-0 whitespace-pre-wrap">
+                  {line}
+                  {isLast ? (
+                    <span className="italic text-[var(--accent-deep)]"> R.</span>
+                  ) : null}
+                </p>
+              );
+            })}
+          </div>
+        ))}
       </div>
     );
   }

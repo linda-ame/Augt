@@ -275,13 +275,14 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
   }
 
   function checkOrder() {
-    if (!Array.isArray(activity.correct_answer)) {
+    const answers = activity.correct_answer;
+    if (!Array.isArray(answers)) {
       setStatus("revealed");
       return;
     }
     const ok =
-      order.length === activity.correct_answer.length &&
-      order.every((item, i) => item === activity.correct_answer![i]);
+      order.length === answers.length &&
+      order.every((item, i) => item === answers[i]);
     if (ok) registerCorrect();
     else registerWrong();
   }
