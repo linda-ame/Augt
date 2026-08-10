@@ -1,0 +1,102 @@
+[
+  {
+    "commandment": "1. Tev nebūs citus dievus turēt līdzās manim.",
+    "correct": "Godāt un ticēt tikai vienam patiesajam Dievam.",
+    "options": [
+      "Godāt un ticēt tikai vienam patiesajam Dievam.",
+      "Runāt patiesību un nemelot.",
+      "Saudzēt citu īpašumu.",
+      "Cienīt vecākus."
+    ]
+  },
+  {
+    "commandment": "2. Tev nebūs Kunga, sava Dieva, vārdu nelietīgi valkāt.",
+    "correct": "Godāt Dieva vārdu un runāt par to ar cieņu.",
+    "options": [
+      "Godāt Dieva vārdu un runāt par to ar cieņu.",
+      "Svētdienās piedalīties dievkalpojumos.",
+      "Saudzēt dzīvību un veselību.",
+      "Neskaust citus cilvēkus."
+    ]
+  },
+  {
+    "commandment": "3. Tev būs svēto dienu svētīt.",
+    "correct": "Svētdienās lūgties un piedalīties dievkalpojumā.",
+    "options": [
+      "Svētdienās lūgties un piedalīties dievkalpojumā.",
+      "Godāt vecākus un skolotājus.",
+      "Runāt patiesību.",
+      "Saudzēt īpašumu."
+    ]
+  },
+  {
+    "commandment": "4. Tev būs godāt savu tēvu un savu māti.",
+    "correct": "Cienīt, mīlēt un klausīt vecākus.",
+    "options": [
+      "Cienīt, mīlēt un klausīt vecākus.",
+      "Runāt patiesību un nemelot.",
+      "Saudzēt dzīvību.",
+      "Nelietot Dieva vārdu jokos."
+    ]
+  },
+  {
+    "commandment": "5. Tev nebūs nokaut.",
+    "correct": "Saudzēt savu un citu cilvēku dzīvību un veselību.",
+    "options": [
+      "Saudzēt savu un citu cilvēku dzīvību un veselību.",
+      "Godāt Dieva vārdu.",
+      "Būt šķīstam domās.",
+      "Neskaust citu mantu."
+    ]
+  },
+  {
+    "commandment": "6. Tev nebūs laulību pārkāpt.",
+    "correct": "Sargāt savas domas, vārdus un rīcību no nešķīstības.",
+    "options": [
+      "Sargāt savas domas, vārdus un rīcību no nešķīstības.",
+      "Saudzēt īpašumu.",
+      "Runāt patiesību.",
+      "Godāt vecākus."
+    ]
+  },
+  {
+    "commandment": "7. Tev nebūs zagt.",
+    "correct": "Saudzēt citu cilvēku īpašumu un būt godīgam.",
+    "options": [
+      "Saudzēt citu cilvēku īpašumu un būt godīgam.",
+      "Svētdienās lūgties.",
+      "Būt šķīstam domās.",
+      "Runāt patiesību."
+    ]
+  },
+  {
+    "commandment": "8. Tev nebūs nepatiesu liecību dot.",
+    "correct": "Runāt patiesību un saudzēt otra labo slavu.",
+    "options": [
+      "Runāt patiesību un saudzēt otra labo slavu.",
+      "Godāt vecākus.",
+      "Saudzēt īpašumu.",
+      "Sargāt savas domas no nešķīstības."
+    ]
+  },
+  {
+    "commandment": "9. Tev nebūs iekārot sava tuvākā sievu.",
+    "correct": "Sargāt savas domas un vēlmes no nešķīstības.",
+    "options": [
+      "Sargāt savas domas un vēlmes no nešķīstības.",
+      "Saudzēt dzīvību un veselību.",
+      "Godāt Dieva vārdu.",
+      "Būt godīgam īpašumā."
+    ]
+  },
+  {
+    "commandment": "10. Tev nebūs iekārot nevienu lietu, kas pieder tavam tuvākam.",
+    "correct": "Nebūt mantkārīgam un neapskaust citu īpašumu.",
+    "options": [
+      "Nebūt mantkārīgam un neapskaust citu īpašumu.",
+      "Godāt vecākus.",
+      "Runāt patiesību.",
+      "Svētdienās lūgties."
+    ]
+  }
+]

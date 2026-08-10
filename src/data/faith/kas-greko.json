@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "question": "Kas grēko pret 1. bausli?",
+    "commandment": "Tev nebūs citus dievus turēt līdzās Manim.",
+    "meaning": "Ar pirmo bausli ir pavēlēts atzīt un godināt tikai vienu patieso Dievu.",
+    "correct": "Paļaujas uz zīlēšanu, horoskopiem un citiem spēkiem, nevis uz Dievu",
+    "options": [
+      "Paļaujas uz zīlēšanu, horoskopiem un citiem spēkiem, nevis uz Dievu",
+      "Melo un aprunā citus cilvēkus",
+      "Zog vai bojā cita īpašumu",
+      "Ir rupjš pret vecākiem"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Kas grēko pret 2. bausli?",
+    "commandment": "Tev nebūs Kunga vārdu lietot vieglprātīgi.",
+    "meaning": "Ar otro bausli ir pavēlēts godā turēt Dieva vārdu un nepiesaukt to vieglprātīgi.",
+    "correct": "Lieto Dieva vārdu jokojoties vai nepilda Dievam doto solījumu",
+    "options": [
+      "Lieto Dieva vārdu jokojoties vai nepilda Dievam doto solījumu",
+      "Skaudīgi iekāro citu mantu",
+      "Kaujas un ievaino citus cilvēkus",
+      "Neiet uz dievkalpojumu svētdienā"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Kas grēko pret 3. bausli?",
+    "commandment": "Svētdienas jāsvētī.",
+    "meaning": "Ar trešo bausli ir pavēlēts svētdienās lūgties, piedalīties dievkalpojumos un nestrādāt smagus darbus.",
+    "correct": "Apzināti ignorē svētdienas un nepiedalās dievkalpojumos",
+    "options": [
+      "Apzināti ignorē svētdienas un nepiedalās dievkalpojumos",
+      "Melo un izplata nepatiesu informāciju",
+      "Zog vai krāpj citus cilvēkus",
+      "Ir necieņpilns pret vecākiem"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Kas grēko pret 4. bausli?",
+    "commandment": "Godā savu tēvu un māti.",
+    "meaning": "Ar ceturto bausli ir pavēlēts cienīt, klausīt un mīlēt savus vecākus.",
+    "correct": "Ir rupjš pret vecākiem un sagādā viņiem sirdssāpes",
+    "options": [
+      "Ir rupjš pret vecākiem un sagādā viņiem sirdssāpes",
+      "Lasa neķītrus rakstus un skatās neķītras bildes",
+      "Lieto Dieva vārdu dusmās",
+      "Paļaujas uz burvjiem un zīlniekiem"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Kas grēko pret 5. bausli?",
+    "commandment": "Tev nebūs nokaut.",
+    "meaning": "Ar piekto bausli ir pavēlēts saudzēt savu un citu cilvēku veselību un dzīvību.",
+    "correct": "Izrāda vardarbību vai apdraud citu cilvēku veselību",
+    "options": [
+      "Izrāda vardarbību vai apdraud citu cilvēku veselību",
+      "Melo un aprunā citus cilvēkus",
+      "Zog vai bojā cita īpašumu",
+      "Nepaklausa saviem vecākiem"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Kas grēko pret 6. bausli?",
+    "commandment": "Tev nebūs laulību pārkāpt.",
+    "meaning": "Ar sesto bausli ir pavēlēts būt šķīstam domās, vārdos un darbos.",
+    "correct": "Iesaistās nešķīstās domās, sarunās vai darbos",
+    "options": [
+      "Iesaistās nešķīstās domās, sarunās vai darbos",
+      "Krāpj un neatdod parādus",
+      "Ir necieņpilns pret saviem vecākiem",
+      "Apskauž citu cilvēku mantu"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Kas grēko pret 7. bausli?",
+    "commandment": "Tev nebūs zagt.",
+    "meaning": "Ar septīto bausli ir pavēlēts saudzēt savu un citu īpašumu.",
+    "correct": "Zog, krāpj vai bojā cita cilvēka īpašumu",
+    "options": [
+      "Zog, krāpj vai bojā cita cilvēka īpašumu",
+      "Kaujas un draud citiem cilvēkiem",
+      "Melo un aprunā citus",
+      "Lieto Dieva vārdu jokojoties"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Kas grēko pret 8. bausli?",
+    "commandment": "Tev nebūs melot.",
+    "meaning": "Ar astoto bausli ir pavēlēts runāt patiesību un saudzēt citu labo slavu.",
+    "correct": "Melo, aprunā citus vai izplata nepatiesu informāciju",
+    "options": [
+      "Melo, aprunā citus vai izplata nepatiesu informāciju",
+      "Zog vai bojā cita cilvēka mantu",
+      "Nepaklausa saviem vecākiem",
+      "Skatās neķītras bildes"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Kas grēko pret 9. bausli?",
+    "commandment": "Tev nebūs iekārot sava tuvākā sievu.",
+    "meaning": "Ar devīto bausli ir pavēlēts sargāt savas domas un vēlmes no nešķīstības.",
+    "correct": "Pieļauj nešķīstas domas un vēlmes",
+    "options": [
+      "Pieļauj nešķīstas domas un vēlmes",
+      "Kaujas un ievaino citus cilvēkus",
+      "Krāpj un zog",
+      "Melo tiesas priekšā"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Kas grēko pret 10. bausli?",
+    "commandment": "Tev nebūs iekārot cita mantu.",
+    "meaning": "Ar desmito bausli ir pavēlēts nebūt mantkārīgam un neapskaust citus.",
+    "correct": "Iekāro citu cilvēku mantu un kļūst mantkārīgs",
+    "options": [
+      "Iekāro citu cilvēku mantu un kļūst mantkārīgs",
+      "Ir rupjš pret saviem vecākiem",
+      "Lieto Dieva vārdu nevietā",
+      "Apzināti neiet uz dievkalpojumu svētdienā"
+    ]
+  }
+]

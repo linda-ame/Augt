@@ -1,0 +1,29 @@
+name: Daily Augt generation
+
+on:
+  schedule:
+    # 03:00 UTC ≈ 06:00 Europe/Riga in winter; 04:00 UTC in summer DST.
+    # Run both; the job is idempotent per child+date.
+    - cron: "0 3 * * *"
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Generate daily lessons
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
+          KID_SESSION_SECRET: ${{ secrets.KID_SESSION_SECRET }}
+        run: npm run generate:daily

@@ -1,0 +1,177 @@
+{
+  "sections": [
+    {
+      "id": "bausli",
+      "title": "10 Dieva baušļi",
+      "lines": [
+        "Es esmu Kungs, tavs Dievs.",
+        "1. Tev nebūs citus dievus turēt līdzās manim.",
+        "2. Tev nebūs Kunga, sava Dieva, vārdu nelietīgi valkāt.",
+        "3. Tev būs svēto dienu svētīt.",
+        "4. Tev būs godāt savu tēvu un savu māti.",
+        "5. Tev nebūs nokaut.",
+        "6. Tev nebūs laulību pārkāpt.",
+        "7. Tev nebūs zagt.",
+        "8. Tev nebūs nepatiesu liecību dot pret savu tuvāko.",
+        "9. Tev nebūs iekārot sava tuvākā sievu.",
+        "10. Tev nebūs iekārot nevienu lietu, kas pieder tavam tuvākam."
+      ]
+    },
+    {
+      "id": "baznicas-bausli",
+      "title": "5 Baznīcas baušļi",
+      "lines": [
+        "1. Tev būs svētdienās un svētku dienās cienīgi piedalīties Svētajā Misē un atturēties no smagiem darbiem.",
+        "2. Tev būs piektdienās atturēties no gaļas ēdieniem un gavējamās dienās gavēt.",
+        "3. Tev būs vismaz vienu reizi gadā izsūdzēt savus grēkus.",
+        "4. Tev būs vismaz Lieldienu laikā pieņemt Vissvētāko Sakramentu.",
+        "5. Tev būs palīdzēt uzturēt savu Baznīcu un tās kalpus."
+      ]
+    },
+    {
+      "id": "ticibas-patiesibas",
+      "title": "Galvenās ticības patiesības",
+      "lines": [
+        "1. Ir Dievs, kas visu radījis, uztur un vada.",
+        "2. Dievs ir viens, bet trijās Personās: Dievs Tēvs, Dievs Dēls un Dievs Svētais Gars.",
+        "3. Dievs Dēls kļuva par cilvēku un nomira par mūsu grēkiem pie krusta.",
+        "4. Dievs ir taisnīgs, par labiem darbiem atalgo, par ļauniem soda.",
+        "5. Cilvēka dvēsele ir nemirstīga.",
+        "6. Lai varētu iemantot debesu valstību, cilvēkam ir nepieciešama Dieva žēlastība."
+      ]
+    },
+    {
+      "id": "svetibas",
+      "title": "8 svētības",
+      "lines": [
+        "1. Svētīgi nabadzīgie garā, jo viņiem pieder debesu valstība.",
+        "2. Svētīgi lēnprātīgie, jo viņi iemantos zemi.",
+        "3. Svētīgi noskumušie, jo viņi tiks iepriecināti.",
+        "4. Svētīgi tie, kas izsalkuši un kam slāpst pēc taisnības, jo viņi tiks paēdināti.",
+        "5. Svētīgi žēlsirdīgie, jo viņi iemantos žēlsirdību.",
+        "6. Svētīgi sirdsšķīstie, jo viņi redzēs Dievu.",
+        "7. Svētīgi miermīlīgie, jo viņi tiks saukti par Dieva bērniem.",
+        "8. Svētīgi tie, kas cieš vajāšanas taisnības dēļ, jo viņiem pieder debesu valstība."
+      ]
+    },
+    {
+      "id": "sveta-gara-davanas",
+      "title": "7 Svētā Gara dāvanas",
+      "lines": [
+        "1. Gudrība",
+        "2. Saprāts",
+        "3. Padoms",
+        "4. Stiprums",
+        "5. Zināšana",
+        "6. Dievbijība",
+        "7. Dieva bijāšana"
+      ]
+    },
+     {
+      "id": "Dievam-vispatikamakie-darbi",
+      "title": "3 Dievam vispatīkamākie labie darbi",
+      "lines": [
+        "1. Lūgšana",
+        "2. Gavēnis",
+        "3. Dāvanu došana"
+      ]
+    },
+    {
+      "id": "vissvarigakie-tikumi",
+      "title": "3 vissvarīgākie tikumi",
+      "lines": [
+        "1. Ticība",
+        "2. Cerība",
+        "3. Mīlestība"
+      ]
+    },
+    {
+      "id": "cetri-pamattikumi",
+      "title": "4 pamattikumi",
+      "lines": [
+        "1. Gudrība",
+        "2. Taisnība",
+        "3. Sātība",
+        "4. Drosme"
+      ]
+    },
+
+    {
+      "id": "zelsirdibas-darbi-dveselei",
+      "title": "7 žēlsirdības darbi dvēselei",
+      "lines": [
+        "1. Ved grēciniekus uz labu ceļu.",
+        "2. Pamāci nemācītos.",
+        "3. Dod labu padomu šaubīgiem.",
+        "4. Iepriecini noskumušos.",
+        "5. Pacietīgi panes netaisnības.",
+        "6. Labprāt piedod tiem, kas tevi apkaitinājuši.",
+        "7. Lūdz Dievu par dzīviem un mirušiem."
+      ]
+    },
+    {
+      "id": "zelsirdibas-darbi-miesai",
+      "title": "7 žēlsirdības darbi miesai",
+      "lines": [
+        "1. Paēdini izsalkušos.",
+        "2. Padzirdini izslāpušos.",
+        "3. Apģērb trūcīgos.",
+        "4. Uzņem svešiniekus savās mājās.",
+        "5. Apmeklē cietumniekus.",
+        "6. Apraugi slimniekus.",
+        "7. Apglabā mirušos."
+      ]
+    },
+   
+    {
+      "id": "galvenie-greki-netikumi",
+      "title": "7 galvenie grēki (netikumi)",
+      "lines": [
+        "1. Lepnība",
+        "2. Skopums",
+        "3. Nešķīstība",
+        "4. Negausība",
+        "5. Skaudība",
+        "6. Dusmība",
+        "7. Slinkums."
+      ]
+    },
+    {
+      "id": "lielakie-greki",
+      "title": "4 vislielākie grēki",
+      "lines": [
+        "1. Ar nodomu izdarīta slepkavība.",
+        "2. Sodomiešu (netiklības) grēks.",
+        "3. Nabagu, bāreņu un atraitņu apspiešana.",
+        "4. Strādniekiem nopelnītās algas aizturēšana."
+      ]
+    },
+    {
+      "id": "greki-pret-sveto-garu",
+      "title": "6 grēki pret Svēto Garu",
+      "lines": [
+        "1. Ja cilvēks, paļaudamies uz Dieva žēlsirdību, tīšām grēko.",
+        "2. Ja, grēku padarījis, šaubās, vai Dievs to piedos.",
+        "3. Ja pretojas kādai Baznīcas mācības patiesībai.",
+        "4. Ja savu tuvāko apskauž tāpēc, ka Dievs to ir svētījis.",
+        "5. Ja parāda nocietinātu sirdi pret derīgām pamācībām.",
+        "6. Ja no grēkiem tīšām neatgriežas."
+      ]
+    },
+    {
+      "id": "svesie-greki",
+      "title": "9 sveši grēki",
+      "lines": [
+        "1. Pamācām citus uz ļauniem darbiem.",
+        "2. Pavēlam.",
+        "3. Palīdzam.",
+        "4. Atļaujam darīt ļaunu.",
+        "5. Uzslavējam.",
+        "6. Paskubinām.",
+        "7. Noklusējam.",
+        "8. Noslēpjam.",
+        "9. Dalām netaisni iegūtu mantu."
+      ]
+    }
+  ]
+}

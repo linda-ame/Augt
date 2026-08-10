@@ -1,0 +1,345 @@
+{
+  "title": "Dieva baušļi un kristīgā dzīve",
+  "sections": [
+    {
+      "id": "bausli",
+      "title": "Dieva baušļi",
+      "range": "78-98",
+      "groups": [
+        {
+          "id": "radiba",
+          "title": "Kā rādās? ",
+          "range": "78",
+          "items": [
+            {
+              "nr": 78,
+              "q": "Kas cilvēkam ir devis 10 baušļus?",
+              "a": "Desmit baušļus cilvēkam ir devis pats Dievs."
+            }
+          ]
+        },
+        {
+          "id": "1-bauslis",
+          "title": "1. bauslis",
+          "range": "79-80",
+          "items": [
+            {
+              "nr": 79,
+              "q": "Ko mums Dievs pavēl ar pirmo bausli?",
+              "a": "Ar pirmo bausli – „Tev nebūs citus dievus turēt līdzās manim” – ir pavēlēts atzīt un godināt tikai vienu patieso Dievu, debesu un zemes Radītāju."
+            },
+            {
+              "nr": 80,
+              "q": "Kas grēko pret pirmo Dieva bausli?",
+              "a": "Pret pirmo Dieva bausli grēko tas, kas netic Dievam un nelūdzas, bet tic zīlniekiem, gaišreģiem, burvjiem un kalpo dēmonam."
+            }
+          ]
+        },
+        {
+          "id": "2-bauslis",
+          "title": "2. bauslis",
+          "range": "81-82",
+          "items": [
+            {
+              "nr": 81,
+              "q": "Ko mums Dievs pavēl ar otro bausli?",
+              "a": "Ar otro bausli – „Tev nebūs Kunga, sava Dieva, vārdu nelietīgi valkāt” – ir pavēlēts godā turēt Dieva vārdu, tas ir, lasīt un pildīt to, kas teikts Svētajos Rakstos."
+            },
+            {
+              "nr": 82,
+              "q": "Kas grēko pret otro Dieva bausli?",
+              "a": "Pret otro Dieva bausli grēko tas, kurš svētos vārdus izrunā pie jokiem vai dusmās, vai netaisnā lietā, vai arī nepilda Dievam doto solījumu."
+            }
+          ]
+        },
+        {
+          "id": "3-bauslis",
+          "title": "3. bauslis",
+          "range": "83-84",
+          "items": [
+            {
+              "nr": 83,
+              "q": "Ko mums Dievs pavēl ar trešo bausli?",
+              "a": "Ar trešo bausli – „Tev būs svēto dienu svētīt” – ir pavēlēts svētdienās lūgties, piedalīties dievkalpojumos un nestrādāt smagus darbus."
+            },
+            {
+              "nr": 84,
+              "q": "Kas grēko pret trešo Dieva bausli?",
+              "a": "Pret trešo Dieva bausli grēko tas, kurš svētdienās un svētku dienās nepiedalās Sv. Misē un strādā bez vajadzības."
+            }
+          ]
+        },
+        {
+          "id": "4-bauslis",
+          "title": "4. bauslis",
+          "range": "85-86",
+          "items": [
+            {
+              "nr": 85,
+              "q": "Ko mums Dievs pavēl ar ceturto bausli?",
+              "a": "Ar ceturto bausli – „Tev būs godāt savu tēvu un savu māti” – ir pavēlēts klausīt, cienīt un mīlēt vecākus."
+            },
+            {
+              "nr": 86,
+              "q": "Kas grēko pret ceturto Dieva bausli?",
+              "a": "Pret ceturto Dieva bausli grēko tas, kurš nepalīdz vecākiem un ir rupjš pret tiem."
+            }
+          ]
+        },
+        {
+          "id": "5-bauslis",
+          "title": "5. bauslis",
+          "range": "87-88",
+          "items": [
+            {
+              "nr": 87,
+              "q": "Ko Dievs pavēl ar piekto bausli?",
+              "a": "Ar piekto bausli – „Tev nebūs nokaut” – ir pavēlēts saudzēt dzīvību."
+            },
+            {
+              "nr": 88,
+              "q": "Kas grēko pret piekto Dieva bausli?",
+              "a": "Pret piekto Dieva bausli grēko tas, kurš kaitē citiem vai sev."
+            }
+          ]
+        },
+        {
+          "id": "6-bauslis",
+          "title": "6. bauslis",
+          "range": "89-90",
+          "items": [
+            {
+              "nr": 89,
+              "q": "Ko Dievs pavēl ar sesto bausli?",
+              "a": "Ar sesto bausli – „Tev nebūs laulību pārkāpt” – ir pavēlēts būt šķīstiem."
+            },
+            {
+              "nr": 90,
+              "q": "Kas grēko pret sesto Dieva bausli?",
+              "a": "Pret sesto Dieva bausli grēko tas, kurš dara nešķīstus darbus vai domas."
+            }
+          ]
+        },
+        {
+          "id": "7-bauslis",
+          "title": "7. bauslis",
+          "range": "91-92",
+          "items": [
+            {
+              "nr": 91,
+              "q": "Ko Dievs pavēl ar septīto bausli?",
+              "a": "Ar septīto bausli – „Tev nebūs zagt” – ir pavēlēts cienīt īpašumu."
+            },
+            {
+              "nr": 92,
+              "q": "Kas grēko pret septīto Dieva bausli?",
+              "a": "Pret septīto Dieva bausli grēko tas, kurš zog vai krāpj."
+            }
+          ]
+        },
+        {
+          "id": "8-bauslis",
+          "title": "8. bauslis",
+          "range": "93-94",
+          "items": [
+            {
+              "nr": 93,
+              "q": "Ko Dievs pavēl ar astoto bausli?",
+              "a": "Ar astoto bausli – „Tev nebūs nepatiesu liecību dot” – ir pavēlēts runāt patiesību."
+            },
+            {
+              "nr": 94,
+              "q": "Kas grēko pret astoto Dieva bausli?",
+              "a": "Pret astoto Dieva bausli grēko tas, kurš melo vai aprunā citus."
+            }
+          ]
+        },
+        {
+          "id": "9-10-bauslis",
+          "title": "9. un 10. bauslis",
+          "range": "95-96",
+          "items": [
+            {
+              "nr": 95,
+              "q": "Ko Dievs pavēl ar devīto un desmito bausli?",
+              "a": "Ar devīto un desmito bausli ir pavēlēts būt tīriem domās."
+            },
+            {
+              "nr": 96,
+              "q": "Kas grēko pret devīto un desmito Dieva bausli?",
+              "a": "Pret devīto un desmito bausli grēko tas, kurš iekāro citu mantu."
+            }
+          ]
+        }, 
+
+        {
+      "id": "baznicas-bausli",
+      "title": "Baznīcas baušļi",
+      "range": "97",
+      "items": [
+        {
+          "nr": 97,
+          "q": "Kas ir pavēlēts ar Baznīcas baušļiem?",
+          "a": "Ar Baznīcas baušļiem ir pavēlēts svētdienās un svētku dienās piedalīties Sv. Misē, piektdienās atturēties no gaļas ēdieniem, Lieldienu laikā ik gadus izsūdzēt savus grēkus un pieņemt Sv. Komūniju."
+        }
+      ]
+    },
+    {
+      "id": "bauslu-nozime",
+      "title": "Baušļu nozīme",
+      "range": "98",
+      "items": [
+        {
+          "nr": 98,
+          "q": "Ko nozīmē visi desmit Dieva baušļi?",
+          "a": "Visi desmit Dieva baušļi nozīmē to, ka mums jāmīl Dievs vairāk par visu citu, bet tuvākais jāmīl kā sevi pašu."
+        }
+      ]
+    }
+      ]
+    },
+
+    {
+      "id": "par-greku",
+      "title": "Par grēku",
+      "groups": [
+        {
+          "id": "greks",
+          "title": "Grēks",
+          "range": "99",
+          "items": [
+            {
+              "nr": 99,
+              "q": "Kas ir grēks?",
+              "a": "Grēks ir Dieva vai Baznīcas baušļu apzinīga un brīvprātīga pārkāpšana."
+            }
+          ]
+        },
+
+        {
+          "id": "navigs-greks",
+          "title": "Nāvīgs grēks",
+          "range": "100-101",
+          "items": [
+            {
+              "nr": 100,
+              "q": "Kas ir nāvīgs grēks?",
+              "a": "Nāvīgs grēks ir tīša un apzināta Dieva vai Baznīcas baušļu pārkāpšana lielā lietā."
+            },
+            {
+              "nr": 101,
+              "q": "Ko zaudē cilvēks ar nāvīgu grēku?",
+              "a": "Ar nāvīgu grēku cilvēks zaudē Dieva žēlastību un nokļūst pazudināšanas briesmās."
+            }
+          ]
+        },
+
+        {
+          "id": "ikdienisks-greks",
+          "title": "Ikdienišķs grēks",
+          "range": "102-103",
+          "items": [
+            {
+              "nr": 102,
+              "q": "Kas ir ikdienišķs grēks?",
+              "a": "Ikdienišķs grēks ir Dieva vai Baznīcas baušļu pārkāpšana mazā lietā."
+            },
+            {
+              "nr": 103,
+              "q": "Kādu sodu cilvēks pelna par ikdienišķu grēku?",
+              "a": "Par ikdienišķu grēku cilvēks pelna laicīgu sodu šinī pasaulē vai pēc nāves šķīstīšanā."
+            }
+          ]
+        },
+
+        {
+          "id": "grekosana",
+          "title": "Grēkošana un netikumi",
+          "range": "104-106",
+          "items": [
+            {
+              "nr": 104,
+              "q": "Kā cilvēks var grēkot?",
+              "a": "Cilvēks var grēkot ar domām, vārdiem, darbiem un nepildot pienākumu."
+            },
+            {
+              "nr": 105,
+              "q": "Kas notiek, ja kādu grēku atkārto?",
+              "a": "Atkārtojot grēku, rodas netikums."
+            },
+            {
+              "nr": 106,
+              "q": "Cik ir biežāk sastopamu netikumu?",
+              "a": "Ir septiņi galvenie grēki: lepnība, skopums, nešķīstība, skaudība, negausība, dusmība, slinkums."
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "bauslu-pildisana",
+      "title": "Baušļu pildīšana",
+      "groups": [
+        {
+          "id": "labie-darbi",
+          "title": "Labie darbi",
+          "range": "107-109",
+          "items": [
+            {
+              "nr": 107,
+              "q": "Vai pietiek sargāties no grēkiem?",
+              "a": "Nē, jādara arī labi darbi."
+            },
+            {
+              "nr": 108,
+              "q": "Kādi labi darbi jādara vispirms?",
+              "a": "Tie, ko prasa pienākums."
+            },
+            {
+              "nr": 109,
+              "q": "Kādi ir Dievam vispatīkamākie labie darbi?",
+              "a": "Lūgšana, gavēnis un dāvanu došana."
+            }
+          ]
+        },
+
+        {
+          "id": "tikumi",
+          "title": "Tikummi",
+          "range": "110-112",
+          "items": [
+            {
+              "nr": 110,
+              "q": "Ko iegūstam, darot labus darbus?",
+              "a": "Tikumus."
+            },
+            {
+              "nr": 111,
+              "q": "Kādi ir vissvarīgākie tikumi?",
+              "a": "Ticība, cerība un mīlestība."
+            },
+            {
+              "nr": 112,
+              "q": "Kādi ir pamattikumi?",
+              "a": "Gudrība, taisnība, sātība un drosme."
+            }
+          ]
+        },
+
+        {
+          "id": "nomods",
+          "title": "Būt nomodā",
+          "range": "113",
+          "items": [
+            {
+              "nr": 113,
+              "q": "Kas jādara, lai mēs nekristu grēkos?",
+              "a": "Jālūdzas rītos, vakaros un ikdienā."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

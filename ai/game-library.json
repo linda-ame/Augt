@@ -1,0 +1,85 @@
+{
+  "version": 2,
+  "games": [
+    {
+      "id": "multiple_choice",
+      "name": "Izvēlies pareizo atbildi",
+      "best_for": ["facts", "vocabulary", "main_idea", "characters"],
+      "age_range": [8, 18],
+      "mode": "quiz",
+      "notes": "3–4 options. REQUIRED: correct_answer (0-based index), explanation. One clear factual/Gospel answer."
+    },
+    {
+      "id": "true_false",
+      "name": "Patiess vai nepatiess",
+      "best_for": ["facts", "main_idea"],
+      "age_range": [8, 18],
+      "mode": "quiz",
+      "notes": "options: [\"Patiess\", \"Nepatiess\"]. REQUIRED: correct_answer (0 or 1), explanation. Avoid trick questions that undermine faith."
+    },
+    {
+      "id": "fill_blank",
+      "name": "Aizpildi tukšo vietu",
+      "best_for": ["vocabulary", "key_phrases"],
+      "age_range": [8, 16],
+      "mode": "quiz",
+      "notes": "REQUIRED: answer (string), explanation. One meaningful blank from the reading or main idea."
+    },
+    {
+      "id": "word_scramble",
+      "name": "Sajaukti burti",
+      "best_for": ["vocabulary", "key_words"],
+      "age_range": [8, 14],
+      "mode": "quiz",
+      "notes": "REQUIRED: scrambled, answer, explanation. Scramble an important word from today’s reading. explanation must be neutral (no „Lieliski!” / „Pareizi!” — UI adds that)."
+    },
+    {
+      "id": "who_am_i",
+      "name": "Kas es esmu?",
+      "best_for": ["characters"],
+      "age_range": [8, 16],
+      "mode": "quiz",
+      "notes": "REQUIRED: answer, explanation. Clues about a person from the Scripture."
+    },
+    {
+      "id": "put_in_order",
+      "name": "Sakārto notikumus",
+      "best_for": ["sequences", "stories"],
+      "age_range": [9, 18],
+      "mode": "quiz",
+      "notes": "REQUIRED: items (scrambled order for UI), correct_answer as ordered string array OR explanation of correct order, explanation. 3–5 events."
+    },
+    {
+      "id": "matching",
+      "name": "Sasaisti pārus",
+      "best_for": ["characters", "vocabulary", "concepts"],
+      "age_range": [9, 16],
+      "mode": "explore",
+      "notes": "REQUIRED: pairs [{left, right}], short explanation. Pairs shown already matched for younger UX; 3–4 pairs."
+    },
+    {
+      "id": "scenario_choice",
+      "name": "Ko tu darītu?",
+      "best_for": ["application", "moral_decisions", "empathy"],
+      "age_range": [10, 18],
+      "mode": "discernment",
+      "notes": "Everyday situation linked to Gospel. 2–3 respectful options. REQUIRED: correct_answer = index of Gospel-aligned preferred option; explanation = warm 1–3 sentences (why this path fits today’s Word). Do NOT shame other options; frame as growth, not failure. UI will not say „nepareizi”."
+    },
+    {
+      "id": "find_the_mistake",
+      "name": "Atrodi kļūdu",
+      "best_for": ["facts", "main_idea"],
+      "age_range": [10, 18],
+      "mode": "quiz",
+      "notes": "A short retelling with one incorrect detail as options or in the prompt. REQUIRED: correct_answer, explanation."
+    },
+    {
+      "id": "choose_the_best_response",
+      "name": "Labākā atbilde",
+      "best_for": ["application", "relationships", "virtues"],
+      "age_range": [10, 18],
+      "mode": "discernment",
+      "notes": "Choose the response that best reflects the Scripture’s teaching. Same fields as scenario_choice: correct_answer + warm explanation; gentle preference, not harsh wrong."
+    }
+  ]
+}

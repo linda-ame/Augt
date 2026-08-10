@@ -1,0 +1,374 @@
+{
+  "sections": [
+{
+  "id": "par-lugsanu",
+  "title": "Par lūgšanu",
+  "type": "qa",
+  "items": [
+    {
+      "id": "323",
+      "question": "Kas ir lūgšana?",
+      "answer": "Lūgšana ir dievbijīga saruna ar Dievu vai Viņa svētajiem."
+    },
+    {
+      "id": "324",
+      "question": "Kāpēc mums jālūdz Dievs?",
+      "answer": "Mums jālūdz Dievs tāpēc, ka pats Kungs Jēzus mums tā pavēlējis."
+    },
+    {
+      "id": "325",
+      "question": "Kā var lūgt Dievu?",
+      "answer": "Dievu var lūgt vārdos un domās."
+    },
+    {
+      "id": "326",
+      "question": "Ko mēs varam lūgt no Dieva?",
+      "answer": "Mēs varam lūgt visu, kas ir labs un vajadzīgs mūsu pestīšanai."
+    },
+    {
+      "id": "327",
+      "question": "Kad visvairāk jālūdz Dievs?",
+      "answer": "Dievs jālūdz rītā, vakarā un īpaši kārdināšanās un nelaimēs."
+    },
+    {
+      "id": "328",
+      "question": "Kāda lūgšana ir vislabākā?",
+      "answer": "Vislabākā ir Kunga lūgšana jeb „Tēvs mūsu”."
+    },
+    {
+      "id": "329",
+      "question": "Kāpēc to sauc par Kunga lūgšanu?",
+      "answer": "To sauc tāpēc, ka to mums iemācīja pats Kungs Jēzus."
+    },
+    {
+      "id": "330",
+      "question": "Kura ir vēl viena svarīga lūgšana pēc „Tēvs mūsu”?",
+      "answer": "„Esi sveicināta” jeb „Eņģeļa sveicinājums”."
+    },
+    {
+      "id": "331",
+      "question": "Ko nozīmē „Esi sveicināta, Marija”?",
+      "answer": "Tas ir sveiciens Jaunavai Marijai."
+    }
+  ]
+},
+
+{
+  "id": "ikdienas",
+  "title": "Ikdienišķās lūgšanas",
+  "sections": [
+    {
+      "id": "krusta-zime",
+      "title": "Svētā krusta zīme",
+      "subtitle": "Lūgšana dienas sākumam un beigām",
+      "content": "Dieva Tēva un Dēla, un Svētā Gara vārdā. Āmen.",
+      "qa": [
+        {
+          "id": "351",
+          "question": "Kā mēs sākam un beidzam visas lūgšanas?",
+          "answer": "Ar krusta zīmi: Dieva Tēva un Dēla, un Svētā Gara vārdā. Āmen."
+        },
+        {
+          "id": "352",
+          "question": "Ko nozīmē vārds „Āmen”?",
+          "answer": "Tas nozīmē: lai tā notiek, kā mēs ticam, darām un lūdzam."
+        }
+      ]
+    },
+
+    {
+      "id": "tevs-musu",
+      "title": "Tēvs mūsu",
+      "subtitle": "Kunga Jēzus lūgšana",
+        "lines": [
+            "Tēvs mūsu, kas esi debesīs,",
+            "svētīts lai top Tavs vārds,",
+            "lai atnāk Tava valstība,",
+            "Tavs prāts lai notiek kā debesīs, tā arī virs zemes.",
+            "Mūsu dienišķo maizi dod mums šodien",
+            "un piedod mums mūsu parādus,",
+            "kā arī mēs piedodam saviem parādniekiem,",
+            "un neieved mūs kārdināšanā,",
+            "bet atpestī mūs no ļauna",
+            "Amen."
+        ],
+      "qa": [
+        {
+          "id": "332",
+          "question": "Ko nozīmē „Tēvs mūsu, kas esi debesīs”?",
+          "answer": "Dievs ir mūsu debesu Tēvs, tādēļ Viņu lūdzam ar paļāvību."
+        },
+        {
+          "id": "333",
+          "question": "Ko nozīmē „Svētīts lai top Tavs vārds”?",
+          "answer": "Mēs vēlamies, lai visi godina Dievu."
+        },
+        {
+          "id": "334",
+          "question": "Ko nozīmē „Lai atnāk Tava valstība”?",
+          "answer": "Mēs vēlamies, lai Dievs valda pār mums un ved uz debesu valstību."
+        },
+        {
+          "id": "335",
+          "question": "Ko nozīmē „Tavs prāts lai notiek…”?",
+          "answer": "Mēs vēlamies pildīt Dieva gribu kā to dara svētie debesīs."
+        },
+        {
+          "id": "336",
+          "question": "Ko nozīmē „Mūsu dienišķo maizi dod mums šodien”?",
+          "answer": "Mēs lūdzam visu, kas nepieciešams mūsu dzīvei."
+        },
+        {
+          "id": "337",
+          "question": "Ko nozīmē „Piedod mums mūsu parādus…”?",
+          "answer": "Mēs lūdzam piedošanu un piedodam citiem."
+        },
+        {
+          "id": "338",
+          "question": "Ko nozīmē „Neieved mūs kārdināšanā”?",
+          "answer": "Mēs lūdzam Dievu pasargāt no kārdinājumiem."
+        },
+        {
+          "id": "339",
+          "question": "Ko nozīmē „Bet atpestī mūs no ļauna”?",
+          "answer": "Mēs lūdzam Dievu pasargāt no ļauna un nelaimēm."
+        }
+      ]
+    },
+
+    {
+      "id": "esi-sveicinata",
+      "title": "Esi sveicināta, Marija",
+      "subtitle": "Lūgšana Dievmātes godam",
+        "lines": [
+            "Esi sveicināta, Marija,",
+            "žēlastības pilnā,",
+            "Kungs ir ar Tevi;",
+            "Tu esi svētīta starp sievietēm,",
+            "un svētīts ir Tavas miesas auglis Jēzus.",
+            "Svētā Marija, Dieva Māte",
+            "lūdz par mums, grēciniekiem",
+            "tagad un mūsu nāves stundā.",
+            "Amen."
+        ], 
+      "qa": [
+        {
+          "id": "340",
+          "question": "Ko nozīmē „Esi sveicināta, Marija”?",
+          "answer": "Tas ir eņģeļa sveiciens Marijai."
+        },
+        {
+          "id": "341",
+          "question": "Ko nozīmē „Žēlastības pilnā”?",
+          "answer": "Dievs Mariju ir apveltījis ar žēlastībām."
+        },
+        {
+          "id": "342",
+          "question": "Ko nozīmē „Kungs ir ar Tevi”?",
+          "answer": "Marija bija vienota ar Dievu bez grēka."
+        },
+        {
+          "id": "343",
+          "question": "Ko nozīmē „Tu esi svētīta starp sievietēm”?",
+          "answer": "Marija ir vissvētītākā starp sievietēm."
+        },
+        {
+          "id": "344",
+          "question": "Ko nozīmē „Un svētīts ir Tavas miesas auglis Jēzus”?",
+          "answer": "Jēzus ir Dieva Dēls."
+        },
+        {
+          "id": "345",
+          "question": "Ko nozīmē lūgšana Marijai?",
+          "answer": "Mēs lūdzam Mariju aizlūgt par mums visā dzīvē un nāves stundā."
+        }
+      ]
+    },
+
+    {
+      "id": "gods-tevam",
+      "title": "Gods lai ir Tēvam",
+      "subtitle": "Lūgšana Vissvētākās Trīssvienības godam",
+      "content": "Gods lai ir Tēvam un Dēlam un Svētajam Garam, kā tas no iesākuma bijis, tā tagad un vienmēr, un mūžīgi mūžam. Amen.",
+      "qa": []
+    }, 
+
+    {
+      "id": "es-ticu",
+      "title": "Es ticu",
+      "subtitle": "Ticības apliecinājums",
+        "lines": [
+            "Es ticu uz Dievu, visuvareno Tēvu, debesu un zemes Radītāju,",
+            "un uz Jēzu Kristu, Viņa vienpiedzimušo Dēlu, mūsu Kungu,",
+            "kas ir ieņemts no Svētā Gara, piedzimis no Jaunavas Marijas;",
+            "cietis zem Poncija Pilāta, krustā sists, nomiris un apbedīts,", 
+            "nokāpis ellē, trešajā dienā augšāmcēlies no miroņiem,",
+            "uzkāpis debesīs, sēž pie Dieva, visvarenā Tēva labās rokas,",
+            "no kurienes Viņš atnāks tiesāt dzīvos un mirušos.",
+            "Es ticu uz Svēto Garu,",
+            "svēto katolisko Baznīcu, svēto sadraudzību,",
+            "grēku piedošanu",
+            "miesas augšāmcelšanos",
+            "un mūžīgo dzīvošanu.",
+            "Āmen."
+        ],
+      "qa": []
+    }  
+  ]
+}, 
+
+{
+  "id": "citas",
+  "title": "Citas bieži lietotās lūgšanas",
+  "type": "list",
+  "sections": [
+    {
+      "id": "kunga-engelis",
+      "title": "Kunga Eņģelis",
+      "subtitle": "Pasludināšanas lūgšana",
+      "lines": [
+        "Kunga Eņģelis pasludināja Jaunavai Marijai, un viņa ieņēma no Svētā Gara.",
+        "",
+        "Esi sveicināta, Marija…",
+        "",
+        "Redzi, es esmu Kunga kalpone, lai man notiek pēc Tava vārda.",
+        "",
+        "Esi sveicināta, Marija…",
+        "",
+        "Un Vārds ir tapis Miesa un dzīvojis starp mums.",
+        "",
+        "Esi sveicināta, Marija…",
+        "",
+        "V. Lūdz par mums, svētā Dieva Dzemdētāja.",
+        "R. Lai mēs Kristus solījumu cienīgi topam.",
+        "",
+        "Lūgsimies: Mēs Tevi lūdzam, Kungs, ielej mūsu sirdīs savu žēlastību, lai mēs, kuriem eņģeļu sludināšanā ir tapusi zināma Kristus, Tava Dēla, iemiesošanās, ar Viņa ciešanām un krustu tiktu ievesti augšāmcelšanās godībā. Caur Jēzu Kristu, mūsu Kungu. Āmen.",
+        "",
+        "(No Lieldienu sestdienas līdz sestdienai pēc Vasarsvētkiem Kunga Eņģeļa vietā skaita „Debess Karaliene, līksmojies, Alleluja…”)"
+      ]
+    },
+
+    {
+      "id": "debess-karaliene",
+      "title": "Debess Karaliene",
+      "subtitle": "Lieldienu laika lūgšana",
+      "lines": [
+        "Debess Karaliene, līksmojies, Alleluja,",
+        "Tas, ko Tu kā bērnu nesi, Alleluja,",
+        "Augšāmcēlies ir, kā teicis, Alleluja,",
+        "Lūdz Dievu par mums, Alleluja.",
+        "",
+        "V. Priecājies un līksmojies, Jaunava Marija, (Alleluja)",
+        "R. Jo Kungs ir patiesi augšāmcēlies. (Alleluja)",
+        "",
+        "Lūgsimies: Dievs, Tev ir labpaticis ar sava Dēla, mūsu Kunga Jēzus Kristus augšāmcelšanos iepriecināt pasauli: mēs Tevi lūdzam, dāvā ar Viņa Mātes Jaunavas Marijas aizbildniecību mums mūžīgās dzīves prieku. Caur Jēzu Kristu, mūsu Kungu. Āmen.",
+        "R. Amen."
+      ]
+    },
+
+    {
+      "id": "galda-lugsanas",
+      "title": "Galda lūgšanas",
+      "qa": [
+        {
+          "id": "pirms-esanas",
+          "question": "Lūgšana pirms ēšanas",
+          "answer": "Svētī, Kungs, mūs un šīs Tavas dāvanas, ko no Tavas žēlastības saņemam. Caur Jēzu Kristu, mūsu Kungu. Āmen."
+        },
+        {
+          "id": "pec-esanas",
+          "question": "Lūgšana pēc ēšanas",
+          "answer": "Mēs pateicamies Tev, Dievs, par visām Tavām dāvanām, ko no Tavas devības saņēmām, kas dzīvo un valdi mūžīgi mūžos. Āmen."
+        }
+      ]
+    },
+
+    {
+      "id": "par-mirusajiem",
+      "title": "Lūgšana par mirušajiem",
+      "content": "Mūžīgo mieru dod viņiem, Kungs, un mūžīgā gaisma lai atspīd viņiem. Lai viņi dus mierā. Āmen.",
+      "qa": []
+    },
+
+    {
+      "id": "katoļu-sveiciens",
+      "title": "Katoļu sveiciens",
+      "lines": [
+        "Lai top slavēts Jēzus Kristus!",
+        "Atbilde: Mūžīgi mūžam. Amen."
+      ],
+      
+      "qa": []
+    },
+
+    {
+  "id": "lugana-svetajam-garam",
+  "title": "Lūgšana Svētajam Garam",
+  "subtitle": "Atvērtības un ticības lūgšana",
+  "lines": [
+    "Dievs Svētais Gars, atver manas ausis, lai es varu dzirdēt Tavu vēsti;",
+    "atver manas acis, lai es varu redzēt Tavas radības skaistumu;",
+    "atver manu garu, lai es varu ticēt Tavam vārdam.",
+    "",
+    "Dievs Svētais Gars, atver manu muti, lai es varu liecināt par Tevi;",
+    "atver manas rokas, lai es varu saņemt Tavu palīdzību;",
+    "atver manas jūtas, lai es mīlētu Tavu tuvumu;",
+    "atver manu sirdi, lai es sajustu Tavu mīlestību."
+  ]
+},
+
+{
+  "id": "lugsana-par-vecakiem",
+  "title": "Lūgšana par vecākiem",
+  "subtitle": "Pateicības un mīlestības lūgšana",
+  "lines": [
+    "Kungs, mūsu visu Tēvs, pasargā mani no visa, kas varētu skumdināt manus vecākus.",
+    "Atlīdzini viņiem, ak, Dievs, par visām labdarībām, kādas viņi man ir devuši;",
+    "izlej pār viņiem savu žēlastību, atļauj viņiem ilgi un laimīgi dzīvot",
+    "un mani vadi tā, lai es viņus arvien mīlu un godāju.",
+    "Āmen."
+  ]
+},
+
+{
+  "id": "lugsana-svetajam-aizbildnim",
+  "title": "Lūgšana Svētajam Aizbildnim",
+  "subtitle": "Lūgšana par aizsardzību un vadību",
+  "lines": [
+    "Svētais Aizstāvi, kura vārdu man deva svētajā kristībā,",
+    "neatņem man savu gādību,",
+    "aizstāvi mani no visa ļauna,",
+    "lai es, Tev sekodams, iemantoju ar Tevi mūžīgo svētlaimi debesīs.",
+    "Āmen."
+  ]
+}, 
+
+{
+  "id": "ticiba-ceriba-milestiba-nozela",
+  "title": "Ticības, cerības, mīlestības un grēku nožēlas uzmodināšana",
+  "subtitle": "Četras garīgās lūgšanas",
+  "paragraphs": [
+    {
+      "title": "Ticības:",
+      "text": "Mans Dievs un Kungs! Es ticu visam, ko Tu esi pasludinājis un caur savu svēto Baznīcu ticēt pavēlējis, jo Tu esi mūžīgā un īstā patiesība."
+    },
+    {
+      "title": "Cerības:",
+      "text": "Mans Dievs un Kungs! Es ceru saņemt no Tevis vajadzīgo žēlastību savu grēku piedošanu un mūžīgo svētlaimi, jo Tu to visu esi apsolījis."
+    },
+    {
+      "title": "Mīlestības:",
+      "text": "Mans Dievs un Kungs! Es mīlu Tevi no visas sirds vairāk nekā visu citu, jo Tu esi man tik daudz laba darījis. Mīlestībā uz Tevi es mīlu arī savu tuvāko kā sevi pašu."
+    },
+    {
+      "title": "Grēku nožēlošanas uzmudināšanai:",
+      "text": "Es nožēloju no visas sirds, ka esmu Tevi, savu Dievu, vismīļo Debesu Tēvu, visaugstāko Labumu, daudzkārt sāpinājis. Es cieši apņemos sargāties no visiem grēkiem, sevišķi no ļauna ieraduma grēka, kā arī rūpīgi sargāties no katras izdevības grēkot. Stiprini ar savu žēlastību šo manu apņemšanos un neļauj man krist grēkā."
+    }
+  ]
+}
+
+  ]
+}
+
+  ]
+}

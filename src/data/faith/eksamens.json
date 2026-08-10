@@ -1,0 +1,494 @@
+[
+  {
+    "id": 1,
+    "q": "Kas ir Dievs, kur ir Dievs? Kāpēc mēs Dievu nevaram redzēt",
+    "answerNrs": [
+      1,
+      2,
+      3
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 2,
+    "q": "Ko Dievs spēj darīt? Kāpēc Viņu saucam par taisnīgu un žēlsirdīgu?",
+    "answerNrs": [
+      5,
+      6,
+      7
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 3,
+    "q": "Vai ir vairāk nekā viens Dievs? Kā saucam to patiesību, ka ir viens Dievs trijās Personās? LŪGŠANA VISSVĒTĀKĀS TRĪSSVIENĪBAS GODAM",
+    "answerNrs": [
+      9,
+      11
+    ],
+    "extraAnswer": "LŪGŠANA VISSVĒTĀKĀS TRĪSSVIENĪBAS GODAM\nGods lai ir Tēvam un Dēlam, un Svētajam Garam, kā tas no iesākuma bijis, tā tagad un vienmēr, un mūžīgi mūžam. Amen."
+  },
+  {
+    "id": 4,
+    "q": "Kāpēc mēs Dievu saucam par pasaules Radītāju? Ko Dievs radīja debesīs",
+    "answerNrs": [
+      12,
+      13
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 5,
+    "q": "Kas ir eņģeļi? Kāpēc Dievs radīja eņģeļus? Ko vēl vai pastāstīt par eņģeļiem?",
+    "answerNrs": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 6,
+    "q": "Kas ir cilvēks? Kā un kāpēc Dievs radīja cilvēku? Kā sauca pirmos cilvēkus? Kur viņi dzīvoja?",
+    "answerNrs": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 7,
+    "q": "Vai pirmie cilvēki bija vienmēr paklausīgi Dievam? Kam kaitēja pirmo cilvēku grēks? Kā mēs to saucam? Ko cilvēki zaudēja iedzimtā grēka dēļ? Vai Dievs apžēlojās par cilvēkiem?",
+    "answerNrs": [
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 8,
+    "q": "Kas ir Jēzus Kristus?",
+    "answerNrs": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      4,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 9,
+    "q": "Kas ir Kunga Jēzus Māte? Kas bija svētais Jāzeps?",
+    "answerNrs": [
+      37,
+      38
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 10,
+    "q": "Kur piedzima Jēzus? Kur dzīvoja Kungs Jēzus? Ko Kungs Jēzus darīja, kad Viņam bija 30 gadu?",
+    "answerNrs": [
+      39,
+      40,
+      41
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 11,
+    "q": "Ko Kungs Jēzus mācīja ļaudīm? Kādas līdzības tu zini?",
+    "answerNrs": [
+      42
+    ],
+    "extraAnswer": "Jēzus stāstīja līdzības, lai cilvēki labāk izprastu mācību par Dievu, cilvēku dzīvi un attiecībām ar citiem.  Šeit apkopotas dažas no zināmākajām Jēzus līdzībām.\nPar Dieva valstību:\n- par sējēju – cilvēki dažādi uzklausa Dieva vārdu: daži to aizmirst, bet citi pieņem un dara labu;\n- par sinepju graudu – kaut kas ļoti mazs var izaugt par kaut ko lielu.\nPar Dieva mīlestību:\n- par pazudušo dēlu – Dievs vienmēr piedod, ja cilvēks no sirds nožēlo, un gaida atgriežamies katru cilvēku;\n- par pazudušo avi – Dievs rūpējas par katru cilvēku;\n- par pazudušo drahmu – katrs cilvēks Dieva mir ļoti svarīgs.\nPar cilvēku attiecībām:\n- par labo samarieti – jāpalīdz ikvienam, arī tiem, ko nepazīsti;\n- par nežēlīgo kalpu – ja Dievs mums piedod, arī mums jāpiedod citiem.\nPar atbildību:\n- par talentiem – jāizmanto tas, ko Dievs mums devis (spējas, laiks, iespējas);\n- par desmit jaunavām – jābūt vienmēr gataviem darīt labu un satikt Dievu;\n- par pēdējo tiesu – Dievs vērtē, kā mēs izturamies pret citiem\nPiezīme: Šis materiāls par Jēzus līdzībām ir sagatavots ar mākslīgā intelekta palīdzību un ir paredzēts mācību nolūkiem. Tas nav uzskatāms par oficiālu vai pilnīgu teoloģisku interpretāciju."
+  },
+  {
+    "id": 12,
+    "q": "Kur, kā un kāpēc Jēzus nomira? Kas notika trešajā dienā pēc Kunga Jēzus nāves?",
+    "answerNrs": [
+      44,
+      45,
+      46,
+      47
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 13,
+    "q": "Pastāsti par vienu svēto!",
+    "answerNrs": [],
+    "extraAnswer": "Iepazīsties ar katoļu Baznīcas svētajiem šeit: https://katolis.lv/baznicas-svetie-un-svetigie/"
+  },
+  {
+    "id": 14,
+    "q": "Kas notika Vasarsvētkos? Ko darīja apustuļi, saņēmuši Svēto Garu?",
+    "answerNrs": [
+      50,
+      51,
+      52
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 15,
+    "q": "Kā tika saukti tie cilvēki, kas pieņēma Kristus mācību un kristību? Pastāsto par Kristības sakramentu!",
+    "answerNrs": [
+      53,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 16,
+    "q": "Kas bija augstākais visu kristiešu gans? Kas viņu par to iecēla? Kas pēc svētā Pēter nāves kļuva par viņa pēcteci? Kāpēc Kristus dibināja svēto Katolisko Baznīcu? Kas ir bīskapi, priesteri un diakoni?",
+    "answerNrs": [
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 17,
+    "q": "Cik ir Dieva baušļu? Kas cilvēkiem tos ir devis! Pastāsti par vienu bausli!",
+    "answerNrs": [
+      78
+    ],
+    "extraAnswer": "Desmit Dieva baušļi.\nEs esmu Kungs, tavs Dievs.\n1. Tev nebūs citus dievus turēt līdzās man.\n2. Tev nebūs Kunga, sava Dieva, vārdu nelietīgi valkāt.\n3. Tev būs svēto dienu svētīt.\n4. Tev būs godāt savu tēvu un māti.\n5. Tev nebūs nokaut.\n6. Tev nebūs laulību pārkāpt.\n7. Tev nebūs zagt.\n8. Tev nebūs nepatiesu liecību dot pret savu tuvāko.\n9. Tev nebūs iekārot sava tuvākā sievu.\n10. Tev nebūs iekārot nevienu lietu, kas pieder tavam tuvākajam."
+  },
+  {
+    "id": 18,
+    "q": "Pastāsti par 1. bausli.",
+    "answerNrs": [
+      79,
+      80
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 19,
+    "q": "Pastāsti par 2. bausli!",
+    "answerNrs": [
+      81,
+      82
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 20,
+    "q": "Pastāsti par 3. bausli!",
+    "answerNrs": [
+      83,
+      84
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 21,
+    "q": "Pastāsti par 4. bausli!",
+    "answerNrs": [
+      85,
+      86
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 22,
+    "q": "Pastāsti par 5. bausli?",
+    "answerNrs": [
+      87,
+      88
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 23,
+    "q": "Pastāsti par 6. bausli!",
+    "answerNrs": [
+      89,
+      90
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 24,
+    "q": "Pastāsti par 7.bausli!",
+    "answerNrs": [
+      91,
+      92
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 25,
+    "q": "Pastāsti par 8. bausli!",
+    "answerNrs": [
+      93,
+      94
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 26,
+    "q": "Pastāsti par 9. un 10. bausli!",
+    "answerNrs": [
+      95,
+      96
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 27,
+    "q": "Ko nozīmē visi desmit Dieva baušļi? Kāds ir vissvarīgākais bauslis?",
+    "answerNrs": [
+      98
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 28,
+    "q": "Cik un kādi ir Baznīcas baušļi? Kas ir pavēlēts ar Baznīcas baušļiem?",
+    "answerNrs": [
+      97
+    ],
+    "extraAnswer": "Ir pieci Baznīcas baušļi.\n1. Tev būs svētdienās un svētku dienās cienīgi piedalīties Svētajā Misē un atturēties no smagiem darbiem.\n2. Tev būs Baznīcas noliktās dienās atturēties no gaļas ēdieniem un gavējamās dienās gavēt.\n3. Tev būs vismaz vienu reizi gadā izsūdzēt savus grēkus.\n4. Tev būs vismaz Lieldienu laikā pieņemt Vissvētāko Sakramentu.\n5. Tev būs palīdzēt uzturēt savu Baznīcu un tās kalpus."
+  },
+  {
+    "id": 29,
+    "q": "Kas ir grēks? Kā cilvēks var grēkot?",
+    "answerNrs": [
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 30,
+    "q": "Kas ir sakramenti? Kas tos iedibināja un cik to ir?",
+    "answerNrs": [
+      124,
+      125,
+      126
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 31,
+    "q": "Pastāsti par KRISTĪBAS SAKRAMENTU!",
+    "answerNrs": [
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 32,
+    "q": "Pastāsti par IESTIPRINĀŠANAS SAKRAMENTU!",
+    "answerNrs": [
+      134,
+      135,
+      136,
+      137,
+      138,
+      139
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 33,
+    "q": "Pastāsti par VISSVĒTĀKĀ ALTĀRA SAKRAMENTU!",
+    "answerNrs": [
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 34,
+    "q": "Pastāsti par GANDARĪŠANAS SAKRAMENTU!",
+    "answerNrs": [
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 35,
+    "q": "Pastāsti par SLIMNIEKU SAKRAMENTU!",
+    "answerNrs": [
+      198,
+      199,
+      200
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 36,
+    "q": "Pastāsti par ORDINĀCIJAS SAKRAMENTU!",
+    "answerNrs": [
+      201,
+      202,
+      203
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 37,
+    "q": "Pastāsti par LAULĪBAS SAKRAMENTU!",
+    "answerNrs": [
+      204,
+      205,
+      206,
+      207,
+      208
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 38,
+    "q": "Ko vari pastāstīt par SVĒTAJIEM RAKSTIEM?",
+    "answerNrs": [],
+    "extraAnswer": "Svētie Raksti ir Bībele. Tā ir kristiešu svētā grāmata un Dieva vārds, kas pierakstīts cilvēku valodā.\nBībele ir pati svarīgākā grāmata pasaulē.\nTajā ir rakstīts viss, ko mēs zinām par Dievu.\nBībele mums stāsta, cik ļoti Dievs mūs mīl.\nCaur Svētajiem Rakstiem Dievs runā uz mums.\nSvētie Raksti nav pasaku vai fabulu grāmata.\nLasot Bībeli, kristieši tic, ka Dievs tajā brīdī ar viņiem runā.\nPiemēram, ja Bībelē rakstīts: “Tu esi pasaules gaisma” (Mt 5:14), tas attiecas arī uz kristiešiem mūsdienās.\nDievs tic, ka mēs varam padarīt pasauli par gaišāku un labāku vietu.\nBībele sastāv no divām daļām:\nVecā Derība – stāsta par pasaules radīšanu un Dieva attiecībām ar Israēla tautu. Tajā ir 39 grāmatas.\nJaunā Derība – stāsta par Jēzu Kristu, Viņa dzīvi, mācību, nāvi un augšāmcelšanos. Tajā ir 27 grāmatas.\nPiezīme: Šī informācija sagatavota, izmantojot Youcat Kids materiālus un mākslīgā intelekta palīdzību. Tā paredzēta mācību nolūkiem un nav uzskatāma par oficiālu teoloģisku interpretāciju."
+  },
+  {
+    "id": 39,
+    "q": "Ko vari pastāstīt par Baznīcas gadu? Kādi ir lielākie svētki?",
+    "answerNrs": [],
+    "extraAnswer": "Baznīcas gads ir īpašs laika ritējums Baznīcā, kurā kristieši katru gadu atceras un svin svarīgākos notikumus no Jēzus dzīves un ticības noslēpumiem.\nBaznīcas gads sākas ar Adventu – gaidīšanas laiku, kad gatavojas Jēzus dzimšanai.\nTad seko Kristus dzimšanas svētki (Ziemassvētki) – mēs svinam Jēzus piedzimšanu. Tie ir otrie lielākie svētki Baznīcā.\nPēc Ziemassvētkiem seko Parastais liturģiskais laiks, kad vairāk mācāmies par Jēzus dzīvi un mācību.\nTad nāk Gavēņa laiks – sagatavošanās laiks Lieldienām, kad kristieši vairāk lūdzas un pārdomā savu dzīvi.\nTad ir Lieldienas, kad mēs svinam Kristus augšāmcelšanos. Lieldienas ir Baznīcas gada nozīmīgākie svētki.\nPēc tam ir Vasarsvētki – Svētā Gara nonākšana pār apustuļiem un Baznīcas sākums.\nBaznīcas gadā ir arī daudzi citi svētki. Baznīcas gads palīdz kristiešiem katru gadu no jauna izdzīvot Jēzus dzīves un ticības svarīgākos notikumus.\nPiezīme: Šis materiāls par Jēzus līdzībām ir sagatavots ar mākslīgā intelekta palīdzību un ir paredzēts mācību nolūkiem. Tas nav uzskatāms par oficiālu vai pilnīgu teoloģisku interpretāciju."
+  },
+  {
+    "id": 40,
+    "q": "Ko vari pastāstīt par Svēto Misi?",
+    "answerNrs": [
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      160,
+      161,
+      162
+    ],
+    "extraAnswer": ""
+  },
+  {
+    "id": 41,
+    "q": "KUNGA JĒZUS LŪGŠANA",
+    "answerNrs": [],
+    "extraAnswer": "Tēvs mūsu, kas esi debesīs,\nSvētīts lai top Tavs vārds,\nLai atnāk Tava valstība,\nTavs prāts lai notiek kā debesīs, tā arī virs zemes.\nMūsu dienišķo maizi dod mums šodien\nUn piedod mums mūsu parādus,\nKā arī mēs piedodam saviem parādniekiem,\nUn neieved mūs kārdināšanā,\nBet atpestī mūs no ļauna.\nAmen."
+  },
+  {
+    "id": 42,
+    "q": "LŪGŠANA DIEVMĀTEI",
+    "answerNrs": [],
+    "extraAnswer": "Esi sveicināta, Marija, žēlastības pilnā,\nKungs ir ar Tevi;\nTu esi svētīta starp sievietēm,\nUn svētīts ir Tavas miesa auglis Jēzus.\nSvētā Marija, Dieva Māte,\nLūdz par mums grēciniekiem,\nTagad un mūsu nāves stundā.\nAmen."
+  }
+]

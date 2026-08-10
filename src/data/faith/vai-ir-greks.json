@@ -1,0 +1,670 @@
+{
+  "gameTitle": "Vai tas ir grēks? (sirdsapziņas treniņš)",
+  "sinOptions": ["grēks", "nav grēks"],
+
+  "questions": [
+    {
+      "id": 1,
+      "situation": "Mana lūgšana bija pavirša, jo biju noguris, man nāca miegs un es nespēju koncentrēties.",
+      "correctSin": "nav grēks",
+      "sinExplanation": "Nogurums samazina spēju pilnībā koncentrēties, tāpēc tā nav apzināta necieņa pret Dievu.",
+      "actions": [
+        { "text": "Mēģināt lūgties īsi, bet ar sirdi", "correct": true },
+        { "text": "Turpināt, kad esi atpūties", "correct": true },
+        { "text": "Mēģināt palūgties ātrāk, kad vēl nav tik liela noguruma", "correct": true },
+        { "text": "Turpmāk arī atlikt lūgšanu uz tik vēlu laiku, kad jau ir nogurums un nāk miegs", "correct": false }
+      ],
+    "actionExplanation": "Ja lūgšana bija pavirša noguruma dēļ, tas nav grēks, bet tas parāda, ka šajā brīdī bija grūti koncentrēties. Ir labi atrast mierīgāku brīdi lūgšanai, piemēram, kad esi atpūties, lai vari būt vairāk klātesošs un veltīt Dievam uzmanību. Lūgšana ir saruna, un tā kļūst dziļāka, kad tai var pievērsties ar pilnu uzmanību."
+    },
+    {
+      "id": 2,
+      "situation": "Mana lūgšana bija pavirša, jo man negribējās lūgties. Vēlējos ātrāk pabeigt un darīt citas lietas.",
+      "correctSin": "grēks",
+      "sinExplanation": "Apzināta nevērība pret Dievu var būt grēks.",
+      "actions": [
+        { "text": "Atvainoties Dievam", "correct": true },
+        { "text": "Nākamreiz lūgties ar lielāku uzmanību un cieņu pret Dievu", "correct": true },
+        { "text": "Turpināt tāpat, jo citas nodarbes ir daudz interesantākas", "correct": false }
+      ],
+    "actionExplanation": "Lūgšana nav tikai pienākums, ko jāizpilda, bet veids, kā būt kopā ar Dievu, pateikties un nomierināties. Tāpēc ir svarīgi to darīt ar uzmanību un no sirds, nevis tikai ātri izpildīt vārdus. Kad cilvēks lūdzas ar cieņu un mieru, viņš var labāk ieklausīties sevī, Dievā un citos cilvēkos, un tas palīdz viņam augt iekšēji."
+    },
+    {
+  "id": 3,
+  "situation": "Es nejauši uzgrūdos virsū cilvēkam, steidzoties pa gaiteni.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Šajā situācijā nav grēka, jo notikums bija nejaušs un nebija apzinātas vēlmes nodarīt pāri. Grēks prasa brīvu un apzinātu izvēli.",
+  "actions": [
+    { "text": "Atvainoties un pārliecināties, vai tam cilvēkam viss ir kārtībā", "correct": true },
+    { "text": "Ignorēt notikušo un aiziet prom", "correct": false },
+    { "text": "Pasmaidīt un turpināt ceļu bez reakcijas", "correct": false },
+    { "text": "Piedāvāt palīdzību, ja cilvēks ir apmulsis vai sasities", "correct": true }
+  ],
+  "actionExplanation": "Lai gan nav grēks, atvainošanās ir svarīga, jo tā parāda cieņu un mīlestību pret citiem cilvēkiem. Pareiza rīcība ietver atbildību par savu ietekmi uz citiem, pat ja tā bija nejauša."
+},
+    {
+      "id": 4,
+      "situation": "Es tīšām pagrūdu klasesbiedru.",
+      "correctSin": "grēks",
+      "sinExplanation": "Apzināta vardarbība ir grēks.",
+      "actions": [
+        { "text": "Pasmieties par klasesbiedru", "correct": false },
+        { "text": "Atvainoties", "correct": true },
+        { "text": "Lūgt Dievam, lai Viņš palīdz kļūt labsirdīgam un laipnam pret visiem", "correct": true },
+        { "text": "Mēģināt atjaunot attiecības ar klasesbiedru", "correct": true },
+        { "text": "Citreiz vairs tīšuprāt šādi nerīkoties", "correct": true },
+        { "text": "Darīt to vēlreiz", "correct": false }
+      ],
+      "actionExplanation": "Svarīgi ir pārtraukt vardarbību un atjaunot attiecības."
+    },
+
+    {
+      "id": 5,
+      "situation": "Es palīdzēju mammai, jo gribēju viņu iepriecināt.",
+      "correctSin": "nav grēks",
+      "sinExplanation": "Palīdzība ar labu nodomu ir laba rīcība.",
+      "actions": [
+  { "text": "Turpināt palīdzēt ar prieku, kad vien varu", "correct": true },
+  { "text": "Nākamreiz ignorēt mammu, jo vienreiz jau palīdzēju", "correct": false }
+],
+"actionExplanation": "Dievs mūs aicina būt žēlsirdīgiem un darīt labu citiem ne tikai vienu reizi, bet tad, kad tas ir iespējams. Palīdzēt citiem, īpaši ģimenei, ir veids, kā parādīt mīlestību un rūpes. Labie darbi stiprina attiecības un padara pasauli labāku."
+    },
+{
+  "id": 6,
+  "situation": "Es palīdzēju mammai, lai ātrāk varētu doties spēlēties ar draugiem.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Palīdzēt mājās ir labs un normāls pienākums. Un tas nav grēks, pat ja to paveic tikai tāpēc, lai ātrāk varētu darīt citas lietas.",
+  "actions": [
+    { "text": "Palīdzēt līdz galam un izpildīt savus pienākumus", "correct": true },
+    { "text": "Palīdzēt ar prieku, cik vien varu", "correct": true },
+    { "text": "Ignorēt pienākumus, spēlēt datorspēles vai iet ārā ar draugiem, jo tas ir daudz interesantāk", "correct": false }, 
+    { "text": "Citreiz vairs nepalīdzēt, jo tas ir daudz interesantāk", "correct": false }, 
+    { "text": "Palīdzēt mammai tikai tādos gadījumos, kad par to saņemu ko pretī", "correct": false }
+    
+  ],
+  "actionExplanation": "Pildīt mūsu pienākumus mājās - tā ir viena no lietām, ko mums Dievs arī māca ar saviem baušļiem. Bet vienlaicīgi Dievs mūs aicina ne tikai pildīt pienākumus, bet arī augt mīlestībā un žēlsirdībā. Palīdzēt ģimenei ir veids, kā parādīt rūpes un mīlestību. Tāpēc ar laiku mēs varam iemācīties palīdzēt ne tikai pienākuma dēļ, bet arī no sirds un bez gaidīta atalgojuma."
+},
+
+    {
+  "id": 7,
+  "situation": "Es sameloju vecākiem, lai neiekultos nepatikšanās.",
+  "correctSin": "grēks",
+"sinExplanation": "Meli ir grēks, jo tajos cilvēks apzināti saka to, kas nav patiesība.",
+  "actions": [
+    { "text": "Pastāstīt patiesību, pat ja ir bail no soda/nepatikšanām", "correct": true },
+    { "text": "Palūgt vecākiem piedošanu par melošanu", "correct": true },
+    { "text": "Lūgt Dievam drosmi vienmēr teikt taisnību", "correct": true },
+    { "text": "Lūgt Dievam drosmi vienmēr uzņemties atbildību par savas rīcības sekām", "correct": true },
+    { "text": "Turpināt melot, lai izvairītos no sekām", "correct": false },
+    { "text": "Noliegt, ka vispār kaut kas ir noticis", "correct": false }
+  ],
+  "actionExplanation": "Godīgums prasa drosmi, īpaši tad, kad ir bail no sekām. Meli var sabojāt uzticēšanos un attiecības, un, ja tos turpina, cilvēkiem var kļūt grūti uzticēties. Svarīgi ir atzīt patiesību, atvainoties, labot to, kas noticis, un censties vairs nemelot. Tas palīdz atjaunot uzticību un augt kā cilvēkam."
+},
+
+   {
+  "id": 8,
+  "situation": "Es aizmirsu izpildīt skolā uzdoto mājasdarbu.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Aizmāršība pati par sevi nav grēks.",
+  "actions": [
+    { "text": "Izpildīt mājasdarbu pie pirmās iespējas", "correct": true },
+    { "text": "Pateikt skolotājam patiesību", "correct": true },
+    { "text": "Turpināt nepildīt mājasdarbus", "correct": false },
+    { "text": "Melot par iemeslu, kāpēc tas nav izdarīts", "correct": false },
+    { "text": "Norakstīt no drauga", "correct": false }
+  ],
+  "actionExplanation": "Ir svarīgi būt godīgam un pateikt patiesību, ja kaut kas nav izdarīts. Mājasdarbi tiek doti, lai palīdzētu mācīties, tāpēc, ja tos nepilda vai noraksta, cilvēks kaitē pats savai izaugsmei. Labāk ir izpildīt to pēc iespējas ātrāk, sekot līdzi uzdotajam un nākamreiz būt uzmanīgākam."
+},
+
+  {
+  "id": 9,
+  "situation": "Es neizpildīju mājasdarbu, jo man bija slinkums un negribējās.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti neizpildīt pienākumu, jo negribas, ir nepareiza izvēle.",
+  "actions": [
+    { "text": "Izpildīt mājasdarbu pēc iespējas ātrāk", "correct": true },
+    { "text": "Lūgt Dievam palīdzību tikt vaļā no slinkuma", "correct": true },
+    { "text": "Atzīt skolotājam, ka tas nav izdarīts", "correct": true },
+    { "text": "Turpināt nepildīt mājasdarbus", "correct": false },
+    { "text": "Melot, ka to aizmirsu", "correct": false }
+  ],
+  "actionExplanation": "Svarīgi ir būt godīgam un atbildīgam. Mājasdarbi palīdz mācīties, tāpēc, ja tos nepilda, cilvēks pats sev traucē progresēt. Labāk ir izdarīt tos pēc iespējas ātrāk un nākamreiz būt uzmanīgākam."
+},
+
+   {
+  "id": 10,
+  "situation": "Es sadusmojos uz klasesbiedru, jo viņš mani izsmēja.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Dusmas pašas par sevi nav grēks, tās ir emocija, kas rodas cilvēkiem.",
+  "actions": [
+    { "text": "Nomierināties pirms kaut ko teikt vai darīt", "correct": true },
+    { "text": "Izrunāties mierīgi par to, kas notika", "correct": true },
+    { "text": "Apvainoties un vairs ar viņu nerunāt", "correct": false },
+    { "text": "Turēt ļaunu prātu un ilgi dusmoties", "correct": false },
+    { "text": "Aizvainot vai atriebties", "correct": false },
+    { "text": "Piedot, īpaši ja otrs ir atvainojies", "correct": true },
+    { "text": "Palūgties par otru cilvēku", "correct": true }
+  ],
+  "actionExplanation": "Dusmas ir normālas, bet svarīgi ir tas, ko mēs ar tām darām. Labāk ir nomierināties un mēģināt izrunāties, nevis apvainoties vai turēt ļaunu prātu. Piedošana un lūgšana par otru cilvēku palīdz atjaunot attiecības un iekšēju mieru. Ja otrs atvainojas, piedot ir pareiza izvēle, jo tas palīdz abiem cilvēkiem virzīties uz priekšu."
+},
+
+    {
+  "id": 11,
+  "situation": "Es biju dusmīgs uz draugu un nosaucu viņu sliktos vārdos.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti aizvainot citu cilvēku ar sliktiem vārdiem ir nepareizi, jo tas var viņu sāpināt.",
+  "actions": [
+    { "text": "Atvainoties draugam", "correct": true },
+    { "text": "Pateikt, ka biju dusmīgs, bet mēģināt runāt mierīgi", "correct": true },
+    { "text": "Apstāties un nomierināties pirms runāt", "correct": true },
+    { "text": "Pārdomāt savu rīcību un nākotnē censties kontrolēt savas emocijas un dusmas", "correct": true },
+    { "text": "Lūgt Dievam palīdzību kļūt lēnprātīgākam", "correct": true },
+    { "text": "Turpināt apvainot draugus un saukt viņus sliktos vārdos", "correct": false },
+    { "text": "Izlikties, ka tas bija joks", "correct": false }, 
+    { "text": "Ne tikai apvainot draugu, bet arī pasmieties par viņu", "correct": false }
+  ],
+  "actionExplanation": "Dusmas reizēm var būt pamatotas, piemēram, ja kāds mūs aizskar vai izturas netaisnīgi. Bet svarīgi ir tas, ko mēs ar tām darām. Ja es esmu dusmīgs, es varu apstāties, nomierināties un izvēlēties runāt cieņpilni, nevis pateikt aizvainojošus vārdus vai kādu sāpināt. Ja kādu esam aizvainojuši, atvainošanās palīdz atjaunot attiecības un uzticēšanos."
+},
+
+    {
+  "id": 12,
+  "situation": "Es palīdzēju draugam, jo gribēju viņu iepriecināt.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Palīdzēt draugam ar labu nodomu ir laba un pareiza rīcība.",
+  "actions": [
+    { "text": "Turpināt būt atbalstošam draugam", "correct": true },
+    { "text": "Palīdzēt arī tad, kad tas ir grūti vai neizdevīgi", "correct": true },
+    { "text": "Palīdzēt tikai tad, ja no tā kaut ko iegūstu", "correct": false },
+    { "text": "Nākamreiz ignorēt draugu, ja tas man nav ērti", "correct": false }
+  ],
+  "actionExplanation": "Būt draugam nozīmē rūpēties par otru un palīdzēt, kad tas ir iespējams. Labie darbi, kas darīti no vēlmes iepriecināt otru, stiprina draudzību. Ar laiku mēs varam mācīties palīdzēt ne tikai tad, kad tas ir viegli, bet arī tad, kad tas prasa piepūli vai neko nedod pretī."
+},
+
+    {
+  "id": 14,
+  "situation": "Klasesbiedrs gribēja ar mani spēlēties, bet es izlikos, ka viņu neredzu un ignorēju.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti ignorēt cilvēku, kurš vēlas draudzīgi sazināties, ir nepareizi, jo tas var viņu sāpināt un noraida viņa mēģinājumu veidot attiecības.",
+  "actions": [
+    { "text": "Pateikt godīgi, ka šobrīd negribu spēlēties", "correct": true },
+    { "text": "Paskaidrot, kāpēc es negribēju iesaistīties", "correct": true },
+    { "text": "Mēģināt nākamreiz būt laipnākam un atsaucīgākam", "correct": true },
+    { "text": "Atvainoties, ja es viņu aizvainoju", "correct": true },
+    { "text": "Turpināt viņu ignorēt", "correct": false },
+    { "text": "Izlikties, ka viņš vispār neeksistē", "correct": false }
+  ],
+  "actionExplanation": "Dažreiz mēs negribam spēlēties vai runāt, un tas ir normāli. Taču apzināti ignorēt otru cilvēku var viņu sāpināt un radīt attiecību plaisu. Labāk ir pateikt godīgi, kā jūtamies, un izturēties cieņpilni, pat ja tajā brīdī negribam iesaistīties."
+},
+
+  {
+  "id": 15,
+  "situation": "Klasesbiedrs bija mājās aizmirsis savus krāsainos zīmuļus, un es ar viņu padalījos ar saviem zīmuļiem.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Dalīšanās ar citiem, kuriem kaut kas trūkst, ir laba un žēlsirdīga rīcība.",
+  "actions": [
+    { "text": "Turpināt dalīties, kad kādam kaut kas pietrūkst", "correct": true },
+    { "text": "Palīdzēt klasesbiedriem, kad viņiem kaut kas nav līdzi", "correct": true },
+    { "text": "Dalīties tikai ar tiem klasesbiedriem, kas ir dalījušies ar mani", "correct": false },
+    { "text": "Dalīties tikai ar tiem klasesbiedriem, kas ir mani tuvākiem draugi", "correct": false },
+    { "text": "Dalīties tikai tad, ja pretī saņemu kaut ko", "correct": false },
+    { "text": "Citreiz nedalīties, jo vienreiz jau to darīju", "correct": false }
+  ],
+"actionExplanation": "Dalīšanās un palīdzēšana nav jādara tikai draugiem vai tiem, kas mums kaut ko dod pretī. Mēs esam aicināti būt laipni un palīdzēt arī klasesbiedriem un citiem cilvēkiem, kad viņiem kaut kas pietrūkst. Labie darbi kļūst vēl vērtīgāki, kad tos darām brīvi un ar labu sirdi, nevis tikai tad, kad no tā kaut ko iegūstam."
+},
+
+{
+  "id": 16,
+  "situation": "Es negribēju dalīties ar savām lietām, jo gribēju tās paturēt tikai sev.",
+  "correctSin": "grēks",
+  "sinExplanation": "Tas ir grēks, jo skopums liek mums domāt tikai par sevi un neļauj dalīties ar citiem, pat tad, kad viņiem tas būtu noderīgi vai vajadzīgi.",
+  "actions": [
+    { "text": "Pārdomāt, kāpēc man ir grūti dalīties", "correct": true },
+    { "text": "Palūgt Dievam palīdzību būt dāsnākam un pārvarēt skopumu", "correct": true },
+    { "text": "Mēģināt nākamreiz dalīties ar prieku", "correct": true },
+    { "text": "Turpināt visu paturēt tikai sev", "correct": false },
+    { "text": "Dalīties tikai tad, ja mani piespiež", "correct": false },
+    { "text": "Domāt, ka tās ir manas lietas un tāpēc man nav pienākums tās dot citiem", "correct": false }
+  ],
+  "actionExplanation": "Dalīšanās palīdz mums kļūt dāsnākiem un laipnākiem. Skopums padara grūtu dalīties ar citiem, bet mēs varam to pārvarēt, lūdzot Dievam palīdzību un mācoties pakāpeniski dalīties ar prieku. Dāsnums stiprina draudzību un palīdz rūpēties par citiem."
+},
+
+    {
+  "id": 17,
+  "situation": "Es apzināti neaizgāju uz stundu un paliku ārpus klases, lai izvairītos no mācībām.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināta stundu kavēšana bez iemesla ir necieņa pret mācībām un pienākumiem.",
+  "actions": [
+    { "text": "Doties uz nākamo stundu un mācīties", "correct": true },
+    { "text": "Atzīt kļūdu un nākamreiz iet uz visām stundām", "correct": true },
+    { "text": "Runāt ar skolotāju, ja ir grūtības stundā", "correct": true },
+    { "text": "Atzīties vecākiem par apzināti kavēto stundu", "correct": true },
+
+    { "text": "Turpināt kavēt stundas", "correct": false },
+    { "text": "Izlikties, ka man bija iemesls, lai gan nebija", "correct": false },
+    { "text": "Paslēpties un izvairīties no skolas", "correct": false }
+  ],
+  "actionExplanation": "Skola ir svarīga mācību vieta, un apzināta stundu kavēšana traucē gan mācībām, gan atbildības veidošanai."
+},
+
+    {
+  "id": 18,
+  "situation": "Es apzināti izstāstīju drauga noslēpumu visai klasei.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti izpaust cita cilvēka noslēpumu ir grēks, jo tas salauž uzticību un var sāpināt otru cilvēku.",
+  "actions": [
+    { "text": "Atvainoties draugam", "correct": true },
+    { "text": "Atzīt savu kļūdu", "correct": true },
+    { "text": "Mēģināt labot uzticību ar savām darbībām", "correct": true },
+    { "text": "Pārtraukt tālāk stāstīt citu noslēpumus", "correct": true },
+    { "text": "Smieties par draugu kopā ar citiem", "correct": false },
+    { "text": "Melot un teikt, ka tas nebiju es", "correct": false },
+    { "text": "Turpināt stāstīt citus noslēpumus", "correct": false }
+  ],
+  "actionExplanation": "Uzticība ir ļoti svarīga draudzībā. Kad mēs apzināti izpaužam cita cilvēka noslēpumu, mēs varam viņu ievainot un sabojāt attiecības. Ir svarīgi atzīt kļūdu, atvainoties un nākotnē būt uzticamiem, lai attiecības varētu atjaunoties."
+},
+
+   {
+  "id": 19,
+  "situation": "Es palīdzēju vecam cilvēkam pāriet ielu.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Palīdzēt cilvēkam, kuram tas ir vajadzīgs, ir laba un žēlsirdīga rīcība.",
+  "actions": [
+    { "text": "Turpināt palīdzēt cilvēkiem, kuriem tas ir vajadzīgs", "correct": true },
+    { "text": "Pievērst uzmanību, ja kādam vajag palīdzību arī nākotnē", "correct": true },
+    { "text": "Palīdzēt arī tad, kad tas nav ērti vai prasa laiku", "correct": true },
+    { "text": "Izturēties ar cieņu un sapratni pret vecākiem cilvēkiem", "correct": true },
+    { "text": "Ignorēt un iet tālāk", "correct": false },
+    { "text": "Domāt, ka kāds cits noteikti palīdzēs", "correct": false },
+    { "text": "Steigties prom, lai nebūtu jāiesaistās", "correct": false },
+    { "text": "Pasmieties ar draugiem par vecā cilvēka grūtībām", "correct": false }
+  ],
+  "actionExplanation": "Palīdzēt cilvēkiem, kuriem tas ir grūtāk, ir žēlsirdības darbs. Tas māca mums būt uzmanīgiem, laipniem un cienīt citus. Pat maza palīdzība var ļoti nozīmēt otram cilvēkam, bet izsmiešana vai vienaldzība var viņu sāpināt."
+},
+    {
+  "id": 20,
+  "situation": "Mans brālis/māsa nesot LEGO kasti aizķērās, un kluči izbira pa visu grīdu. Es nebiju aizņemts, bet arī nepalīdzēju tos savākt.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti nepalīdzēt, kad redzam, ka kādam ir grūti, ir grēks, jo tas parāda vienaldzību un nevērību pret otru cilvēku.",
+  "actions": [
+    { "text": "Pienākt un palīdzēt savākt LEGO klučus", "correct": true },
+    { "text": "Pajautāt, vai viņam vajag palīdzību", "correct": true },
+    { "text": "Atvainoties un palīdzēt sakārtot", "correct": true },
+    { "text": "Nākamreiz palīdzēt uzreiz, kad kaut kas tāds notiek", "correct": true },
+    { "text": "Aiziet prom un izlikties, ka neredzu", "correct": false },
+    { "text": "Smieties par to, ka viss izbira", "correct": false },
+    { "text": "Domāt, ka tas nav mans pienākums", "correct": false },
+    { "text": "Turpināt darīt savas lietas, kamēr otrs pats visu savāc", "correct": false }
+  ],
+  "actionExplanation": "Ģimenē mēs esam aicināti palīdzēt viens otram, īpaši, ja kaut kas nejauši notiek. Pat tad, ja neesam aizņemti, izvēle nepalīdzēt var sāpināt otru. Palīdzība māca rūpību, laipnību un stiprina attiecības mājās."
+},
+{
+  "id": 21,
+  "situation": "Es redzēju, ka draugi apsmej klasesbiedru, bet es neko neteicu un nepiedalījos, tomēr arī neiebildu.",
+  "correctSin": "grēks",
+  "sinExplanation": "Ja mēs redzam, ka kādu apsmej, bet klusējam un necenšamies to apturēt, mēs varam netieši atbalstīt nepareizu rīcību.",
+  "actions": [
+    { "text": "Pateikt, ka apsmiet citus nav pareizi", "correct": true },
+    { "text": "Aizstāvēt klasesbiedru un viņu atbalstīt", "correct": true },
+    { "text": "Mēģināt novērst situāciju vai aiziet kopā ar cietušo", "correct": true },
+    { "text": "Lūgt Dievam drosmi aizstāvēt vājākos", "correct": true },
+    { "text": "Nākamreiz neklusēt, ja kādu apsmej", "correct": true },
+    { "text": "Smieties līdzi", "correct": false },
+    { "text": "Izlikties, ka neko neredzu", "correct": false },
+    { "text": "Domāt, ka tas nav mans pienākums viņu aizstāvēt", "correct": false }, 
+    { "text": "Baidīties, ka sāks smieties par mani, ja aizstāvēšu klasesbiedru", "correct": false }
+  ],
+  "actionExplanation": "Apsmiešana var ļoti sāpināt cilvēku. Pat ja mēs paši nepiedalāmies, klusēšana var dot sajūtu, ka tas ir pieņemami. Ir svarīgi būt drosmīgiem, aizstāvēt citus un palīdzēt veidot laipnu un cieņpilnu vidi."
+}, 
+  
+{
+  "id": 22,
+  "situation": "Starpbrīdī es nejauši uzlēju dzērienu uz klasesbiedra zīmējuma, un neviens neredzēja, ka tas biju es.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Nejaušs negadījums bez nodoma nav grēks, bet tas joprojām var ietekmēt citus, tāpēc ir svarīgi rīkoties godīgi un atbildīgi.",
+  "actions": [
+    { "text": "Uzreiz pateikt klasesbiedram patiesību", "correct": true },
+    { "text": "Atvainoties par notikušo", "correct": true },
+    { "text": "Piedāvāt palīdzēt izžāvēt vai atjaunot zīmējumu", "correct": true },
+    { "text": "Nākamreiz būt uzmanīgākam ar dzērienu skolā", "correct": true },
+    { "text": "Neko neteikt un izlikties, ka tas notika pats no sevis", "correct": false },
+    { "text": "Novelt vainu uz kādu citu", "correct": false },
+    { "text": "Aiziet prom, nepasakot neko", "correct": false }
+  ],
+  "actionExplanation": "Pat ja neviens uzreiz nepamana, godīgums un atbildība ir svarīgi. Atzīt notikušo un piedāvāt palīdzību parāda cieņu pret citiem un palīdz saglabāt uzticību."
+},
+  {
+  "id": 23,
+  "situation": "Es apzināti sabojāju klasesbiedra zīmējumu, jo man šķita, ka viņa darbs ir labāks par manējo.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti sabojāt cita cilvēka darbu no skaudības vai dusmām ir grēks, jo tas nodara kaitējumu otram.",
+  "actions": [
+    { "text": "Atvainoties klasesbiedram", "correct": true },
+    { "text": "Atzīt, ko esmu izdarījis", "correct": true },
+    { "text": "Mēģināt palīdzēt atjaunot vai labot zīmējumu", "correct": true },
+    { "text": "Pārdomāt savu rīcību un censties nākotnē vairs nebūt tik skaudīgam, lūgt palīdzību Dievam", "correct": true },
+    { "text": "Pārtraukt bojāt citu cilvēku darbus", "correct": true },
+    { "text": "Turpināt bojāt viņa darbu", "correct": false },
+    { "text": "Nolikt vainu uz kādu citu", "correct": false },
+    { "text": "Izlikties, ka tas nebiju es", "correct": false }
+  ],
+  "actionExplanation": "Skaudība var likt mums darīt nepareizas lietas, bet svarīgi ir apstāties, atzīt kļūdu un labot nodarīto. Citu cilvēku darbu bojāšana nekad nav pareiza, pat ja mums pašiem šķiet, ka esam sarūgtināti vai neapmierināti."
+},
+  {
+  "id": 24,
+  "situation": "Es biju slims un paliku mājās, jo mamma lika atpūsties. Tajā dienā skolā bija kontroldarbs.",
+  "correctSin": "nav grēks",
+  "sinExplanation": "Būt slimam un palikt mājās, lai atgūtos, nav grēks, tas ir nepieciešams veselībai un rūpēm par sevi.",
+  "actions": [
+    { "text": "Atpūsties un rūpēties par veselību", "correct": true },
+    { "text": "Pajautāt skolotājam, kad varēšu uzrakstīt kontroldarbu", "correct": true },
+    { "text": "Godīgi izpildīt kontroldarbu citā dienā", "correct": true },
+    { "text": "Sagatavoties nākamajām mācībām, kad jūtos labāk", "correct": true },
+    { "text": "Izlikties slims, lai izvairītos no kontroldarba nākotnē", "correct": false },
+    { "text": "Mēģināt uzzināt no klasesbiedriem atbildes, lai iegūtu labāku atzīmi", "correct": false },
+    { "text": "Nepiedalīties un neko neskaidrot ar skolotāju", "correct": false }
+  ],
+  "actionExplanation": "Kad esam slimi, mums ir svarīgi atpūsties un rūpēties par veselību. Tajā pašā laikā mēs esam aicināti būt godīgi un atbildīgi par mācībām. Godīgums nozīmē necensties apiet noteikumus, bet risināt situāciju pareizi kopā ar skolotāju."
+},
+  {
+  "id": 25,
+  "situation": "Es izlikos slims, lai nebūtu jāiet uz skolu un nebūtu jāpilda pienākumi.",
+  "correctSin": "grēks",
+  "sinExplanation": "Izlikšanās un melošana, lai izvairītos no pienākumiem, ir grēks, jo tā nav godīga attieksme pret citiem un pret saviem pienākumiem.",
+  "actions": [
+    { "text": "Pastāstīt vecākiem patiesību", "correct": true },
+    { "text": "Nākamreiz būt godīgam, pat ja negribas iet uz skolu", "correct": true },
+    { "text": "Atvainoties par melošanu", "correct": true },
+    { "text": "Mācīties uzņemties atbildību par skolu", "correct": true },
+    { "text": "Turpināt izlikties slims, lai izvairītos no skolas", "correct": false },
+    { "text": "Turpināt melot, lai iegūtu sev izdevīgāku situāciju", "correct": false },
+    { "text": "Mēģināt noslēpt patiesību", "correct": false }
+  ],
+  "actionExplanation": "Skola nav tikai pienākums — tā ir vieta, kur mēs mācāmies un augam paši sev. Mācības palīdz mums kļūt gudrākiem un sagatavoties nākotnei. Godīgums palīdz veidot uzticību un iemācīties uzņemties atbildību, nevis izvairīties no tās."
+},
+  {
+  "id": 26,
+  "situation": "Skolotājs skaidro uzdevumu, bet es runāju ar klasesbiedru un neklausos.",
+  "correctSin": "grēks",
+  "sinExplanation": "Neklausīšanās un traucēšana stundā ir necieņa pret skolotāju un citiem skolēniem.",
+  "actions": [
+    { "text": "Nākamreiz klausīties skolotāju uzmanīgi", "correct": true },
+    { "text": "Pārtraukt runāt un sekot līdzi stundai", "correct": true },
+    { "text": "Atvainoties skolotājam par traucēšanu", "correct": true },
+
+    { "text": "Turpināt runāt stundas laikā", "correct": false },
+    { "text": "Ignorēt skolotāju", "correct": false }
+  ],
+  "actionExplanation": "Stundā ir svarīgi cienīt skolotāju un citus, lai visi varētu mācīties."
+}, 
+  {
+  "id": 27,
+  "situation": "Baznīcā es runāju un smejos, kamēr notiek lūgšana.",
+  "correctSin": "grēks",
+  "sinExplanation": "Baznīcā traucēt lūgšanu ir necieņa pret svēto vietu un citiem cilvēkiem.",
+  "actions": [
+    { "text": "Klusēt un klausīties lūgšanu", "correct": true },
+    { "text": "Izslēgt telefonu un ievērot klusumu", "correct": true },
+    { "text": "Nākamreiz izturēties ar cieņu baznīcā", "correct": true },
+    { "text": "Palūgt Dievam piedošanu par necienīgu uzvedību", "correct": true },
+    { "text": "Turpināt runāt un smieties", "correct": false },
+    { "text": "Apzināti traucēt citiem", "correct": false }
+  ],
+  "actionExplanation": "Baznīcā ir svarīgi ievērot klusumu un cieņu, lai netraucētu citiem lūgties."
+},
+  {
+  "id": 28,
+  "situation": "Draugu priekšā es izliekos, ka neticu Dievam, lai neizskatītos citāds.",
+  "correctSin": "grēks",
+  "sinExplanation": "Noliegt savu ticību citu priekšā var būt nepatiesa un bailēs balstīta rīcība.",
+  "actions": [
+    { "text": "Būt godīgam par savu ticību", "correct": true },
+    { "text": "Nebaidīties izteikt savu viedokli", "correct": true },
+    { "text": "Turēt savu pārliecību arī citu priekšā", "correct": true },
+
+    { "text": "Izlikties, ka neticu, lai iederētos", "correct": false },
+    { "text": "Kaunēties par savu ticību", "correct": false }
+  ],
+  "actionExplanation": "Svarīgi ir būt godīgam par to, kam mēs ticam, un nebaidīties no citu viedokļa."
+},
+  {
+  "id": 29,
+  "situation": "Grēksūdzē es speciāli noklusēju vienu grēku, jo man bija neērti to pateikt.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti slēpt patiesību grēksūdzē ir nepatiesa rīcība.",
+  "actions": [
+    { "text": "Būt godīgam grēksūdzē", "correct": true },
+    { "text": "Atzīt visus savus grēkus", "correct": true },
+    { "text": "Nākamreiz nebaidīties pateikt patiesību", "correct": true },
+    { "text": "Nākošajā grēksūdzē atzīties, ka iepriekš ir apzināti noklusēts grēks", "correct": true },
+    { "text": "Turpināt noklusēt lietas", "correct": false },
+    { "text": "Neiet vairāk uz grēksūdzi, jo ir neērti runāt par saviem sliktajiem darbiem", "correct": false },
+    { "text": "Maldināt garīdznieku", "correct": false }
+  ],
+  "actionExplanation": "Godīgums palīdz patiesi nožēlot un laboties, nevis slēpt savas kļūdas."
+},
+  {
+  "id": 30,
+  "situation": "Es smējos par joku, kas aizskar Dievu vai ticību.",
+  "correctSin": "grēks",
+  "sinExplanation": "Smieties par aizskarošiem jokiem var būt necieņa pret svētām lietām un citiem cilvēkiem.",
+  "actions": [
+    { "text": "Nesmieties par necienīgiem jokiem", "correct": true },
+    { "text": "Aizrādīt, ka tas nav cieņpilni", "correct": true },
+    { "text": "Nomainīt sarunas tēmu", "correct": true },
+    { "text": "Lūgt piedošanu Dievam par necienīgu izturēšanos", "correct": true },
+    { "text": "Turpināt smieties līdzi", "correct": false },
+    { "text": "Stāstīt tādus pašus jokus tālāk", "correct": false }
+  ],
+  "actionExplanation": "Cieņa pret ticību un citiem cilvēkiem nozīmē izvairīties no aizskarošiem jokiem un runāt ar cieņu."
+},
+  {
+  "id": 31,
+  "situation": "Es dalījos ar citiem, bet pēc tam lielījos par to.",
+  "correctSin": "grēks",
+  "sinExplanation": "Darīt labu un pēc tam lielīties par to nav īsti pazemīga rīcība un samazina labā darba vērtību.",
+  "actions": [
+    { "text": "Darīt labus darbus klusi, bez lielīšanās", "correct": true },
+    { "text": "Priecāties, ka varu palīdzēt citiem", "correct": true },
+    { "text": "Atvainoties, ja esmu lielījies", "correct": true },
+    { "text": "Turpināt lielīties par saviem labajiem darbiem", "correct": false },
+    { "text": "Darīt labus darbus tikai tad, kad citi to var redzēt", "correct": false },
+    { "text": "Citreiz vairs nedalīties vispār", "correct": false }
+  ],
+  "actionExplanation": "Labie darbi ir visvērtīgākie tad, kad tie tiek darīti, lai palīdzētu citiem, nevis lai izceltos vai saņemtu uzmanību. Lielīšanās var mazināt labā darba jēgu, bet pazemība un klusums palīdz saglabāt īsto labestību."
+}, 
+{
+  "id": 32,
+  "situation": "Es dzirdēju, ka draugs plāno paņemt saldumus no veikala, nesamaksājot, bet es neko neteicu un aizgāju mājās.",
+  "correctSin": "grēks",
+  "sinExplanation": "Ja mēs zinām, ka kāds plāno darīt kaut ko nepareizi, bet neko nesakām un nepamudinām uz pareizu rīcību, mēs nepalīdzam viņam izvēlēties labo ceļu.",
+  "actions": [
+    { "text": "Pateikt draugam, ka tas nav pareizi un nedrīkst tā darīt", "correct": true },
+    { "text": "Ieteikt darīt pareizi un nesabojāt attiecības ar citiem", "correct": true },
+    { "text": "Piedāvāt kopā aiziet prom no situācijas", "correct": true },
+    { "text": "Nākamreiz uzreiz pateikt, ja redzu, ka draugs grib darīt kaut ko nepareizi", "correct": true },
+    { "text": "Izlikties, ka neko nedzirdēju", "correct": false },
+    { "text": "Domāt, ka tā nav mana problēma", "correct": false },
+    { "text": "Vienkārši aiziet prom un neko neteikt", "correct": false },
+    { "text": "Atbalstīt viņa ideju", "correct": false }
+  ],
+  "actionExplanation": "Ja mēs zinām, ka draugs plāno darīt kaut ko nepareizi, ir svarīgi viņu brīdināt un palīdzēt izvēlēties pareizo rīcību. Pat vienkāršs vārds var palīdzēt viņam apstāties un nepieļaut kļūdu. Vienaldzība var nozīmēt, ka mēs ļaujam sliktai rīcībai notikt."
+},
+{
+  "id": 33,
+  "situation": "Vecāki ir uzlikuši laika limitu telefonam, bet es pa kluso mēģinu uzzināt paroli, lai pagarinātu ekrāna laiku.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināta noteikumu apiešana un slepena rīcība pret vecāku noteikumiem ir nepareiza, jo tā bojā uzticību.",
+  "actions": [
+    { "text": "Godīgi lūgt vecākiem papildu ekrāna laiku", "correct": true },
+    { "text": "Pieņemt noteikumus un izmantot telefonu atbildīgi", "correct": true },
+    { "text": "Runāt ar vecākiem par ekrāna laika maiņu", "correct": true },
+    { "text": "Mēģināt uzzināt paroli bez atļaujas arī turpmāk", "correct": false },
+    { "text": "Apiet vecāku noteikumus pa kluso", "correct": false },
+    { "text": "Izmantot telefonu slepeni ilgāk nekā atļauts", "correct": false }
+  ],
+  "actionExplanation": "Vecāku noteikumi palīdz mācīties atbildīgi lietot tehnoloģijas. Godīga saruna ir pareizais veids, kā risināt neapmierinātību, nevis noteikumu apiešana."
+},
+{
+  "id": 34,
+  "situation": "Es uzzināju vecāku telefona paroli un bez atļaujas iegāju viņu telefonā, lai pagarinātu sev ekrāna laiku.",
+  "correctSin": "grēks",
+  "sinExplanation": "Ielaušanās cita telefonā un noteikumu apzināta apiešana ir nepareiza, jo tā pārkāpj uzticību un godīgumu.",
+  "actions": [
+    { "text": "Godīgi pajautāt vecākiem par ekrāna laika pagarināšanu", "correct": true },
+    { "text": "Godīgi atzīties vecākiem, ka esi uzzinājis viņu paroli", "correct": true },
+    { "text": "Neizmantot šo paroli, lai negodīgi sev pagarinātu ekrāna laiku", "correct": true },
+    { "text": "Runāt ar vecākiem par noteikumiem un mēģināt vienoties par ilgāku ekrāna laiku", "correct": true },
+    { "text": "Atzīt, ka nedrīkst izmantot svešu telefonu bez atļaujas", "correct": true },
+    { "text": "Ienākt vecāku telefonā bez atļaujas", "correct": false },
+    { "text": "Mainīt iestatījumus, lai sev pagarinātu laiku", "correct": false },
+    { "text": "Izmantot iegūto paroli, lai apietu noteikumus", "correct": false }, 
+    { "text": "Mēģināt uzzināt paroli arī nākotnē", "correct": false }
+  ],
+  "actionExplanation": "Vecāku noteikumi un privātums ir jārespektē. Ja ir vēlme pēc vairāk ekrāna laika, pareizais veids ir saruna, nevis slepena rīcība."
+}, 
+{
+  "id": 35,
+  "situation": "Es dusmās nosaucu savus vecākus sliktos vārdos un teicu, ka viņi ir sliktākie vecāki, jo viņi man neļāva iet uz ballīti.",
+  "correctSin": "grēks",
+  "sinExplanation": "Rupji vārdi un aizvainojoši apvainojumi pret vecākiem ir necieņa, pat ja esam dusmīgi vai neapmierināti.",
+  "actions": [
+    { "text": "Nomierināties un vēlāk mierīgi par to parunāt", "correct": true },
+    { "text": "Atvainoties vecākiem par pateiktajiem vārdiem", "correct": true },
+    { "text": "Mācīties izteikt savas dusmas bez aizvainojumiem", "correct": true },
+
+    { "text": "Turpināt apvainot un necienīt vecākus", "correct": false },
+    { "text": "Turēt ļaunu prātu un nerunāt ar viņiem", "correct": false },
+    { "text": "Apzināti teikt aizvainojošas lietas, lai viņus ievainotu", "correct": false }
+  ],
+  "actionExplanation": "Dusmas ir normālas, bet svarīgi ir tās izteikt cieņpilni. Aizvainojoši vārdi var sāpināt attiecības, tāpēc labāk ir nomierināties un runāt mierīgi."
+}, 
+{
+  "id": 36,
+  "situation": "Vecāki aicina mani doties uz baznīcu, bet es palieku mājās un spēlēju datorspēles, jo man negribas iet.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināta atteikšanās no kopīgas dalības un necieņa pret vecāku lūgumu var būt nepareiza rīcība.",
+  "actions": [
+    { "text": "Doties līdzi un piedalīties ar cieņu", "correct": true },
+    { "text": "Pārrunāt ar vecākiem savas grūtības, bet respektēt viņu lūgumu", "correct": true },
+    { "text": "Mēģināt nākamreiz būt atvērtāks kopīgām lietām", "correct": true },
+    { "text": "Lūgt piedošanu Dievam, ka grēkoju pret 3. bausli un neapmeklēju baznīcu", "correct": true },
+    { "text": "Palikt mājās un spēlēt spēles, ignorējot vecākus", "correct": false },
+    { "text": "Izlikties, ka neesmu dzirdējis aicinājumu", "correct": false }
+  ],
+  "actionExplanation": "Svarīgi ir cienīt ģimenes kopīgos lēmumus un neatteikties tikai tāpēc, ka negribas vai ir ērtāk."
+}, 
+{
+  "id": 37,
+  "situation": "Baznīcā es sēžu telefonā un spēlēju spēles vai skatos video, kamēr citi piedalās lūgšanā.",
+  "correctSin": "grēks",
+  "sinExplanation": "Baznīcā traucēt un neievērot cieņu pret kopīgo lūgšanu ir nepareiza rīcība.",
+  "actions": [
+    { "text": "Izslēgt telefonu un ievērot klusumu", "correct": true },
+    { "text": "Piedalīties ar cieņu vai mierīgi klausīties", "correct": true },
+    { "text": "Nolikt telefonu un netraucēt citiem", "correct": true },
+    { "text": "Citreiz izslēgt telefonu, atstāt mājās vai iedot vecākiem, lai nebūtu kārdinājums to lietot", "correct": true },
+    { "text": "Lūgt piedošanu Dievam, par necienīgu izturēšanos pret viņu", "correct": true },
+    { "text": "Spēlēt spēles telefonā baznīcā", "correct": false },
+    { "text": "Sūtīt ziņas un smieties lūgšanas laikā", "correct": false }
+  ],
+  "actionExplanation": "Baznīca ir vieta, kur svarīga ir cieņa un klusums, lai netraucētu citiem cilvēkiem lūgties."
+}, 
+{
+  "id": 38,
+  "situation": "Es redzēju, ka klasesbiedrs neieradās uz kino, jo palīdzēja vecmāmiņai dārzā, un es par to kopā ar citiem pasmējos.",
+  "correctSin": "grēks",
+  "sinExplanation": "Izsmiet kādu par labu rīcību ir necieņa un var sāpināt cilvēku, kurš palīdzējis citiem.",
+  "actions": [
+    { "text": "Pārtraukt smieties un neiesaistīties izsmiešanā", "correct": true },
+    { "text": "Atbalstīt klasesbiedru un viņa izvēli palīdzēt ģimenei", "correct": true },
+    { "text": "Nākamreiz aizstāvēt cilvēku, ja citi viņu izsmej", "correct": true },
+
+    { "text": "Turpināt smieties kopā ar citiem", "correct": false },
+    { "text": "Stāstīt to tālāk, lai citi arī smejas", "correct": false },
+    { "text": "Noniecināt viņa palīdzību vecmāmiņai", "correct": false }
+  ],
+  "actionExplanation": "Labi darbi ir jārespektē, nevis jāizsmej. Cieņa pret citu izvēlēm palīdz veidot draudzīgāku un taisnīgāku attieksmi."
+}, 
+{
+  "id": 39,
+  "situation": "Starpbrīdī mēs ar draugiem spēlējam futbolu. Mēs neļaujam vienam klasesbiedram pievienoties mūsu spēlei, jo mums viņš nepatīk.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināta kāda atstumšana no grupas un neiekļaušana aiz nepatikas vai attieksmes ir netaisnīga un var sāpināt otru cilvēku.",
+  "actions": [
+    { "text": "Aicināt viņu pievienoties spēlei", "correct": true },
+    { "text": "Pateikt draugiem, ka vajag viņu iekļaut", "correct": true },
+    { "text": "Pārtraukt atstumšanu un mainīt attieksmi", "correct": true },
+
+    { "text": "Turpināt neļaut viņam piedalīties", "correct": false },
+    { "text": "Piedalīties viņa atstumšanā", "correct": false },
+    { "text": "Izlikties, ka tas ir normāli", "correct": false }
+  ],
+  "actionExplanation": "Cilvēku izslēgšana no grupas aiz nepatikas nav taisnīga rīcība. Iekļaušana un cieņa pret citiem palīdz veidot labāku attiecību vidi."
+}, 
+{
+  "id": 40,
+  "situation": "Stundas laikā es apzināti smejos, runāju un taisu troksni, traucējot citiem skolēniem un skolotājam, pat pēc aizrādījuma.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināta traucēšana stundā un citu mācību darba traucēšana ir necieņa un nepareiza rīcība.",
+  "actions": [
+    { "text": "Pārtraukt traucēt un ievērot klusumu", "correct": true },
+    { "text": "Uzreiz paklausīt skolotāja aizrādījumam", "correct": true },
+    { "text": "Nākamreiz stundā uzvesties mierīgi", "correct": true },
+    { "text": "Atvainoties skolotājam par savu rīcību", "correct": true },
+    { "text": "Turpināt smieties un traucēt", "correct": false },
+    { "text": "Ignorēt skolotāja aizrādījumus", "correct": false },
+    { "text": "Apzināti traucēt arī pēc vairākiem aizrādījumiem", "correct": false }
+  ],
+  "actionExplanation": "Stundā ir svarīgi ievērot kārtību un netraucēt citiem, lai visi varētu mācīties."
+}, 
+{
+  "id": 41,
+  "situation": "Es apzināti kaitinu savu mazo brāli vai māsu, līdz viņš/viņa sadusmojas vai sāk raudāt.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināti kādu kaitināt un sāpināt emocionāli ir nepareiza rīcība, jo tas var ievainot otra cilvēka jūtas.",
+  "actions": [
+    { "text": "Pārtraukt kaitināt un atstāt brāli/māsu mierā", "correct": true },
+    { "text": "Atvainoties, ja esmu viņu sāpinājis", "correct": true },
+    { "text": "Mēģināt spēlēties ar viņu draudzīgi", "correct": true },
+
+    { "text": "Turpināt kaitināt līdz viņš/viņa raud", "correct": false },
+    { "text": "Ignorēt, ka viņš/viņa ir satraukts", "correct": false },
+    { "text": "Darīt to speciāli, lai viņu sadusmotu", "correct": false }
+  ],
+  "actionExplanation": "Ģimenē ir svarīgi būt laipnam un neizraisīt sāpes citiem, pat ja tas šķiet kā joks."
+}, 
+{
+  "id": 42,
+  "situation": "Es bez atļaujas paņēmu brāļa/māsas LEGO figūriņu, jo gribēju ar to paspēlēties.",
+  "correctSin": "grēks",
+  "sinExplanation": "Paņemt cita cilvēka mantu bez atļaujas ir necieņa pret viņa īpašumu un uzticību.",
+  "actions": [
+    { "text": "Pajautāt atļauju pirms ņemu LEGO figūriņu", "correct": true },
+    { "text": "Atdot figūriņu un atvainoties", "correct": true },
+    { "text": "Vienoties, ar ko drīkst spēlēties", "correct": true },
+
+    { "text": "Turpināt ņemt mantas bez atļaujas", "correct": false },
+    { "text": "Slēpt, ka es to paņēmu", "correct": false },
+    { "text": "Izlikties, ka tā ir mana figūriņa", "correct": false }
+  ],
+  "actionExplanation": "Citu mantas drīkst izmantot tikai ar atļauju. Godīgums palīdz saglabāt uzticību ģimenē."
+}, 
+{
+  "id": 43,
+  "situation": "Dusmās es sāku mētāt savas mantas pa istabu, apgāzu galdu un iespēru krēslam.",
+  "correctSin": "grēks",
+  "sinExplanation": "Apzināta dusmu izlādēšana, bojājot mantas un radot haosu, ir nepareiza rīcība, jo tā var kaitēt gan pašam, gan citiem un bojā kopīgo vidi.",
+  "actions": [
+    { "text": "Aiziet prom un nomierināties", "correct": true },
+    { "text": "Runāt par to, kas mani sadusmoja", "correct": true },
+    { "text": "Pēc tam sakārtot un atvainoties", "correct": true },
+    { "text": "Lūgt Dievam palīdzību būt lēnprātīgākam", "correct": true },
+
+    { "text": "Turpināt mest un bojāt lietas", "correct": false },
+    { "text": "Spārdīt mēbeles", "correct": false },
+    { "text": "Izlikties, ka tas ir normāli", "correct": false }
+  ],
+  "actionExplanation": "Dusmas var būt spēcīgas, bet tās nevajag izpaust, bojājot lietas. Labāk ir nomierināties un atrast mierīgu risinājumu."
+} 
+
+  ]
+}

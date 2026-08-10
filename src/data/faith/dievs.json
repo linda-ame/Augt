@@ -1,0 +1,613 @@
+{
+  "title": "Dievs un ticība",
+  "range": "1-77",
+  "sections": [
+    {
+      "id": "dievs",
+      "title": "Dievs",
+      "range": "1-11",
+      "groups": [ 
+        { 
+            "id": "butiba", 
+            "title": "Dieva būtība", 
+            "range": "1-3",
+            "items": [
+                {
+                    "nr": 1,
+                    "q": "Kas ir Dievs?",
+                    "a": "Dievs ir debesu un zemes Radītājs."
+                },
+                {
+                    "nr": 2,
+                    "q": "Kur ir Dievs?",
+                    "a": "Dievs ir visur: debesīs, virs zemes un ikvienā vietā."
+                },
+                {
+                    "nr": 3,
+                    "q": "Kāpēc mēs Dievu nevaram redzēt?",
+                    "a": "Mēs Dievu nevaram redzēt, jo Viņš ir Gars un Viņam nav miesas."
+                }
+            ]
+        }, 
+
+        { 
+            "id": "ipasibas", 
+            "title": "Kāds ir Dievs?", 
+            "range": "4-8",
+            "items": [
+                {
+                    "nr": 4,
+                    "q": "Vai Dievam ir iesākums?",
+                    "a": "Dievam nav iesākuma. Dievs vienmēr bija un būs, jo Viņš ir mūžīgs."
+                },
+                {
+                    "nr": 5,
+                    "q": "Ko Dievs spēj darīt?",
+                    "a": "Dievs spēj darīt visu, ko vien grib, jo Dievs ir visvarens."
+                },
+                {
+                    "nr": 6,
+                    "q": "Kāpēc Dievu saucam par taisnīgu?",
+                    "a": "Dievu saucam par taisnīgu, jo Viņš par labiem darbiem atalgo, bet par ļauniem – tiesā."
+                },
+                {
+                    "nr": 7,
+                    "q": "Kāpēc Dievu saucam par žēlsirdīgu?",
+                    "a": "Dievu saucam par žēlsirdīgu, jo Viņš labprāt piedod, kad nožēlojam savus grēkus."
+                },
+                {
+                    "nr": 8,
+                    "q": "Ko Dievs zina?",
+                    "a": "Dievs zina visu, kas ir bijis un kas būs – Dievs zina pat visas mūsu domas."
+                }
+            ]
+        }, 
+
+ { 
+            "id": "trisvieniba", 
+            "title": "Svētā Trīsvienība", 
+            "range": "9-11",
+            "items": [       
+                {
+                    "nr": 9,
+                    "q": "Vai ir vairāk nekā viens Dievs?",
+                    "a": "Dievs ir tikai viens, bet trijās personās: Dievs Tēvs, Dievs Dēls un Dievs Svētais Gars."
+                },
+                {
+                    "nr": 10,
+                    "q": "Vai katra dievišķā Persona ir īsts Dievs?",
+                    "a": "Jā, katra dievišķā Persona ir īsts un patiess Dievs."
+                },
+                {
+                    "nr": 11,
+                    "q": "Kā saucam to patiesību, ka ir viens Dievs trijās Personās?",
+                    "a": "To patiesību, ka ir viens Dievs trijās Personās, saucam par Vissvētās Trīsvienības noslēpumu."
+                }
+      ]
+    }
+]
+    }, 
+
+    {
+      "id": "raditajs",
+      "title": "Dievs – pasaules Radītājs",
+      "range": "12-31",
+      "groups": [
+        {
+            "id": "debess-zeme", 
+            "title": "Debess un zemes Radītājs", 
+            "range": "12",
+            "items": [
+      
+        {
+          "nr": 12,
+          "q": "Kāpēc mēs Dievu saucam par pasaules Radītāju?",
+          "a": "Dievu mēs saucam par pasaules Radītāju, jo Viņš radīja debesis un zemi."
+        }]
+        }, 
+
+        {
+            "id": "engeli", 
+            "title": "Eņģeļi", 
+            "range": "13-15",
+            "items": [
+
+        {
+          "nr": 13,
+          "q": "Ko Dievs radīja debesīs?",
+          "a": "Debesīs Dievs radīja eņģeļus."
+        },
+        {
+          "nr": 14,
+          "q": "Kas ir eņģeļi?",
+          "a": "Eņģeļi ir gari, kam ir prāts un brīva griba, bet nav miesas."
+        },
+        {
+          "nr": 15,
+          "q": "Kāpēc Dievs radīja eņģeļus?",
+          "a": "Dievs radīja eņģeļus, lai tie Viņu mīlētu, godinātu un būtu laimīgi."
+            }
+        ]
+        }, 
+   {
+            "id": "labie-launie", 
+            "title": "Labie un ļaunie eņģeļi", 
+            "range": "16-19",
+            "items": [     
+        
+        {
+          "nr": 16,
+          "q": "Vai visi eņģeļi palika uzticīgi Dievam?",
+          "a": "Nē, daudzi eņģeļi sacēlās pret Dievu, tādēļ tika notiesāti un iemesti ellē."
+        },
+        {
+          "nr": 17,
+          "q": "Kā saucas ļaunie eņģeļi?",
+          "a": "Ļaunie eņģeļi saucas par velniem vai ļaunajiem gariem."
+        },
+        {
+          "nr": 18,
+          "q": "Vai ļaunais gars dara cilvēkiem ko ļaunu?",
+          "a": "Ļaunais gars mudina cilvēkus uz grēku."
+        },
+        {
+          "nr": 19,
+          "q": "Vai labie eņģeļi dara mums ko labu?",
+          "a": "Labie eņģeļi sargā mūs, mudina uz labu un lūdz par mums Dievu."
+        }
+    ]
+},
+      
+
+    {
+            "id": "cilveks", 
+            "title": "Cilvēks", 
+            "range": "20-23",
+            "items": [  
+        {
+          "nr": 20,
+          "q": "Kas ir cilvēks?",
+          "a": "Cilvēks ir Dieva radījums, kas sastāv no miesas un dvēseles."
+        },
+        {
+          "nr": 21,
+          "q": "Kā Dievs radīja pirmo cilvēku?",
+          "a": "Dievs radīja no zemes cilvēka miesu un iedvesa tajā nemirstīgu dvēseli."
+        },
+        {
+          "nr": 22,
+          "q": "Kas ir cilvēka dvēsele?",
+          "a": "Cilvēka dvēsele ir nemirstīgs gars, apveltīts ar prātu un brīvu gribu."
+        },
+        {
+          "nr": 23,
+          "q": "Kāpēc Dievs radīja cilvēku?",
+          "a": "Dievs radīja cilvēku, lai viņš Dievu pazītu, mīlētu, uzticīgi\nViņam kalpotu un tā sasniegtu mūžīgu laimi debesīs."
+        }
+    ]
+}, 
+
+{
+            "id": "pirmie-cilveki", 
+            "title": "Pirmie cilvēki", 
+            "range": "24-27",
+            "items": [ 
+        {
+          "nr": 24,
+          "q": "Kā saucam pirmos cilvēkus?",
+          "a": "Pirmos cilvēkus saucam par Ādamu un Ievu."
+        },
+        {
+          "nr": 25,
+          "q": "Kādi bija pirmie cilvēki?",
+          "a": "Pirmie cilvēki bija labi un laimīgi."
+        },
+        {
+          "nr": 26,
+          "q": "Kur Dievs novietoja pirmos cilvēkus?",
+          "a": "Dievs pirmos cilvēkus novietoja paradīzes dārzā."
+        },
+        {
+          "nr": 27,
+          "q": "Vai pirmie cilvēki bija vienmēr paklausīgi Dievam?",
+          "a": "Nē, pirmie cilvēki kļuva nepaklausīgi Dievam un smagi sagrēkoja."
+        }
+    ]
+}, 
+
+    {
+            "id": "iedzimtais-greks", 
+            "title": "Iedzimtais grēks", 
+            "range": "28-31",
+            "items": [ 
+        {
+          "nr": 28,
+          "q": "Kam kaitēja pirmo cilvēku grēks?",
+          "a": "Pirmo cilvēku grēks kaitēja visiem ļaudīm."
+        },
+        {
+          "nr": 29,
+          "q": "Kā saucās tas grēks, kuru visi cilvēki mantoja no Ādama un Ievas?",
+          "a": "Grēks, ko cilvēki mantoja no Ādama un Ievas, saucas par iedzimto grēku."
+        },
+        {
+          "nr": 30,
+          "q": "Ko cilvēki zaudēja iedzimtā grēka dēļ?",
+          "a": "Iedzimtā grēka dēļ cilvēki zaudēja Dieva žēlastību, laimīgu dzīvi virs zemes un tiesības uz debesu valstību."
+        },
+        {
+          "nr": 31,
+          "q": "Vai Dievs apžēlojās par cilvēkiem?",
+          "a": "Dievs apžēlojās par cilvēkiem, jo atsūtīja viņiem Pestītāju."
+        }
+      ]
+    }
+      ]
+    }, 
+
+
+    {
+      "id": "pestitajs",
+      "title": "Dievs – pasaules Pestītājs",
+      "range": "32-49",
+      "groups": [
+{
+            "id": "Jezus-Kristus", 
+            "title": "Jēzus Kristus", 
+            "range": "32-36",
+            "items": [ 
+
+        {
+          "nr": 32,
+          "q": "Kā sauc pasaules Pestītāju?",
+          "a": "Pasaules Pestītāju sauc par Jēzu Kristu."
+        },
+        {
+          "nr": 33,
+          "q": "Kas ir Jēzus Kristus?",
+          "a": "Jēzus Kristus ir Dieva Dēls, kas kļuva par cilvēku un nomira pie krusta mūsu pestīšanas dēļ."
+        },
+        {
+          "nr": 34,
+          "q": "Vai Kungs Jēzus ir Dievs vai cilvēks?",
+          "a": "Kungs Jēzus ir īsts Dievs un īsts cilvēks."
+        },
+        {
+          "nr": 35,
+          "q": "Kas ir Jēzus Kristus Tēvs?",
+          "a": "Jēzus Kristus Tēvs ir Dievs Tēvs."
+        },
+        {
+          "nr": 36,
+          "q": "Kas ir Dievs Svētais Gars?",
+          "a": "Dievs Svētais Gars ir trešā Vissvētās Trīsvienības Persona."
+        }
+    ]
+}, 
+{
+            "id": "Jezus-berniba", 
+            "title": "Jēzus vecāki un bērnība", 
+            "range": "37-40",
+            "items": [ 
+
+        {
+          "nr": 37,
+          "q": "Kas ir Kunga Jēzus Māte?",
+          "a": "Kunga Jēzus Māte ir Vissvētākā Jaunava Marija."
+        },
+        {
+          "nr": 38,
+          "q": "Kas bija svētais Jāzeps?",
+          "a": "Svētais Jāzeps bija Kunga Jēzus audžutēvs un apgādnieks."
+        },
+        {
+          "nr": 39,
+          "q": "Kur piedzima Kungs Jēzus?",
+          "a": "Kungs Jēzus piedzima Betlēmes miestā, nabadzīgā stallītī."
+        },
+        {
+          "nr": 40,
+          "q": "Kur dzīvoja Kungs Jēzus?",
+          "a": "Kungs Jēzus dzīvoja Nazaretes pilsētiņā."
+        }
+    ]
+}, 
+{
+            "id": "Jezus-paveiktais", 
+            "title": "Ko Jēzus Kristus darīja?", 
+            "range": "41-43",
+            "items": [ 
+        {
+          "nr": 41,
+          "q": "Ko Kungs Jēzus darīja, kad Viņam bija 30 gadu?",
+          "a": "Kungs Jēzus mācīja ļaudis, piedeva viņiem grēkus un darīja daudz brīnumdarbu."
+        },
+        {
+          "nr": 42,
+          "q": "Ko Kungs Jēzus mācīja ļaudīm?",
+          "a": "Kungs Jēzus mācīja kā dzīvot, lai sasniegtu mūžīgu laimi Dieva valstībā."
+        },
+        {
+          "nr": 43,
+          "q": "Kādā veidā Kungs Jēzus atpestīja cilvēkus?",
+          "a": "Kungs Jēzus atpestīja cilvēkus ar savām ciešanām, nāvi un augšāmcelšanos."
+        }
+    ]
+}, 
+{
+            "id": "Jezus-nave", 
+            "title": "Jēzus Kristus nāve", 
+            "range": "44-46",
+            "items": [ 
+        {
+          "nr": 44,
+          "q": "Kur Kungs Jēzus nomira?",
+          "a": "Kungs Jēzus nomira Jeruzalemē uz Kalvarijas kalna, pienaglots krustā."
+        },
+        {
+          "nr": 45,
+          "q": "Kas notika ar Kunga Jēzus miesu pēc nāves?",
+          "a": "Kunga Jēzus miesa tika guldīta kapā."
+        },
+        {
+          "nr": 46,
+          "q": "Kur aizgāja Kunga Jēzus dvēsele?",
+          "a": "Pēc Kunga Jēzus nāves Viņa dvēsele aizgāja uz mirušo valstību, lai arī mirušajiem nestu pestīšanas vēsti."
+        }
+    ]
+}, 
+{
+            "id": "augsamecelsanas", 
+            "title": "Jēzus Kristus augšāmcelšanās", 
+            "range": "47-49",
+            "items": [ 
+        {
+          "nr": 47,
+          "q": "Kas notika trešajā dienā pēc Kunga Jēzus nāves?",
+          "a": "Trešajā dienā Kungs Jēzus ar miesu un dvēseli augšāmcēlās no kapa."
+        },
+        {
+          "nr": 48,
+          "q": "Ko darīja Kungs Jēzus pēc savas augšāmcelšanās?",
+          "a": "Pēc savas augšāmcelšanās Kungs Jēzus parādījās saviem mācekļiem, mācīja viņus un beidzot 40.dienā aizgāja debesīs."
+        },
+        {
+          "nr": 49,
+          "q": "Vai Pestītājs nekad neatnāks no debesīm virs zemes?",
+          "a": "Pestītājs atnāks no debesīm virs zemes šīs pasaules beigās tiesāt dzīvos un mirušos. Šo atnākšanu sauc par pastardienu."
+        }
+      ]
+    }
+]
+    }, 
+
+    {
+      "id": "svetais_gars",
+      "title": "Dievs Svētais Gars – Svētdarītājs",
+      "range": "50-66",
+      "groups": [
+{
+            "id": "sveta-gara-sanemsana", 
+            "title": "Svētā Gara saņemšana", 
+            "range": "50-52",
+            "items": [ 
+
+        {
+          "nr": 50,
+          "q": "Ko Pestītājs apsolīja atsūtīt apustuļiem, atgriezdamies debesīs?",
+          "a": "Atgriezdamies debesīs, Pestītājs apsolīja apustuļiem Svēto Garu."
+        },
+        {
+          "nr": 51,
+          "q": "Kad Pestītājs savu solījumu izpildīja?",
+          "a": "Savu solījumu Pestītājs izpildīja Vasarsvētkos atsūtīdams apustuļiem un ticīgajiem Svēto Garu."
+        },
+        {
+          "nr": 52,
+          "q": "Ko darīja apustuļi, saņēmuši Svēto Garu?",
+          "a": "Apustuļi, saņēmuši Svēto Garu, izklīda uz visām pasaules pusēm sludināt Kristus mācību, kristīt cilvēkus un piedot grēkus."
+        }
+    ]
+}, 
+{
+            "id": "pirmie-kristiesi", 
+            "title": "Pirmie kristieši", 
+            "range": "53-55",
+            "items": [ 
+        {
+          "nr": 53,
+          "q": "Kā tika nosaukti tie, kas pieņēma Kristus mācību un kristību?",
+          "a": "Tos, kas pieņēmuši Kristus mācību un kristību, sauc par kristiešiem."
+        }, 
+        {
+          "nr": 54,
+          "q": "Kas vadīja pirmās kristiešu draudzes?",
+          "a": "Pirmās kristiešu draudzes vadīja paši apustuļi."
+        }
+    ]
+}, 
+{
+            "id": "Peteris", 
+            "title": "Apustulis Pēteris", 
+            "range": "55-57",
+            "items": [ 
+        {
+          "nr": 55,
+          "q": "Kas bija augstākais visu kristiešu gans?",
+          "a": "Augstākais visu kristiešu gans bija apustulis Pēteris."
+        },
+        {
+          "nr": 56,
+          "q": "Kas svēto Pēteri iecēla par augstāko visu kristiešu ganu?",
+          "a": "Par augstāko visu kristiešu ganu Pēteri iecēla pats Jēzus Kristus."
+        },
+        {
+          "nr": 57,
+          "q": "Kas pēc svētā Pētera nāves kļuva par viņa pēcteci?",
+          "a": "Pēc svētā Pētera nāves par viņa pēcteci kļuva Romas bīskaps, ko sauc par pāvestu."
+        }
+    ]
+}, 
+{
+            "id": "biskapi", 
+            "title": "Bīskapi un priesteri", 
+            "range": "58-60",
+            "items": [ 
+        {
+          "nr": 58,
+          "q": "Kas ir citu apustuļu pēcteči?",
+          "a": "Citu apustuļu pēcteči ir bīskapi."
+        },
+        {
+          "nr": 59,
+          "q": "Kas ir bīskapu palīgi?",
+          "a": "Bīskapu palīgi ir priesteri, kas darbojas draudzēs."
+        },
+        {
+          "nr": 60,
+          "q": "Ko sastāda pāvests, bīskapi, priesteri un visi kristieši?",
+          "a": "Pāvests, bīskapi, priesteri un visi kristieši sastāda vispārējo jeb Katoļu Baznīcu."
+        }
+            ]
+}, 
+{
+            "id": "katolu-baznica", 
+            "title": "Katoļu baznīca", 
+            "range": "61-63",
+            "items": [ 
+
+        {
+          "nr": 61,
+          "q": "Kas ir svētā Katoļu Baznīca?",
+          "a": "Svētā Katoļu Baznīca ir kristiešu savienība, kura atzīst kristīgo ticības un tikumības mācību, pieņem vienus un tos pašus svētos sakramentus un atrodas pāvesta vadībā."
+        },
+        {
+          "nr": 62,
+          "q": "Kas dibināja svēto Katoļu Baznīcu?",
+          "a": "Svēto Katoļu Baznīcu dibināja pats Kungs Jēzus Kristus."
+        },
+        {
+          "nr": 63,
+          "q": "Cik Baznīcu dibināja Jēzus Kristus?",
+          "a": "Jēzus Kristus dibināja tikai vienu vienīgo svēto Katoļu Baznīcu."
+        }
+            ]
+        }, 
+{
+            "id": "pestisana", 
+            "title": "Cilvēku pestīšana", 
+            "range": "64-66",
+            "items": [ 
+
+        {
+          "nr": 64,
+          "q": "Kāpēc Kristus dibināja svēto Katoļu Baznīcu?",
+          "a": "Kristus dibināja svēto Katoļu Baznīcu, lai tā vestu cilvēkus uz pestīšanu."
+        },
+        {
+          "nr": 65,
+          "q": "Kā Baznīca ved cilvēkus uz pestīšanu?",
+          "a": "Baznīca ved cilvēkus uz pestīšanu, sludinot viņiem Kristus mācību un piešķirot tiem svētos sakramentus."
+        },
+        {
+          "nr": 66,
+          "q": "Kas mums jādara, lai Baznīca varētu mūs aizvest uz pestīšanu?",
+          "a": "Lai Baznīca varētu mūs aizvest uz pestīšanu, ticības lietās mums jāklausa tās garīgā vadība: pāvests, bīskapi un priesteri. Jātic tām patiesībām, kuras Baznīca mums māca un sludina, un jāpilda Dieva baušļi."
+        }
+      ]
+    }
+]
+    }, 
+
+    {
+      "id": "pedejas_lietas",
+      "title": "Pēdējās lietas",
+      "range": "67-77",
+      "groups": [
+        {
+            "id": "nāve", 
+            "title": "Dvēsele pēc nāves", 
+            "range": "67-70",
+            "items": [ 
+        {
+          "nr": 67,
+          "q": "Ar ko beidzas cilvēka dzīve virs zemes?",
+          "a": "Cilvēka dzīve virs zemes beidzas ar nāvi."
+        },
+        {
+          "nr": 68,
+          "q": "Kas ir nāve?",
+          "a": "Nāve ir dvēseles šķiršanās no miesas."
+        },
+        {
+          "nr": 69,
+          "q": "Kas notiek ar dvēseli, kad cilvēks nomirst?",
+          "a": "Kad cilvēks nomirst, viņa dvēsele stājas Dieva tiesas priekšā."
+        },
+        {
+          "nr": 70,
+          "q": "Kas notiek ar dvēseli pēc Dieva tiesas?",
+          "a": "Pēc Dieva tiesas dvēsele nokļūst debesu valstībā vai šķīstītavā, vai ellē."
+        }
+            ]
+        }, 
+        {
+            "id": "debesis", 
+            "title": "Debesis", 
+            "range": "71-72",
+            "items": [ 
+        {
+          "nr": 71,
+          "q": "Kādas dvēseles nokļūst debesu valstībā?",
+          "a": "Debesu valstībā nokļūst to cilvēku dvēseles, kuri pēc kristības nav grēkojuši, vai arī par saviem grēkiem ir pilnīgi gandarījuši."
+        },
+        {
+          "nr": 72,
+          "q": "Vai debesu laime ir mūžīga?",
+          "a": "Jā, debesīs cilvēks ir mūžīgi laimīgs."
+        }
+    ]
+}, 
+{
+            "id": "skistitava", 
+            "title": "Šķīstīva un elle", 
+            "range": "73-76",
+            "items": [ 
+        {
+          "nr": 73,
+          "q": "Kādas dvēseles nokļūst šķīstītavā?",
+          "a": "Šķīstītavā nokļūst to cilvēku dvēseles, kuri nomirst ikdienišķos grēkos un nav vēl pilnīgi gandarījuši par saviem pārkāpumiem."
+        },
+        {
+          "nr": 74,
+          "q": "Vai ciešanas šķīstītavā izbeigsies?",
+          "a": "Ciešanas šķīstītavā izbeigsies, kad cilvēks jau pilnīgi būs gandarījis par saviem grēkiem."
+        },
+        {
+          "nr": 75,
+          "q": "Kādas dvēseles nokļūst ellē?",
+          "a": "Ellē nokļūst to cilvēku dvēseles, kuri nomirst nāvīgā grēkā."
+        },
+        {
+          "nr": 76,
+          "q": "Vai ciešanas ellē izbeigsies?",
+          "a": "Nē, ciešanas ellē ir mūžīgas."
+        }
+            ]
+        }, 
+        {
+            "id": "pastara-diena", 
+            "title": "Pastarā diena", 
+            "range": "77",
+            "items": [ 
+        {
+          "nr": 77,
+          "q": "Vai arī cilvēku miesa kādreiz celsies augšā no miroņiem?",
+          "a": "Jā pastarā dienā cilvēki savā miesā celsies augšā no kapa un dzīvos mūžīgi, taisnīgie debesīs, grēcinieki ellē."
+        }
+      ]
+    }
+  ]
+}
+  ]
+}

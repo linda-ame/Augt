@@ -1,0 +1,872 @@
+{
+  "title": "Sakramenti un Dieva žēlastība",
+  "sections": [
+    {
+      "id": "s1",
+      "title": "Dieva žēlastība",
+      "range": "114–123",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Žēlastība",
+          "range": "114–116",
+          "items": [
+            {
+              "id": 1,
+              "nr": 114,
+              "q": "Vai mēs spējam vienīgi saviem spēkiem izpildīt visus baušļus un izsargāties no visiem grēkiem?",
+              "a": "Vienīgi saviem spēkiem mēs nespējam izpildīt visus baušļus un izsargāties no visiem grēkiem."
+            },
+            {
+              "id": 2,
+              "nr": 115,
+              "q": "Kas mums ir vajadzīgs, lai mēs spētu izpildīt visus baušļus un izsargāties no grēkiem?",
+              "a": "Lai mēs spētu izpildīt visus baušļus un izsargāties no grēkiem, mums ir vajadzīga Dieva palīdzība, ko mēs saucam par Dieva žēlastību."
+            },
+            {
+              "id": 3,
+              "nr": 116,
+              "q": "Kādas ir Dieva žēlastības?",
+              "a": "Dieva žēlastības ir divējādas: svētdarošā un palīga žēlastība."
+            }
+          ]
+        },
+        {
+          "id": "g2",
+          "title": "Svētdarošā žēlastība",
+          "range": "117–120",
+          "items": [
+            {
+              "id": 4,
+              "nr": 117,
+              "q": "Kas ir svētdarošā žēlastība?",
+              "a": "Svētdarošā žēlastība ir sevišķa Dieva dāvana, kura mūs dara par svētiem, Dievam patīkamiem un dod mums tiesības uz debesu valstību."
+            },
+            {
+              "id": 5,
+              "nr": 118,
+              "q": "Kad mēs zaudējam svētdarošo žēlastību?",
+              "a": "Svētdarošo žēlastību mēs zaudējam, kad padarām kādu nāvīgu grēku."
+            },
+            {
+              "id": 6,
+              "nr": 119,
+              "q": "Kad mēs atkal saņemam pazaudēto svētdarošo žēlastību?",
+              "a": "Pazaudēto svētdarošo žēlastību mēs atkal iemantojam, kad pie grēku gandarīšanas sakramenta izsūdzam savus grēkus un saņemam piedošanu."
+            },
+            {
+              "id": 7,
+              "nr": 120,
+              "q": "Vai varam būt pestīti bez svētdarošās žēlastības?",
+              "a": "Bez svētdarošās žēlastības mēs nevaram būt pestīti."
+            }
+          ]
+        },
+        {
+          "id": "g3",
+          "title": "Palīga žēlastība",
+          "range": "121–123",
+          "items": [
+            {
+              "id": 8,
+              "nr": 121,
+              "q": "Kas ir palīga žēlastība?",
+              "a": "Palīga žēlastība ir sevišķa Dieva dāvana, kura mums dod spēku darīt labu un sargāties no ļauna."
+            },
+            {
+              "id": 9,
+              "nr": 122,
+              "q": "Kad Dievs mums dod palīga žēlastību?",
+              "a": "Dievs mums dod palīga žēlastību katrā gadījumā, kad tā mums vajadzīga."
+            },
+            {
+              "id": 10,
+              "nr": 123,
+              "q": "Kā mēs saņemam Dieva žēlastības?",
+              "a": "Dieva žēlastības mēs saņemam caur svētajiem sakramentiem un lūgšanu."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Svētie sakramenti",
+      "range": "124–126",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Kas tas ir?",
+          "range": "124–126",
+          "items": [
+            {
+              "id": 11,
+              "nr": 124,
+              "q": "Kas ir sakramenti?",
+              "a": "Sakramenti ir Kunga Jēzus iedibinātas redzamas zīmes, ar kurām saņemam Dieva žēlastības."
+            },
+            {
+              "id": 12,
+              "nr": 125,
+              "q": "Kas iedibināja svētos sakramentus?",
+              "a": "Svētos sakramentus iedibināja pats Kungs Jēzus."
+            },
+            {
+              "id": 13,
+              "nr": 126,
+              "q": "Cik sakramentus Kungs Jēzus iedibināja?",
+              "a": "Kungs Jēzus iedibināja septiņus sakramentus."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "1. Kristība",
+      "range": "127–133",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Kristības sakraments",
+          "range": "127–129",
+          "items": [
+            
+            {
+              "id": 14,
+              "nr": 127,
+              "q": "Kurš sakraments ir visvajadzīgākais?",
+              "a": "Visvajadzīgākais ir kristības sakraments."
+            },
+            {
+              "id": 15,
+              "nr": 128,
+              "q": "Kādēļ kristības sakraments ir visvajadzīgākais?",
+              "a": "Kristības sakraments ir visvajadzīgākais tāpēc, ka bez kristības cilvēks nevar pieņemt citus sakramentus."
+            },
+            {
+              "id": 16,
+              "nr": 129,
+              "q": "Kādu žēlastību dod kristības sakraments?",
+              "a": "Kristības sakraments atbrīvo no iedzimtā grēka un no visiem citiem grēkiem, padarītiem pirms kristības."
+            }
+          ]
+        },
+        {
+          "id": "g2",
+          "title": "Kā notiek Kristīšana?",
+          "range": "130–133",
+          "items": [
+            {
+              "id": 17,
+              "nr": 130,
+              "q": "Kas var kristīt?",
+              "a": "Kristīt var bīskapi, priesteri, diakoni un vajadzības gadījumā ikkatrs cilvēks."
+            },
+            {
+              "id": 18,
+              "nr": 131,
+              "q": "Kā jākristī?",
+              "a": "Jākristī tā: lejot ūdeni bērnam uz galvas, jāsaka vārdi: „N. (jāmin bērna vārds), es tevi kristu, Dieva Tēva un Dēla, un Svētā Gara vārdā”."
+            },
+            {
+              "id": 19,
+              "nr": 132,
+              "q": "Kas var būt krusttēvs un krustmāte?",
+              "a": "Krusttēvs un krustmāte var būt tikai katoļi un turklāt godīgi cilvēki."
+            },
+            {
+              "id": 20,
+              "nr": 133,
+              "q": "Cik reizes dzīvē drīkst pieņemt kristību?",
+              "a": "Kristību drīkst pieņemt tikai vienu reizi dzīvē."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "2. Iestiprināšana",
+      "range": "134–139",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Iestiprināšana sakraments",
+          "range": "134–136",
+          "items": [
+            {
+              "id": 21,
+              "nr": 134,
+              "q": "Kas ir iestiprināšana?",
+              "a": "Iestiprināšana ir sakraments, kas cilvēku stiprina ticībā un dod Svētā Gara dāvanas."
+            },
+            {
+              "id": 22,
+              "nr": 135,
+              "q": "Kādas ir Svētā Gara dāvanas?",
+              "a": "Svētā Gara dāvanas ir: 1) gudrība, 2) saprāts, 3) padoms, 4) stiprums, 5) zināšana, 6) dievbijība, 7) Dieva bijāšana."
+            },
+            {
+              "id": 23,
+              "nr": 136,
+              "q": "Kas var iestiprināt?",
+              "a": "Iestiprināt var bīskaps."
+            }
+          ]
+        },
+        {
+          "id": "g2",
+          "title": "Iestiprināšanas sakramenta pieņemšana",
+          "range": "137–139",
+          "items": [
+            {
+              "id": 24,
+              "nr": 137,
+              "q": "Kas var pieņemt iestiprināšanas sakramentu?",
+              "a": "Iestiprināšanas sakramentu var pieņemt tas, kas ir kristīts un ir brīvs no nāvīga grēka."
+            },
+            {
+              "id": 25,
+              "nr": 138,
+              "q": "Cik reizes var pieņemt iestiprināšanas sakramentu?",
+              "a": "Iestiprināšanas sakramentu var pieņemt tikai vienu reizi."
+            },
+            {
+              "id": 26,
+              "nr": 139,
+              "q": "Kas pie iestiprināšanas sakramenta var būt krusttēvs un krustmāte?",
+              "a": "Pie iestiprināšanas sakramenta krusttēvs vai krustmāte var būt tas, kas pats ir iestiprināts un turklāt godīgs cilvēks (var būt tas pats cilvēks, kas bija pie kristības)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "3. Vissvētākais Altāra Sakraments",
+      "range": "140–162",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Kas tas ir?",
+          "range": "140–142",
+          "items": [
+            {
+              "id": 27,
+              "nr": 140,
+              "q": "Kas ir Vissvētākais Sakraments?",
+              "a": "Vissvētākais Sakraments ir Kunga Jēzus Kristus īstā Miesa un Asinis zem maizes un vīna zīmēm."
+            },
+            {
+              "id": 28,
+              "nr": 141,
+              "q": "Kāpēc šo sakramentu sauc par Vissvētāko Sakramentu?",
+              "a": "Šo sakramentu sauc par Vissvētāko Sakramentu tāpēc, ka tanī ir apslēpts pats svētuma devējs, Kungs Jēzus Kristus."
+            },
+            {
+              "id": 29,
+              "nr": 142,
+              "q": "Kad Kungs Jēzus iedibināja Vissvētāko Altāra Sakramentu?",
+              "a": "Jēzus Kristus iedibināja Vissvētāko Altāra Sakramentu Pēdējās vakariņās – Lielajā ceturtdienā."
+            }
+          ]
+        },
+        {
+          "id": "g2",
+          "title": "Vissvētākā Sakramenta iedibināšana",
+          "range": "143–146",
+          "items": [
+            {
+              "id": 30,
+              "nr": 143,
+              "q": "Kā Kungs Jēzus iedibināja Vissvētāko Altāra Sakramentu?",
+              "a": [
+                "Kungs Jēzus iedibināja Vissvētāko Altāra Sakramentu tā:",
+                "Viņš ņēma maizi, svētīja, lauza un deva to saviem mācekļiem, sacīdams:",
+                "„Ņemiet un ēdiet, tā ir Mana Miesa.”",
+                "Tad Viņš ņēma biķeri ar vīnu, svētīja to un sacīja:",
+                "„Dzeriet visi no tā, jo tās ir Manas Asinis.”",
+                "Pēc tam Viņš pavēlēja apustuļiem:",
+                "„Dariet to, Mani pieminēdami.”"
+              ]            
+              },
+            
+            {
+              "id": 31,
+              "nr": 144,
+              "q": "Ko Kungs Jēzus darīja sakot: „Tā ir Mana Miesa”?",
+              "a": "Sakot: „Tā ir Mana Miesa”, Kungs Jēzus pārvērta maizi savā Miesā."
+            },
+            {
+              "id": 32,
+              "nr": 145,
+              "q": "Ko Kungs Jēzus darīja, sakot: „Tās ir Manas Asinis”?",
+              "a": "Sakot „Tās ir Manas Asinis”, Kungs Jēzus pārvērta vīnu savās Asinīs."
+            },
+            {
+              "id": 33,
+              "nr": 146,
+              "q": "Ko Kungs Jēzus darīja, sakot: „Dariet to, mani pieminēdami”?",
+              "a": "Kungs Jēzus deva saviem apustuļiem varu pārvērst maizi Viņa Miesā un vīnu Viņa Asinīs."
+            }
+          ]
+        },
+        {
+          "id": "g3",
+          "title": "Svētais Sakraments un Svētā Mise",
+          "range": "147–151",
+          "items": [
+            {
+              "id": 34,
+              "nr": 147,
+              "q": "Kam apustuļi nodeva šo pārvēršanas varu tālāk?",
+              "a": "Apustuļi nodeva šo pārvēršanas varu tālāk bīskapiem un priesteriem."
+            },
+            {
+              "id": 35,
+              "nr": 148,
+              "q": "Kad bīskapi un priesteri pārvērš maizi un vīnu Kunga Jēzus miesā un asinīs?",
+              "a": "Svētajā Misē bīskapi un priesteri pārvērš maizi un vīnu Kunga Jēzus Miesā un Asinīs."
+            },
+            {
+              "id": 36,
+              "nr": 149,
+              "q": "Kas ir Svētā Mise?",
+              "a": "Svētā Mise ir bezasiņu Jaunās Derības upuris, kurā Kungs Jēzus ar priestera rokām pats sevi par mums upurē Debesu Tēvam."
+            },
+            {
+              "id": 37,
+              "nr": 150,
+              "q": "Kas iedibināja Svēto Misi?",
+              "a": "Svēto Misi iedibināja pats Kungs Jēzus Kristus."
+            },
+            {
+              "id": 38,
+              "nr": 151,
+              "q": "Kad Kungs Jēzus iedibināja Svētās Mises upuri?",
+              "a": "Kungs Jēzus Svētās Mises upuri iedibināja Lielajā ceturtdienā, Pēdējo vakariņu laikā."
+            }
+          ]
+        },
+        {
+          "id": "g4",
+          "title": "Ko mēs pieņemmam Vissvētākajā Sakramentā?",
+          "range": "152–154",
+          "items": [
+            {
+              "id": 39,
+              "nr": 152,
+              "q": "Kas paliek no maizes un vīna pēc pārvēršanas Kunga Jēzus Miesā un Asinīs?",
+              "a": "No maizes un vīna pēc pārvēršanas Kunga Jēzus Miesā un Asinīs paliek tikai zīmes: garša, izskats un veids."
+            },
+            {
+              "id": 40,
+              "nr": 153,
+              "q": "Ko mēs pieņemam Vissvētākajā Sakramentā pie Dieva galda – svētajā Komūnijā?",
+              "a": "Vissvētākajā Sakramentā pie Dieva galda mēs pieņemam dzīvu Kungu Jēzu."
+            },
+            {
+              "id": 41,
+              "nr": 154,
+              "q": "Vai, pieņemot Vissvētāko Sakramentu zem maizes zīmēm, mēs pieņemam arī Kunga Jēzus Asinis?",
+              "a": "Pieņemot Kunga Jēzus Miesu zem maizes zīmēm, pieņemam reizē arī Viņa Asinis, jo, kur ir dzīva miesa, tur klāt ir arī dzīvas asinis."
+            }
+          ]
+        },
+        {
+          "id": "g5",
+          "title": "Kā sagatavoties, lai cienīgi pieņemt Vissvātāko Sakramentu?",
+          "range": "155–158",
+          "items": [
+            {
+              "id": 42,
+              "nr": 155,
+              "q": "Kas nepieciešams, lai cienīgi pieņemtu Vissvētāko Sakramentu?",
+              "a": "Lai cienīgi pieņemtu Vissvētāko Sakramentu, jāsagatavo dvēsele un miesa."
+            },
+            {
+              "id": 43,
+              "nr": 156,
+              "q": "Kā jāsagatavo miesa?",
+              "a": "Miesa jāsagatavo tā: vienu stundu jābūt neēdušam un nedzērušam, un pieklājīgi jāapģērbjas."
+            },
+            {
+              "id": 44,
+              "nr": 157,
+              "q": "Kā jāsagatavo dvēsele?",
+              "a": "Dvēsele jāsagatavo tā: jāizsūdz savi grēki, vismaz jābūt brīvam no nāvīga grēka."
+            },
+            {
+              "id": 45,
+              "nr": 158,
+              "q": "Kas jādara īsi pirms Vissvētākā Sakramenta pieņemšanas?",
+              "a": "Īsi pirms Vissvētākā Sakramenta pieņemšanas jāuzmodina savā sirdī ticība, cerība un mīlestība."
+            }
+          ]
+        },
+        {
+          "id": "g6",
+          "title": "Vissvētākā Sakramenta pieņemšana",
+          "range": "159–159",
+          "items": [
+            {
+              "id": 46,
+              "nr": 159,
+              "q": "Kas jādara, kas priesteris paceļ Vissvētāko Sakramentu?",
+              "a": "Pirms Komūnijas jānometas ceļos un, kad priesteris paceļ Vissvētāko Sakramentu, kopā ar citiem ir jāsaka: „Kungs, es neesmu cienīgs, ka tu nāktu pie manis, bet saki tikai vārdu, un mana dvēsele kļūs vesela”. Vissvētāko Sakramentu jāpieņem uz ceļiem. Kad priesteris, to sniedzot, saka: „Corpus Christi” (t.i., Kristus Miesa), ir jāatbild: „Amen” un jāatver mute, lai saņemtu dievmaizīti (uz mēles)."
+            }
+          ]
+        },
+        {
+          "id": "g7",
+          "title": "Kas jādara pēc Vissvētākā Sakramenta pieņemšanas?",
+          "range": "160–161",
+          "items": [
+            {
+              "id": 47,
+              "nr": 160,
+              "q": "Kas jādara tūlīt pēc Vissvētākā Sakramenta pieņemšanas?",
+              "a": "Pēc Komūnijas laiks jāpavada lūgšanā. Ieteicams lasīt dažas attiecīgās lūgšanas pēc Sv. Komūnijas, pavadot šīs minūtes dievbijīgā sarunā ar Pestītāju. Tas ir svēts brīdis, kad zem redzamām zīmēm mūsu dvēseli apciemo Dievs. „Es esmu dzīvā maize, kas nākusi no debesīm,” saka Kungs. „Ja kas ēdīs no šīs maizes, tas dzīvos mūžīgi” (Jņ 6, 51 – 52). Pie dievgalda ikreiz nāc ar skaidru sirdi un dziļu ticību Euharistijas noslēpumam!"
+            },
+            {
+              "id": 48,
+              "nr": 161,
+              "q": "Vai var tūlīt pēc Vissvētākā Sakramenta pieņemšanas iziet no baznīcas?",
+              "a": "Pēc Vissvētākā Sakramenta pieņemšanas vismaz dažas minūtes jāpavada lūgšanā un jāpateicas Dievam par tik lielu žēlastību."
+            }
+          ]
+        },
+        {
+          "id": "g8",
+          "title": "Grēka stāvoklis",
+          "range": "162–162",
+          "items": [
+            {
+              "id": 49,
+              "nr": 162,
+              "q": "Vai drīkst pieņemt Vissvētāko Sakramentu cilvēks, kas pie grēksūdzes nav saņēmis piedošanu?",
+              "a": "Kas pie grēksūdzes nav saņēmis grēku piedošanu un tomēr pieņem Vissvētāko Sakramentu, tas izdara ļoti lielu grēku."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "4. Gandarīšanas sakraments",
+      "range": "163–197",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Kas ir gandarīšanas sakraments?",
+          "range": "163–165",
+          "items": [
+            {
+              "id": 50,
+              "nr": 163,
+              "q": "Kas ir gandarīšana?",
+              "a": "Grēksūdze ir Kunga Jēzus iedibināts sakraments, kurā saņemam grēku piedošanu."
+            },
+            {
+              "id": 51,
+              "nr": 164,
+              "q": "Kad Kungs Jēzus iedibināja gandarīšanas sakramentu?",
+              "a": "Kungs Jēzus iedibināja gandarīšanas sakramentu pēc savas augšāmcelšanās, kad Jēzus sacīja apustuļiem: „Saņemiet Svēto Garu! Kam jūs grēkus piedosiet, tiem tiks piedoti, kam jūs tos aizturēsiet, tiem tie tiks aizturēti”."
+            },
+            {
+              "id": 52,
+              "nr": 165,
+              "q": "Kam ir vara piedot grēkus?",
+              "a": "Vara piedot grēkus ir bīskapiem un priesteriem."
+            }
+          ]
+        },
+        {
+          "id": "g2",
+          "title": "Kā to saņemt?",
+          "range": "166–166",
+          "items": [
+            {
+              "id": 53,
+              "nr": 166,
+              "q": "Kas jādara, lai saņemtu grēku piedošanu?",
+              "a": "Lai saņemtu grēku piedošanu, jāizpilda piecas grēku sūdzēšanas jeb bikts daļas: 1) jāizmeklē sirdsapziņa, 2) jānožēlo savi grēki, 3) nopietni jāapņemas laboties, 4) jāizsūdz savi grēki, 5) jāizpilda uzliktais gandarījums. Sirdsapziņas izmeklēšana"
+            }
+          ]
+        },
+        {
+          "id": "g3",
+          "title": "Sirdsapziņas izmeklēšana",
+          "range": "167–170",
+          "items": [
+            {
+              "id": 54,
+              "nr": 167,
+              "q": "Kas ir sirdsapziņas izmeklēšana?",
+              "a": "Sirdsapziņas izmeklēšana ir visu pēc pēdējās labās grēksūdzes darīto grēku atcerēšanās."
+            },
+            {
+              "id": 55,
+              "nr": 168,
+              "q": "Kad jāizmeklē sava sirdsapziņa?",
+              "a": "Sirdsapziņa jāizmeklē pirms grēksūdzes."
+            },
+            {
+              "id": 56,
+              "nr": 169,
+              "q": "Kas vēl jādara pie sirdsapziņas izmeklēšanas?",
+              "a": "Pie sirdsapziņas izmeklēšanas jāatceras grēku skaitliskais daudzums, lielums un ļaunums. Grēku nožēlošana"
+            },
+            {
+              "id": 57,
+              "nr": 170,
+              "q": "Kas jādara pēc sirdsapziņas izmeklēšanas?",
+              "a": "Pēc sirdsapziņas izmeklēšanas grēki sirsnīgi jānožēlo."
+            }
+          ]
+        },
+        {
+          "id": "g4",
+          "title": "Grēku nožēlošana",
+          "range": "171–173",
+          "items": [
+            {
+              "id": 58,
+              "nr": 171,
+              "q": "Kas ir grēku nožēlošana?",
+              "a": "Grēku nožēlošana ir sirdssāpes par padarītiem grēkiem. Apzināšanās par to, ka esam ļauni darījuši."
+            },
+            {
+              "id": 59,
+              "nr": 172,
+              "q": "Kāda ir grēku nožēlošana?",
+              "a": "Grēku nožēlošana ir divējāda: dabiska un pārdabiska."
+            },
+            {
+              "id": 60,
+              "nr": 173,
+              "q": "Kad grēku nožēlošana ir dabiska?",
+              "a": "Grēku nožēlošana ir dabiska, kad mēs grēkus nožēlojam tikai laicīgu iemeslu dēļ."
+            }
+          ]
+        },
+        {
+          "id": "g5",
+          "title": "Pārdabiska grēku nožēlošana",
+          "range": "174–176",
+          "items": [
+            {
+              "id": 61,
+              "nr": 174,
+              "q": "Kad grēku nožēlošana ir pārdabiska?",
+              "a": "Grēku nožēlošana ir pārdabiska, kad mēs grēkus nožēlojam tāpēc, ka esam rīkojušies pret Dieva gribu un nopelnījuši elli."
+            },
+            {
+              "id": 62,
+              "nr": 175,
+              "q": "Kāda grēku nožēlošana ir vajadzīga pie grēksūdzes?",
+              "a": "Pie grēksūdzes ir vajadzīga pārdabiska grēku nožēlošana."
+            },
+            {
+              "id": 63,
+              "nr": 176,
+              "q": "Kāda var būt pārdabiska grēku nožēlošana?",
+              "a": "Pārdabiska grēku nožēlošana ir pilnīga un nepilnīga."
+            }
+          ]
+        },
+        {
+          "id": "g6",
+          "title": "Pilnīga grēku nožēla",
+          "range": "177–179",
+          "items": [
+            {
+              "id": 64,
+              "nr": 177,
+              "q": "Kad ir pilnīga grēku nožēlošana?",
+              "a": "Ja mums sāp sirds aiz mīlestības, ka esam vērsušies pret Dievu, savu labo Tēvu, tad mums ir pilnīga grēku nožēlošana."
+            },
+            {
+              "id": 65,
+              "nr": 178,
+              "q": "Kad ir nepilnīga grēku nožēlošana?",
+              "a": "Kad mums sāp sirds aiz bailēm, ka esam pazaudējuši debesis un nopelnījuši elli, tad mums ir nepilnīga grēku nožēlošana."
+            },
+            {
+              "id": 66,
+              "nr": 179,
+              "q": "Kad nepieciešami jāuzmodina pilnīga grēku nožēlošana?",
+              "a": "Pilnīga grēku nožēlošana nepieciešami jāuzmodina nāves briesmās, kad vairs nevar izsūdzēt nāvīgus grēkus."
+            }
+          ]
+        },
+        {
+          "id": "g7",
+          "title": "Apņemšanās laboties",
+          "range": "180–182",
+          "items": [
+            {
+              "id": 67,
+              "nr": 180,
+              "q": "Kas jādara pēc grēku nožēlošanas?",
+              "a": "Pēc grēku nožēlošanas stingri jāapņemas vairs negrēkot un sargāties no grēku iemesliem."
+            },
+            {
+              "id": 68,
+              "nr": 181,
+              "q": "Kas var būt grēku iemesli?",
+              "a": "Grēku iemesli var būt personas, vietas un apstākļi, kuri cilvēku ved uz grēku."
+            },
+            {
+              "id": 69,
+              "nr": 182,
+              "q": "Vai Dievs piedod tam cilvēkam grēkus, kas negrib atstāt grēku iemeslus?",
+              "a": "Ja cilvēks zina, ka viņš turpinās tā grēkot kā līdz šim, un neatstāj grēku iemeslus, tad tam netiek grēki piedoti."
+            }
+          ]
+        },
+        {
+          "id": "g8",
+          "title": "Grēku sūdzēšana",
+          "range": "183–186",
+          "items": [
+            {
+              "id": 70,
+              "nr": 183,
+              "q": "Kas ir grēku sūdzēšana?",
+              "a": "Grēku sūdzēšana ir atzīšanās savos pārkāpumos priesterim, lai saņemtu grēku piedošanu."
+            },
+            {
+              "id": 71,
+              "nr": 184,
+              "q": "Kādai jābūt grēku sūdzēšanai?",
+              "a": "Grēku sūdzēšanai jābūt vaļsirdīgai un pilnīgai."
+            },
+            {
+              "id": 72,
+              "nr": 185,
+              "q": "Kad grēku sūdzēšana būs vaļsirdīga?",
+              "a": "Grēku sūdzēšana vaļsirdīga būs tad, kad grēkus un to apstākļus sūdzēsim tā, kā tas ir bijis."
+            },
+            {
+              "id": 73,
+              "nr": 186,
+              "q": "Kad grēku sūdzēšana būs pilnīga?",
+              "a": "Grēku sūdzēšana būs pilnīga tad, ja atklāsi priesterim visus grēkus, nevienu neslēpjot."
+            }
+          ]
+        },
+        {
+          "id": "g9",
+          "title": "Nāvīgi grēki",
+          "range": "187–191",
+          "items": [
+            {
+              "id": 74,
+              "nr": 187,
+              "q": "Kas vēl jādara pie grēku sūdzēšanas?",
+              "a": "Pie grēku sūdzēšanas jāpasaka, cik reižu esi padarījis nāvīgu grēku."
+            },
+            {
+              "id": 75,
+              "nr": 188,
+              "q": "Vai grēku sūdzēšana ir laba, ja esi aizmirsis izsūdzēt nāvīgu grēku?",
+              "a": "Ja esi aizmirsis izsūdzēt nāvīgu grēku, tāda grēku sūdzēšana ir laba, tikai nākošreiz jāpasaka aizmirstais grēks."
+            },
+            {
+              "id": 76,
+              "nr": 189,
+              "q": "Vai grēku sūdzēšana būs laba, ja aiz kauna vai bailēm noslēpsi kādu nāvīgu grēku?",
+              "a": "Ja kādu nāvīgu grēku noslēpsi apzināti, aiz kauna vai bailēm, tāda grēku sūdzēšana būs slikta un svētzadzīga."
+            },
+            {
+              "id": 77,
+              "nr": 190,
+              "q": "Vai ar svētzadzīgu grēku sūdzēšanu saņem grēku piedošanu?",
+              "a": "Ar svētzadzīgu grēku sūdzēšanu nesaņem grēku piedošanu."
+            },
+            {
+              "id": 78,
+              "nr": 191,
+              "q": "Kas jādara tam, kas pie grēku sūdzēšanas tīšam noslēpis nāvīgu grēku?",
+              "a": "Kas pie grēku sūdzēšanas tīšām noslēpis nāvīgu grēku, tam pie nākošās grēku sūdzēšanas jāpasaka grēka noslēpšana biktstēvam un no jauna jāizsūdz iepriekšājās grēksūdzes grēki."
+            }
+          ]
+        },
+        {
+          "id": "g10",
+          "title": "Grēksūddzes kārtība",
+          "range": "192–192",
+          "items": [
+            {
+              "id": 79,
+              "nr": 192,
+              "q": "Grēksūdzes kārtība ir šāda.",
+              "a": "Kad būsi piegājis pie biktskrēsla, priesteris tevi svētīs ar krusta zīmi. Reizē arī sevi apzīmē ar krusta zīmi un tad uzrunā priesteri ar katoļu sveiciena vārdiem: „Lai top slavēts Jēzus Kristus!” (Pēc tam saki:) „Pēdējo reizi biju pie grēksūdzes (kad?). Vislabo Dievu esmu apvainojis ar šādiem grēkiem.” (tad pazemīgi un droši nosauc savus grēkus un beigās saki): „Vairāk grēkus neatceros, visus savus grēkus nožēloju, apņemos laboties un lūdzu grēku piedošanu.” Pēc tam klausies, ko tev saka priesteris."
+            }
+          ]
+        },
+        {
+          "id": "g11",
+          "title": "Grēku piedošana",
+          "range": "193–193",
+          "items": [
+            {
+              "id": 80,
+              "nr": 193,
+              "q": "Kas jādara, kad priesteris dod grēku piedošanu?",
+              "a": "Brīdī, kad viņš tev dod grēku piedošanu, vēlreiz nožēlo savus grēkus un sitot krūtīs trīs reizes, atkārto šos lūgšanas vārdus: „Kungs Dievs, esi man, grēciniekam, žēlīgs!” Biktskrēslu atstāt var tikai tad, kad priesteris ir pieklauvējis par zīmi, ka bikts beigusies."
+            }
+          ]
+        },
+        {
+          "id": "g12",
+          "title": "Pēc grēksūdzes - gandarīšana",
+          "range": "194–197",
+          "items": [
+            {
+              "id": 81,
+              "nr": 194,
+              "q": "Kas jādara pēc grēku sūdzēšanas?",
+              "a": "Pēc grēku sūdzēšanas jāizpilda biktstēva uzliktā gandarīšana par grēkiem."
+            },
+            {
+              "id": 82,
+              "nr": 195,
+              "q": "Kas ir gandarīšana par grēkiem?",
+              "a": "Gandarīšana nozīmē zināmas lūgšanas vai labus darbus, ko priesteris uzliek grēku sūdzētājam izpildīt, lai tā dzēstu vismaz daļu no pelnītā soda."
+            },
+            {
+              "id": 83,
+              "nr": 196,
+              "q": "Vai paši drīkstam izmainīt priestera uzlikto gandarīšanu par grēkiem?",
+              "a": "Paši, bez biktstēva ziņas, gandarīšanu nedrīkstam izmainīt."
+            },
+            {
+              "id": 84,
+              "nr": 197,
+              "q": "Kad un kā jāizpilda uzliktā gandarīšana?",
+              "a": "Gandarīšana ir jāizpilda tanī laikā un tā, kā biktstēvs to ir uzlicis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "5. Slimnieku sakraments",
+      "range": "198–200",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Kas tas ir?",
+          "range": "198–200",
+          "items": [
+            {
+              "id": 85,
+              "nr": 198,
+              "q": "Kas ir slimnieku sakraments?",
+              "a": "Slimnieku sakraments ir Kunga Jēzus iedibināts sakraments, kas mūs stiprina pēdējā mūsu dzīves brīdī pret kārdināšanu, dzēš grēka vainas vai atgriež veselību."
+            },
+            {
+              "id": 86,
+              "nr": 199,
+              "q": "Kas un kad var pieņemt slimnieku sakramentu?",
+              "a": "Šo sakramentu var pieņemt ikviens katolis, kas ir smagi slims."
+            },
+            {
+              "id": 87,
+              "nr": 200,
+              "q": "Cik reizes var pieņemt slimnieku sakramentu?",
+              "a": "Šo sakramentu var pieņemt vienā un tanī pašā slimībā vienu reizi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "title": "6. Priesterība",
+      "range": "201–202",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Priesterības sakraments",
+          "range": "201–202",
+          "items": [
+            {
+              "id": 88,
+              "nr": 201,
+              "q": "Kas ir priesterība?",
+              "a": "Priesterība ir Kunga Jēzus iedibināts sakraments, kas dod cilvēkam varu upurēt Svēto Misi, dalīt svētos sakramentus un citas Dieva žēlastības, mācīt ticības patiesības."
+            },
+            {
+              "id": 89,
+              "nr": 202,
+              "q": "Kas var iesvētīt priesterus?",
+              "a": "Priesterus var iesvētīt tikai bīskaps."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "title": "7. Laulība",
+      "range": "203–208",
+      "groups": [
+        {
+          "id": "g1",
+          "title": "Laulības sakraments",
+          "range": "203–205",
+          "items": [
+            {
+              "id": 90,
+              "nr": 203,
+              "q": "Kas ir laulība?",
+              "a": "Laulība ir Kunga Jēzus iedibināts sakraments, kas vīrietim un sievietei, kuri apsola viens otram mīlestību, dod tiesības uzsākt ģimenes dzīvi, dod žēlastību saticīgi dzīvot un dievbijīgi audzināt bērnus."
+            },
+            {
+              "id": 91,
+              "nr": 204,
+              "q": "Kas var laulāt?",
+              "a": "Laulāt var bīskapi, priesteri un diakoni."
+            },
+            {
+              "id": 92,
+              "nr": 205,
+              "q": "Vai dzimtsarakstu nodaļas var dot laulības sakramentu?",
+              "a": "Dzimtsarakstu nodaļas nevar dot laulības sakramentu."
+            }
+          ]
+        },
+        {
+          "id": "g2",
+          "title": "Baznīca un laulība",
+          "range": "206–208",
+          "items": [
+            {
+              "id": 93,
+              "nr": 206,
+              "q": "Vai tie, kuri kopīgi dzīvo tikai ar dzimtsarakstu nodaļas sarakstīšanu bez Baznīcas laulības, var tikt pielaisti pie svētajiem sakramentiem?",
+              "a": "Tie, kuri kopīgi dzīvo tikai ar dzimtsarakstu nodaļas sarakstīšanu, nevar tik pielaisti pie svētajiem sakramentiem, kamēr nebūs salaulāti Baznīcā."
+            },
+            {
+              "id": 94,
+              "nr": 207,
+              "q": "Vai īsta laulība ir šķirama?",
+              "a": "Īsta laulība ir nešķirama. Ja vīrs ar sievu vairs nevar sadzīvot, viņi tiek šķirti, bet tikai tā, ka ne šķirtais vīrs, ne šķirtā sieva nevar precēties ar kādu citu."
+            },
+            {
+              "id": 95,
+              "nr": 208,
+              "q": "Kāpēc Baznīca neiesaka laulību starp dažādu ticību cilvēkiem?",
+              "a": "Baznīca neiesaka laulību starp dažādu ticību cilvēkiem, jo nav iespējama laba bērnu audzināšana tur, kur nav vienotības ticībā."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

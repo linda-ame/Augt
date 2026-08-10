@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "type": "conscience_examination",
+    "version": "1.0",
+    "language": "lv"
+  },
+
+  "content": {
+    "intro": {
+      "id": "intro",
+      "title": "Ievads",
+      "text": [
+        "Šis ir palīgs sirdsapziņas izmeklēšanai, lai palīdzētu Tev mierīgi sagatavoties grēksūdzei.",
+        "Izlasi jautājumus un ieķeksē tos, kuri attiecas uz Tevi. Pie katra izvēlētā punkta vari arī pierakstīt nelielu piezīmi vai paskaidrojumu, ja tas Tev palīdz sagatavoties grēksūdzei. Tas nav obligāti — vari atstāt arī tukšu.",
+        "Visa informācija paliek tikai Tavā ierīcē. Šī lapa neizmanto kontus, profilus vai personīgu identifikāciju, un nekas netiek sūtīts vai saglabāts serverī.",
+        "Ja vēlies, vari izvēlēties īslaicīgi saglabāt ievadīto informāciju savā ierīcē. Tas var palīdzēt turpināt vēlāk, ja aizver lapu vai Tevi pārtrauc.",
+        "Tu jebkurā brīdī vari nospiest pogu “Dzēst visu”, un visi dati nekavējoties tiks izdzēsti no ierīces.",
+        "Kad pabeigsi sirdsapziņas izmeklēšanu, būs iespēja saglabāt pierakstus PDF formātā, izdrukāt tos vai paturēt savā ierīcē, lai izmantotu pirms grēksūdzes.",
+        "Lūdzies Svētajam Garam un atceries — Dievs Tevi mīl un ar prieku gaida grēksūdzē."
+      ]
+    },
+
+    "preparation_prayer": {
+      "id": "preparation_prayer",
+      "title": "Sagatavošanās sirdsapziņas izmeklēšanai",
+
+      "text": [
+        "Dievs Tevi mīl un vienmēr vēlas Tev piedot. Viņš negrib Tevi nosodīt, bet palīdzēt Tev kļūt labākam. Arī tagad Viņš Tevi aicina ar uzticību nākt pie Viņa.",
+
+        "Raugies uz Jēzu Kristu, kurš Tevi mīl un ir par Tevi miris pie krusta. Viņš nevis tiesā, bet dziedina un piedod. Viņš palīdz Tev saprast savus grēkus un ar patiesību uz tiem paskatīties.",
+
+        "Sāc ar pateicību Dievam par visām Viņa labestības un mīlestības dāvanām. Apstājies uz brīdi un klusībā pārdomā: kas man pēdējā laikā ir bijis labs, par ko es varu pateikties Dievam, kādas dāvanas, cilvēkus vai notikumus esmu saņēmis.",
+
+        "Pateicies Dievam ne tikai par priecīgām lietām, bet arī par grūtībām un ciešanām, kas palīdz tev augt, mācīties uzticēties Viņam un kļūt stiprākam."
+      ],
+
+      "prayer": {
+        "id": "holy_spirit_prayer",
+        "title": "Lūgšana Svētajam Garam",
+        "text": [
+          "Nāc, Svētais Gars, palīdzi man saprast savus grēkus.",
+          "Dod man drosmi būt godīgam un tos atzīt.",
+          "Palīdzi man tos nožēlot un laboties.",
+          "Svētā Marija, palīdzi man šajā ceļā."
+        ]
+      }
+    },
+    "commandments": [
+      {
+        "id": "commandment_1",
+        "title": "I bauslis. Tev nebūs citus dievus turēt līdzās man!",
+        "questions": [
+          { "id": "q_1_1", "text": "Ir bijušas reizes, kad esmu noliedzis Dievu." },
+          { "id": "q_1_2", "text": "Esmu šaubījies par ticību." },
+          { "id": "q_1_3", "text": "Esmu aizmirsis regulāri lūgties." },
+          { "id": "q_1_4", "text": "Esmu izvēlējies sportu, draugus, TV, videospēles, naudu vai miegu Dieva vietā, neatrodot laiku lūgšanai, Svētajai Misei vai katehēzei." },
+          { "id": "q_1_5", "text": "Es mīlu lietas un cilvēkus vairāk nekā Dievu." },
+          { "id": "q_1_6", "text": "Grūtībās esmu novērsies no Dieva un meklējis palīdzību tikai ar saviem spēkiem." },
+          { "id": "q_1_7", "text": "Esmu lepni noraidījis Dievu, uzskatot, ka varu iztikt bez Viņa." },
+          { "id": "q_1_8", "text": "Esmu sevi uzskatījis augstāku, labāku par citiem." },
+          { "id": "q_1_9", "text": "Es ticu horoskopiem un burvjiem." }
+        ]
+      },
+
+      {
+        "id": "commandment_2",
+        "title": "II bauslis. Tev nebūs Dieva vārdu nelietīgi valkāt!",
+        "questions": [
+          { "id": "q_2_1", "text": "Esmu lamājies un lietojis nepieklājīgus vārdus." },
+          { "id": "q_2_2", "text": "Esmu baidījies apliecināt savu ticību citu priekšā." },
+          { "id": "q_2_3", "text": "Esmu necienīgi izrunājis Dieva, Jaunavas Marijas un svēto vārdus (piemēram, “Ak, Dievs!”)." },
+          { "id": "q_2_4", "text": "Esmu jokojies par Dievu, Jēzu, Mariju vai Baznīcu necienīgā veidā un smējies par šādiem jokiem." },
+          { "id": "q_2_5", "text": "Esmu lauzis Dievam doto solījumu." }
+        ]
+      },
+
+      {
+        "id": "commandment_3",
+        "title": "III bauslis. Tev būs svēto dienu svētīt!",
+        "questions": [
+          { "id": "q_3_1", "text": "Esmu kavējis vai neapmeklējis Svēto Misi svētdienās vai svētku dienās savas nolaidības dēļ." },
+          { "id": "q_3_2", "text": "Esmu baznīcā bijis neuzmanīgs vai izklaidīgs." },
+          { "id": "q_3_3", "text": "Esmu baznīcā uzvedies nepieklājīgi." },
+          { "id": "q_3_4", "text": "Esmu atstājis visus mājasdarbus uz svētdienu, neievērojot atpūtas dienu." }
+        ]
+      },
+
+      {
+        "id": "commandment_4",
+        "title": "IV bauslis. Godini savu tēvu un māti!",
+        "questions": [
+          { "id": "q_4_1", "text": "Esmu aizvainojis vecākus ar asiem vārdiem." },
+          { "id": "q_4_2", "text": "Esmu bijis nepaklausīgs vecākiem." },
+          { "id": "q_4_3", "text": "Esmu izvairījies palīdzēt vecākiem un vecvecākiem." },
+          { "id": "q_4_4", "text": "Esmu aizmirsis lūgties par saviem vecākiem." },
+          { "id": "q_4_5", "text": "Esmu slikti izturējies pret citiem ģimenes locekļiem (brāļiem, māsām)." },
+          { "id": "q_4_6", "text": "Esmu aizmirsis atvainoties ģimenes locekļiem." },
+          { "id": "q_4_7", "text": "Esmu necienīgi izturējies pret skolotājiem vai treneriem." }
+        ]
+      },
+
+      {
+        "id": "commandment_5",
+        "title": "V bauslis. Tev nebūs nokaut!",
+        "questions": [
+  { "id": "q_5_1", "text": "Esmu apdraudējis savu dzīvību vai veselību." },
+  { "id": "q_5_2", "text": "Esmu apdraudējis kāda cita cilvēka dzīvību vai veselību." },
+  { "id": "q_5_3", "text": "Esmu kādu sitis." },
+  { "id": "q_5_4", "text": "Ir gadījies, ka neesmu aizstāvējis vājākos." },
+  { "id": "q_5_5", "text": "Esmu aizvainojis kādu ar vārdiem." },
+  { "id": "q_5_6", "text": "Esmu kādu izsmējis." },
+  { "id": "q_5_7", "text": "Esmu kādu izslēdzis no spēlēm vai citādi bijis nelaipns." },
+  { "id": "q_5_8", "text": "Esmu domājis sliktu par citiem." },
+  { "id": "q_5_9", "text": "Esmu izraisījis konfliktus un strīdus." },
+  { "id": "q_5_10", "text": "Esmu draudējis kaut ko izdarīt, ja kāds man neizdara pa prātam." },
+  { "id": "q_5_11", "text": "Esmu ilgi turējis sevī naidu un atteicies piedot." },
+  { "id": "q_5_12", "text": "Esmu kaitinājis vecākus, audzinātājus, skolotājus vai citus cilvēkus." },
+  { "id": "q_5_13", "text": "Esmu aizmirsis lūgt piedošanu par savu uzvedību, attieksmi, vārdiem un darbiem." },
+  { "id": "q_5_14", "text": "Esmu darījis pāri dzīvniekiem." },
+  { "id": "q_5_15", "text": "Esmu postījis dabu." }
+]
+      },
+
+      {
+        "id": "commandment_6_9",
+        "title": "VI un IX bauslis",
+        "questions": [
+  { "id": "q_6_1", "text": "Esmu teicis nekaunīgus vārdus." },
+  { "id": "q_6_2", "text": "Esmu domājis vai darījis nekaunīgas lietas sev vai citiem." },
+  { "id": "q_6_3", "text": "Esmu skatījies nekaunīgas filmas vai žurnālus." },
+  { "id": "q_6_4", "text": "Esmu stāstījis nekaunīgus jokus." }
+]
+      },
+
+      {
+        "id": "commandment_7_10",
+        "title": "VII un X bauslis",
+        "questions": [
+  { "id": "q_7_1", "text": "Esmu zadzis." },
+  { "id": "q_7_2", "text": "Esmu atbalstījis zādzību." },
+  { "id": "q_7_3", "text": "Esmu bijis pārāk izšķērdīgs." },
+  { "id": "q_7_4", "text": "Esmu bojājis citu aizdotās lietas." },
+  { "id": "q_7_5", "text": "Esmu paturējis sev citu aizdotās lietas." },
+  { "id": "q_7_6", "text": "Esmu bijis skops." },
+  { "id": "q_7_7", "text": "Esmu nedalījies ar tiem, kam ir vajadzīga palīdzība." },
+  { "id": "q_7_8", "text": "Esmu bijis skaudīgs." },
+  { "id": "q_7_9", "text": "Esmu priecājies par citu neveiksmēm." },
+  { "id": "q_7_10", "text": "Esmu vēlējies iegūt sev to, kas pieder citiem." },
+  { "id": "q_7_11", "text": "Esmu bijis neapmierināts ar to, kas man pieder." },
+  { "id": "q_7_12", "text": "Esmu bijis nepateicīgs par to, kas man ir." },
+  { "id": "q_7_13", "text": "Esmu bijis slinks mācībās." },
+  { "id": "q_7_14", "text": "Esmu bijis slinks savos pienākumos (piemēram, mājās)." }
+]
+      },
+
+      {
+        "id": "commandment_8",
+        "title": "VIII bauslis. Tev nebūs nepatiesu liecību dot!",
+        "questions": [
+  { "id": "q_8_1", "text": "Esmu melojis." },
+  { "id": "q_8_2", "text": "Esmu melojis, lai izvairītos no nepatikšanām." },
+  { "id": "q_8_3", "text": "Esmu pārspīlējis vai melojis, lai izskatītos labāks." },
+  { "id": "q_8_4", "text": "Esmu stāstījis nepatiesas lietas par citiem." },
+  { "id": "q_8_5", "text": "Esmu uzvēlis vainu citiem." },
+  { "id": "q_8_6", "text": "Esmu aprunājis citus." },
+  { "id": "q_8_7", "text": "Esmu izpaudis citu cilvēku noslēpumus." },
+  { "id": "q_8_9", "text": "Esmu bijis negodīgs skolā (piemēram, špikoju vai norakstīju no citiem)." },
+  { "id": "q_8_10", "text": "Esmu bijis negodīgs citās nodarbēs (piemēram, sportā vai spēlēs)." }
+]
+      }
+    ],
+
+    "after_examination_prayer": {
+        "id": "after_examination_prayer",
+        "title": "Nožēlas un apņemšanās lūgšana",
+        "text": [
+            "Dievs, es redzu savus grēkus un nožēloju, ka esmu Tevi aizvainojis.",
+            "Piedod man un palīdzi man sākt no jauna.",
+            "Dod man spēku laboties un dzīvot labāk.",
+            "Palīdzi man sagatavoties grēksūdzei ar atvērtu un godīgu sirdi."
+        ]
+ 
+    }
+
+  }
+}
