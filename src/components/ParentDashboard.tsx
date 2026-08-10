@@ -197,7 +197,7 @@ export function ParentDashboard({
         <h2 className="brand-mark text-2xl">Pievienot bērnu</h2>
         <p className="mt-2 text-sm text-[var(--ink-soft)]">
           Pēc izveides uzreiz tiek ielādēti šodienas Svētie Raksti un ģenerēts
-          bērna saturs (nav jāgaida 6:00).
+          bērna saturs (nav jāgaida nakts ģenerēšanu).
         </p>
         <form onSubmit={addChild} className="mt-5 space-y-4">
           <input

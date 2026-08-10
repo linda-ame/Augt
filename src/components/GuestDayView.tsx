@@ -245,7 +245,7 @@ export function GuestDayView({
                   ? "Šodienas AI satura ģenerēšana neizdevās. Zemāk joprojām vari lasīt liturģiskos tekstus."
                   : generationStatus === "pending"
                     ? "Vecuma grupai pielāgotais saturs vēl tiek ģenerēts. Zemāk — šodienas lasījumi."
-                    : "Vecuma grupai pielāgotais skaidrojums vēl nav gatavs (parasti no rīta ap 6:00). Zemāk — šodienas lasījumi."}
+                    : "Vecuma grupai pielāgotais skaidrojums vēl nav gatavs (parasti pēc pusnakts ap 00:10). Zemāk — šodienas lasījumi."}
               </p>
             </div>
           </section>

@@ -849,7 +849,7 @@ export function DailyLessonView({
           <p className="mt-3 text-[var(--ink-soft)]">
             {status === "failed"
               ? "Ģenerēšana neizdevās. Vecāku skatā nospied «Ģenerēt šodienu» un mēģini vēlreiz."
-              : "Saturs tiek ģenerēts no rīta ap 6:00 (Latvijas laiks) vai uzreiz pēc profila izveides."}{" "}
+              : "Saturs tiek ģenerēts pēc pusnakts ap 00:10 (Latvijas laiks) vai uzreiz pēc profila izveides."}{" "}
             Statuss: {status || "nav"}.
           </p>
         </section>

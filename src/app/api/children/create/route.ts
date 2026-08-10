@@ -57,7 +57,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // Immediate generation for today (does not wait for 06:00 cron)
+  // Immediate generation for today (does not wait for ~00:10 cron)
   let generation: unknown = null;
   let generationError: string | null = null;
   try {

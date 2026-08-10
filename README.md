@@ -8,7 +8,7 @@ Latviešu ģimenes tīmekļa lietotne: ikdienas Svētie Raksti no [Mieram tuvu](
 
 - Next.js (App Router) + TypeScript + Tailwind
 - Supabase (Auth vecākiem, Postgres, RLS)
-- GitHub Actions (ikdienas ģenerēšana ~06:00 Europe/Riga)
+- GitHub Actions (ikdienas ģenerēšana ~00:10 Europe/Riga)
 - OpenAI-compatible AI API (piem. GitHub Models)
 
 ## Ātrā uzstādīšana
@@ -24,7 +24,7 @@ Latviešu ģimenes tīmekļa lietotne: ikdienas Svētie Raksti no [Mieram tuvu](
 
 - **Vecāks** reģistrējas ar e-pastu, izveido ģimeni, saņem **ģimenes kodu**, pievieno bērnus ar **personīgo kodu** un mācību mērķiem.
 - **Kad bērns tiek izveidots** (jebkurā diennakts laikā): tiek ģenerēts AI profils, ielādēti šodienas lasījumi no Mieram tuvu un uzreiz ģenerēts šodienas bērna saturs.
-- **Katru rītu ~06:00** GitHub Action ģenerē saturu visiem aktīvajiem bērniem, kuriem šodienas nodarbība vēl nav.
+- **Katru nakti ~00:10** (Latvijas laiks, neilgi pēc Mieram tuvu jauno lasījumu) GitHub Action ielādē lasījumus un ģenerē saturu visiem aktīvajiem bērniem / vecuma grupām, kuriem šodienas nodarbība vēl nav.
 - **Bērns** ievada ģimenes kodu → izvēlas savu vārdu → ievada personīgo kodu.
 - **Vecāks** var pārslēgties uz katra bērna skatu.
 - Pieejamas tikai **šodiena un līdz 7 dienām atpakaļ** (nav nākotnes).
