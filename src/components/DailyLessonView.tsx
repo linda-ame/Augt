@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { formatLatvianDate, formatLatvianDateShort } from "@/lib/dates";
 import { DayHeroArt } from "@/components/DayHeroArt";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -38,6 +39,8 @@ function DateSwitcher({
   date: string;
   dates: string[];
 }) {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -60,18 +63,21 @@ function DateSwitcher({
   function goTo(d: string) {
     setOpen(false);
     if (d === date) return;
-    const url = new URL(window.location.href);
-    url.searchParams.set("date", d);
-    window.location.href = url.toString();
+    startTransition(() => {
+      router.push(`/kid?date=${d}`);
+    });
   }
 
   return (
     <div ref={rootRef} className="relative inline-block max-w-full">
       <button
         type="button"
-        className="inline-flex max-w-full items-center gap-2 text-left"
+        className={`inline-flex max-w-full items-center gap-2 text-left ${
+          pending ? "opacity-60" : ""
+        }`}
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-busy={pending}
         onClick={() => setOpen((v) => !v)}
       >
         <span className="brand-mark text-[1.35rem] leading-snug text-[var(--bg-deep)] sm:text-2xl">

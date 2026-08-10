@@ -27,12 +27,29 @@ export default async function KidPage({
   }
 
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const parentViewChildId = user ? await getParentViewChild() : null;
-  const kidSession = await getKidSession();
-  const guestBand = await getGuestAgeBand();
+  const admin = createServiceClient();
+
+  // Parallel: auth + sessions + reading for this date (timezone is Europe/Riga only for the date key).
+  const [{ data: authData }, parentViewChildId, kidSession, guestBand, readingRes] =
+    await Promise.all([
+      supabase.auth.getUser(),
+      getParentViewChild(),
+      getKidSession(),
+      getGuestAgeBand(),
+      admin
+        .from("daily_readings")
+        .select("source_text, readings, daily_quote")
+        .eq("reading_date", date)
+        .maybeSingle(),
+    ]);
+
+  const user = authData.user;
+  const reading = readingRes.data;
+  const readings = ensureReadingRoles(
+    (reading?.readings as ScriptureReading[] | null) ?? [],
+  );
+  const dates = pastWeekDates();
+  const dailyQuote = reading?.daily_quote ?? null;
 
   let childId: string | null = null;
   let displayName = "";
@@ -71,18 +88,6 @@ export default async function KidPage({
 
   if (!childId) redirect("/");
 
-  const admin = createServiceClient();
-
-  const { data: reading } = await admin
-    .from("daily_readings")
-    .select("source_text, readings, daily_quote")
-    .eq("reading_date", date)
-    .maybeSingle();
-
-  const readings = ensureReadingRoles(
-    (reading?.readings as ScriptureReading[] | null) ?? [],
-  );
-
   if (isGuest && guestBand) {
     const { data: bandLesson } = await admin
       .from("age_band_lessons")
@@ -99,12 +104,12 @@ export default async function KidPage({
       return (
         <DailyLessonView
           date={date}
-          dates={pastWeekDates()}
+          dates={dates}
           displayName={displayName}
           childId={childId}
           content={content}
           readings={readings}
-          dailyQuote={reading?.daily_quote ?? null}
+          dailyQuote={dailyQuote}
           status={status}
           isGuest
           splitOptionalReadings={
@@ -117,38 +122,40 @@ export default async function KidPage({
     return (
       <GuestDayView
         date={date}
-        dates={pastWeekDates()}
+        dates={dates}
         ageBandId={guestBand}
         readings={readings}
-        dailyQuote={reading?.daily_quote ?? null}
+        dailyQuote={dailyQuote}
         generationStatus={status}
       />
     );
   }
 
-  const { data: childRow } = await admin
-    .from("children")
-    .select("display_name, age")
-    .eq("id", childId)
-    .maybeSingle();
-  if (childRow?.display_name) displayName = childRow.display_name;
+  const [{ data: childRow }, { data: lesson }] = await Promise.all([
+    admin
+      .from("children")
+      .select("display_name, age")
+      .eq("id", childId)
+      .maybeSingle(),
+    admin
+      .from("daily_lessons")
+      .select("content_json, generation_status")
+      .eq("child_id", childId)
+      .eq("reading_date", date)
+      .maybeSingle(),
+  ]);
 
-  const { data: lesson } = await admin
-    .from("daily_lessons")
-    .select("content_json, generation_status")
-    .eq("child_id", childId)
-    .eq("reading_date", date)
-    .maybeSingle();
+  if (childRow?.display_name) displayName = childRow.display_name;
 
   return (
     <DailyLessonView
       date={date}
-      dates={pastWeekDates()}
+      dates={dates}
       displayName={displayName}
       childId={childId}
       content={(lesson?.content_json as DailyLessonContent) ?? null}
       readings={readings}
-      dailyQuote={reading?.daily_quote ?? null}
+      dailyQuote={dailyQuote}
       status={lesson?.generation_status ?? "missing"}
       isParentPreview={isParentPreview}
       splitOptionalReadings={
