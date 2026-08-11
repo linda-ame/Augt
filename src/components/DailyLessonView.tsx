@@ -2,7 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { formatLatvianDate, formatLatvianDateShort } from "@/lib/dates";
+import {
+  formatLatvianDate,
+  formatLatvianDateShort,
+  todayInRiga,
+} from "@/lib/dates";
 import { DayHeroArt } from "@/components/DayHeroArt";
 import { SectionHeading } from "@/components/SectionHeading";
 import { keepParentheticalsTogether } from "@/lib/citation";
@@ -803,6 +807,9 @@ export function DailyLessonView({
 
   const activeTab = tabs.includes(tab) ? tab : "gospel";
   const parts = content?.parts;
+  const scriptureGospel = byRole.get("gospel");
+  const lessonGospel = status === "success" ? gospel : null;
+  const dayLabel = date === todayInRiga() ? "Šodienas" : "Šīs dienas";
 
   function selectTab(next: TabId) {
     setTab(next);
@@ -843,9 +850,9 @@ export function DailyLessonView({
         <DateSwitcher date={date} dates={dates} />
       </section>
 
-      {status !== "success" || !gospel ? (
+      {!lessonGospel && !scriptureGospel ? (
         <section className="panel section-enter mt-8 p-6">
-          <h2 className="brand-mark text-2xl">Šodienas saturs vēl nav gatavs</h2>
+          <h2 className="brand-mark text-2xl">{dayLabel} saturs vēl nav gatavs</h2>
           <p className="mt-3 text-[var(--ink-soft)]">
             {status === "failed"
               ? "Ģenerēšana neizdevās. Vecāku skatā nospied «Ģenerēt šodienu» un mēģini vēlreiz."
@@ -853,6 +860,108 @@ export function DailyLessonView({
             Statuss: {status || "nav"}.
           </p>
         </section>
+      ) : !lessonGospel && scriptureGospel ? (
+        <>
+          <section className="panel panel-day section-enter relative mt-6 overflow-hidden p-6">
+            <DayHeroArt />
+            <div className="relative z-10">
+              <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--bg-deep)]">
+                <span
+                  className="inline-block h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(196,163,90,0.25)]"
+                  aria-hidden
+                />
+                {date === todayInRiga() ? "Šodien" : "Šī diena"}
+              </p>
+              <h2 className="brand-mark mt-2 text-3xl text-[var(--bg-deep)]">
+                {scriptureGospel.label || "Evaņģēlijs"}
+              </h2>
+              {scriptureGospel.reference && (
+                <p className="mt-2 text-sm text-[var(--ink)]">
+                  {scriptureGospel.reference}
+                </p>
+              )}
+              {dailyQuote && (
+                <p className="mt-4 border-l-2 border-[var(--accent)] pl-4 font-medium text-[var(--ink)] italic leading-relaxed">
+                  {keepParentheticalsTogether(dailyQuote)}
+                </p>
+              )}
+              <p className="mt-4 text-sm leading-relaxed text-[var(--ink)]">
+                {status === "failed"
+                  ? `${dayLabel} AI satura ģenerēšana neizdevās. Zemāk joprojām vari lasīt liturģiskos tekstus.`
+                  : `${dayLabel} pielāgotais skaidrojums vēl nav gatavs. Zemāk — liturģiskie lasījumi.`}
+              </p>
+            </div>
+          </section>
+
+          <nav
+            className="section-enter mt-5 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1"
+            aria-label="Dienas lasījumi"
+          >
+            {(
+              [
+                "gospel",
+                "first_reading",
+                "second_reading",
+                "psalm",
+                "alleluia",
+              ] as ReadingRole[]
+            )
+              .filter((role) => byRole.has(role))
+              .map((role) => (
+                <button
+                  key={role}
+                  type="button"
+                  onClick={() => selectTab(role)}
+                  className={tabClass(role)}
+                >
+                  {READING_TAB_LABELS[role]}
+                </button>
+              ))}
+          </nav>
+
+          {byRole.get(activeTab as ReadingRole) || scriptureGospel ? (
+            <section className="panel section-enter mt-5 p-6">
+              <SectionHeading
+                as="h3"
+                className="brand-mark section-title text-2xl text-[var(--bg-deep)]"
+                icon={
+                  (activeTab as ReadingRole) === "psalm"
+                    ? "psalm"
+                    : (activeTab as ReadingRole) === "alleluia"
+                      ? "alleluia"
+                      : "book"
+                }
+              >
+                {
+                  READING_TAB_LABELS[
+                    (byRole.has(activeTab as ReadingRole)
+                      ? activeTab
+                      : "gospel") as ReadingRole
+                  ]
+                }
+              </SectionHeading>
+              {(byRole.get(activeTab as ReadingRole) || scriptureGospel)!
+                .reference &&
+                (activeTab as ReadingRole) !== "gospel" && (
+                  <p className="mt-1 text-sm text-[var(--ink-soft)]">
+                    {
+                      (byRole.get(activeTab as ReadingRole) || scriptureGospel)!
+                        .reference
+                    }
+                  </p>
+                )}
+              <div className="mt-4 text-[var(--ink)]">
+                <ReadingBody
+                  reading={
+                    byRole.get(activeTab as ReadingRole) || scriptureGospel!
+                  }
+                />
+              </div>
+            </section>
+          ) : null}
+
+          {isGuest ? <NotificationSoftPrompt /> : null}
+        </>
       ) : (
         <>
           {activeTab !== "morning" && activeTab !== "evening" && (
@@ -867,7 +976,7 @@ export function DailyLessonView({
                   Šodien
                 </p>
                 <h2 className="brand-mark mt-2 text-3xl text-[var(--bg-deep)]">
-                  {gospel.title}
+                  {lessonGospel!.title}
                 </h2>
                 {dailyQuote && (
                   <p className="mt-4 border-l-2 border-[var(--accent)] pl-4 font-medium text-[var(--ink)] italic leading-relaxed">
@@ -930,7 +1039,7 @@ export function DailyLessonView({
                 <section className="panel section-enter p-6">
                   <SectionHeading icon="book">Evaņģēlijs</SectionHeading>
                   <p className="mt-2 text-sm text-[var(--accent-deep)]">
-                    {gospel.scripture_reference}
+                    {lessonGospel!.scripture_reference}
                   </p>
                   <p className="mt-4 whitespace-pre-wrap leading-relaxed">
                     {byRole.get("gospel")?.text ||
@@ -944,10 +1053,10 @@ export function DailyLessonView({
                   style={{ animationDelay: "50ms" }}
                 >
                   <SectionHeading icon="meaning">Ko tas nozīmē?</SectionHeading>
-                  <p className="mt-3 leading-relaxed">{gospel.explanation}</p>
-                  <p className="mt-4 font-medium">{gospel.main_idea}</p>
+                  <p className="mt-3 leading-relaxed">{lessonGospel!.explanation}</p>
+                  <p className="mt-4 font-medium">{lessonGospel!.main_idea}</p>
                   <p className="mt-3 text-[var(--ink-soft)]">
-                    {gospel.real_life_application}
+                    {lessonGospel!.real_life_application}
                   </p>
                 </section>
 
@@ -959,7 +1068,7 @@ export function DailyLessonView({
                     Šodienas izaicinājums
                   </SectionHeading>
                   <div className="mt-4">
-                    <ActivityGame activity={gospel.activity} />
+                    <ActivityGame activity={lessonGospel!.activity} />
                   </div>
                 </section>
 
@@ -969,7 +1078,7 @@ export function DailyLessonView({
                 >
                   <SectionHeading icon="reflect">Pārdomas</SectionHeading>
                   <p className="mt-3 leading-relaxed">
-                    {gospel.reflection_question}
+                    {lessonGospel!.reflection_question}
                   </p>
                 </section>
 
@@ -978,7 +1087,7 @@ export function DailyLessonView({
                   style={{ animationDelay: "200ms" }}
                 >
                   <SectionHeading icon="pray">Lūgšana</SectionHeading>
-                  <p className="mt-3 leading-relaxed italic">{gospel.prayer}</p>
+                  <p className="mt-3 leading-relaxed italic">{lessonGospel!.prayer}</p>
                 </section>
               </div>
             ) : byRole.get(activeTab as ReadingRole) ? (

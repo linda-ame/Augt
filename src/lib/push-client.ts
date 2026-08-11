@@ -11,6 +11,16 @@ export function urlBase64ToUint8Array(base64String: string) {
   return outputArray;
 }
 
+/** Uncompressed P-256 public key is 65 bytes starting with 0x04. */
+export function isValidVapidPublicKey(base64String: string) {
+  try {
+    const bytes = urlBase64ToUint8Array(base64String.trim());
+    return bytes.length === 65 && bytes[0] === 0x04;
+  } catch {
+    return false;
+  }
+}
+
 export function isPushSupported() {
   return (
     typeof window !== "undefined" &&
@@ -60,9 +70,16 @@ export async function getExistingSubscription() {
 }
 
 export async function subscribeToPush() {
-  const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+  const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY?.trim();
   if (!publicKey) {
-    throw new Error("Trūkst NEXT_PUBLIC_VAPID_PUBLIC_KEY.");
+    throw new Error(
+      "Trūkst NEXT_PUBLIC_VAPID_PUBLIC_KEY (pārbūvē lietotni pēc Vercel env iestatīšanas).",
+    );
+  }
+  if (!isValidVapidPublicKey(publicKey)) {
+    throw new Error(
+      "VAPID publiskā atslēga nav derīga P-256 atslēga. Pārbaudi NEXT_PUBLIC_VAPID_PUBLIC_KEY.",
+    );
   }
 
   const registration = await registerPushServiceWorker();

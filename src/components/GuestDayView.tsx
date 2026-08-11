@@ -3,7 +3,11 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { formatLatvianDate, formatLatvianDateShort } from "@/lib/dates";
+import {
+  formatLatvianDate,
+  formatLatvianDateShort,
+  todayInRiga,
+} from "@/lib/dates";
 import { DayHeroArt } from "@/components/DayHeroArt";
 import { SectionHeading } from "@/components/SectionHeading";
 import { keepParentheticalsTogether } from "@/lib/citation";
@@ -211,8 +215,8 @@ export function GuestDayView({
         <section className="panel section-enter mt-8 p-6">
           <h2 className="brand-mark text-2xl">Lasījumi vēl nav pieejami</h2>
           <p className="mt-3 text-[var(--ink-soft)]">
-            Šodienas liturģiskie teksti vēl nav ielādēti. Mēģini vēlāk vai citu
-            datumu.
+            {date === todayInRiga() ? "Šodienas" : "Šīs dienas"} liturģiskie
+            teksti vēl nav ielādēti. Mēģini vēlāk vai citu datumu.
           </p>
         </section>
       ) : (
@@ -225,7 +229,7 @@ export function GuestDayView({
                   className="inline-block h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(196,163,90,0.25)]"
                   aria-hidden
                 />
-                Šodien
+                {date === todayInRiga() ? "Šodien" : "Šī diena"}
               </p>
               <h2 className="brand-mark mt-2 text-3xl text-[var(--bg-deep)]">
                 {gospel.label || "Evaņģēlijs"}
@@ -242,10 +246,10 @@ export function GuestDayView({
               )}
               <p className="mt-4 text-sm leading-relaxed text-[var(--ink)]">
                 {generationStatus === "failed"
-                  ? "Šodienas AI satura ģenerēšana neizdevās. Zemāk joprojām vari lasīt liturģiskos tekstus."
+                  ? "AI satura ģenerēšana neizdevās. Zemāk joprojām vari lasīt liturģiskos tekstus."
                   : generationStatus === "pending"
-                    ? "Vecuma grupai pielāgotais saturs vēl tiek ģenerēts. Zemāk — šodienas lasījumi."
-                    : "Vecuma grupai pielāgotais skaidrojums vēl nav gatavs (parasti pēc pusnakts ap 00:10). Zemāk — šodienas lasījumi."}
+                    ? "Vecuma grupai pielāgotais saturs vēl tiek ģenerēts. Zemāk — liturģiskie lasījumi."
+                    : "Vecuma grupai pielāgotais skaidrojums vēl nav gatavs (parasti pēc pusnakts ap 00:10). Zemāk — liturģiskie lasījumi."}
               </p>
             </div>
           </section>

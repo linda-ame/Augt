@@ -11,7 +11,14 @@ import { GuestDayView } from "@/components/GuestDayView";
 import type { DailyLessonContent, ScriptureReading } from "@/lib/types";
 import { ensureReadingRoles } from "@/lib/reading-roles";
 import { getGuestAgeBand } from "@/lib/guest-age";
-import { getAgeBand, guestChildId } from "@/lib/age-bands";
+import {
+  ageBandFromAge,
+  getAgeBand,
+  guestChildId,
+  type AgeBandId,
+} from "@/lib/age-bands";
+
+export const dynamic = "force-dynamic";
 
 export default async function KidPage({
   searchParams,
@@ -147,16 +154,43 @@ export default async function KidPage({
 
   if (childRow?.display_name) displayName = childRow.display_name;
 
+  let content = (lesson?.content_json as DailyLessonContent | null) ?? null;
+  let status = lesson?.generation_status ?? "missing";
+
+  // If personalized lesson is missing, fall back to the shared age-band lesson
+  // so past/current days stay readable when cron filled age_band_lessons.
+  if (status !== "success" || !content) {
+    const band: AgeBandId | null =
+      typeof childRow?.age === "number" ? ageBandFromAge(childRow.age) : null;
+    if (band) {
+      const { data: bandLesson } = await admin
+        .from("age_band_lessons")
+        .select("content_json, generation_status")
+        .eq("age_band", band)
+        .eq("reading_date", date)
+        .maybeSingle();
+      if (
+        bandLesson?.generation_status === "success" &&
+        bandLesson.content_json
+      ) {
+        content = bandLesson.content_json as DailyLessonContent;
+        status = "success";
+      } else if (bandLesson?.generation_status) {
+        status = bandLesson.generation_status;
+      }
+    }
+  }
+
   return (
     <DailyLessonView
       date={date}
       dates={dates}
       displayName={displayName}
       childId={childId}
-      content={(lesson?.content_json as DailyLessonContent) ?? null}
+      content={content}
       readings={readings}
       dailyQuote={dailyQuote}
-      status={lesson?.generation_status ?? "missing"}
+      status={status}
       isParentPreview={isParentPreview}
       splitOptionalReadings={
         typeof childRow?.age === "number" ? childRow.age <= 12 : false

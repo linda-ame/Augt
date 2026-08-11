@@ -55,3 +55,11 @@ export function approximateAge(band: AgeBandId): number {
       return 17;
   }
 }
+
+/** Map a child's age to the public age-band lesson bucket. */
+export function ageBandFromAge(age: number): AgeBandId {
+  if (age <= 9) return "age_7_9";
+  if (age <= 12) return "age_10_12";
+  if (age <= 15) return "age_13_15";
+  return "age_16_19";
+}
