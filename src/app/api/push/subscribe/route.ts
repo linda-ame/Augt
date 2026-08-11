@@ -4,6 +4,7 @@ import { isAgeBandId } from "@/lib/age-bands";
 import {
   deleteSubscription,
   isPushConfigured,
+  pushConfigStatus,
   upsertSubscription,
 } from "@/lib/push";
 
@@ -24,8 +25,19 @@ const unsubscribeSchema = z.object({
 
 export async function POST(req: Request) {
   if (!isPushConfigured()) {
+    const status = pushConfigStatus();
+    const missing = [
+      !status.hasPublicKey ? "NEXT_PUBLIC_VAPID_PUBLIC_KEY" : null,
+      !status.hasPrivateKey ? "VAPID_PRIVATE_KEY" : null,
+    ].filter(Boolean);
     return NextResponse.json(
-      { error: "Paziņojumi vēl nav konfigurēti serverī." },
+      {
+        error:
+          "Paziņojumi vēl nav konfigurēti serverī. Vercel → Settings → Environment Variables: pievieno " +
+          missing.join(" un ") +
+          ", tad Redeploy.",
+        missing,
+      },
       { status: 503 },
     );
   }

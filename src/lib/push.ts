@@ -39,8 +39,20 @@ export function ensureVapid() {
 
 export function isPushConfigured() {
   return Boolean(
-    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY,
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY?.trim() &&
+      process.env.VAPID_PRIVATE_KEY?.trim(),
   );
+}
+
+/** Safe diagnostics for env setup (no secret values). */
+export function pushConfigStatus() {
+  const hasPublic = Boolean(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY?.trim());
+  const hasPrivate = Boolean(process.env.VAPID_PRIVATE_KEY?.trim());
+  return {
+    configured: hasPublic && hasPrivate,
+    hasPublicKey: hasPublic,
+    hasPrivateKey: hasPrivate,
+  };
 }
 
 function truncate(text: string, max: number) {
