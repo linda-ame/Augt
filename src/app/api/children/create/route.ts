@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { hashPersonalCode } from "@/lib/personal-code";
-import { onChildProfileReady } from "@/services/generation";
+import { normalizeParentNotes } from "@/lib/parent-notes";
+import { draftChildProfile } from "@/services/generation";
 
 export async function POST(req: Request) {
   const supabase = await createClient();
@@ -16,13 +17,13 @@ export async function POST(req: Request) {
     displayName?: string;
     age?: number;
     personalCode?: string;
-    goalIds?: string[];
+    parentNotes?: unknown;
   };
 
   const displayName = body.displayName?.trim();
   const age = Number(body.age);
   const personalCode = body.personalCode?.trim();
-  const goalIds = Array.isArray(body.goalIds) ? body.goalIds : [];
+  const parentNotes = normalizeParentNotes(body.parentNotes);
 
   if (!displayName || !personalCode || !age || age < 3 || age > 20) {
     return NextResponse.json({ error: "Nepilnīgi bērna dati." }, { status: 400 });
@@ -45,7 +46,10 @@ export async function POST(req: Request) {
       display_name: displayName,
       age,
       personal_code_hash,
-      selected_goal_ids: goalIds,
+      selected_goal_ids: [],
+      parent_notes: parentNotes,
+      notes_version: 1,
+      profile_status: "none",
     })
     .select("*")
     .single();
@@ -57,14 +61,17 @@ export async function POST(req: Request) {
     );
   }
 
-  // Immediate generation for today (does not wait for ~00:10 cron)
-  let generation: unknown = null;
-  let generationError: string | null = null;
+  let draft = child;
+  let draftError: string | null = null;
   try {
-    generation = await onChildProfileReady(child.id);
+    draft = await draftChildProfile(child.id);
   } catch (err) {
-    generationError = err instanceof Error ? err.message : String(err);
+    draftError = err instanceof Error ? err.message : String(err);
   }
 
-  return NextResponse.json({ child, generation, generationError });
+  return NextResponse.json({
+    child: draft,
+    profileDraft: draft.profile_draft ?? null,
+    draftError,
+  });
 }

@@ -22,8 +22,8 @@ Latviešu ģimenes tīmekļa lietotne: ikdienas Svētie Raksti no [Mieram tuvu](
 
 ## Lietotāju plūsma
 
-- **Vecāks** reģistrējas ar e-pastu, izveido ģimeni, saņem **ģimenes kodu**, pievieno bērnus ar **personīgo kodu** un mācību mērķiem.
-- **Kad bērns tiek izveidots** (jebkurā diennakts laikā): tiek ģenerēts AI profils, ielādēti šodienas lasījumi no Mieram tuvu un uzreiz ģenerēts šodienas bērna saturs.
+- **Vecāks** reģistrējas ar e-pastu, izveido ģimeni, saņem **ģimenes kodu**, pievieno bērnus ar **personīgo kodu** un īsu aprakstu (uzsvars, ikdiena, robežas).
+- **Pēc apraksta** AI izveido profila melnrakstu; vecāks to pārskata un apstiprina. Tad tiek ģenerēts šodienas bērna saturs.
 - **Katru nakti ~00:10** (Latvijas laiks, neilgi pēc Mieram tuvu jauno lasījumu) GitHub Action ielādē lasījumus un ģenerē saturu visiem aktīvajiem bērniem / vecuma grupām, kuriem šodienas nodarbība vēl nav.
 - **Bērns** ievada ģimenes kodu → izvēlas savu vārdu → ievada personīgo kodu.
 - **Vecāks** var pārslēgties uz katra bērna skatu.
@@ -32,7 +32,6 @@ Latviešu ģimenes tīmekļa lietotne: ikdienas Svētie Raksti no [Mieram tuvu](
 ## AI konfigurācija
 
 - Pastāvīgie noteikumi: [`ai/system-rules.md`](ai/system-rules.md)
-- Mērķu bibliotēka: [`ai/teaching-goals.json`](ai/teaching-goals.json)
 - Spēļu katalogs: [`ai/game-library.json`](ai/game-library.json)
 
 ## Rokas ģenerēšana

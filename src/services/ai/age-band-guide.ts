@@ -5,17 +5,22 @@ export function ageBandGenerationGuide(bandId: AgeBandId): string {
   const sharedMorning = `
 RĪTA LŪGŠANA — ARĪ PAR CITIEM (ne tikai “svētī manu dienu”):
 - morning_prayer joprojām īsa un saistīta ar dienas Evaņģēlija domu.
-- Katrā rītā iekļauj **vismaz vienu** īsu aizlūgumu / lūgumu par citiem — rotē, NE katru rītu visu sarakstu:
-  iespējamie virzieni: ģimene; draugi; skolasbiedri / skolotāji; cilvēki, kurus šodien satikšu; kāds, kam šodien grūti; miera / labestības lūgums citiem.
+- Katrā rītā iekļauj **vismaz vienu** īsu aizlūgumu / lūgumu par citiem — rotē, NE katru rītu visu sarakstu.
+- Iespējamie virzieni: ģimene; draugi; cilvēki, kurus šodien satikšu; kāds, kam šodien grūti; miera / labestības lūgums citiem.
+- Skolasbiedri / skolotāji / skola — **TIKAI** ja SKOLAS KONTEKSTS atļauj (nav vasaras brīvlaiks jūnijs–augusts un nav sestdiena/svētdiena). Brīvlaikā un brīvdienās šos virzienus NELIETOT.
 - LABI: 1–2 teikumi body vai closing daļā (“Kungs, svētī manu ģimeni…” / “palīdzi tiem, kurus šodien satikšu…”).
-- NEDRĪKST: katru rītu mehāniski visi punkti; gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam.`;
+- NEDRĪKST: katru rītu mehāniski visi punkti; gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās.
+
+SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation):
+- Vispirms Evaņģēlija notikums un Jēzus mācība; tad universāla nozīme kristīga cilvēka dzīvē.
+- NEDRĪKST: skaidrojumu būvēt ap bērna profilu, “tavām grūtībām” vai vecāku piezīmēm.`;
 
   const sharedEvening = `
 DIENAS APŅEMŠANĀS vs VAKARS:
 - Praktiskais ierosinājums ir gospel.real_life_application (+ spēle) — ŠODIENAI (vai atlikušajai dienai), ne “rītdienas plāns”.
 - real_life_application jābūt **vieglam un reāli izpildāmam** 1–5 minūtēs vai vienā īsa izvēlē:
-  LABI: īss labs vārds; viena reize nolikt telefonu un palīdzēt; 10–15 min bez ekrāna pirms miega; neiesaistīties aprunāšanā; atvainoties.
-  SLIKTI / NEDRĪKST: “pirmo pusstundu rīt veltīt palīdzībai”; “visu dienu bez telefona”; “vienmēr būšu…”; lieli laika bloki skolas rītā.
+  LABI: īss labs vārds; viena reize nolikt telefonu un palīdzēt ģimenei; 10–15 min bez ekrāna pirms miega; neiesaistīties aprunāšanā; atvainoties.
+  SLIKTI / NEDRĪKST: “pirmo pusstundu rīt veltīt palīdzībai”; “visu dienu bez telefona”; “vienmēr būšu…”; lieli laika bloki skolas rītā; **klasesbiedru / skolas uzdevumi vasarā vai sestdienā–svētdienā**.
   Ja tēma saistās ar ekrāniem/tīkliem — labāk “izvēlies šodien vienu reizi palīdzēt / būt klātesošam NEVISēdēt ekrānā”, nevis milzīgs “bez ekrāna” maratons.
 - evening_prayer.resolution NAV “Rīt es izdarīšu X”. Tā ir ĪSA LŪGŠANA pēc spēka/palīdzības (“Jēzu, palīdzi man…”).
 - Vakara jautājumi = atskats un sirds, ne jauns uzdevumu saraksts.
@@ -36,10 +41,10 @@ VAKARĀ OBLIGĀTA ĪSTA LŪGŠANA (ne tikai atskats):
   switch (bandId) {
     case "age_7_9":
       return `VECUMA GRUPA 7–9 — OBLIGĀTI ŠAURĀK UN ĪSĀK NEKĀ VECĀKAJĀM GRUPĀM:
-- Rīta lūgšana: 40–70 vārdi. Vienkārša valoda (ne “mazuļu” žargons). Īss aizlūgums par ģimeni / draugiem / kādu, ko šodien satikšu (1 virziens, ne viss saraksts).
+- Rīta lūgšana: 40–70 vārdi. Vienkārša valoda (ne “mazuļu” žargons). Īss aizlūgums par ģimeni / draugiem / kādu, ko šodien satikšu (1 virziens, ne viss saraksts; skola tikai ja SKOLAS KONTEKSTS atļauj).
 ${sharedMorning}
 - Evaņģēlija skaidrojums (explanation): 80–120 vārdi. Kas notiek + ko tas nozīmē man. BEZ smagas teoloģijas.
-- main_idea: 1 īss teikums. real_life_application: 2–4 īsi teikumi = **mazs, šodien izpildāms** ierosinājums (ne pusstundas projekti).
+- main_idea: 1 īss teikums. real_life_application: 2–4 īsi teikumi = **mazs, šodien izpildāms** ierosinājums (ne pusstundas projekti; brīvlaikā/brīvdienās — bez skolas/klasesbiedriem).
 - reflection_question: viens vienkāršs jautājums.
 - Spēle: vienkārša (multiple_choice / true_false u.tml.), bez smagām “scenāriju” dilemmām.
 - parts.*.summary: ļoti īsi (1–3 teikumi katram).
@@ -55,11 +60,11 @@ ${sharedMorning}
 ${sharedEvening}`;
     case "age_10_12":
       return `VECUMA GRUPA 10–12 — VIDĒJS DZIĻUMS (garāks un nopietnāks nekā 7–9, vienkāršāks nekā 13+):
-- Rīta lūgšana: 50–90 vārdi. Īss aizlūgums par citiem (ģimene / draugi / skola — 1 virziens, rotē).
+- Rīta lūgšana: 50–90 vārdi. Īss aizlūgums par citiem (ģimene / draugi / skola* — 1 virziens, rotē; *skola tikai ja SKOLAS KONTEKSTS atļauj).
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 120–180 vārdi. Kas notiek / ko Jēzus dara / kāpēc svarīgi / ko nozīmē man.
-- real_life_application = šodienas praktiskā apņemšanās.
-- Piemēri: skola, ģimene, draugi, godīgums, vienaudžu spiediens (vieglā formā).
+- real_life_application = šodienas praktiskā apņemšanās (brīvlaikā/brīvdienās — bez skolas situācijām).
+- Piemēri: ģimene, draugi, godīgums, vienaudžu spiediens (vieglā formā); skola — tikai skolas dienā.
 - Spēle: var būt quiz VAI viegls scenario_choice.
 - parts: īsi–vidēji (ne esejas).
 - Vakara examen_questions: TIEŠI 5 jautājumi:
@@ -79,7 +84,7 @@ ${sharedEvening}`;
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 150–250 vārdi. Virsraksta gars: “Ko šis Evaņģēlijs saka par manu dzīvi?”
 - real_life_application / izaicinājums = šodienas apņemšanās (konkrēta).
-- Piemēri no: skola, draugi, vienaudžu spiediens, ģimene, digitālā vide — TIKAI ja dabiski no lasījuma.
+- Piemēri no: draugi, vienaudžu spiediens, ģimene, digitālā vide; skola — TIKAI skolas dienā un ja dabiski no lasījuma. Brīvlaikā/brīvdienās — bez klases/skolotājiem.
 - Spēle: bieži scenario_choice / choose_the_best_response (apzināta izvēle).
 - reflection_question: personiskāks, par rīcību (ne ticības apšaubīšana).
 - Vakara examen_questions: TIEŠI 6 jautājumi:

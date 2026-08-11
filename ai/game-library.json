@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "games": [
     {
       "id": "multiple_choice",
@@ -7,7 +7,7 @@
       "best_for": ["facts", "vocabulary", "main_idea", "characters"],
       "age_range": [8, 18],
       "mode": "quiz",
-      "notes": "3–4 options. REQUIRED: correct_answer (0-based index), explanation. One clear factual/Gospel answer."
+      "notes": "GOSPEL-FIRST: exactly 2 short questions ABOUT TODAY'S GOSPEL TEXT. REQUIRED: questions[{question, options (3–4), correct_answer (0-based index), explanation}] length 2. UI shows both questions stacked in one panel. NOT everyday life scenarios."
     },
     {
       "id": "true_false",
@@ -15,7 +15,7 @@
       "best_for": ["facts", "main_idea"],
       "age_range": [8, 18],
       "mode": "quiz",
-      "notes": "options: [\"Patiess\", \"Nepatiess\"]. REQUIRED: correct_answer (0 or 1), explanation. Avoid trick questions that undermine faith."
+      "notes": "GOSPEL-FIRST: exactly 2 true/false statements ABOUT TODAY'S GOSPEL. REQUIRED: questions[{question (statement), options:[\"Patiess\",\"Nepatiess\"], correct_answer (0 or 1), explanation}] length 2. UI: both stacked; immediate reveal after tap (green/red + explanation)."
     },
     {
       "id": "fill_blank",
@@ -23,7 +23,7 @@
       "best_for": ["vocabulary", "key_phrases"],
       "age_range": [8, 16],
       "mode": "quiz",
-      "notes": "REQUIRED: answer (string), explanation. One meaningful blank from the reading or main idea."
+      "notes": "GOSPEL-FIRST: 2–3 blanks FROM TODAY'S GOSPEL wording/main idea. REQUIRED: blanks[{question (sentence with ___), answer, explanation}]. UI shows all stacked; one Check validates all — correct lock in, wrong stay editable for retry."
     },
     {
       "id": "word_scramble",
@@ -31,7 +31,7 @@
       "best_for": ["vocabulary", "key_words"],
       "age_range": [8, 14],
       "mode": "quiz",
-      "notes": "REQUIRED: scrambled, answer, explanation. Scramble an important word from today’s reading. explanation must be neutral (no „Lieliski!” / „Pareizi!” — UI adds that)."
+      "notes": "GOSPEL-FIRST: exactly ONE important word/name from today's Gospel. REQUIRED: scrambled, answer, explanation (neutral; no „Lieliski!” / „Pareizi!”). Keep short (prefer 4–10 letters). UI: type guess + Check; retries then reveal."
     },
     {
       "id": "who_am_i",
@@ -39,7 +39,7 @@
       "best_for": ["characters"],
       "age_range": [8, 16],
       "mode": "quiz",
-      "notes": "REQUIRED: answer, explanation. Clues about a person from the Scripture."
+      "notes": "GOSPEL-FIRST: exactly ONE person FROM TODAY'S GOSPEL. REQUIRED: clues (2–3 short hints, vague→clearer), answer (short name), explanation. UI shows clue 1 first; each wrong guess reveals the next clue; after all clues, allow reveal answer."
     },
     {
       "id": "put_in_order",
@@ -47,7 +47,7 @@
       "best_for": ["sequences", "stories"],
       "age_range": [9, 18],
       "mode": "quiz",
-      "notes": "REQUIRED: items (scrambled order for UI), correct_answer as ordered string array OR explanation of correct order, explanation. 3–5 events."
+      "notes": "GOSPEL-FIRST: exactly 3–4 short events FROM TODAY'S GOSPEL only. REQUIRED: items (scrambled for UI), correct_answer as ordered string array, explanation. UI: reorder then Check all together; after 3 wrong tries show Reveal answer."
     },
     {
       "id": "matching",
@@ -55,15 +55,15 @@
       "best_for": ["characters", "vocabulary", "concepts"],
       "age_range": [9, 16],
       "mode": "explore",
-      "notes": "REQUIRED: pairs [{left, right}], short explanation. Pairs shown already matched for younger UX; 3–4 pairs."
+      "notes": "GOSPEL-FIRST: exactly 3 pairs from today's Gospel (person↔action, word↔meaning). REQUIRED: pairs [{left, right}] length 3 + short explanation. UI shuffles right column; child connects left then right. Do NOT present already matched."
     },
     {
       "id": "scenario_choice",
-      "name": "Ko tu darītu?",
-      "best_for": ["application", "moral_decisions", "empathy"],
+      "name": "Ko viņš darītu?",
+      "best_for": ["gospel_understanding", "characters", "main_idea"],
       "age_range": [10, 18],
       "mode": "discernment",
-      "notes": "Everyday situation linked to Gospel. 2–3 respectful options. REQUIRED: correct_answer = index of Gospel-aligned preferred option; explanation = warm 1–3 sentences (why this path fits today’s Word). Do NOT shame other options; frame as growth, not failure. UI will not say „nepareizi”."
+      "notes": "STRICT GOSPEL-ONLY. ONLY use if today's Gospel has a clear action/decision by Jesus or another named figure IN THE TEXT. Question = what would that same figure do next / in this scene (no invented school/home/friend drama). Options 2–3 must be plausible readings of THIS passage. correct_answer = best text-aligned index; explanation cites the Gospel beat (who did/said what). If the day has no clear figure-action, DO NOT pick this type — use multiple_choice/true_false/matching/put_in_order instead. No shaming."
     },
     {
       "id": "find_the_mistake",
@@ -71,15 +71,15 @@
       "best_for": ["facts", "main_idea"],
       "age_range": [10, 18],
       "mode": "quiz",
-      "notes": "A short retelling with one incorrect detail as options or in the prompt. REQUIRED: correct_answer, explanation."
+      "notes": "GOSPEL-FIRST: exactly 1 item. Show a short retelling of TODAY'S GOSPEL that contains ONE wrong factual detail. Question: „Kur ir kļūda?” Options: 3–4 short candidate details (one is the actual mistake). REQUIRED: question, options, correct_answer (index of the wrong detail), explanation (what the text really says). UI: pick option; after 3 wrong tries reveal answer. Mistake = fact from the text (who/what/where), not a moral judgment."
     },
     {
       "id": "choose_the_best_response",
-      "name": "Labākā atbilde",
-      "best_for": ["application", "relationships", "virtues"],
+      "name": "Ko viņš teiktu?",
+      "best_for": ["gospel_understanding", "characters", "virtues"],
       "age_range": [10, 18],
       "mode": "discernment",
-      "notes": "Choose the response that best reflects the Scripture’s teaching. Same fields as scenario_choice: correct_answer + warm explanation; gentle preference, not harsh wrong."
+      "notes": "STRICT GOSPEL-ONLY. ONLY use if today's Gospel has spoken words or a clear speaking figure (Jesus or other IN THE TEXT). Ask what that figure would say that best fits THIS passage (not a modern chat). Options 2–3; correct_answer + warm explanation tied to the verse/scene. If no dialogue/speaker in the text, DO NOT pick this type. No shaming; gentle preference."
     }
   ]
 }

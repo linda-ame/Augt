@@ -10,6 +10,19 @@ export const READING_ROLES = [
 
 export type ReadingRole = (typeof READING_ROLES)[number];
 
+export const quizQuestionSchema = z.object({
+  question: z.string().min(1),
+  options: z.array(z.string()).min(2),
+  correct_answer: z.union([z.number(), z.string()]),
+  explanation: z.string().optional(),
+});
+
+export const fillBlankItemSchema = z.object({
+  question: z.string().min(1),
+  answer: z.string().min(1),
+  explanation: z.string().optional(),
+});
+
 export const activitySchema = z
   .object({
     type: z.string(),
@@ -26,14 +39,82 @@ export const activitySchema = z
       .optional(),
     scrambled: z.string().optional(),
     answer: z.string().optional(),
+    /** multiple_choice / true_false */
+    questions: z.array(quizQuestionSchema).optional(),
+    /** fill_blank: 2–3 Gospel blanks */
+    blanks: z.array(fillBlankItemSchema).optional(),
+    /** who_am_i: progressive clues (2–3) */
+    clues: z.array(z.string().min(1)).min(1).max(3).optional(),
   })
-  .transform((a) => ({
-    ...a,
-    instruction:
+  .transform((a) => {
+    const instruction =
       (a.instruction && a.instruction.trim()) ||
       (a.question && a.question.trim()) ||
-      "Izpildi uzdevumu.",
-  }));
+      "Izpildi uzdevumu.";
+
+    let questions = a.questions;
+    const needsSynth =
+      (a.type === "multiple_choice" || a.type === "true_false") &&
+      (!questions || questions.length === 0);
+
+    if (needsSynth) {
+      const ca = a.correct_answer;
+      const options =
+        a.options && a.options.length >= 2
+          ? a.options
+          : a.type === "true_false"
+            ? ["Patiess", "Nepatiess"]
+            : null;
+      if (options) {
+        questions = [
+          {
+            question: (a.question && a.question.trim()) || instruction,
+            options,
+            correct_answer:
+              typeof ca === "number" || typeof ca === "string" ? ca : 0,
+            explanation: a.explanation,
+          },
+        ];
+      }
+    }
+
+    let blanks = a.blanks;
+    if (
+      a.type === "fill_blank" &&
+      (!blanks || blanks.length === 0) &&
+      (a.answer || typeof a.correct_answer === "string")
+    ) {
+      const ans =
+        (typeof a.answer === "string" && a.answer.trim()) ||
+        (typeof a.correct_answer === "string" ? a.correct_answer : "");
+      if (ans) {
+        blanks = [
+          {
+            question: (a.question && a.question.trim()) || instruction,
+            answer: ans,
+            explanation: a.explanation,
+          },
+        ];
+      }
+    }
+
+    let clues = a.clues;
+    if (a.type === "who_am_i" && (!clues || clues.length === 0)) {
+      const raw =
+        (a.question && a.question.trim()) ||
+        (a.instruction && a.instruction.trim()) ||
+        "";
+      if (raw) {
+        const parts = raw
+          .split(/\n+|(?<=\.)\s+/)
+          .map((s) => s.trim())
+          .filter(Boolean);
+        clues = (parts.length > 0 ? parts : [raw]).slice(0, 3);
+      }
+    }
+
+    return { ...a, instruction, questions, blanks, clues };
+  });
 
 export const gospelContentSchema = z.object({
   title: z.string().min(1),

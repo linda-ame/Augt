@@ -1,51 +1,151 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  GoalPickerModal,
-  type GoalCategory,
-  type GoalItem,
-} from "@/components/GoalPickerModal";
 import { BrandLogo } from "@/components/BrandLogo";
+import {
+  EMPTY_PARENT_NOTES,
+  normalizeParentNotes,
+  type ParentNotes,
+  type ProfileStatus,
+} from "@/lib/parent-notes";
 
 type Child = {
   id: string;
   display_name: string;
   age: number;
   active: boolean;
-  hasProfile?: boolean;
+  profileStatus: ProfileStatus;
+  profileDraft: string | null;
+  generatedProfile: string | null;
+  parentNotes: ParentNotes;
   todayStatus?: string;
 };
+
+function ParentNotesFields({
+  notes,
+  onChange,
+  disabled,
+}: {
+  notes: ParentNotes;
+  onChange: (next: ParentNotes) => void;
+  disabled?: boolean;
+}) {
+  function setField(key: keyof ParentNotes, value: string) {
+    onChange({ ...notes, [key]: value });
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <label className="text-sm font-medium text-[var(--ink)]">
+          Ko īpaši vēlies uzsvērt / attīstīt?
+        </label>
+        <p className="mt-1 text-xs text-[var(--ink-soft)]">
+          Piemēram drosmi, labestību, lūgšanu, atbildību…
+        </p>
+        <textarea
+          className="field mt-2 min-h-[72px]"
+          disabled={disabled}
+          value={notes.emphasize}
+          onChange={(e) => setField("emphasize", e.target.value)}
+          placeholder="Brīvi apraksti saviem vārdiem…"
+        />
+      </div>
+      <div>
+        <label className="text-sm font-medium text-[var(--ink)]">
+          Ar ko ikdienā saskaramies?
+        </label>
+        <p className="mt-1 text-xs text-[var(--ink-soft)]">
+          Situācijas, kurās gribētu atbalstu (bez diagnožu valodas).
+        </p>
+        <textarea
+          className="field mt-2 min-h-[72px]"
+          disabled={disabled}
+          value={notes.challenges}
+          onChange={(e) => setField("challenges", e.target.value)}
+          placeholder="Piemēram strīdi, bailes, skola, ekrāni…"
+        />
+      </div>
+      <div>
+        <label className="text-sm font-medium text-[var(--ink)]">
+          Ko nevēlies, lai AI pieskaras?
+        </label>
+        <p className="mt-1 text-xs text-[var(--ink-soft)]">
+          Robežas — jutīgas tēmas, ģimenes situācijas u.tml.
+        </p>
+        <textarea
+          className="field mt-2 min-h-[64px]"
+          disabled={disabled}
+          value={notes.boundaries}
+          onChange={(e) => setField("boundaries", e.target.value)}
+          placeholder="Neobligāti"
+        />
+      </div>
+      <div>
+        <label className="text-sm font-medium text-[var(--ink)]">
+          Vēl kaut kas?
+        </label>
+        <p className="mt-1 text-xs text-[var(--ink-soft)]">
+          Brīvais lauks — personība, konteksts, kas neiederas augšā.
+        </p>
+        <textarea
+          className="field mt-2 min-h-[64px]"
+          disabled={disabled}
+          value={notes.other}
+          onChange={(e) => setField("other", e.target.value)}
+          placeholder="Neobligāti"
+        />
+      </div>
+    </div>
+  );
+}
+
+function profileStatusLabel(status: ProfileStatus) {
+  if (status === "approved") return "profils apstiprināts";
+  if (status === "draft") return "gaida apstiprinājumu";
+  return "nav profila";
+}
 
 export function ParentDashboard({
   family,
   childrenList,
-  goals,
-  categories,
 }: {
   family: { id: string; name: string; family_code: string };
   childrenList: Child[];
-  goals: GoalItem[];
-  categories: GoalCategory[];
 }) {
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
   const [age, setAge] = useState(10);
   const [personalCode, setPersonalCode] = useState("");
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const [createNotes, setCreateNotes] = useState<ParentNotes>(EMPTY_PARENT_NOTES);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [regenChildId, setRegenChildId] = useState<string | null>(null);
 
-  const selectedLabels = useMemo(() => {
-    const map = new Map(goals.map((g) => [g.id, g]));
-    return selectedGoals
-      .map((id) => map.get(id))
-      .filter((g): g is GoalItem => Boolean(g));
-  }, [goals, selectedGoals]);
+  const [editorChildId, setEditorChildId] = useState<string | null>(null);
+  const [editorNotes, setEditorNotes] = useState<ParentNotes>(EMPTY_PARENT_NOTES);
+  const [editorProfile, setEditorProfile] = useState("");
+  const [editorBusy, setEditorBusy] = useState(false);
+
+  const editorChild = childrenList.find((c) => c.id === editorChildId) ?? null;
+
+  useEffect(() => {
+    if (!editorChild) return;
+    setEditorNotes(normalizeParentNotes(editorChild.parentNotes));
+    setEditorProfile(
+      editorChild.profileDraft || editorChild.generatedProfile || "",
+    );
+  }, [editorChild]);
+
+  function openEditor(child: Child) {
+    setEditorChildId(child.id);
+    setEditorNotes(normalizeParentNotes(child.parentNotes));
+    setEditorProfile(child.profileDraft || child.generatedProfile || "");
+    setError(null);
+    setMessage(null);
+  }
 
   async function addChild(e: React.FormEvent) {
     e.preventDefault();
@@ -60,21 +160,28 @@ export function ParentDashboard({
           displayName,
           age,
           personalCode,
-          goalIds: selectedGoals,
+          parentNotes: createNotes,
         }),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Neizdevās pievienot.");
-      if (json.generationError) {
+      if (json.draftError) {
         setMessage(
-          `Bērns pievienots. Šodienas satura ģenerēšana neizdevās: ${json.generationError}`,
+          `Bērns pievienots, bet profila melnraksts neizdevās: ${json.draftError}`,
         );
       } else {
-        setMessage("Bērns pievienots. Šodienas saturs tiek / ir ģenerēts.");
+        setMessage(
+          "Bērns pievienots. Pārskati AI profilu un apstiprini, lai ģenerētu šodienas saturu.",
+        );
       }
       setDisplayName("");
       setPersonalCode("");
-      setSelectedGoals([]);
+      setCreateNotes(EMPTY_PARENT_NOTES);
+      if (json.child?.id) {
+        setEditorChildId(json.child.id);
+        setEditorNotes(normalizeParentNotes(json.child.parent_notes));
+        setEditorProfile(json.profileDraft || json.child.profile_draft || "");
+      }
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Kļūda");
@@ -93,7 +200,7 @@ export function ParentDashboard({
     router.refresh();
   }
 
-  async function regenerateToday(childId: string, regenerateProfile: boolean) {
+  async function regenerateToday(childId: string) {
     setRegenChildId(childId);
     setError(null);
     setMessage(null);
@@ -101,7 +208,7 @@ export function ParentDashboard({
       const res = await fetch("/api/children/regenerate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ childId, regenerateProfile }),
+        body: JSON.stringify({ childId }),
       });
       const json = await res.json();
       if (!res.ok || !json.ok) {
@@ -113,6 +220,63 @@ export function ParentDashboard({
       setError(err instanceof Error ? err.message : "Kļūda");
     } finally {
       setRegenChildId(null);
+    }
+  }
+
+  async function generateDraft() {
+    if (!editorChildId) return;
+    setEditorBusy(true);
+    setError(null);
+    setMessage(null);
+    try {
+      const res = await fetch("/api/children/profile/draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          childId: editorChildId,
+          parentNotes: editorNotes,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.ok) {
+        throw new Error(json.error || "Melnraksts neizdevās.");
+      }
+      setEditorProfile(json.profileDraft || "");
+      setMessage("Profila melnraksts gatavs — pārskati un apstiprini.");
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Kļūda");
+    } finally {
+      setEditorBusy(false);
+    }
+  }
+
+  async function approveProfile() {
+    if (!editorChildId) return;
+    setEditorBusy(true);
+    setError(null);
+    setMessage(null);
+    try {
+      const res = await fetch("/api/children/profile/approve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          childId: editorChildId,
+          profileText: editorProfile,
+          generateToday: true,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.ok) {
+        throw new Error(json.error || "Apstiprināšana neizdevās.");
+      }
+      setMessage("Profils apstiprināts. Šodienas saturs tiek / ir ģenerēts.");
+      setEditorChildId(null);
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Kļūda");
+    } finally {
+      setEditorBusy(false);
     }
   }
 
@@ -159,7 +323,7 @@ export function ParentDashboard({
                 <p className="font-semibold">{c.display_name}</p>
                 <p className="text-sm text-[var(--ink-soft)]">{c.age} gadi</p>
                 <p className="mt-1 text-xs text-[var(--ink-soft)]">
-                  Šodiena:{" "}
+                  {profileStatusLabel(c.profileStatus)} · Šodiena:{" "}
                   {c.todayStatus === "success"
                     ? "gatavs"
                     : c.todayStatus === "failed"
@@ -170,9 +334,21 @@ export function ParentDashboard({
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
+                  className="btn btn-secondary"
+                  onClick={() => openEditor(c)}
+                >
+                  Personalizācija
+                </button>
+                <button
+                  type="button"
                   className="btn btn-primary"
-                  disabled={regenChildId === c.id}
-                  onClick={() => regenerateToday(c.id, !c.hasProfile)}
+                  disabled={regenChildId === c.id || c.profileStatus !== "approved"}
+                  onClick={() => regenerateToday(c.id)}
+                  title={
+                    c.profileStatus !== "approved"
+                      ? "Vispirms apstiprini profilu"
+                      : undefined
+                  }
                 >
                   {regenChildId === c.id
                     ? "Ģenerē…"
@@ -193,11 +369,81 @@ export function ParentDashboard({
         </div>
       </section>
 
+      {editorChild && (
+        <section
+          className="panel section-enter mt-6 p-6"
+          style={{ animationDelay: "90ms" }}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="brand-mark text-2xl">
+                Personalizācija — {editorChild.display_name}
+              </h2>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">
+                Apraksti bērnu saviem vārdiem. AI izveidos iekšējo profilu — tu to
+                pārskati un apstiprini pirms lietošanas.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setEditorChildId(null)}
+            >
+              Aizvērt
+            </button>
+          </div>
+
+          <div className="mt-5">
+            <ParentNotesFields
+              notes={editorNotes}
+              onChange={setEditorNotes}
+              disabled={editorBusy}
+            />
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="btn btn-accent"
+              disabled={editorBusy}
+              onClick={generateDraft}
+            >
+              {editorBusy ? "Ģenerē…" : "Ģenerēt profila melnrakstu"}
+            </button>
+          </div>
+
+          <div className="mt-6">
+            <label className="text-sm font-medium text-[var(--ink)]">
+              AI profils (pārskati pirms apstiprināšanas)
+            </label>
+            <textarea
+              className="field mt-2 min-h-[160px]"
+              disabled={editorBusy}
+              value={editorProfile}
+              onChange={(e) => setEditorProfile(e.target.value)}
+              placeholder="Šeit parādīsies AI melnraksts…"
+            />
+          </div>
+
+          <button
+            type="button"
+            className="btn btn-primary mt-4"
+            disabled={editorBusy || !editorProfile.trim()}
+            onClick={approveProfile}
+          >
+            {editorBusy
+              ? "Apstiprina…"
+              : "Apstiprināt profilu un ģenerēt šodienu"}
+          </button>
+        </section>
+      )}
+
       <section className="panel section-enter mt-6 p-6" style={{ animationDelay: "120ms" }}>
         <h2 className="brand-mark text-2xl">Pievienot bērnu</h2>
         <p className="mt-2 text-sm text-[var(--ink-soft)]">
-          Pēc izveides uzreiz tiek ielādēti šodienas Svētie Raksti un ģenerēts
-          bērna saturs (nav jāgaida nakts ģenerēšanu).
+          Pēc pievienošanas AI izveidos profila melnrakstu. Tu to apstiprini — tad
+          tiek ģenerēts šodienas saturs. Piezīmes nav obligātas; bez tām paliek
+          vecuma joslas standarts.
         </p>
         <form onSubmit={addChild} className="mt-5 space-y-4">
           <input
@@ -226,61 +472,16 @@ export function ParentDashboard({
             onChange={(e) => setPersonalCode(e.target.value)}
           />
 
-          <div>
-            <label className="text-sm text-[var(--ink-soft)]">Mācību mērķi</label>
-            <div className="mt-2 rounded-2xl border border-[var(--line)] bg-white/70 p-4">
-              <p className="text-sm text-[var(--ink-soft)]">
-                {selectedGoals.length === 0
-                  ? "Vēl nav izvēlēts neviens mērķis."
-                  : `Izvēlēti ${selectedGoals.length} mērķi`}
-              </p>
-              {selectedGoals.length > 40 && (
-                <p className="mt-2 text-xs text-[var(--accent-deep)]">
-                  Ieteikums: 10–40 mērķi ir pietiekami. Ļoti daudz mērķu
-                  nepalielina kvalitāti, bet var apgrūtināt ģenerēšanu.
-                </p>
-              )}
-              {selectedLabels.length > 0 && (
-                <ul className="mt-3 max-h-28 space-y-1 overflow-y-auto text-sm">
-                  {selectedLabels.slice(0, 8).map((g) => (
-                    <li key={g.id}>• {g.name}</li>
-                  ))}
-                  {selectedLabels.length > 8 && (
-                    <li className="text-[var(--ink-soft)]">
-                      …un vēl {selectedLabels.length - 8}
-                    </li>
-                  )}
-                </ul>
-              )}
-              <button
-                type="button"
-                className="btn btn-accent mt-4"
-                onClick={() => setPickerOpen(true)}
-              >
-                Izvēlēties mērķus…
-              </button>
-            </div>
-          </div>
+          <ParentNotesFields notes={createNotes} onChange={setCreateNotes} disabled={loading} />
 
           <button className="btn btn-primary" disabled={loading}>
-            {loading ? "Ģenerē profilu un šodienas saturu…" : "Pievienot un ģenerēt šodienu"}
+            {loading ? "Pievieno un ģenerē melnrakstu…" : "Pievienot bērnu"}
           </button>
         </form>
-        {message && <p className="mt-4 text-sm text-[var(--ok)]">{message}</p>}
-        {error && <p className="mt-4 text-sm text-[var(--danger)]">{error}</p>}
       </section>
 
-      <GoalPickerModal
-        open={pickerOpen}
-        goals={goals}
-        categories={categories}
-        initialSelected={selectedGoals}
-        onClose={() => setPickerOpen(false)}
-        onSave={(ids) => {
-          setSelectedGoals(ids);
-          setPickerOpen(false);
-        }}
-      />
+      {message && <p className="mt-4 text-sm text-[var(--ok)]">{message}</p>}
+      {error && <p className="mt-4 text-sm text-[var(--danger)]">{error}</p>}
     </main>
   );
 }

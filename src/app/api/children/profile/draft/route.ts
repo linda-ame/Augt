@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { generateLessonForChild } from "@/services/generation";
+import { normalizeParentNotes } from "@/lib/parent-notes";
+import { draftChildProfile } from "@/services/generation";
 
 export async function POST(req: Request) {
   const supabase = await createClient();
@@ -13,6 +14,7 @@ export async function POST(req: Request) {
 
   const body = (await req.json()) as {
     childId?: string;
+    parentNotes?: unknown;
   };
   const childId = body.childId;
   if (!childId) {
@@ -39,8 +41,16 @@ export async function POST(req: Request) {
   }
 
   try {
-    const result = await generateLessonForChild(childId, { force: true });
-    return NextResponse.json({ ok: true, result });
+    const notes =
+      body.parentNotes !== undefined
+        ? normalizeParentNotes(body.parentNotes)
+        : undefined;
+    const updated = await draftChildProfile(childId, notes);
+    return NextResponse.json({
+      ok: true,
+      child: updated,
+      profileDraft: updated.profile_draft ?? null,
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     const isQuota = /429|quota|rate/i.test(message);

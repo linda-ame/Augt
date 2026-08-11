@@ -191,6 +191,26 @@ const DISCERNMENT_TYPES = new Set([
 
 const MAX_WRONG_ATTEMPTS = 3;
 
+function seededShuffle<T>(items: T[], seed: number): T[] {
+  const copy = [...items];
+  let s = seed || 1;
+  for (let i = copy.length - 1; i > 0; i--) {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    const j = s % (i + 1);
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function hashSeed(text: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
 function normalizeGuess(value: string): string {
   return value
     .trim()
@@ -199,22 +219,677 @@ function normalizeGuess(value: string): string {
     .replace(/[\s\-_.]+/g, "");
 }
 
+type QuizQuestion = {
+  question: string;
+  options: string[];
+  correct_answer: number | string;
+  explanation?: string;
+};
+
+function resolveQuizQuestions(activity: ActivityContent): QuizQuestion[] {
+  let list: QuizQuestion[] = [];
+  if (activity.questions && activity.questions.length > 0) {
+    list = activity.questions.map((q) => ({
+      question: q.question,
+      options: q.options,
+      correct_answer: q.correct_answer,
+      explanation: q.explanation,
+    }));
+  } else if (activity.type === "true_false") {
+    const ca = activity.correct_answer;
+    list = [
+      {
+        question:
+          (activity.question && activity.question.trim()) ||
+          activity.instruction,
+        options:
+          activity.options && activity.options.length >= 2
+            ? activity.options
+            : ["Patiess", "Nepatiess"],
+        correct_answer:
+          typeof ca === "number" || typeof ca === "string" ? ca : 0,
+        explanation: activity.explanation,
+      },
+    ];
+  } else if (activity.options && activity.options.length >= 2) {
+    const ca = activity.correct_answer;
+    list = [
+      {
+        question:
+          (activity.question && activity.question.trim()) ||
+          activity.instruction,
+        options: activity.options,
+        correct_answer:
+          typeof ca === "number" || typeof ca === "string" ? ca : 0,
+        explanation: activity.explanation,
+      },
+    ];
+  }
+  return list.slice(0, 2);
+}
+
+function questionCorrectIndex(q: QuizQuestion): number | null {
+  if (typeof q.correct_answer === "number") return q.correct_answer;
+  if (typeof q.correct_answer === "string") {
+    const idx = q.options.findIndex((o) => o === q.correct_answer);
+    return idx >= 0 ? idx : null;
+  }
+  return null;
+}
+
+type QuestionPlayState = {
+  picked: number | null;
+  tried: number[];
+  wrongAttempts: number;
+  status: "idle" | "wrong" | "correct" | "revealed";
+};
+
+function emptyPlayState(): QuestionPlayState {
+  return { picked: null, tried: [], wrongAttempts: 0, status: "idle" };
+}
+
+function TrueFalseQuiz({
+  instruction,
+  questions,
+}: {
+  instruction: string;
+  questions: QuizQuestion[];
+}) {
+  const [plays, setPlays] = useState<QuestionPlayState[]>(() =>
+    questions.map(() => emptyPlayState()),
+  );
+
+  function choose(qIndex: number, optIndex: number) {
+    setPlays((prev) => {
+      const cur = prev[qIndex];
+      if (!cur || cur.status === "correct" || cur.status === "revealed") {
+        return prev;
+      }
+      const q = questions[qIndex]!;
+      const options =
+        q.options.length >= 2 ? q.options : ["Patiess", "Nepatiess"];
+      const correctIndex = questionCorrectIndex({ ...q, options });
+      const next = [...prev];
+      next[qIndex] = {
+        ...cur,
+        picked: optIndex,
+        status:
+          correctIndex !== null && optIndex === correctIndex
+            ? "correct"
+            : "revealed",
+      };
+      return next;
+    });
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="font-medium">{instruction}</p>
+      <div className="space-y-5">
+        {questions.map((q, qIndex) => {
+          const play = plays[qIndex] ?? emptyPlayState();
+          const options =
+            q.options.length >= 2 ? q.options : ["Patiess", "Nepatiess"];
+          const correctIndex = questionCorrectIndex({ ...q, options });
+          const answered =
+            play.status === "correct" || play.status === "revealed";
+          const isCorrect = play.status === "correct";
+          const correctLabel =
+            correctIndex !== null ? options[correctIndex] ?? null : null;
+
+          return (
+            <div
+              key={`tf-${qIndex}-${q.question}`}
+              className="space-y-3 border-t border-[var(--line)] pt-4 first:border-t-0 first:pt-0"
+            >
+              {questions.length > 1 && (
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                  {qIndex + 1}.
+                </p>
+              )}
+              <p>{q.question}</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {options.map((opt, idx) => {
+                  const base = "btn text-left";
+                  let cls = `${base} btn-secondary`;
+                  if (answered) {
+                    if (correctIndex !== null && idx === correctIndex) {
+                      cls = `${base} border-2 border-[var(--ok)] bg-[var(--bg-soft)]`;
+                    } else if (play.picked === idx) {
+                      cls = `${base} border-2 border-[var(--danger)] opacity-80`;
+                    } else {
+                      cls = `${base} btn-secondary opacity-50`;
+                    }
+                  }
+                  return (
+                    <button
+                      key={`${qIndex}-${opt}`}
+                      type="button"
+                      disabled={answered}
+                      className={cls}
+                      onClick={() => choose(qIndex, idx)}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+              {answered && (
+                <div
+                  className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    isCorrect
+                      ? "feedback-ok"
+                      : "border border-[var(--danger)]/30 bg-red-50/80"
+                  }`}
+                >
+                  {isCorrect ? (
+                    <p className="font-medium text-[var(--ok)]">
+                      Pareizi —{" "}
+                      {correctLabel?.toLowerCase() === "nepatiess"
+                        ? "apgalvojums ir nepatiess"
+                        : "apgalvojums ir patiess"}
+                      .
+                    </p>
+                  ) : (
+                    <p className="font-medium text-[var(--danger)]">
+                      Nepareizi — pareizi ir: {correctLabel}.
+                    </p>
+                  )}
+                  {q.explanation && (
+                    <p
+                      className={`mt-2 ${
+                        isCorrect ? "text-[var(--ink-soft)]" : "text-[var(--ink)]"
+                      }`}
+                    >
+                      {q.explanation}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function MultiChoiceQuiz({
+  instruction,
+  questions,
+}: {
+  instruction: string;
+  questions: QuizQuestion[];
+}) {
+  const [plays, setPlays] = useState<QuestionPlayState[]>(() =>
+    questions.map(() => emptyPlayState()),
+  );
+
+  function checkChoice(qIndex: number, optIndex: number) {
+    setPlays((prev) => {
+      const cur = prev[qIndex];
+      if (!cur || cur.status === "correct" || cur.status === "revealed") {
+        return prev;
+      }
+      const q = questions[qIndex]!;
+      const correctIndex = questionCorrectIndex(q);
+      const next = [...prev];
+      if (correctIndex === null) {
+        next[qIndex] = { ...cur, picked: optIndex, status: "revealed" };
+        return next;
+      }
+      if (optIndex === correctIndex) {
+        next[qIndex] = { ...cur, picked: optIndex, status: "correct" };
+        return next;
+      }
+      const tried = cur.tried.includes(optIndex)
+        ? cur.tried
+        : [...cur.tried, optIndex];
+      const wrongAttempts = cur.wrongAttempts + 1;
+      next[qIndex] = {
+        picked: optIndex,
+        tried,
+        wrongAttempts,
+        status: "wrong",
+      };
+      return next;
+    });
+  }
+
+  function reveal(qIndex: number) {
+    setPlays((prev) => {
+      const cur = prev[qIndex];
+      if (!cur) return prev;
+      const next = [...prev];
+      next[qIndex] = { ...cur, status: "revealed" };
+      return next;
+    });
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="font-medium">{instruction}</p>
+      <div className="space-y-5">
+        {questions.map((q, qIndex) => {
+          const play = plays[qIndex] ?? emptyPlayState();
+          const correctIndex = questionCorrectIndex(q);
+          const showSolution =
+            play.status === "correct" || play.status === "revealed";
+          const canGiveUp =
+            play.wrongAttempts >= MAX_WRONG_ATTEMPTS &&
+            play.status !== "correct";
+
+          return (
+            <div
+              key={`mc-${qIndex}-${q.question}`}
+              className="space-y-3 border-t border-[var(--line)] pt-4 first:border-t-0 first:pt-0"
+            >
+              {questions.length > 1 && (
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                  {qIndex + 1}.
+                </p>
+              )}
+              <p>{q.question}</p>
+              <div className="grid gap-2">
+                {q.options.map((opt, idx) => {
+                  const base = "btn text-left";
+                  let cls = `${base} btn-secondary`;
+                  if (showSolution && correctIndex !== null) {
+                    if (idx === correctIndex) {
+                      cls = `${base} border-2 border-[var(--ok)] bg-[var(--bg-soft)]`;
+                    } else if (play.tried.includes(idx) || play.picked === idx) {
+                      cls = `${base} border-2 border-[var(--danger)] opacity-70`;
+                    } else {
+                      cls = `${base} btn-secondary opacity-50`;
+                    }
+                  } else if (play.tried.includes(idx)) {
+                    cls = `${base} border-2 border-[var(--danger)] opacity-70`;
+                  } else if (play.picked === idx && play.status === "wrong") {
+                    cls = `${base} border-2 border-[var(--danger)]`;
+                  }
+                  return (
+                    <button
+                      key={`${qIndex}-${opt}`}
+                      type="button"
+                      disabled={showSolution || play.tried.includes(idx)}
+                      className={cls}
+                      onClick={() => checkChoice(qIndex, idx)}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {play.status === "wrong" && (
+                <div className="rounded-2xl border border-[var(--danger)]/30 bg-red-50/80 px-4 py-3 text-sm">
+                  <p className="font-medium text-[var(--danger)]">
+                    Nepareizi. Mēģini vēlreiz.
+                  </p>
+                  {canGiveUp && (
+                    <button
+                      type="button"
+                      className="btn btn-secondary mt-3 text-sm"
+                      onClick={() => reveal(qIndex)}
+                    >
+                      Parādīt pareizo atbildi
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {showSolution && (
+                <div className="feedback-ok rounded-2xl px-4 py-3 text-sm leading-relaxed">
+                  {play.status === "correct" ? (
+                    <p className="font-medium text-[var(--ok)]">
+                      Pareizi — labi darīts!
+                    </p>
+                  ) : (
+                    <p className="font-medium">Pareizā atbilde</p>
+                  )}
+                  {correctIndex !== null && q.options[correctIndex] && (
+                    <p className="mt-1">{q.options[correctIndex]}</p>
+                  )}
+                  {q.explanation && (
+                    <p className="mt-2 text-[var(--ink-soft)]">{q.explanation}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+type FillBlankItem = {
+  question: string;
+  answer: string;
+  explanation?: string;
+};
+
+function resolveFillBlanks(activity: ActivityContent): FillBlankItem[] {
+  if (activity.blanks && activity.blanks.length > 0) {
+    return activity.blanks
+      .map((b) => ({
+        question: b.question,
+        answer: b.answer,
+        explanation: b.explanation,
+      }))
+      .slice(0, 3);
+  }
+  const ans =
+    (typeof activity.answer === "string" && activity.answer.trim()) ||
+    (typeof activity.correct_answer === "string"
+      ? activity.correct_answer
+      : "");
+  if (!ans) return [];
+  return [
+    {
+      question:
+        (activity.question && activity.question.trim()) || activity.instruction,
+      answer: ans,
+      explanation: activity.explanation,
+    },
+  ];
+}
+
+function FillBlankQuiz({
+  instruction,
+  blanks,
+}: {
+  instruction: string;
+  blanks: FillBlankItem[];
+}) {
+  const [values, setValues] = useState<string[]>(() => blanks.map(() => ""));
+  const [locked, setLocked] = useState<boolean[]>(() => blanks.map(() => false));
+  const [wrong, setWrong] = useState<boolean[]>(() => blanks.map(() => false));
+  const [checkedOnce, setCheckedOnce] = useState(false);
+
+  const allDone = locked.length > 0 && locked.every(Boolean);
+
+  function setValue(i: number, v: string) {
+    if (locked[i]) return;
+    setValues((prev) => {
+      const next = [...prev];
+      next[i] = v;
+      return next;
+    });
+    if (wrong[i]) {
+      setWrong((prev) => {
+        const next = [...prev];
+        next[i] = false;
+        return next;
+      });
+    }
+  }
+
+  function checkAll() {
+    setCheckedOnce(true);
+    setLocked((prevLocked) => {
+      const nextLocked = [...prevLocked];
+      const nextWrong = blanks.map((_, i) => {
+        if (nextLocked[i]) return false;
+        const ok =
+          normalizeGuess(values[i] ?? "") ===
+          normalizeGuess(blanks[i]?.answer ?? "");
+        if (ok) nextLocked[i] = true;
+        return !ok;
+      });
+      setWrong(nextWrong);
+      return nextLocked;
+    });
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="font-medium">{instruction}</p>
+      <div className="space-y-5">
+        {blanks.map((b, i) => {
+          const isLocked = locked[i];
+          const isWrong = wrong[i];
+          return (
+            <div
+              key={`fb-${i}-${b.question}`}
+              className="space-y-3 border-t border-[var(--line)] pt-4 first:border-t-0 first:pt-0"
+            >
+              {blanks.length > 1 && (
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                  {i + 1}.
+                </p>
+              )}
+              <p>{b.question}</p>
+              <input
+                className={`field max-w-md ${
+                  isLocked
+                    ? "border-2 border-[var(--ok)] bg-[var(--bg-soft)]"
+                    : isWrong
+                      ? "border-2 border-[var(--danger)]"
+                      : ""
+                }`}
+                value={values[i] ?? ""}
+                disabled={isLocked}
+                placeholder="Tava atbilde"
+                onChange={(e) => setValue(i, e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !allDone) checkAll();
+                }}
+              />
+              {isLocked && (
+                <div className="feedback-ok rounded-2xl px-4 py-3 text-sm leading-relaxed">
+                  <p className="font-medium text-[var(--ok)]">Pareizi!</p>
+                  {b.explanation && (
+                    <p className="mt-1 text-[var(--ink-soft)]">{b.explanation}</p>
+                  )}
+                </div>
+              )}
+              {isWrong && !isLocked && (
+                <p className="text-sm font-medium text-[var(--danger)]">
+                  Nepareizi — mēģini vēlreiz.
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {!allDone && (
+        <button type="button" className="btn btn-accent" onClick={checkAll}>
+          {checkedOnce ? "Pārbaudīt vēlreiz" : "Pārbaudīt"}
+        </button>
+      )}
+
+      {allDone && (
+        <div className="feedback-ok rounded-2xl px-4 py-3 text-sm leading-relaxed">
+          <p className="font-medium text-[var(--ok)]">
+            Labi darīts — visas tukšās vietas aizpildītas!
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function resolveWhoAmIClues(activity: ActivityContent): string[] {
+  if (activity.clues && activity.clues.length > 0) {
+    return activity.clues.map((c) => c.trim()).filter(Boolean).slice(0, 3);
+  }
+  const raw =
+    (activity.question && activity.question.trim()) ||
+    (activity.instruction && activity.instruction.trim()) ||
+    "";
+  if (!raw) return [];
+  const parts = raw
+    .split(/\n+|(?<=\.)\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return (parts.length > 0 ? parts : [raw]).slice(0, 3);
+}
+
+function WhoAmIQuiz({
+  clues,
+  answer,
+  explanation,
+}: {
+  clues: string[];
+  answer: string;
+  explanation?: string;
+}) {
+  const [guess, setGuess] = useState("");
+  const [visibleCount, setVisibleCount] = useState(1);
+  const [status, setStatus] = useState<"idle" | "wrong" | "correct" | "revealed">(
+    "idle",
+  );
+  const showSolution = status === "correct" || status === "revealed";
+  const allCluesVisible = visibleCount >= clues.length;
+  const canReveal = allCluesVisible && status === "wrong";
+
+  function check() {
+    if (showSolution) return;
+    if (normalizeGuess(guess) === normalizeGuess(answer)) {
+      setStatus("correct");
+      setVisibleCount(clues.length);
+      return;
+    }
+    setStatus("wrong");
+    setVisibleCount((n) => Math.min(clues.length, n + 1));
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="font-medium">Kas es esmu?</p>
+      <ol className="list-decimal space-y-2 pl-5">
+        {clues.slice(0, visibleCount).map((clue, i) => (
+          <li key={`${i}-${clue}`} className="leading-relaxed">
+            {clue}
+          </li>
+        ))}
+      </ol>
+      {!allCluesVisible && status === "wrong" && (
+        <p className="text-sm text-[var(--ink-soft)]">
+          Jauns mājiens atvērts — mēģini vēlreiz.
+        </p>
+      )}
+
+      <div className="flex flex-wrap gap-2">
+        <input
+          className="field max-w-xs"
+          value={guess}
+          disabled={showSolution}
+          placeholder="Kas es esmu?"
+          onChange={(e) => {
+            setGuess(e.target.value);
+            if (status === "wrong") setStatus("idle");
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !showSolution) check();
+          }}
+        />
+        {!showSolution && (
+          <button type="button" className="btn btn-accent" onClick={check}>
+            Pārbaudīt
+          </button>
+        )}
+      </div>
+
+      {status === "wrong" && !showSolution && (
+        <div className="rounded-2xl border border-[var(--danger)]/30 bg-red-50/80 px-4 py-3 text-sm">
+          <p className="font-medium text-[var(--danger)]">Nepareizi.</p>
+          {canReveal && (
+            <button
+              type="button"
+              className="btn btn-secondary mt-3 text-sm"
+              onClick={() => setStatus("revealed")}
+            >
+              Parādīt pareizo atbildi
+            </button>
+          )}
+        </div>
+      )}
+
+      {showSolution && (
+        <div className="feedback-ok rounded-2xl px-4 py-3 text-sm leading-relaxed">
+          {status === "correct" ? (
+            <p className="font-medium text-[var(--ok)]">Pareizi — labi darīts!</p>
+          ) : (
+            <p className="font-medium">Pareizā atbilde</p>
+          )}
+          <p className="mt-1">{answer}</p>
+          {explanation && (
+            <p className="mt-2 text-[var(--ink-soft)]">{explanation}</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ActivityGame({ activity }: { activity: ActivityContent }) {
+  const quizQuestions = useMemo(
+    () =>
+      activity.type === "multiple_choice" || activity.type === "true_false"
+        ? resolveQuizQuestions(activity)
+        : [],
+    [activity],
+  );
+  const fillBlanks = useMemo(
+    () =>
+      activity.type === "fill_blank" ? resolveFillBlanks(activity) : [],
+    [activity],
+  );
+  const whoClues = useMemo(
+    () =>
+      activity.type === "who_am_i" ? resolveWhoAmIClues(activity) : [],
+    [activity],
+  );
+  const whoAnswer = useMemo(() => {
+    if (activity.type !== "who_am_i") return "";
+    if (typeof activity.answer === "string" && activity.answer.trim()) {
+      return activity.answer.trim();
+    }
+    if (typeof activity.correct_answer === "string") {
+      return activity.correct_answer;
+    }
+    return "";
+  }, [activity]);
+
   const [picked, setPicked] = useState<number | null>(null);
   const [order, setOrder] = useState<string[]>(activity.items ?? []);
   const [blank, setBlank] = useState("");
   const [scrambleGuess, setScrambleGuess] = useState("");
-  const [whoGuess, setWhoGuess] = useState("");
   const [wrongAttempts, setWrongAttempts] = useState(0);
   const [triedChoices, setTriedChoices] = useState<number[]>([]);
   const [status, setStatus] = useState<
     "idle" | "wrong" | "correct" | "revealed"
   >("idle");
+  const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
+  const [matchedLeft, setMatchedLeft] = useState<Set<string>>(() => new Set());
+  const [matchedRight, setMatchedRight] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [matchFlashWrong, setMatchFlashWrong] = useState<{
+    left: string;
+    right: string;
+  } | null>(null);
 
   const isDiscernment = DISCERNMENT_TYPES.has(activity.type);
   const canGiveUp = wrongAttempts >= MAX_WRONG_ATTEMPTS && status !== "correct";
   const showSolution = status === "correct" || status === "revealed";
 
+  const matchPairs = (activity.pairs ?? []).slice(0, 3);
+  const rightColumn = useMemo(() => {
+    const pairs = (activity.pairs ?? []).slice(0, 3);
+    const rights = pairs.map((p) => p.right);
+    const seed = hashSeed(pairs.map((p) => `${p.left}::${p.right}`).join("|"));
+    return seededShuffle(rights, seed);
+  }, [activity.pairs]);
+
+  const correctRightByLeft = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const p of (activity.pairs ?? []).slice(0, 3)) map.set(p.left, p.right);
+    return map;
+  }, [activity.pairs]);
   const correctIndex = useMemo(() => {
     if (typeof activity.correct_answer === "number") return activity.correct_answer;
     if (typeof activity.correct_answer === "string" && activity.options) {
@@ -233,8 +908,11 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
     }
     if (typeof activity.correct_answer === "string") return activity.correct_answer;
     if (activity.answer) return activity.answer;
+    if (activity.type === "matching" && matchPairs.length > 0) {
+      return matchPairs.map((p) => `${p.left} — ${p.right}`).join("; ");
+    }
     return null;
-  }, [activity, correctIndex]);
+  }, [activity, correctIndex, matchPairs]);
 
   const expectedText = useMemo(() => {
     if (activity.answer) return activity.answer;
@@ -298,7 +976,40 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
   }
 
   function revealAnswer() {
+    if (activity.type === "matching" && matchPairs.length > 0) {
+      setMatchedLeft(new Set(matchPairs.map((p) => p.left)));
+      setMatchedRight(new Set(matchPairs.map((p) => p.right)));
+      setSelectedLeft(null);
+    }
     setStatus("revealed");
+  }
+
+  function onMatchLeft(left: string) {
+    if (showSolution || matchedLeft.has(left)) return;
+    setSelectedLeft(left);
+    setMatchFlashWrong(null);
+    if (status === "wrong") setStatus("idle");
+  }
+
+  function onMatchRight(right: string) {
+    if (showSolution || matchedRight.has(right) || !selectedLeft) return;
+    const expected = correctRightByLeft.get(selectedLeft);
+    if (expected === right) {
+      const nextLeft = new Set(matchedLeft);
+      nextLeft.add(selectedLeft);
+      const nextRight = new Set(matchedRight);
+      nextRight.add(right);
+      setMatchedLeft(nextLeft);
+      setMatchedRight(nextRight);
+      setSelectedLeft(null);
+      setMatchFlashWrong(null);
+      if (nextLeft.size >= matchPairs.length) registerCorrect();
+      else if (status === "wrong") setStatus("idle");
+      return;
+    }
+    setMatchFlashWrong({ left: selectedLeft, right });
+    registerWrong();
+    setSelectedLeft(null);
   }
 
   function optionClass(idx: number): string {
@@ -333,14 +1044,69 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
     return `${base} btn-secondary`;
   }
 
+  function matchButtonClass(side: "left" | "right", value: string): string {
+    const base = "btn w-full text-left";
+    const matched =
+      side === "left" ? matchedLeft.has(value) : matchedRight.has(value);
+    if (matched) {
+      return `${base} border-2 border-[var(--ok)] bg-[var(--bg-soft)]`;
+    }
+    if (
+      matchFlashWrong &&
+      ((side === "left" && matchFlashWrong.left === value) ||
+        (side === "right" && matchFlashWrong.right === value))
+    ) {
+      return `${base} border-2 border-[var(--danger)]`;
+    }
+    if (side === "left" && selectedLeft === value) {
+      return `${base} btn-primary`;
+    }
+    return `${base} btn-secondary`;
+  }
+
+  if (activity.type === "multiple_choice" && quizQuestions.length > 0) {
+    return (
+      <MultiChoiceQuiz
+        instruction={activity.instruction}
+        questions={quizQuestions}
+      />
+    );
+  }
+
+  if (activity.type === "true_false" && quizQuestions.length > 0) {
+    return (
+      <TrueFalseQuiz
+        instruction={activity.instruction}
+        questions={quizQuestions}
+      />
+    );
+  }
+
+  if (activity.type === "fill_blank" && fillBlanks.length > 0) {
+    return (
+      <FillBlankQuiz
+        instruction={activity.instruction}
+        blanks={fillBlanks}
+      />
+    );
+  }
+
+  if (activity.type === "who_am_i" && whoClues.length > 0 && whoAnswer) {
+    return (
+      <WhoAmIQuiz
+        clues={whoClues}
+        answer={whoAnswer}
+        explanation={activity.explanation}
+      />
+    );
+  }
+
   return (
     <div className="space-y-4">
       <p className="font-medium">{activity.instruction}</p>
       {activity.question && <p>{activity.question}</p>}
 
-      {activity.type === "multiple_choice" ||
-      activity.type === "true_false" ||
-      activity.type === "scenario_choice" ||
+      {activity.type === "scenario_choice" ||
       activity.type === "choose_the_best_response" ||
       activity.type === "find_the_mistake" ? (
         <div className="grid gap-2">
@@ -360,33 +1126,6 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
           ))}
         </div>
       ) : null}
-
-      {activity.type === "fill_blank" && (
-        <div className="flex flex-wrap gap-2">
-          <input
-            className="field max-w-xs"
-            value={blank}
-            disabled={showSolution}
-            onChange={(e) => {
-              setBlank(e.target.value);
-              if (status === "wrong") setStatus("idle");
-            }}
-            placeholder="Tava atbilde"
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !showSolution) checkTextGuess(blank);
-            }}
-          />
-          {!showSolution && (
-            <button
-              type="button"
-              className="btn btn-accent"
-              onClick={() => checkTextGuess(blank)}
-            >
-              Pārbaudīt
-            </button>
-          )}
-        </div>
-      )}
 
       {activity.type === "word_scramble" && (
         <div className="space-y-2">
@@ -464,54 +1203,41 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
         </div>
       )}
 
-      {activity.type === "matching" && activity.pairs && (
+      {activity.type === "matching" && matchPairs.length > 0 && (
         <div className="space-y-3">
-          <ul className="space-y-2">
-            {activity.pairs.map((p) => (
-              <li
-                key={p.left}
-                className="rounded-xl border border-[var(--line)] bg-white/70 px-3 py-2"
-              >
-                <strong>{p.left}</strong> — {p.right}
-              </li>
-            ))}
-          </ul>
-          {activity.explanation && status === "idle" && (
-            <button
-              type="button"
-              className="btn btn-accent"
-              onClick={() => setStatus("revealed")}
-            >
-              Parādīt skaidrojumu
-            </button>
-          )}
-        </div>
-      )}
-
-      {activity.type === "who_am_i" && (
-        <div className="flex flex-wrap gap-2">
-          <input
-            className="field max-w-xs"
-            value={whoGuess}
-            disabled={showSolution}
-            placeholder="Kas es esmu?"
-            onChange={(e) => {
-              setWhoGuess(e.target.value);
-              if (status === "wrong") setStatus("idle");
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !showSolution) checkTextGuess(whoGuess);
-            }}
-          />
-          {!showSolution && (
-            <button
-              type="button"
-              className="btn btn-accent"
-              onClick={() => checkTextGuess(whoGuess)}
-            >
-              Pārbaudīt
-            </button>
-          )}
+          <p className="text-sm text-[var(--ink-soft)]">
+            Vispirms izvēlies kreiso, tad atbilstošo labo.
+          </p>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              {matchPairs.map((p) => (
+                <button
+                  key={p.left}
+                  type="button"
+                  disabled={showSolution || matchedLeft.has(p.left)}
+                  className={matchButtonClass("left", p.left)}
+                  onClick={() => onMatchLeft(p.left)}
+                >
+                  {p.left}
+                </button>
+              ))}
+            </div>
+            <div className="space-y-2">
+              {rightColumn.map((right) => (
+                <button
+                  key={right}
+                  type="button"
+                  disabled={
+                    showSolution || matchedRight.has(right) || !selectedLeft
+                  }
+                  className={matchButtonClass("right", right)}
+                  onClick={() => onMatchRight(right)}
+                >
+                  {right}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
@@ -552,31 +1278,32 @@ function ActivityGame({ activity }: { activity: ActivityContent }) {
         </div>
       )}
 
-      {!isDiscernment &&
-        activity.type !== "matching" &&
-        showSolution && (
+      {!isDiscernment && showSolution && (
         <div className="feedback-ok rounded-2xl px-4 py-3 text-sm leading-relaxed">
           {status === "correct" ? (
             <p className="font-medium text-[var(--ok)]">Pareizi — labi darīts!</p>
           ) : (
             <p className="font-medium">Pareizā atbilde</p>
           )}
-          {correctLabel && (
+          {correctLabel && activity.type !== "matching" && (
             <p className="mt-1">
               {activity.type === "put_in_order"
                 ? `Secība: ${correctLabel}`
                 : correctLabel}
             </p>
           )}
+          {activity.type === "matching" && status === "revealed" && (
+            <ul className="mt-2 space-y-1">
+              {matchPairs.map((p) => (
+                <li key={p.left}>
+                  <strong>{p.left}</strong> — {p.right}
+                </li>
+              ))}
+            </ul>
+          )}
           {activity.explanation && (
             <p className="mt-2 text-[var(--ink-soft)]">{activity.explanation}</p>
           )}
-        </div>
-      )}
-
-      {activity.type === "matching" && status === "revealed" && activity.explanation && (
-        <div className="rounded-2xl bg-[var(--bg-soft)] px-4 py-3 text-sm leading-relaxed">
-          <p>{activity.explanation}</p>
         </div>
       )}
     </div>

@@ -1,9 +1,17 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ParentDashboard } from "@/components/ParentDashboard";
-import { loadTeachingGoals } from "@/services/ai/generate";
 import { generateFamilyCode } from "@/lib/codes";
 import { todayInRiga } from "@/lib/dates";
+import {
+  normalizeParentNotes,
+  type ProfileStatus,
+} from "@/lib/parent-notes";
+
+function asProfileStatus(value: unknown): ProfileStatus {
+  if (value === "draft" || value === "approved" || value === "none") return value;
+  return "none";
+}
 
 export default async function ParentPage() {
   const supabase = await createClient();
@@ -45,7 +53,9 @@ export default async function ParentPage() {
 
   const { data: children } = await supabase
     .from("children")
-    .select("id, display_name, age, active, generated_profile")
+    .select(
+      "id, display_name, age, active, generated_profile, profile_draft, profile_status, parent_notes",
+    )
     .eq("family_id", family.id)
     .order("display_name");
 
@@ -63,32 +73,27 @@ export default async function ParentPage() {
     }
   }
 
-  const goalsLib = loadTeachingGoals();
-  const goals = goalsLib.goals.map((g) => ({
-    id: g.id,
-    name: g.name,
-    category: g.category,
-    category_id: g.category_id,
-  }));
-  const categories =
-    goalsLib.categories?.map((c) => ({ id: c.id, name: c.name })) ??
-    Array.from(
-      new Map(goals.map((g) => [g.category, g.category])).entries(),
-    ).map(([name]) => ({ id: name, name }));
-
   return (
     <ParentDashboard
       family={family}
-      childrenList={(children ?? []).map((c) => ({
-        id: c.id,
-        display_name: c.display_name,
-        age: c.age,
-        active: c.active,
-        hasProfile: Boolean(c.generated_profile),
-        todayStatus: lessonStatusByChild[c.id] ?? "missing",
-      }))}
-      goals={goals}
-      categories={categories}
+      childrenList={(children ?? []).map((c) => {
+        const status = asProfileStatus(c.profile_status);
+        const hasLegacyProfile =
+          status === "none" &&
+          typeof c.generated_profile === "string" &&
+          c.generated_profile.trim().length > 0;
+        return {
+          id: c.id,
+          display_name: c.display_name,
+          age: c.age,
+          active: c.active,
+          profileStatus: hasLegacyProfile ? "approved" : status,
+          profileDraft: c.profile_draft ?? null,
+          generatedProfile: c.generated_profile ?? null,
+          parentNotes: normalizeParentNotes(c.parent_notes),
+          todayStatus: lessonStatusByChild[c.id] ?? "missing",
+        };
+      })}
     />
   );
 }

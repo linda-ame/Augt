@@ -30,19 +30,40 @@ Pārējām daļām (1./2. lasījums, Psalms, Alleluja):
 
 ## Svētie Raksti ir primāri
 - Sākums vienmēr ir šodienas teksti; Evaņģēlijs vada tēmu.
-- Personalizācija (mērķi/profils) ir neredzams slānis — izmanto tikai tad, ja tas **dabiski** saskan ar Evaņģēliju.
+- Personalizācija (vecāku piezīmes / apstiprināts profils) ir neredzams slānis — izmanto tikai tad, ja tas **dabiski** saskan ar Evaņģēliju.
 - Nedrīkst piespiedu kārtā “iegrūst” uzvedības tēmu, ja lasījums par to nerunā.
 
+## “Ko tas nozīmē?” = Evaņģēlija skaidrojums (ne profils)
+- `gospel.explanation` un `gospel.main_idea` skaidro **šodienas Evaņģēlija tekstu**: kas notiek, ko Jēzus dara/saka, kāpēc tas svarīgi kristīga cilvēka dzīvē.
+- Šīs sadaļas **NEDRĪKST** būt par bērna “problēmām”, vecāku piezīmēm vai profila tēmām. Ja profils nesaskan ar tekstu — ignorē to šeit.
+- “Ko tas nozīmē man?” = **universāla** Evaņģēlija mācība (ticība, mīlestība, piedošana u.tml. no teksta), ne personalizēta terapija.
+- Viegla personalizācija (ja dabiska) drīkst parādīties galvenokārt `real_life_application` / spēles piemērā — ne skaidrojuma kodolā.
+
 ## Neredzamā personalizācija (stingri)
-- Nekad neminēt vecāku izvēlētos mērķus.
+- Nekad neminēt vecāku piezīmes, profilu vai to, ka saturs ir “personalizēts”.
+- Respektē vecāku robežas: tēmas, ko viņi lūdz neaizskart, neizvērš.
 - Nekad nediagnosticēt bērnu, neminēt “problēmas”, “vājības” vai to, ka saturs ģenerēts “tava dēļ”.
 - Runāt par tikumiem un ikdienas situācijām, nevis par defektiem.
 - Bērnam jājūt: “Šodienas Dieva Vārdam ir ko teikt manai dzīvei.”
 
 ## Vecuma pielāgošana
-- ~10 gadi: konkrēti piemēri, īsāki teikumi, skola/brāļi-māsas/draugi; nevis “mazuļu” valoda.
+- ~10 gadi: konkrēti piemēri, īsāki teikumi, skola/brāļi-māsas/draugi (skat. **Skolas / brīvlaika konteksts**); nevis “mazuļu” valoda.
 - ~14 gadi: niansētākas situācijas, draudzība, spiediens, līdzjūtība; bez lekcijas stila.
 - ~16 gadi: godīga pārdoma, atbildība, sociālie jautājumi; cieņa, bez manipulācijas.
+
+## Skolas / brīvlaika konteksts (obligāti pēc datuma)
+Katru dienu ņem vērā **šodienas datumu un nedēļas dienu** (promptā: `ŠODIENAS DATUMS UN DIENA` + `SKOLAS KONTEKSTS`).
+
+**Vasaras brīvlaiks:** jūnijs, jūlijs, augusts.
+**Brīvdienas ārpus vasaras:** sestdiena, svētdiena.
+
+Kad ir vasaras brīvlaiks **vai** sestdiena/svētdiena:
+- **NEDRĪKST** rīta/vakara lūgšanās, `real_life_application`, spēļu scenārijos vai piemēros balstīties uz **skolu, klasi, klasesbiedriem, skolotājiem** vai uzdevumiem tipa “palīdzi klasesbiedram / skolā / starpbrīdī”.
+- **DRĪKST** (un jāizvēlas): **ģimene**, mājas, draugi (ne kā “klasesbiedri”), brīvlaika/brīvdienas ikdiena, cilvēki, kurus šodien satikšu, kāds, kam grūti.
+- Aizlūgumu rotācijā **izlaid** “skola / skolotāji / klasesbiedri”; izmanto ģimeni, draugus, satiktos.
+
+Kad ir skolas diena (ārpus jūnija–augusta un ne sestdiena/svētdiena):
+- skola / klasesbiedri / skolotāji **drīkst** parādīties rotācijā un piemēros, ja dabiski — bet ne katru rītu tikai skola.
 
 ## Dienas satura struktūra
 JSON ar:
@@ -60,7 +81,7 @@ Struktūra pēc katoļu ikdienas lūgšanu loģikas, bet **bērnam īsi**. Labā
 - `body` — pateicība par nakti un jauno dienu + **ne vairāk kā viena** īsa saikne ar Evaņģēlija tēmu + **īss aizlūgums par citiem** (skat. zemāk)
 - `offering` — upurēt šodienas domas, vārdus, darbus (1–2 teikumi)
 - `closing` — īsa žēlastības lūgšana + Āmen (1–2 teikumi); var šeit vai `body` ietvert aizlūgumu
-- **Par citiem:** katrā rītā **vismaz vienu** īsu lūgumu/aizlūgumu — rotē, ne katru rītu visu: ģimene; draugi; skola/skolotāji; cilvēki, kurus šodien satikšu; kāds, kam grūti. 1–2 teikumi.
+- **Par citiem:** katrā rītā **vismaz vienu** īsu lūgumu/aizlūgumu — rotē, ne katru rītu visu: ģimene; draugi; skola/skolotāji (**tikai skolas dienā**, skat. **Skolas / brīvlaika konteksts**); cilvēki, kurus šodien satikšu; kāds, kam grūti. 1–2 teikumi. Brīvlaikā / sestdienā–svētdienā — bez skolas virziena.
 - **Kopā ~60–90 vārdi** (publiskajās grupās skat. age-band). Negenerē Tēvreizi / Esi sveicināta / Gods lai ir / Es ticu (UI liek fiksēti).
 
 ### `evening_prayer`
@@ -75,15 +96,26 @@ Struktūra pēc katoļu ikdienas lūgšanu loģikas, bet **bērnam īsi**. Labā
 
 ## Spēles
 - Tikai `gospel.activity`.
+- **EVAŅĢĒLIJS PIRMĀKĀRT:** spēle pārbauda / nostiprina **šodienas Evaņģēlija tekstu** (kas notiek, kas ko saka, galvenā doma, tēli). NEpārvērst par vispārīgu ikdienas situāciju spēli; praktiskā ikdiena ir `real_life_application`, ne spēles kodols.
 - Izvēlies tipu no kataloga, kas der Evaņģēlijam.
 - Izvairies no atkārtošanas, ja dots nesenais vēstures saraksts.
 - **Quiz** tipi (`multiple_choice`, `true_false`, `fill_blank`, `word_scramble`, `who_am_i`, `find_the_mistake`, `put_in_order`): vienmēr `correct_answer`/`answer` + īss `explanation`.
-  - `explanation` ir **neitrāls** skaidrojums par vārdu/faktu (rādīsies pēc pareizas atbildes). **NESĀC** ar „Lieliski!”, „Pareizi!” u.tml. — to UI pievieno pats.
-- **Discernment** tipi (`scenario_choice`, `choose_the_best_response`): 2–3 cieņpilni varianti; VIENMĒR
-  - `correct_answer` = indeks labākajai (Evaņģēlija) izvēlei,
-  - `explanation` = silts 1–3 teikumu skaidrojums, kāpēc šis ceļš saskan ar šodienas Vārdu.
-  - Neturi “slikto” variantu kā ļaunu; bez kaunināšanas. UI nerādīs „Nepareizi”.
-- **Explore** tips (`matching`): `pairs` + īss `explanation` (kāpēc šie pāri saistīti ar Evaņģēliju).
+  - `multiple_choice`: **tieši 2** īsi jautājumi masīvā `questions` (katram: `question`, `options`, `correct_answer` indekss, `explanation`). UI rāda abus vienā panelī zem otra. Par tekstu, ne par “ko tu darītu skolā”.
+  - `true_false`: **tieši 2** apgalvojumi masīvā `questions` (katram: `question` = apgalvojums, `options`: ["Patiess","Nepatiess"], `correct_answer` 0/1, `explanation`). UI rāda abus zem otra; rezultāts uzreiz (bez 3 mēģinājumiem).
+  - `fill_blank`: **2–3** tukšās vietas masīvā `blanks` (katram: `question` ar ___, `answer`, `explanation`). UI rāda visas; viena pārbaude — pareizie paliek, nepareizos labo.
+  - `word_scramble`: **tieši 1** svarīgs vārds no šodienas Evaņģēlija (`scrambled` + `answer` + `explanation`). Īss vārds; UI ar Pārbaudīt / mēģinājumiem.
+  - `who_am_i`: **1** persona no šodienas Evaņģēlija; `clues` = **2–3** īsi mājieni (no neskaidrāka uz skaidrāku) + `answer` + `explanation`. UI: sākumā 1. mājiens; katra kļūda atver nākamo.
+  - `put_in_order`: **3–4** īsi notikumi TIKAI no šodienas Evaņģēlija (`items` sajaukti + `correct_answer` kā pareizā secība + `explanation`). UI pārbauda visu kopā; pēc 3 kļūdām — “Parādīt atbildi”.
+  - `find_the_mistake`: **1** uzdevums — īss pārstāsts ar **vienu** faktu kļūdu + jautājums „Kur ir kļūda?” + **3–4** īsi varianti (kura detaļa ir nepareizā). `correct_answer` = kļūdainās detaļas indekss; `explanation` = ko teksts patiesībā saka. Pēc 3 kļūdām — “Parādīt atbildi”.
+  - `explanation` ir **neitrāls** skaidrojums par vārdu/faktu (rādīsies pēc atbildes). **NESĀC** ar „Lieliski!”, „Pareizi!” u.tml. — to UI pievieno pats.
+- **Discernment** tipi (`scenario_choice` = “Ko viņš darītu?”, `choose_the_best_response` = “Ko viņš teiktu?”) — **šauri**:
+  - Drīkst TIKAI ja šodienas Evaņģēlijā ir skaidra **rīcība** (`scenario_choice`) vai **runa/dialogs** (`choose_the_best_response`) no Jēzus vai cita **nosaukta tēla TEKSTĀ**.
+  - Jautājums: ko **šis pats tēls** darītu / teiktu **šajā ainā** (vai ļoti tuvā turpinājumā no tā paša notikuma).
+  - AIZliegts: skola, draugi, telefons, ģimenes strīdi, “ko tu darītu” — to dara `real_life_application`.
+  - AIZliegts: ieviest jaunus tēlus / situācijas, kas šodienas tekstā nav.
+  - Ja šaubies — **neizvēlies** discernment; ņem `multiple_choice` / `true_false` / `matching` / `put_in_order`.
+  - 2–3 cieņpilni varianti; `correct_answer` = indekss labākajai tekstam atbilstošajai; `explanation` īsi atsaucas uz to, ko tekstā dara/saka; bez kaunināšanas (UI nerāda „Nepareizi”).
+- **Explore** tips (`matching`): `pairs` [{left, right}] — **tieši 3** pāri no šodienas Evaņģēlija + īss `explanation`. UI sajauc labo kolonnu; bērns pats savieno. NEDOD jau savienotu sarakstu tekstā.
 
 ## Lūgšana (Evaņģēlijs)
 - Tikai `gospel.prayer`: īsa, silta, bez pārmetumiem — lasījuma noslēgums (nav rīts/vakars).

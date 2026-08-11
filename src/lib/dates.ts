@@ -50,6 +50,52 @@ export function formatLatvianDate(dateStr: string): string {
   return `${WEEKDAYS_LV[weekdayIndex]}, ${year}. gada ${day}. ${MONTHS_LV[month - 1]}`;
 }
 
+/** Latvian school summer break: June, July, August. */
+export function isSummerBreak(dateStr: string): boolean {
+  const { month } = partsInRiga(dateStr);
+  return month >= 6 && month <= 8;
+}
+
+/** Saturday or Sunday (Europe/Riga). */
+export function isWeekend(dateStr: string): boolean {
+  const { weekdayIndex } = partsInRiga(dateStr);
+  return weekdayIndex === 0 || weekdayIndex === 6;
+}
+
+/**
+ * School-related examples (classmates, teachers, classroom tasks) only make sense
+ * on school days outside summer break. Family / home / friends still fine always.
+ */
+export function isSchoolDayContext(dateStr: string): boolean {
+  return !isSummerBreak(dateStr) && !isWeekend(dateStr);
+}
+
+/** Prompt block: date + whether school/classmates may appear in content. */
+export function schoolDayContextForPrompt(dateStr: string): string {
+  const label = formatLatvianDate(dateStr);
+
+  if (isSummerBreak(dateStr)) {
+    return `ŠODIENAS DATUMS UN DIENA: ${label}
+SKOLAS KONTEKSTS: VASARAS BRĪVLAIKS (jūnijs–augusts).
+- NEDRĪKST lūgties / uzdevumos / piemēros balstīties uz skolu, klasi, klasesbiedriem, skolotājiem vai “palīdzēt klasē / skolā”.
+- DRĪKST: ģimene, mājas, draugi (ne kā “klasesbiedri”), brīvlaika ikdiena, daba, spēles, cilvēki, kurus šodien satikšu.
+- real_life_application un aizlūgumi par citiem — bez skolas situācijām.`;
+  }
+
+  if (isWeekend(dateStr)) {
+    return `ŠODIENAS DATUMS UN DIENA: ${label}
+SKOLAS KONTEKSTS: BRĪVDIENA (sestdiena vai svētdiena) — šodien nav skolas diena.
+- NEDRĪKST šodienas lūgšanās / uzdevumos / piemēros pieņemt, ka bērns ir skolā vai satiek klasesbiedrus/skolotājus klasē.
+- DRĪKST: ģimene, mājas, draugi, baznīca/svētdiena (ja dabiski), brīvdienas ikdiena, cilvēki, kurus šodien satikšu.
+- real_life_application — izpildāms mājās / brīvdienā, ne “klasē / starpbrīdī”.`;
+  }
+
+  return `ŠODIENAS DATUMS UN DIENA: ${label}
+SKOLAS KONTEKSTS: skolas diena (ārpus vasaras brīvlaika, darba diena).
+- DRĪKST rotēt aizlūgumus un piemērus arī ar skolu / klasesbiedriem / skolotājiem, ja dabiski.
+- Joprojām rotē: ģimene, draugi, skola — ne katru rītu tikai skola.`;
+}
+
 /** Shorter label for history dropdown: "10. augusts 2026" */
 export function formatLatvianDateShort(dateStr: string): string {
   const { year, month, day } = partsInRiga(dateStr);

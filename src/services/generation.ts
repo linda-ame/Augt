@@ -5,6 +5,10 @@ import {
   approximateAge,
   type AgeBandId,
 } from "@/lib/age-bands";
+import {
+  normalizeParentNotes,
+  type ParentNotes,
+} from "@/lib/parent-notes";
 import { getScriptureSource } from "@/services/scriptureSource";
 import {
   generateChildProfile,
@@ -50,7 +54,11 @@ export async function ensureTodaysReading(
   return data;
 }
 
-export async function regenerateChildProfile(childId: string) {
+/** Generate a draft profile from parent notes (awaits parent approval). */
+export async function draftChildProfile(
+  childId: string,
+  notesOverride?: ParentNotes,
+) {
   const admin = createServiceClient();
   const { data: child, error } = await admin
     .from("children")
@@ -59,23 +67,76 @@ export async function regenerateChildProfile(childId: string) {
     .single();
   if (error || !child) throw error || new Error("Bērns nav atrasts.");
 
+  const notes = normalizeParentNotes(notesOverride ?? child.parent_notes);
   const profile = await generateChildProfile({
     age: child.age,
-    goalIds: child.selected_goal_ids ?? [],
+    notes,
   });
+
+  const patch: Record<string, unknown> = {
+    parent_notes: notes,
+    profile_draft: profile,
+    profile_status: "draft",
+  };
+  if (notesOverride) {
+    patch.notes_version = (child.notes_version ?? 0) + 1;
+  }
 
   const { data: updated, error: upErr } = await admin
     .from("children")
-    .update({
-      generated_profile: profile,
-      profile_version: (child.profile_version ?? 0) + 1,
-      goals_version: child.goals_version ?? 1,
-    })
+    .update(patch)
     .eq("id", childId)
     .select("*")
     .single();
   if (upErr) throw upErr;
   return updated;
+}
+
+/** Approve draft (or edited text) and use it for daily generation. */
+export async function approveChildProfile(
+  childId: string,
+  options?: { profileText?: string; generateToday?: boolean },
+) {
+  const admin = createServiceClient();
+  const { data: child, error } = await admin
+    .from("children")
+    .select("*")
+    .eq("id", childId)
+    .single();
+  if (error || !child) throw error || new Error("Bērns nav atrasts.");
+
+  const profileText = (options?.profileText ?? child.profile_draft ?? "").trim();
+  if (!profileText) {
+    throw new Error(
+      "Nav profila teksta, ko apstiprināt. Vispirms ģenerē melnrakstu.",
+    );
+  }
+
+  const { data: updated, error: upErr } = await admin
+    .from("children")
+    .update({
+      generated_profile: profileText,
+      profile_draft: profileText,
+      profile_status: "approved",
+      profile_version: (child.profile_version ?? 0) + 1,
+      profile_approved_at: new Date().toISOString(),
+    })
+    .eq("id", childId)
+    .select("*")
+    .single();
+  if (upErr) throw upErr;
+
+  if (options?.generateToday === false) {
+    return { child: updated, lesson: null };
+  }
+
+  const lesson = await generateLessonForChild(childId, { force: true });
+  return { child: updated, lesson };
+}
+
+/** @deprecated Prefer draftChildProfile + approveChildProfile. */
+export async function regenerateChildProfile(childId: string) {
+  return draftChildProfile(childId);
 }
 
 export async function generateLessonForChild(
@@ -105,11 +166,20 @@ export async function generateLessonForChild(
     }
   }
 
-  let profile = child.generated_profile as string | null;
-  if (!profile) {
-    const updated = await regenerateChildProfile(childId);
-    profile = updated.generated_profile;
-  }
+  const approved =
+    child.profile_status === "approved" &&
+    typeof child.generated_profile === "string" &&
+    child.generated_profile.trim().length > 0;
+  // Legacy rows may have a profile without status (pre-migration); treat as usable.
+  const legacyProfile =
+    (!child.profile_status || child.profile_status === "none") &&
+    typeof child.generated_profile === "string" &&
+    child.generated_profile.trim().length > 0;
+  const profile = approved
+    ? (child.generated_profile as string)
+    : legacyProfile
+      ? (child.generated_profile as string)
+      : "";
 
   const reading = await ensureTodaysReading(date, { forceRefresh: force });
 
@@ -136,6 +206,7 @@ export async function generateLessonForChild(
     const { content, provider, model } = await generateDailyLesson({
       age: child.age,
       profile: profile!,
+      date,
       scriptureText: reading.source_text,
       readings: (reading.readings as import("@/lib/types").ScriptureReading[]) ?? [],
       recentGameTypes,
@@ -224,6 +295,7 @@ export async function generateLessonForAgeBand(
       age: approximateAge(ageBandId),
       profile: "",
       ageBandId,
+      date,
       scriptureText: reading.source_text,
       readings:
         (reading.readings as import("@/lib/types").ScriptureReading[]) ?? [],
@@ -290,9 +362,8 @@ export async function generateLessonsForAllAgeBands(options?: {
   return results;
 }
 
-/** Called when a child is created or profile meaningfully changes. */
+/** After parent approves profile: regenerate draft is separate; this only builds today's lesson. */
 export async function onChildProfileReady(childId: string) {
-  await regenerateChildProfile(childId);
   return generateLessonForChild(childId, { force: true });
 }
 

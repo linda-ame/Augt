@@ -1,7 +1,12 @@
 import { readFileSync } from "fs";
 import path from "path";
 import { ageBandGenerationGuide } from "@/services/ai/age-band-guide";
-import { AGE_BANDS, type AgeBandId } from "@/lib/age-bands";
+import {
+  AGE_BANDS,
+  ageBandFromAge,
+  type AgeBandId,
+} from "@/lib/age-bands";
+import { schoolDayContextForPrompt, todayInRiga } from "@/lib/dates";
 import {
   dailyLessonContentSchema,
   type DailyLessonContent,
@@ -95,20 +100,6 @@ export function loadGameLibrary() {
   };
 }
 
-export function loadTeachingGoals() {
-  const file = path.join(process.cwd(), "ai", "teaching-goals.json");
-  return JSON.parse(readFileSync(file, "utf8")) as {
-    categories?: Array<{ id: string; name: string; name_en?: string }>;
-    goals: Array<{
-      id: string;
-      name: string;
-      category: string;
-      category_id?: string;
-      description: string;
-      name_en?: string;
-    }>;
-  };
-}
 
 async function chatCompletionWithModel(
   messages: ChatMessage[],
@@ -198,54 +189,6 @@ async function chatCompletion(
   throw lastError || new Error("AI kļūda: visi modeļi neizdevās.");
 }
 
-/** Keep profile prompts small even if parent selected hundreds of goals. */
-function compactGoalsForProfile(
-  goals: Array<{ id: string; name: string; category: string; category_id?: string }>,
-  maxGoals = 36,
-) {
-  const byCategory = new Map<string, typeof goals>();
-  for (const g of goals) {
-    const key = g.category_id || g.category;
-    const list = byCategory.get(key) || [];
-    list.push(g);
-    byCategory.set(key, list);
-  }
-
-  const picked: typeof goals = [];
-  const categories = Array.from(byCategory.keys());
-  let i = 0;
-  while (picked.length < maxGoals && categories.length > 0) {
-    const cat = categories[i % categories.length];
-    const list = byCategory.get(cat)!;
-    if (list.length > 0) {
-      picked.push(list.shift()!);
-    }
-    if (list.length === 0) {
-      categories.splice(i % categories.length, 1);
-      if (categories.length === 0) break;
-      continue;
-    }
-    i++;
-  }
-
-  const countMap = new Map<string, { category: string; selected_count: number }>();
-  for (const g of goals) {
-    const key = g.category_id || g.category;
-    const cur = countMap.get(key) || { category: g.category, selected_count: 0 };
-    cur.selected_count += 1;
-    countMap.set(key, cur);
-  }
-
-  return {
-    goals_for_prompt: picked.map((g) => ({
-      name: g.name,
-      category: g.category,
-    })),
-    category_summary: Array.from(countMap.values()),
-    total_selected: goals.length,
-  };
-}
-
 function extractJson(raw: string): unknown {
   const trimmed = raw.trim();
   try {
@@ -262,25 +205,31 @@ function extractJson(raw: string): unknown {
 
 export async function generateChildProfile(input: {
   age: number;
-  goalIds: string[];
+  notes: {
+    emphasize: string;
+    challenges: string;
+    boundaries: string;
+    other: string;
+  };
 }): Promise<string> {
-  const goalsLib = loadTeachingGoals();
-  const selected = goalsLib.goals.filter((g) => input.goalIds.includes(g.id));
-  const compact = compactGoalsForProfile(selected);
-
   const system = `${loadSystemRules()}
 
-Uzdevums: izveido KOMPAKTU bērna personalizācijas profilu (latviešu valodā), ko izmantos ikdienas ģenerēšanai.
-Nekad neminēt, ka tie ir "problēmas". Profils ir pozitīvs, tikumu un pieejas apraksts.
-Ja mērķu ir daudz, apkopo galvenās tēmas, nevis uzskaiti katru punktu.
+Uzdevums: izveido KOMPAKTU bērna personalizācijas profilu (latviešu valodā), ko izmantos ikdienas satura ģenerēšanai.
+Profils ir iekšējs (bērns to neredz). Raksti pozitīvi: tikumi, pieeja, ikdienas situācijas — NEKAD kā "problēmas", diagnozes vai defektus.
+Respektē "boundaries": tās tēmas NEiekļauj un NEizvērš.
+Ja piezīmes ir tukšas vai ļoti skopas, izveido īsu, neitrālu vecumam atbilstošu profilu bez izdomātām grūtībām.
+Apkopo galvenās tēmas 1–3 īsos rindkopās (ne sarakstu ar checkboxiem).
 Atbildi JSON: { "profile": "..." }`;
 
   const user = JSON.stringify(
     {
       age: input.age,
-      total_selected_goals: compact.total_selected,
-      category_summary: compact.category_summary,
-      representative_goals: compact.goals_for_prompt,
+      parent_notes: {
+        emphasize: input.notes.emphasize || null,
+        challenges: input.notes.challenges || null,
+        boundaries: input.notes.boundaries || null,
+        other: input.notes.other || null,
+      },
     },
     null,
     2,
@@ -303,10 +252,14 @@ export async function generateDailyLesson(input: {
   scriptureText: string;
   readings?: ScriptureReading[];
   recentGameTypes: string[];
+  /** Calendar day for school/weekend/summer context (yyyy-MM-dd, Europe/Riga). */
+  date?: string;
   /** When set: public standard content for that age band (no child personalization). */
   ageBandId?: AgeBandId;
 }): Promise<{ content: DailyLessonContent; provider: string; model: string }> {
   const models = resolveModelChain();
+  const date = input.date ?? todayInRiga();
+  const dayContext = schoolDayContextForPrompt(date);
   const games = loadGameLibrary().games.filter(
     (g) => input.age >= g.age_range[0] && input.age <= g.age_range[1],
   );
@@ -321,20 +274,15 @@ export async function generateDailyLesson(input: {
         }))
       : null;
 
-  const bandSpec = input.ageBandId
-    ? loadAgeBandSpec(input.ageBandId)
-    : null;
-  const principles = input.ageBandId ? loadCatholicPrinciples() : null;
-  const bandMeta = input.ageBandId
-    ? AGE_BANDS.find((b) => b.id === input.ageBandId)
-    : null;
+  // Public guest path passes ageBandId; personalized children get band from exact age.
+  const isPublicBand = Boolean(input.ageBandId);
+  const bandId = input.ageBandId ?? ageBandFromAge(input.age);
+  const bandMeta = AGE_BANDS.find((b) => b.id === bandId);
+  const bandSpec = loadAgeBandSpec(bandId);
+  const bandGuide = ageBandGenerationGuide(bandId);
+  const principles = loadCatholicPrinciples();
 
-  const bandGuide = input.ageBandId
-    ? ageBandGenerationGuide(input.ageBandId)
-    : null;
-
-  const systemPrefix = principles
-    ? `${principles}
+  const systemPrefix = `${principles}
 
 ---
 
@@ -342,33 +290,34 @@ ${loadSystemRules()}
 
 ---
 
-VECUMA GRUPAS SPECIFIKĀCIJA (${bandMeta?.label ?? input.ageBandId}):
+VECUMA GRUPAS SPECIFIKĀCIJA (${bandMeta?.label ?? bandId}):
 ${bandSpec}
 
 ---
 
 ${bandGuide}
 
----`
-    : loadSystemRules();
+---`;
 
-  const examenSchemaHint = input.ageBandId
-    ? `"examen_questions": string[]  // skaits un tēmas — skat. VECUMA GRUPAS vadlīnijas zemāk (3–6 jautājumi)`
-    : `"examen_questions": [string, string, string]`;
+  const examenSchemaHint = `"examen_questions": string[]  // skaits un tēmas — skat. VECUMA GRUPAS vadlīnijas (3–6 jautājumi)`;
 
-  const lengthRules = input.ageBandId
-    ? `- PUBLISKAIS STANDARTA saturs: BEZ bērna profila. PRIORITĀTE: vecuma grupas specifikācija + vadlīnijas zemāk (garumi, tonis, examen).
+  const lengthRules = isPublicBand
+    ? `- PUBLISKAIS STANDARTA saturs: BEZ bērna profila. PRIORITĀTE: vecuma grupas specifikācija + vadlīnijas (garumi, tonis, examen).
 - system-rules JSON struktūra (rīts/evaņģēlijs/spēle/vakars/parts) PALIEK, bet GARUMI un examen_questions SEKO vecuma grupai, ne “vienam izmēram visiem”.
 - JA system-rules saka “tieši 3 examen_questions” vai fiksētus ~60–90 vārdus — šajā režīmā UZVAR vecuma grupas vadlīnijas.
 - Saturs ŠAI grupai nedrīkst būt gandrīz identisks citai vecuma grupai (cits dziļums, citi piemēri, cits garums).`
-    : `- morning_prayer un evening_prayer OBLIGĀTI; ĪSI (rīts ~60–90 vārdi; vakara teksts bez jautājumiem ~70–120).
-- morning_prayer: katrā rītā vismaz VIENS īss aizlūgums par citiem (ģimene / draugi / skola / kādu, ko satikšu) — rotē, ne katru rītu viss saraksts.
-- examen_questions: 3 vai 4 īsi jautājumi — pateicība; labs darbs; vai kādam vajadzētu atvainoties; ko vēlos uzticēt Dievam (bez kaunināšanas).
-- resolution: ĪSS LŪGUMS pēc spēka/palīdzības (“Jēzu, palīdzi man…”), NE “rīt es izdarīšu X”.
-- evening_prayer.closing: ĪSTA vakara lūgšana (ne atskats) — sargā mani un ģimeni; naktsmiers; veselība; sargā no ļauna/nelaimēm/slimībām + Āmen. Nedrīkst būt tikai “labu nakti”.
-- gospel.real_life_application: mazs, šodien izpildāms ierosinājums (ne lieli laika bloki / “rīt pirmo pusstundu…”).`;
+    : `- PERSONALIZĒTS saturs: bāze = VECUMA GRUPAS specifikācija + vadlīnijas (garumi, tonis, examen, tēmas).
+- Apstiprinātais profils ir NEREDZAMS papildslānis — izmanto TIKAI ja dabiski saskan ar šodienas Evaņģēliju; NEpiespied tēmas no profila.
+- gospel.explanation + gospel.main_idea = EVAŅĢĒLIJA skaidrojums (kas notiek / ko Jēzus māca / kāpēc svarīgi). NEDRĪKST pārvērst par profila “ko darīt ar tavu situāciju”.
+- Ja profila tēma nesaskan ar tekstu — explanation paliek pie Evaņģēlija; profilu ignorē šajā sadaļā.
+- Viegla personalizācija (ja dabiska) — galvenokārt real_life_application / spēles piemērā, ne “Ko tas nozīmē?” kodolā.
+- system-rules JSON struktūra PALIEK; GARUMI un examen_questions SEKO vecuma grupai (ne “vienam izmēram visiem”).
+- JA system-rules saka “tieši 3 examen_questions” vai fiksētus ~60–90 vārdus — UZVAR vecuma grupas vadlīnijas.
+- Vecuma grupas “attīstāmās īpašības / tēmas” — tikai ja dabiski no Evaņģēlija (kā specifikācijā).`;
 
   const system = `${systemPrefix}
+
+${dayContext}
 
 Izveido šodienas pieredzi JSON shēmā:
 {
@@ -408,19 +357,43 @@ Izveido šodienas pieredzi JSON shēmā:
 Noteikumi:
 - day_overview: 1–2 teikumi par VISU dienu (kā lasījumi saskan), rādīsies pirms tabiem.
 - gospel.scripture_reference: TIKAI par Evaņģēliju (atsauce + īss teikums). NEIEJAUC 1. lasījumu / Pāvilu utt.
+- gospel.explanation: EVAŅĢĒLIJA skaidrojums (kas notiek, ko Jēzus dara/saka, kāpēc svarīgi). NEpārvērst par profila/uzvedības lekciju.
+- gospel.main_idea: 1 teikums no šodienas Evaņģēlija mācības, ne no bērna profila.
 - Spēle un Evaņģēlija lūgšana TIKAI gospel objektā.
-- gospel.activity VIENMĒR ietver "type", "instruction" un "explanation".
+- gospel.activity: EVAŅĢĒLIJA teksts (ne vispārīga ikdiena). Ietver "type", "instruction"; explanation katrā jautājumā vai activity līmenī.
+- multiple_choice / true_false: questions masīvs ar **tieši 2** īsiem punktiem par šodienas Evaņģēliju (katram: question, options, correct_answer indekss, explanation). UI rāda abus vienā panelī. true_false options: Patiess / Nepatiess.
+- fill_blank: blanks masīvs ar **2–3** teikumiem (___), katram answer + explanation. UI pārbauda visus kopā.
+- word_scramble: tieši 1 īss Evaņģēlija vārds (scrambled + answer + explanation).
+- who_am_i: 1 persona; clues[2–3] progresīvi mājieni + answer + explanation.
+- put_in_order: 3–4 notikumi no šodienas Evaņģēlija (items + correct_answer secība + explanation).
+- matching: tieši 3 pāri no šodienas Evaņģēlija (pairs + explanation).
+- find_the_mistake: 1 pārstāsts + „Kur ir kļūda?” + 3–4 variantu detaļas; correct_answer = kļūdas indekss.
 - Quiz spēlēm: "correct_answer" vai "answer"; explanation NEUTRĀLS (bez „Lieliski!” / „Pareizi!”).
-- scenario_choice / choose_the_best_response: options (2–3), correct_answer (indekss), explanation (silts).
+- scenario_choice / choose_the_best_response: ŠAURI — tikai ja tekstā ir skaidra rīcība/runa; ko Jēzus/nosaukts tēls no ŠĪ teksta darītu/teiktu šajā ainā. Bez skolas/ikdienas “ko tu darītu”. Ja šaubies — cits spēles tips. options (2–3), correct_answer, silts explanation.
 - gospel.real_life_application: **mazs, izpildāms** ierosinājums šodienai (īsa izvēle / dažas minūtes). Nedrīkst: “rīt pirmo pusstundu…”, “visu dienu bez…”, nereāli laika bloki.
-- morning_prayer: katrā rītā vismaz VIENS īss aizlūgums par citiem (ģimene/draugi/skola/satiktie) — rotē, ne viss saraksts katru rītu.
+- morning_prayer: katrā rītā vismaz VIENS īss aizlūgums par citiem (ģimene/draugi/skola*/satiktie) — rotē; *skola tikai ja SKOLAS KONTEKSTS atļauj.
 - evening_prayer: examen = atskats; resolution = īss spēka lūgums; **closing = GALVENĀ vakara lūgšana** (sargā mani un ģimeni, naktsmiers, veselība, sargā no ļauna/nelaimēm/slimībām + Āmen). Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.
+- STINGRI ievēro SKOLAS KONTEKSTU augstāk: brīvlaikā un sestdienā–svētdienā bez skolas/klasesbiedru/skolotāju situācijām.
 ${lengthRules}
 `;
 
-  const user = input.ageBandId
-    ? `REŽĪMS: publiskais standarta saturs (nav izvēlētu mērķu / īpašību; nav precīza vecuma gados — tikai josla)
-VECUMA GRUPA: ${bandMeta?.label ?? input.ageBandId} (aptuvenais vecums promptam: ${input.age})
+  const gamesJson = JSON.stringify(
+    games.map((g) => ({
+      id: g.id,
+      name: g.name,
+      best_for: g.best_for,
+      mode: g.mode,
+      notes: g.notes,
+    })),
+    null,
+    2,
+  );
+
+  const user = isPublicBand
+    ? `REŽĪMS: publiskais standarta saturs (nav vecāku personalizācijas; nav precīza vecuma gados — tikai josla)
+VECUMA GRUPA: ${bandMeta?.label ?? bandId} (aptuvenais vecums promptam: ${input.age})
+
+${dayContext}
 
 ${bandGuide}
 
@@ -431,13 +404,19 @@ NESENĀS SPĒLES ŠAI GRUPAI (izvairies no atkārtošanas):
 ${input.recentGameTypes.join(", ") || "nav"}
 
 SPĒĻU KATALOGS (tā pati spēļu sistēma kā personalizētajā lietotnē; izvēlies vecumam derīgu tipu):
-${JSON.stringify(games.map((g) => ({ id: g.id, name: g.name, best_for: g.best_for, mode: g.mode, notes: g.notes })), null, 2)}
+${gamesJson}
 
 Uzdevums: izveido šodienas saturu latviešu valodā. Evaņģēlijs ir galvenais. Spēle + JSON struktūra kā privātajā aplikācijā; GARUMS, tonis un vakara jautājumi — pēc šīs vecuma grupas.`
-    : `BĒRNA VECUMS: ${input.age}
+    : `REŽĪMS: personalizēts bērns
+BĒRNA VECUMS: ${input.age}
+VECUMA GRUPA (bāze): ${bandMeta?.label ?? bandId}
 
-PERSONALIZĒTS PROFILS (neredzams bērnam):
-${input.profile}
+${dayContext}
+
+${bandGuide}
+
+PERSONALIZĒTS PROFILS (neredzams bērnam; TIKAI ja dabiski saskan ar Evaņģēliju):
+${input.profile.trim() || "(tukšs — izmanto tikai vecuma grupas bāzi)"}
 
 ŠODIENAS LITURĢISKIE TEKSTI:
 ${readingsPayload ? JSON.stringify(readingsPayload, null, 2) : input.scriptureText}
@@ -446,9 +425,9 @@ NESENĀS SPĒLES (izvairies no atkārtošanas):
 ${input.recentGameTypes.join(", ") || "nav"}
 
 SPĒĻU KATALOGS:
-${JSON.stringify(games.map((g) => ({ id: g.id, name: g.name, best_for: g.best_for, mode: g.mode, notes: g.notes })), null, 2)}
+${gamesJson}
 
-Uzdevums: izveido šodienas saturu latviešu valodā. Evaņģēlijs ir galvenais.`;
+Uzdevums: izveido šodienas saturu latviešu valodā. Evaņģēlijs ir galvenais. Forma/garums/tonis — pēc vecuma grupas. “Ko tas nozīmē?” (explanation + main_idea) = teksta skaidrojums, ne profils; profils — tikai dabiska, neredzama niansēšana citur (piem. real_life_application).`;
 
   const messages: ChatMessage[] = [
     { role: "system", content: system },
