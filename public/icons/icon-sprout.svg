@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Augt">
   <style>
-    .mark { fill: #0d2922; stroke: #0d2922; }
+    .mark { fill: #246e55; stroke: #246e55; }
     @media (prefers-color-scheme: dark) {
       .mark { fill: #8fcda0; stroke: #8fcda0; }
     }

@@ -25,25 +25,25 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    apple: [{ url: "/icons/apple-touch-sprout.png", sizes: "180x180" }],
+    apple: [{ url: "/icons/apple-touch-sprout.png?v=2", sizes: "180x180" }],
     icon: [
       {
-        url: "/icons/icon-sprout.svg",
+        url: "/icons/icon-sprout.svg?v=2",
         type: "image/svg+xml",
       },
       {
-        url: "/icons/icon-sprout.png",
+        url: "/icons/icon-sprout.png?v=2",
         type: "image/png",
         sizes: "32x32",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icons/icon-sprout-dark.png",
+        url: "/icons/icon-sprout-dark.png?v=2",
         type: "image/png",
         sizes: "32x32",
         media: "(prefers-color-scheme: dark)",
       },
-      { url: "/icons/favicon-sprout.ico", sizes: "any" },
+      { url: "/icons/favicon-sprout.ico?v=2", sizes: "any" },
     ],
   },
 };
