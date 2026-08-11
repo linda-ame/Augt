@@ -789,6 +789,7 @@ export function DailyLessonView({
   });
   const [tab, setTab] = useState<TabId>("gospel");
   const [hydrated, setHydrated] = useState(false);
+  const scrollToDayStartRef = useRef(false);
 
   useEffect(() => {
     setHydrated(false);
@@ -811,12 +812,25 @@ export function DailyLessonView({
   const lessonGospel = status === "success" ? gospel : null;
   const dayLabel = date === todayInRiga() ? "Šodienas" : "Šīs dienas";
 
+  useEffect(() => {
+    if (!scrollToDayStartRef.current || activeTab !== "gospel") return;
+    scrollToDayStartRef.current = false;
+    // Wait for "Šodien" panel to mount after leaving morning prayer.
+    requestAnimationFrame(() => {
+      document.getElementById("day-start")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [activeTab]);
+
   function selectTab(next: TabId) {
     setTab(next);
   }
 
   function continueToGospel() {
     setProgress(markMorningDone(childId, date));
+    scrollToDayStartRef.current = true;
     setTab("gospel");
   }
 
@@ -965,7 +979,10 @@ export function DailyLessonView({
       ) : (
         <>
           {activeTab !== "morning" && activeTab !== "evening" && (
-            <section className="panel panel-day section-enter relative mt-6 overflow-hidden p-6">
+            <section
+              id="day-start"
+              className="panel panel-day section-enter relative mt-6 scroll-mt-24 overflow-hidden p-6"
+            >
               <DayHeroArt />
               <div className="relative z-10">
                 <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--bg-deep)]">

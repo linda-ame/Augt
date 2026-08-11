@@ -27,7 +27,22 @@ export const metadata: Metadata = {
   icons: {
     apple: [{ url: "/icons/apple-touch-sprout.png", sizes: "180x180" }],
     icon: [
-      { url: "/icons/icon-sprout.png", type: "image/png", sizes: "32x32" },
+      {
+        url: "/icons/icon-sprout.svg",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/icons/icon-sprout.png",
+        type: "image/png",
+        sizes: "32x32",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icons/icon-sprout-dark.png",
+        type: "image/png",
+        sizes: "32x32",
+        media: "(prefers-color-scheme: dark)",
+      },
       { url: "/icons/favicon-sprout.ico", sizes: "any" },
     ],
   },
