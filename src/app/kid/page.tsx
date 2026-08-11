@@ -5,7 +5,7 @@ import {
   getKidSession,
   getParentViewChild,
 } from "@/lib/kid-session";
-import { assertReadableDate, pastWeekDates, todayInRiga } from "@/lib/dates";
+import { assertReadableDate, filterDatesWithReadings, pastWeekDates, todayInRiga } from "@/lib/dates";
 import { DailyLessonView } from "@/components/DailyLessonView";
 import { GuestDayView } from "@/components/GuestDayView";
 import type { DailyLessonContent, ScriptureReading } from "@/lib/types";
@@ -36,8 +36,11 @@ export default async function KidPage({
   const supabase = await createClient();
   const admin = createServiceClient();
 
-  // Parallel: auth + sessions + reading for this date (timezone is Europe/Riga only for the date key).
-  const [{ data: authData }, parentViewChildId, kidSession, guestBand, readingRes] =
+  const weekDates = pastWeekDates();
+  const today = todayInRiga();
+
+  // Parallel: auth + sessions + reading for this date + which week days have liturgy.
+  const [{ data: authData }, parentViewChildId, kidSession, guestBand, readingRes, weekReadingsRes] =
     await Promise.all([
       supabase.auth.getUser(),
       getParentViewChild(),
@@ -48,6 +51,10 @@ export default async function KidPage({
         .select("source_text, readings, daily_quote")
         .eq("reading_date", date)
         .maybeSingle(),
+      admin
+        .from("daily_readings")
+        .select("reading_date, readings")
+        .in("reading_date", weekDates),
     ]);
 
   const user = authData.user;
@@ -55,8 +62,16 @@ export default async function KidPage({
   const readings = ensureReadingRoles(
     (reading?.readings as ScriptureReading[] | null) ?? [],
   );
-  const dates = pastWeekDates();
+  const datesWithReadings = (weekReadingsRes.data ?? [])
+    .filter((row) => Array.isArray(row.readings) && row.readings.length > 0)
+    .map((row) => row.reading_date as string);
+  const dates = filterDatesWithReadings(weekDates, datesWithReadings, new Date());
   const dailyQuote = reading?.daily_quote ?? null;
+
+  // Deep link to an empty past day → send to today.
+  if (!dates.includes(date)) {
+    redirect(`/kid?date=${today}`);
+  }
 
   let childId: string | null = null;
   let displayName = "";

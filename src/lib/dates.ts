@@ -133,6 +133,20 @@ export function pastWeekDates(now = new Date()): string[] {
   return dates;
 }
 
+/**
+ * Keep today always; drop older days that have no liturgical readings yet
+ * (e.g. before the app started ingesting content).
+ */
+export function filterDatesWithReadings(
+  weekDates: string[],
+  datesWithReadings: Iterable<string>,
+  now = new Date(),
+): string[] {
+  const today = todayInRiga(now);
+  const available = new Set(datesWithReadings);
+  return weekDates.filter((d) => d === today || available.has(d));
+}
+
 export function isFutureDate(dateStr: string, now = new Date()): boolean {
   const today = startOfDay(parseISO(todayInRiga(now)));
   const d = startOfDay(parseISO(dateStr));
