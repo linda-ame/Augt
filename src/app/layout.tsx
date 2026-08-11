@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [{ url: "/icons/apple-touch-sprout.png", sizes: "180x180" }],
     icon: [
-      { url: "/icon.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icons/icon-sprout.png", type: "image/png", sizes: "32x32" },
+      { url: "/icons/favicon-sprout.ico", sizes: "any" },
     ],
   },
 };

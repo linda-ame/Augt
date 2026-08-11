@@ -12,19 +12,19 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "lv",
     icons: [
       {
-        src: "/icons/icon-192.png",
+        src: "/icons/icon-192.png?v=sprout",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icons/icon-512.png",
+        src: "/icons/icon-512.png?v=sprout",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icons/icon-512-maskable.png",
+        src: "/icons/icon-512-maskable.png?v=sprout",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
