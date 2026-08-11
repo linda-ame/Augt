@@ -2,7 +2,7 @@
   <style>
     .mark { fill: #246e55; stroke: #246e55; }
     @media (prefers-color-scheme: dark) {
-      .mark { fill: #8fcda0; stroke: #8fcda0; }
+      .mark { fill: #aae6b9; stroke: #aae6b9; }
     }
   </style>
   <g class="mark">
