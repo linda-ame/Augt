@@ -35,6 +35,7 @@ import {
   type DayProgress,
 } from "@/lib/day-progress";
 import { NotificationSoftPrompt } from "@/components/NotificationSoftPrompt";
+import { GospelListenButton } from "@/components/GospelListenButton";
 
 function DateSwitcher({
   date,
@@ -1459,6 +1460,7 @@ export function DailyLessonView({
   isGuest,
   /** 7–9 / 10–12: primary row = Rīts·Evaņģēlijs·Vakars; optional readings on second row */
   splitOptionalReadings,
+  gospelAudioUrl,
 }: {
   date: string;
   dates: string[];
@@ -1471,6 +1473,7 @@ export function DailyLessonView({
   isParentPreview?: boolean;
   isGuest?: boolean;
   splitOptionalReadings?: boolean;
+  gospelAudioUrl?: string | null;
 }) {
   const gospel = normalizeGospelContent(content);
   const byRole = useMemo(() => {
@@ -1781,7 +1784,12 @@ export function DailyLessonView({
             ) : activeTab === "gospel" ? (
               <div className="space-y-5">
                 <section className="panel section-enter p-6">
-                  <SectionHeading icon="book">Evaņģēlijs</SectionHeading>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <SectionHeading icon="book">Evaņģēlijs</SectionHeading>
+                    {gospelAudioUrl ? (
+                      <GospelListenButton audioUrl={gospelAudioUrl} />
+                    ) : null}
+                  </div>
                   <p className="mt-2 text-sm text-[var(--accent-deep)]">
                     {lessonGospel!.scripture_reference}
                   </p>

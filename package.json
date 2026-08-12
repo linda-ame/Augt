@@ -9,6 +9,7 @@
     "lint": "eslint",
     "generate:daily": "tsx --env-file=.env.local scripts/generate-daily.ts",
     "generate:age-bands": "tsx --env-file=.env.local scripts/generate-age-bands.ts",
+    "generate:gospel-audio": "tsx --env-file=.env.local scripts/generate-gospel-audio.ts",
     "regen:band": "tsx --env-file=.env.local scripts/regen-band.ts"
   },
   "dependencies": {

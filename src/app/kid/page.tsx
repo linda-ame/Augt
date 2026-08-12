@@ -113,7 +113,7 @@ export default async function KidPage({
   if (isGuest && guestBand) {
     const { data: bandLesson } = await admin
       .from("age_band_lessons")
-      .select("content_json, generation_status")
+      .select("content_json, generation_status, gospel_audio_url")
       .eq("age_band", guestBand)
       .eq("reading_date", date)
       .maybeSingle();
@@ -133,6 +133,7 @@ export default async function KidPage({
           readings={readings}
           dailyQuote={dailyQuote}
           status={status}
+          gospelAudioUrl={bandLesson?.gospel_audio_url ?? null}
           isGuest
           splitOptionalReadings={
             guestBand === "age_7_9" || guestBand === "age_10_12"
@@ -171,19 +172,21 @@ export default async function KidPage({
 
   let content = (lesson?.content_json as DailyLessonContent | null) ?? null;
   let status = lesson?.generation_status ?? "missing";
+  let gospelAudioUrl: string | null = null;
 
   // If personalized lesson is missing, fall back to the shared age-band lesson
   // so past/current days stay readable when cron filled age_band_lessons.
-  if (status !== "success" || !content) {
-    const band: AgeBandId | null =
-      typeof childRow?.age === "number" ? ageBandFromAge(childRow.age) : null;
-    if (band) {
-      const { data: bandLesson } = await admin
-        .from("age_band_lessons")
-        .select("content_json, generation_status")
-        .eq("age_band", band)
-        .eq("reading_date", date)
-        .maybeSingle();
+  const band: AgeBandId | null =
+    typeof childRow?.age === "number" ? ageBandFromAge(childRow.age) : null;
+  if (band) {
+    const { data: bandLesson } = await admin
+      .from("age_band_lessons")
+      .select("content_json, generation_status, gospel_audio_url")
+      .eq("age_band", band)
+      .eq("reading_date", date)
+      .maybeSingle();
+    gospelAudioUrl = bandLesson?.gospel_audio_url ?? null;
+    if (status !== "success" || !content) {
       if (
         bandLesson?.generation_status === "success" &&
         bandLesson.content_json
@@ -206,6 +209,7 @@ export default async function KidPage({
       readings={readings}
       dailyQuote={dailyQuote}
       status={status}
+      gospelAudioUrl={gospelAudioUrl}
       isParentPreview={isParentPreview}
       splitOptionalReadings={
         typeof childRow?.age === "number" ? childRow.age <= 12 : false

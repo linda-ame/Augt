@@ -14,6 +14,8 @@ import {
   generateChildProfile,
   generateDailyLesson,
 } from "@/services/ai/generate";
+import { ensureAgeBandGospelAudio } from "@/services/gospel-audio";
+import type { ScriptureReading } from "@/lib/types";
 
 export async function ensureTodaysReading(
   date = todayInRiga(),
@@ -258,19 +260,31 @@ export async function generateLessonForAgeBand(
   const date = options?.date ?? todayInRiga();
   const force = options?.force ?? false;
 
+  const reading = await ensureTodaysReading(date, { forceRefresh: force });
+  const readings = (reading.readings as ScriptureReading[]) ?? [];
+
   if (!force) {
     const { data: existing } = await admin
       .from("age_band_lessons")
-      .select("id, generation_status")
+      .select("id, generation_status, content_json, gospel_audio_url")
       .eq("age_band", ageBandId)
       .eq("reading_date", date)
       .maybeSingle();
-    if (existing?.generation_status === "success") {
-      return { skipped: true as const, reason: "already_exists" };
+    if (existing?.generation_status === "success" && existing.content_json) {
+      const audio = await ensureAgeBandGospelAudio({
+        date,
+        ageBandId,
+        content: existing.content_json as import("@/lib/types").DailyLessonContent,
+        readings,
+      });
+      return {
+        skipped: true as const,
+        reason: "already_exists",
+        audio,
+        lesson: existing,
+      };
     }
   }
-
-  const reading = await ensureTodaysReading(date, { forceRefresh: force });
 
   const { data: recent } = await admin
     .from("age_band_lessons")
@@ -297,8 +311,7 @@ export async function generateLessonForAgeBand(
       ageBandId,
       date,
       scriptureText: reading.source_text,
-      readings:
-        (reading.readings as import("@/lib/types").ScriptureReading[]) ?? [],
+      readings,
       recentGameTypes,
     });
 
@@ -321,7 +334,17 @@ export async function generateLessonForAgeBand(
       .select("*")
       .single();
     if (lessonErr) throw lessonErr;
-    return { skipped: false as const, lesson };
+
+    // Soft-fail: content stays even if TTS quota/API fails.
+    const audio = await ensureAgeBandGospelAudio({
+      date,
+      ageBandId,
+      content,
+      readings,
+      force: true,
+    });
+
+    return { skipped: false as const, lesson, audio };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Nezināma kļūda";
     await admin.from("age_band_lessons").upsert(
