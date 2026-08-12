@@ -129,6 +129,138 @@ a {
     radial-gradient(640px 360px at 0% 28%, rgba(217, 235, 227, 0.75) 0%, transparent 52%);
 }
 
+/* —— Age visual tones (Augt brand): vivid 7–9, soft 10–12, calm 13+ —— */
+
+.kid-shell--calm {
+  /* Default Augt look — inherits .kid-shell + :root tokens */
+}
+
+.kid-shell--soft {
+  --bg-deep: #1b453c;
+  --bg-mid: #2c6e5c;
+  --bg-soft: #e0f0e8;
+  --bg-cream: #f5faf7;
+  --ink: #1a2e28;
+  --ink-soft: #3d564c;
+  --accent: #cdb045;
+  --accent-deep: #a88a2e;
+  --card: rgba(255, 255, 255, 0.86);
+  --line: rgba(27, 69, 60, 0.13);
+  background:
+    radial-gradient(880px 460px at 10% -6%, rgba(80, 175, 140, 0.34) 0%, transparent 55%),
+    radial-gradient(700px 400px at 96% 6%, rgba(216, 178, 70, 0.28) 0%, transparent 50%),
+    radial-gradient(540px 300px at 45% 105%, rgba(160, 200, 180, 0.28) 0%, transparent 55%),
+    linear-gradient(165deg, #e8f5ee 0%, #fbf6ea 50%, #eef5f1 100%);
+}
+
+.kid-shell--soft .btn {
+  border-radius: 15px;
+}
+
+.kid-shell--soft .btn-primary {
+  background: linear-gradient(180deg, #2c6e5c 0%, #1b453c 100%);
+  box-shadow: 0 10px 26px rgba(44, 110, 92, 0.26);
+}
+
+.kid-shell--soft .btn-accent {
+  background: linear-gradient(180deg, #d8bc55 0%, #cdb045 100%);
+  box-shadow: 0 6px 16px rgba(205, 176, 69, 0.25);
+}
+
+.kid-shell--soft .panel {
+  border-radius: 22px;
+  box-shadow: 0 14px 40px rgba(27, 69, 60, 0.09);
+}
+
+.kid-shell--soft .panel-day {
+  border-color: rgba(205, 176, 69, 0.36);
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 252, 242, 0.97) 0%,
+      rgba(255, 255, 255, 0.86) 48%,
+      rgba(226, 240, 232, 0.9) 100%
+    );
+}
+
+.kid-shell--soft .lesson-tab {
+  border-radius: 14px;
+}
+
+.kid-shell--soft .lesson-tab-active {
+  background: linear-gradient(180deg, #2c6e5c 0%, #1b453c 100%);
+  box-shadow: 0 8px 20px rgba(44, 110, 92, 0.24);
+}
+
+.kid-shell--soft .lesson-tab-visited {
+  border-color: rgba(205, 176, 69, 0.58);
+  background: rgba(255, 250, 236, 0.95);
+}
+
+.kid-shell--vivid {
+  --bg-deep: #1a4a3e;
+  --bg-mid: #2d7a64;
+  --bg-soft: #dff3ea;
+  --bg-cream: #f5fbf7;
+  --ink: #1a3028;
+  --ink-soft: #3d5c50;
+  --accent: #d4a83a;
+  --accent-deep: #b88920;
+  --card: rgba(255, 255, 255, 0.88);
+  --line: rgba(26, 74, 62, 0.14);
+  --ok: #2f8a62;
+  --danger: #c45a4a;
+  background:
+    radial-gradient(780px 420px at 12% -5%, rgba(70, 180, 140, 0.38) 0%, transparent 55%),
+    radial-gradient(640px 380px at 95% 8%, rgba(220, 175, 70, 0.32) 0%, transparent 50%),
+    radial-gradient(520px 320px at 50% 100%, rgba(120, 180, 160, 0.22) 0%, transparent 55%),
+    linear-gradient(165deg, #e4f6ee 0%, #fff8e8 48%, #eaf5f0 100%);
+}
+
+.kid-shell--vivid .btn {
+  border-radius: 16px;
+}
+
+.kid-shell--vivid .btn-primary {
+  background: linear-gradient(180deg, #2d7a64 0%, #1a4a3e 100%);
+  box-shadow: 0 10px 26px rgba(45, 122, 100, 0.32);
+}
+
+.kid-shell--vivid .btn-accent {
+  background: linear-gradient(180deg, #e0b84a 0%, #d4a83a 100%);
+  box-shadow: 0 8px 20px rgba(212, 168, 58, 0.3);
+}
+
+.kid-shell--vivid .panel {
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(26, 74, 62, 0.1);
+}
+
+.kid-shell--vivid .panel-day {
+  border-color: rgba(212, 168, 58, 0.4);
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 252, 240, 0.98) 0%,
+      rgba(255, 255, 255, 0.88) 48%,
+      rgba(220, 242, 232, 0.9) 100%
+    );
+}
+
+.kid-shell--vivid .lesson-tab {
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+}
+
+.kid-shell--vivid .lesson-tab-active {
+  background: linear-gradient(180deg, #2d7a64 0%, #1a4a3e 100%);
+  box-shadow: 0 8px 22px rgba(45, 122, 100, 0.28);
+}
+
+.kid-shell--vivid .lesson-tab-visited {
+  border-color: rgba(212, 168, 58, 0.65);
+}
+
 .lesson-tab {
   flex-shrink: 0;
   border-radius: 999px;

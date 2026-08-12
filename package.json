@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate:daily": "tsx scripts/generate-daily.ts",
-    "generate:age-bands": "tsx scripts/generate-age-bands.ts"
+    "generate:daily": "tsx --env-file=.env.local scripts/generate-daily.ts",
+    "generate:age-bands": "tsx --env-file=.env.local scripts/generate-age-bands.ts",
+    "regen:band": "tsx --env-file=.env.local scripts/regen-band.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

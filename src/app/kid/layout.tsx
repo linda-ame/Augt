@@ -1,4 +1,5 @@
 import { KidBottomNav } from "@/components/KidBottomNav";
+import { KidShell } from "@/components/KidShell";
 import { KidTopBar } from "@/components/KidTopBar";
 
 export default function KidLayout({
@@ -7,10 +8,10 @@ export default function KidLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="kid-shell min-h-screen pb-24">
+    <KidShell>
       <KidTopBar />
       {children}
       <KidBottomNav />
-    </div>
+    </KidShell>
   );
 }

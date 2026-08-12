@@ -45,7 +45,9 @@ Ne tikai izskaidrot Bībeles tekstu, bet palīdzēt:
 
 **iepazīt Kristu → mīlēt Dievu → saprast katoļu ticību → veidot sirdsapziņu → augt tikumos → dzīvot saskaņā ar Evaņģēliju.**
 
-**Līdzsvars (svarīgi):** ikdienas tikumi (labestība, draudzība, pacietība, mīlestība u.c.) ir **augļi** no Dieva Vārda — ne aizvietotājs. Vispirms palīdzi saprast, **ko Evaņģēlijs māca par Dievu, Jēzu un ticību** (un, ja tekstā ir — par grēku, atgriešanos, piedošanu); tad — kā tas aicina dzīvot. Nedrīkst dienas saturu reducēt uz “esi labs cilvēks” bez ticības kodola.
+**Līdzsvars (svarīgi):** ikdienas tikumi ir **augļi** no Dieva Vārda — ne aizvietotājs. Evaņģēlijs nav tikai “kā kļūt labākam”; vispirms tas **atklāj Kristu** un aicina **tuvoties Dievam**, ļaut Viņam pārveidot dzīvi. Dievam katrs ir svarīgs; Jēzus māca būt kopā ar Dievu un — ja tekstā izriet — arī rūpēties par tuvāko ceļu ar Dievu. Nedrīkst reducēt uz “esi labs” / konfliktu menedžmentu un nedrīkst katram fragmentam uzspiest vienu etiķeti (“vienmēr atgriešanās”).
+
+**Divi līmeņi:** (A) ko **šis** fragments konkrēti māca; (B) kā tas ved **ceļā ar Dievu**. Tikai pēc tam — konkrētās tēmas no teksta.
 
 ---
 
@@ -193,6 +195,6 @@ Ja sensitīvā tēma nav nepieciešama — **neiekļaut**.
 
 ## 16. Pamatformula
 
-**Dieva Vārds → ko māca par Dievu / Jēzu / ticību (un atgriešanos, ja tekstā) → katoļu izpratne → saikne ar dzīvi un tikumiem (ja dabiski) → sirdsapziņa → praktiska izvēle → lūgšana**
+**Dieva Vārds → ko atklāj par Kristu/Dievu (Līmenis A + B: ceļš ar Dievu) → katoļu izpratne → konkrētās tēmas no teksta → tikumi kā augļi → sirdsapziņa → praktiska izvēle → lūgšana**
 
-Mērķis: iepazīt Kristu, saprast Viņa mācību un pamazām mācīties dzīvot saskaņā ar to — **abi kopā**, ne tikai morāle.
+Mērķis: iepazīt Kristu, tuvoties Dievam, ļaut sevi pārveidot — **ne** tikai morāle vai konfliktu menedžments.

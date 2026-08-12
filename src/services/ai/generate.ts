@@ -15,11 +15,16 @@ import {
 
 type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
 
-/** Best → mid → lite. Used when AI_MODELS is unset. */
+/** Best → … → lite (free-tier text models, Aug 2026).
+ * Skip Pro on free (quota limit 0). Skip retired 2.0/2.5 (404 for new keys).
+ * Aliases (flash-latest) omitted — they share underlying quotas.
+ */
 const DEFAULT_GEMINI_MODEL_CHAIN = [
+  "gemini-3.6-flash",
   "gemini-3.5-flash",
-  "gemini-2.0-flash",
+  "gemini-3-flash-preview",
   "gemini-3.5-flash-lite",
+  "gemini-3.1-flash-lite",
 ] as const;
 
 function aiConfig() {
@@ -303,13 +308,13 @@ ${bandGuide}
 
   const lengthRules = isPublicBand
     ? `- PUBLISKAIS STANDARTA saturs: BEZ bērna profila. PRIORITĀTE: vecuma grupas specifikācija + vadlīnijas (garumi, tonis, examen).
-- gospel.explanation: DIVI aspekti — ticības kodols no teksta + (ja dabiski) tikumu/ikdienas saikne. Nē: tikai “esi labs”.
+- gospel.explanation: DIVI LĪMEŅI iekšēji — (A) ko ŠIS fragments konkrēti māca; (B) kā aicina tuvoties Dievam / ļaut sevi pārveidot (ja tekstā — arī rūpe par tuvāko ceļu ar Dievu). Tad ikdienas augļi. Output = **plūstošs teksts BEZ** etiķetēm „Līmenis A/B”, „A:”, „B:”. Nē: tikai “esi labs” / konfliktu menedžments; nē: uzspiest “atgriešanos” katrai dienai.
 - system-rules JSON struktūra (rīts/evaņģēlijs/spēle/vakars/parts) PALIEK, bet GARUMI un examen_questions SEKO vecuma grupai, ne “vienam izmēram visiem”.
 - JA system-rules saka “tieši 3 examen_questions” vai fiksētus ~60–90 vārdus — šajā režīmā UZVAR vecuma grupas vadlīnijas.
 - Saturs ŠAI grupai nedrīkst būt gandrīz identisks citai vecuma grupai (cits dziļums, citi piemēri, cits garums).`
     : `- PERSONALIZĒTS saturs: bāze = VECUMA GRUPAS specifikācija + vadlīnijas (garumi, tonis, examen, tēmas).
 - Apstiprinātais profils ir NEREDZAMS papildslānis — izmanto TIKAI ja dabiski saskan ar šodienas Evaņģēliju; NEpiespied tēmas no profila.
-- gospel.explanation + gospel.main_idea = EVAŅĢĒLIJA skaidrojums ar DIVIEM aspektiem: (1) ko māca par Dievu/Jēzu/ticību (atgriešanos u.c. — ja tekstā); (2) dzīves/tikumu saikne, ja dabiski. NEDRĪKST tikai “esi labs”; NEDRĪKST pārvērst par profila “ko darīt ar tavu situāciju”.
+- gospel.explanation + gospel.main_idea = DIVI LĪMEŅI iekšēji: (A) šī fragmenta konkrētā mācība; (B) ceļš ar Dievu / tuvināšanās Viņam. Tad tikumi kā augļi. Output BEZ „Līmenis A/B” etiķetēm — viens plūstošs teksts. NEDRĪKST tikai “esi labs” / konfliktu menedžments; NEDRĪKST vienu etiķeti visām dienām; NEDRĪKST profila lekcija.
 - Ja profila tēma nesaskan ar tekstu — explanation paliek pie Evaņģēlija; profilu ignorē šajā sadaļā.
 - Viegla personalizācija (ja dabiska) — galvenokārt real_life_application / spēles piemērā, ne “Ko tas nozīmē?” kodolā.
 - system-rules JSON struktūra PALIEK; GARUMI un examen_questions SEKO vecuma grupai (ne “vienam izmēram visiem”).
@@ -358,8 +363,8 @@ Izveido šodienas pieredzi JSON shēmā:
 Noteikumi:
 - day_overview: 1–2 teikumi par VISU dienu (kā lasījumi saskan), rādīsies pirms tabiem.
 - gospel.scripture_reference: TIKAI par Evaņģēliju (atsauce + īss teikums). NEIEJAUC 1. lasījumu / Pāvilu utt.
-- gospel.explanation: Vispirms ŠĪ Evaņģēlija galvenā vēsts (Jēzus/Dievs/attiecības ar Dievu/aicinājums; ticības aspekti tikai ja tekstā). Pēc tam ikdienas saikne, ja dabiski. NESĀC ar iepriekš izvēlētu “draudzība/pacietība” tēmu. NEpārvērst par profila lekciju; NEupurē garīgo vēsti seklai “esi labs” morālei. Vienkāršo valodu, ne dziļumu.
-- gospel.main_idea: 1 teikums = Evaņģēlija galvenā doma (ticības/garīgais kodols), ne tikuma sauklis un ne no profila.
+- gospel.explanation: iekšēji A (ko ŠIS teksts māca) + B (ceļš ar Dievu: tuvoties Viņam, ļaut sevi pārveidot; Dievam katrs svarīgs; rūpe par citiem — ja tekstā). Tad ikdienas auglis. **NEDRĪKST** tekstā rakstīt „Līmenis A”, „Līmenis B”, „A:”, „B:” — viens plūstošs skaidrojums. NESĀC ar gatavu tēmu. NEpārvērst par konfliktu menedžmentu vai profila lekciju. Neuzspiest atgriešanos/dvēseli, ja tekstā nav. Vienkāršo valodu, ne dziļumu.
+- gospel.main_idea: 1 teikums = A + B saturs — ne tikuma sauklis, ne tīrs “risināsim strīdus”; ne no profila; bez „Līmenis A/B” vārdiem.
 - Spēle un Evaņģēlija lūgšana TIKAI gospel objektā. gospel.prayer / rīts / vakars: saglabā ticības domu no Evaņģēlija, ne tikai “palīdzi būt labam”.
 - gospel.activity: EVAŅĢĒLIJA teksts (ne vispārīga ikdiena). Ietver "type", "instruction"; explanation katrā jautājumā vai activity līmenī.
 - multiple_choice / true_false: questions masīvs ar **tieši 2** īsiem punktiem par šodienas Evaņģēliju (katram: question, options, correct_answer indekss, explanation). UI rāda abus vienā panelī. true_false options: Patiess / Nepatiess.

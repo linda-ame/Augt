@@ -11,13 +11,14 @@ RĪTA LŪGŠANA — ARĪ PAR CITIEM (ne tikai “svētī manu dienu”):
 - LABI: 1–2 teikumi body vai closing daļā (“Kungs, svētī manu ģimeni…” / “palīdzi tiem, kurus šodien satikšu…”).
 - NEDRĪKST: katru rītu mehāniski visi punkti; gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās.
 
-SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — EVAŅĢĒLIJS PIRMS MORĀLES:
-- NESĀC ar iepriekš izvēlētu tēmu (draudzība, pacietība, mīlestība…). Vispirms nosaki ŠĪ fragmenta galveno vēsti.
-- Skaidro: ko Jēzus māca/dara; ko atklāj par Jēzu un Dievu; attiecības ar Dievu; uz ko aicina; ticības aspekti TIKAI ja tekstā būtiski.
-- Pēc tam (ja dabiski) — ikdienas saikne. NEDRĪKST upurēt garīgo vēsti seklai “esi labs” pamācībai.
-- Vienkāršo VALODU, ne Evaņģēlija dziļumu.
-- main_idea = 1 teikums = galvenā Evaņģēlija doma (ne tikuma sauklis).
-- reflection_question / real_life_application — no vēsts; NEDRĪKST būvēt ap profilu.
+SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — DIVI LĪMEŅI (TIKAI iekšēji):
+- Iekšēji **A:** ko ŠIS fragments konkrēti māca (no teksta). Iekšēji **B:** kā tas aicina **tuvoties Dievam** un ļaut Viņam pārveidot dzīvi (Dievam katrs ir svarīgs; ja tekstā — arī rūpe par tuvāko ceļu ar Dievu).
+- Virsjautājums: *Ko šis Evaņģēlijs māca par manu ceļu ar Dievu?* NESĀC ar gatavu tēmu (draudzība / konflikts / “atgriešanās” kā etiķete).
+- Vispirms atklāj Kristu/Dievu; tad konkrētās tēmas **tikai no teksta**; ikdiena = **auglis**. NEDRĪKST tikai “esi labs” / konfliktu menedžments; NEDRĪKST uzspiest vienu un to pašu etiķeti katrai dienai.
+- **NEDRĪKST** outputā rakstīt „Līmenis A”, „Līmenis B”, „A:”, „B:” u.tml. — skaidrojums ir **viens plūstošs teksts** bez šīm etiķetēm.
+- VALODA VISĀM GRUPĀM: īsi, skaidri teikumi; viena galvenā doma teikumā. Vārdu izvēle — pēc vecuma (mazākiem: ikdienas vārdi; vecākiem: drīkst precīzākus / neikdieniskākus). Vienkāršo izteiksmi, ne Evaņģēlija dziļumu.
+- main_idea = 1 teikums = A + B saturs (ne tikuma sauklis, ne tikai konfliktu padoms); arī bez „Līmenis A/B” vārdiem.
+- reflection_question / real_life_application — no A+B; NEDRĪKST būvēt ap profilu.
 - Lūgšanās saglabā Evaņģēlija ticības domu, ne tikai “palīdzi būt labam”.`;
 
   const sharedEvening = `
@@ -46,9 +47,10 @@ VAKARĀ OBLIGĀTA ĪSTA LŪGŠANA (ne tikai atskats):
   switch (bandId) {
     case "age_7_9":
       return `VECUMA GRUPA 7–9 — OBLIGĀTI ŠAURĀK UN ĪSĀK NEKĀ VECĀKAJĀM GRUPĀM:
+- VALODA: ļoti vienkārši, īsi teikumi; ikdienas vārdi; grūtus jēdzienus pārfrāzē. NEDRĪKST: gari “pieaugušo” teikumi, abstrakti termini bez skaidrojuma.
 - Rīta lūgšana: 40–70 vārdi. Vienkārša valoda (ne “mazuļu” žargons). Īss aizlūgums par ģimeni / draugiem / kādu, ko šodien satikšu (1 virziens, ne viss saraksts; skola tikai ja SKOLAS KONTEKSTS atļauj).
 ${sharedMorning}
-- Evaņģēlija skaidrojums (explanation): 80–120 vārdi. Kas notiek → ko Jēzus / Dievs māca (vienkārši) → (ja der) ko tas nozīmē manā ikdienā. BEZ smagas teoloģijas; BEZ skaidrojuma, kas ir tikai “esi labs”.
+- Evaņģēlija skaidrojums (explanation): 80–120 vārdi. Kas notiek → ko Jēzus / Dievs māca (vienkārši) → (ja der) ko tas nozīmē manā ikdienā. BEZ smagas teoloģijas; BEZ skaidrojuma, kas ir tikai “esi labs”. Īsi teikumi.
 - main_idea: 1 īss teikums ar evaņģēlija/ticības domu. real_life_application: 2–4 īsi teikumi = **mazs, šodien izpildāms** ierosinājums no tās pašas mācības (ne pusstundas projekti; brīvlaikā/brīvdienās — bez skolas/klasesbiedriem).
 - reflection_question: viens vienkāršs jautājums.
 - Spēle: vienkārša (multiple_choice / true_false u.tml.), bez smagām “scenāriju” dilemmām.
@@ -65,9 +67,10 @@ ${sharedMorning}
 ${sharedEvening}`;
     case "age_10_12":
       return `VECUMA GRUPA 10–12 — VIDĒJS DZIĻUMS (garāks un nopietnāks nekā 7–9, vienkāršāks nekā 13+):
+- VALODA: skaidri īsi–vidēji teikumi; galvenokārt ikdienas vārdi; atsevišķi ticības termini OK, ja konteksts skaidrs. NEDRĪKST: smaga “grāmatu” valoda kā 16+.
 - Rīta lūgšana: 50–90 vārdi. Īss aizlūgums par citiem (ģimene / draugi / skola* — 1 virziens, rotē; *skola tikai ja SKOLAS KONTEKSTS atļauj).
 ${sharedMorning}
-- Evaņģēlija skaidrojums: 120–180 vārdi. Kas notiek / ko Jēzus dara / ko māca par Dievu un ticību / kāpēc svarīgi / (ja dabiski) ko nozīmē attiecībās un rīcībā. Nē: tikai tikumu lekcija.
+- Evaņģēlija skaidrojums: 120–180 vārdi. Kas notiek / ko Jēzus dara / ko māca par Dievu un ticību / kāpēc svarīgi / (ja dabiski) ko nozīmē attiecībās un rīcībā. Nē: tikai tikumu lekcija. Teikumi skaidri, ne sapinušies.
 - real_life_application = šodienas praktiskā apņemšanās no evaņģēlija mācības (brīvlaikā/brīvdienās — bez skolas situācijām).
 - Piemēri: ģimene, draugi, godīgums, vienaudžu spiediens (vieglā formā); skola — tikai skolas dienā — **pēc** ticības kodola, ne tā vietā.
 - Spēle: var būt quiz VAI viegls scenario_choice.
@@ -85,6 +88,7 @@ ${sharedMorning}
 ${sharedEvening}`;
     case "age_13_15":
       return `VECUMA GRUPA 13–15 — DZIĻĀK, PUSAUDŽA IKDIENA:
+- VALODA: skaidri, lasāmi teikumi (drīkst garāki nekā 7–12); drīkst neikdieniskākus / precīzākus vārdus, ja palīdz. NEDRĪKST: mazuļu leksika.
 - Rīta lūgšana: 60–100 vārdi; personiska. Īss aizlūgums par ģimeni/draugiem/kādu no ikdienas (1 virziens).
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 150–250 vārdi. Vispirms: ko teksts saka par Kristu, Dievu, ticību (atgriešanos/piedošanu — ja tekstā). Tad: “Ko tas saka par manu dzīvi?” (draugi, spiediens, ģimene…) — ja dabiski. Nē: tikai “esi labs pusaudzis”.
@@ -106,6 +110,7 @@ ${sharedMorning}
 ${sharedEvening}`;
     case "age_16_19":
       return `VECUMA GRUPA 16–19 — NOBRIEDUŠĀKAIS DZIĻUMS:
+- VALODA: nobriedusi; drīkst precīzus / neikdieniskākus ticības un ētikas terminus; teikumi skaidri (ne “sapinušies”). NEDRĪKST: bērnu leksika.
 - Rīta lūgšana: 70–110 vārdi. Īss aizlūgums par citiem (ģimene, draugi, kāds, kam grūti — 1 virziens, rotē).
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 180–280 vārdi. Iekļauj “kāpēc” (katoļu izpratne par Dievu/Kristu/ticību), ne tikai “ko darīt” un ne tikai tikumu katalogs.
