@@ -5,10 +5,10 @@ self.addEventListener("push", function (event) {
   try {
     data = event.data.json();
   } catch {
-    data = { title: "Augt", body: event.data.text() };
+    data = { title: "Šodienas citāts", body: event.data.text() };
   }
 
-  const title = data.title || "Augt";
+  const title = data.title || "Šodienas citāts";
   const options = {
     body: data.body || "Šodienas Dieva Vārds tevi gaida.",
     icon: data.icon || "/icons/icon-192.png",

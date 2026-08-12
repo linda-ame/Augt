@@ -1,7 +1,6 @@
 import webpush from "web-push";
 import type { AgeBandId } from "@/lib/age-bands";
 import { createServiceClient } from "@/lib/supabase/admin";
-import { normalizeGospelContent, type DailyLessonContent } from "@/lib/types";
 import { todayInRiga } from "@/lib/dates";
 
 export type PushSubscriptionRow = {
@@ -61,22 +60,12 @@ function truncate(text: string, max: number) {
   return `${t.slice(0, max - 1).trimEnd()}…`;
 }
 
-export function buildMorningPayload(theme: string | null, quote: string | null) {
-  const themePart = theme ? truncate(theme, 60) : null;
-  const quotePart = quote ? truncate(quote, 120) : null;
-  let body: string;
-  if (themePart && quotePart) {
-    body = `${themePart} — ${quotePart}`;
-  } else if (themePart) {
-    body = themePart;
-  } else if (quotePart) {
-    body = quotePart;
-  } else {
-    body = "Šodienas Dieva Vārds tevi gaida.";
-  }
+export function buildMorningPayload(quote: string | null) {
+  const quotePart = quote ? truncate(quote, 180) : null;
   return {
-    title: "Augt",
-    body: truncate(body, 180),
+    // Not "Augt" — OS already shows the app/site name ("from Augt").
+    title: "Šodienas citāts",
+    body: quotePart || "Šodienas Dieva Vārds tevi gaida.",
     icon: "/icons/icon-192.png",
     badge: "/icons/badge-96.png",
     url: "/kid",
@@ -87,35 +76,13 @@ export async function resolveMorningContent(date = todayInRiga()) {
   const admin = createServiceClient();
   const { data: reading } = await admin
     .from("daily_readings")
-    .select("daily_quote, liturgical_day")
+    .select("daily_quote")
     .eq("reading_date", date)
     .maybeSingle();
-
-  const { data: lessons } = await admin
-    .from("age_band_lessons")
-    .select("age_band, content_json, generation_status")
-    .eq("reading_date", date)
-    .eq("generation_status", "success");
-
-  const themeByBand = new Map<AgeBandId, string>();
-  let fallbackTheme: string | null =
-    (reading?.liturgical_day as string | null)?.trim() || null;
-
-  for (const row of lessons ?? []) {
-    const gospel = normalizeGospelContent(
-      row.content_json as DailyLessonContent | null,
-    );
-    const title = gospel?.title?.trim();
-    if (!title) continue;
-    themeByBand.set(row.age_band as AgeBandId, title);
-    if (!fallbackTheme) fallbackTheme = title;
-  }
 
   return {
     date,
     quote: (reading?.daily_quote as string | null)?.trim() || null,
-    fallbackTheme,
-    themeByBand,
   };
 }
 
@@ -200,10 +167,7 @@ export async function sendMorningPushToAll(date = todayInRiga()) {
   let removed = 0;
 
   for (const row of (rows ?? []) as PushSubscriptionRow[]) {
-    const theme =
-      (row.age_band && content.themeByBand.get(row.age_band)) ||
-      content.fallbackTheme;
-    const payload = buildMorningPayload(theme, content.quote);
+    const payload = buildMorningPayload(content.quote);
     const result = await sendPushToSubscription(row, payload);
     if (result.ok) sent += 1;
     else {
