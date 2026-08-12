@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "type": "confession_order",
+    "version": "1.0",
+    "language": "lv"
+  },
+
+  "content": {
+    "steps": [
+      {
+        "id": "step_1",
+        "type": "text",
+        "title": "Krusta zīme",
+        "text": [
+          "1. Krusta zīme"
+        ]
+      },
+
+      {
+        "id": "step_2",
+        "type": "dialogue",
+        "title": "Sākuma sveiciens",
+        "text": [
+          "2. Lai top slavēts Jēzus Kristus! (Priesteris: Mūžīgi mūžos. Amen.)"
+        ]
+      },
+
+      {
+        "id": "step_3",
+        "type": "conditional",
+        "title": "Grēksūdzes statuss",
+        "cases": {
+          "first_confession": [
+            "3. Šī ir mana Pirmā Grēksūdze."
+          ],
+          "not_first_confession": [
+            "3. Pēdējo reizi pie grēksūdzes esmu bijis (bijusi) ... (dienas / nedēļas / mēnešus atpakaļ)."
+          ]
+        }
+      },
+
+      {
+        "id": "step_4",
+        "type": "dynamic_sins",
+        "title": "Grēku izsūdzēšana",
+        "intro": "4. Vislabo Dievu esmu apvainojis (apvainojusi) ar šādiem grēkiem:",
+        "source": "selected_questions_with_notes"
+      },
+
+      {
+        "id": "step_5",
+        "type": "text",
+        "title": "Nožēla",
+        "text": [
+          "5. Vairāk grēkus neatceros, visus grēkus nožēloju, apņemos laboties un lūdzu grēku piedošanu."
+        ]
+      },
+
+      {
+        "id": "step_6",
+        "type": "priest_absolution",
+        "title": "Grēku piedošana",
+        "text": [
+          "6. Priesteris saka absolūcijas vārdus, ar kuriem Dieva vārdā tiek piedota grēku piedošana."
+        ]
+      },
+
+      {
+        "id": "step_7",
+        "type": "text",
+        "title": "Krusta zīme",
+        "text": [
+          "7. Krusta zīme"
+        ]
+      },
+
+      {
+        "id": "step_8",
+        "type": "penance",
+        "title": "Gandarīšana",
+        "text": [
+          "1. Izpildi uzlikto gandarījumu."
+        ]
+      },
+
+      {
+        "id": "step_9",
+        "type": "prayer",
+        "title": "Pateicības lūgšana",
+        "text": [
+          "2. Pateicības lūgšana:", 
+          "    Visvarenais Dievs, es pateicos Tev par visām žēlastībām, kuras Tu man devi, piedodams",
+          "    grēkus! Es gribu Tevi mīlēt un Tev kalpot tagad un mūžībā. Amen."
+        ]
+      },
+
+      {
+        "id": "step_10",
+        "type": "prayers",
+        "title": "Noslēguma lūgšanas",
+        "text": [
+          "3. Noslēgumā: Tēvs mūsu ...    Esi sveicināta ...    Gods lai ir ..."
+        ]
+      }
+    ]
+  }
+}

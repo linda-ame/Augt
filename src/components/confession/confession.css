@@ -32,10 +32,6 @@
   color: var(--bg-deep);
 }
 
-.prayer-text p {
-  line-height: 1.2;
-}
-
 .confession-check {
   display: flex;
   align-items: center;
@@ -49,6 +45,19 @@
   height: 22px;
   accent-color: var(--bg-mid);
   flex-shrink: 0;
+}
+
+.confession-check-quiet {
+  margin-top: 1.15rem;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.confession-check-quiet input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ink-soft);
 }
 
 .save-row {
@@ -309,4 +318,205 @@
 .modal-all {
   background: #c9786e;
   color: #1c2b26;
+}
+
+.version-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.version-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  padding: 16px 18px;
+  border: 2px solid rgba(28, 43, 38, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.version-card:hover {
+  border-color: var(--bg-mid);
+  transform: translateY(-1px);
+}
+
+.version-card-title {
+  font-family: var(--font-display), Literata, Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--bg-deep);
+  font-weight: 600;
+}
+
+.version-card-sub {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+.prep-attribution {
+  margin: 0.45rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.prep-advice {
+  margin-top: 1.35rem;
+}
+
+.prep-advice p {
+  margin: 0 0 1.15rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.prep-advice p:last-child {
+  margin-bottom: 0;
+}
+
+.prep-prayer {
+  margin: 1.75rem 0 0.5rem;
+  padding: 1.25rem 1.2rem 1.35rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(232, 240, 236, 0.55) 100%
+    );
+  border: 1px solid rgba(28, 43, 38, 0.1);
+  box-shadow: 0 10px 28px rgba(28, 43, 38, 0.05);
+}
+
+.prep-prayer-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display), Literata, Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-synthesis: none;
+  color: var(--bg-deep);
+  letter-spacing: -0.01em;
+}
+
+.prep-prayer-body p {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-display), Literata, Georgia, serif;
+  font-size: 0.98rem;
+  font-style: italic;
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.prep-prayer-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Visual tone (matches kid-shell vivid / soft / calm) */
+.confession-app--vivid .prep-prayer {
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(210, 236, 228, 0.75) 100%
+    );
+  border: 2px solid rgba(45, 122, 100, 0.28);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(26, 74, 62, 0.08);
+}
+
+.confession-app--vivid .confession-btn {
+  border-radius: 14px;
+  padding: 0.95rem 1.1rem;
+  font-size: 1.05rem;
+}
+
+.confession-app--vivid .confession-btn-primary {
+  background: linear-gradient(180deg, #2d7a64 0%, #1a4a3e 100%);
+  box-shadow: 0 8px 20px rgba(45, 122, 100, 0.28);
+}
+
+.confession-app--vivid .confession-btn-pdf {
+  background: linear-gradient(180deg, #e0b84a 0%, #d4a83a 100%);
+  color: #3a2a10;
+  box-shadow: 0 8px 20px rgba(212, 168, 58, 0.28);
+}
+
+.confession-app--vivid .confession-check input,
+.confession-app--vivid .questions-container input[type="checkbox"] {
+  width: 26px;
+  height: 26px;
+  accent-color: var(--bg-mid);
+}
+
+.confession-app--vivid .commandment h3 {
+  border-bottom-color: rgba(45, 122, 100, 0.35);
+}
+
+.confession-app--vivid .comment-wrap textarea,
+.confession-app--vivid .custom-sin textarea {
+  border: 2px solid rgba(45, 122, 100, 0.22);
+  border-radius: 12px;
+}
+
+.confession-app--vivid .save-row select {
+  border: 2px solid rgba(45, 122, 100, 0.35);
+  border-radius: 12px;
+}
+
+.confession-app--soft .prep-prayer {
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(224, 238, 230, 0.72) 100%
+    );
+  border: 1.5px solid rgba(44, 110, 92, 0.26);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(27, 69, 60, 0.07);
+}
+
+.confession-app--soft .confession-btn {
+  border-radius: 12px;
+}
+
+.confession-app--soft .confession-btn-primary {
+  background: linear-gradient(180deg, #2c6e5c 0%, #1b453c 100%);
+  box-shadow: 0 8px 18px rgba(44, 110, 92, 0.24);
+}
+
+.confession-app--soft .confession-btn-pdf {
+  background: linear-gradient(180deg, #d8bc55 0%, #cdb045 100%);
+  color: #3a2a10;
+  box-shadow: 0 6px 16px rgba(205, 176, 69, 0.24);
+}
+
+.confession-app--soft .confession-check input,
+.confession-app--soft .questions-container input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--bg-mid);
+}
+
+.confession-app--soft .comment-wrap textarea,
+.confession-app--soft .custom-sin textarea {
+  border: 1.5px solid rgba(44, 110, 92, 0.2);
+  border-radius: 11px;
+}
+
+.commandment-note {
+  margin: -4px 0 10px;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
 }

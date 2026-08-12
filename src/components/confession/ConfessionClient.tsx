@@ -1,77 +1,119 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import appDataJson from "@/data/confession/sirdsapzinas-izmeklesana.json";
-import pdfDataJson from "@/data/confession/greksudze.json";
+import childrenIntro from "@/data/confession/children/sirdsapzinas-izmeklesana.json";
 import {
   createEmptyConfessionState,
-  STORAGE_KEY,
-  type ConfessionAppData,
-  type ConfessionPdfData,
+  loadHideWelcomePreference,
+  saveHideWelcomePreference,
   type ConfessionState,
   type ConfessionStep,
   type CustomSin,
 } from "@/lib/confession-types";
 import { generateConfessionPdf } from "@/lib/confession-pdf";
+import {
+  CONFESSION_VERSIONS,
+  getConfessionVersion,
+  type ConfessionVersion,
+  type ConfessionVersionId,
+} from "@/lib/confession-versions";
+import {
+  confessionToneClass,
+  visualToneFromConfessionVersion,
+} from "@/lib/visual-tone";
 import "./confession.css";
 
-const appData = appDataJson as ConfessionAppData;
-const pdfData = pdfDataJson as ConfessionPdfData;
+const WELCOME_INTRO = childrenIntro.content.intro;
 
-function loadSavedState(): ConfessionState | null {
+function loadSavedState(storageKey: string): ConfessionState | null {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(storageKey);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as { state: ConfessionState };
     const hours = Number(parsed.state.saveDuration || 0);
     if (!hours) return null;
     const diff = Date.now() - parsed.state.updatedAt;
     if (diff > hours * 60 * 60 * 1000) return null;
-    return parsed.state;
+    // Migrate old step name from earlier Augt builds.
+    const rawStep = parsed.state.step as string;
+    const step: ConfessionStep =
+      rawStep === "intro" ? "setup" : (parsed.state.step as ConfessionStep);
+    return { ...parsed.state, step };
   } catch {
     return null;
   }
 }
 
-function persist(state: ConfessionState) {
+function persist(storageKey: string, state: ConfessionState) {
   if (!state.saveDuration) {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(storageKey);
     return;
   }
   localStorage.setItem(
-    STORAGE_KEY,
+    storageKey,
     JSON.stringify({ state: { ...state, updatedAt: Date.now() } }),
   );
 }
 
-export function ConfessionClient({
-  ageLabel,
-  canChangeAge = false,
-}: {
-  ageLabel: string;
-  canChangeAge?: boolean;
-}) {
+function migrateLegacyIfNeeded(version: ConfessionVersion) {
+  if (!version.legacyStorageKey) return;
+  if (localStorage.getItem(version.storageKey)) return;
+  const legacy = localStorage.getItem(version.legacyStorageKey);
+  if (!legacy) return;
+  localStorage.setItem(version.storageKey, legacy);
+  localStorage.removeItem(version.legacyStorageKey);
+}
+
+function normalizeResumeStep(step: ConfessionStep | undefined): ConfessionStep {
+  if (!step || step === "welcome" || step === "pick") return "setup";
+  if ((step as string) === "intro") return "setup";
+  return step;
+}
+
+export function ConfessionClient() {
   const [ready, setReady] = useState(false);
+  const [versionId, setVersionId] = useState<ConfessionVersionId | null>(null);
   const [state, setState] = useState<ConfessionState>(createEmptyConfessionState);
-  const [step, setStep] = useState<ConfessionStep>("intro");
+  const [step, setStep] = useState<ConfessionStep>("welcome");
+  const [hideWelcomeChecked, setHideWelcomeChecked] = useState(false);
+  const [welcomeHidden, setWelcomeHidden] = useState(false);
   const [showResume, setShowResume] = useState(false);
   const [showClear, setShowClear] = useState(false);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
 
+  const version = versionId ? getConfessionVersion(versionId) : null;
+  const storageKey = version?.storageKey ?? null;
+  const toneClass = versionId
+    ? confessionToneClass(visualToneFromConfessionVersion(versionId))
+    : "";
+
   useEffect(() => {
-    const saved = loadSavedState();
-    if (saved) {
-      setState(saved);
-      setShowResume(true);
-    }
+    const hide = loadHideWelcomePreference();
+    setHideWelcomeChecked(hide);
+    setWelcomeHidden(hide);
+    setStep(hide ? "pick" : "welcome");
     setReady(true);
   }, []);
 
   useEffect(() => {
-    if (!ready || showResume) return;
-    persist({ ...state, step });
-  }, [state, step, ready, showResume]);
+    if (!ready || !version || !storageKey) return;
+    migrateLegacyIfNeeded(version);
+    const saved = loadSavedState(storageKey);
+    if (saved) {
+      setState(saved);
+      setShowResume(true);
+    } else {
+      setState(createEmptyConfessionState());
+      setShowResume(false);
+    }
+  }, [ready, versionId, storageKey, version]);
+
+  useEffect(() => {
+    if (!ready || !storageKey || showResume) return;
+    if (step === "welcome" || step === "pick") return;
+    persist(storageKey, { ...state, step });
+  }, [state, step, ready, showResume, storageKey]);
 
   function updateState(patch: Partial<ConfessionState>) {
     setState((prev) => ({ ...prev, ...patch, updatedAt: Date.now() }));
@@ -83,16 +125,42 @@ export function ConfessionClient({
     window.scrollTo(0, 0);
   }
 
+  function continueFromWelcome() {
+    saveHideWelcomePreference(hideWelcomeChecked);
+    setWelcomeHidden(hideWelcomeChecked);
+    setStep("pick");
+    window.scrollTo(0, 0);
+  }
+
+  function selectVersion(id: ConfessionVersionId) {
+    setVersionId(id);
+    setState(createEmptyConfessionState());
+    setStep("setup");
+    setShowResume(false);
+    setPdfError(null);
+    window.scrollTo(0, 0);
+  }
+
+  function changeVersion() {
+    setVersionId(null);
+    setState(createEmptyConfessionState());
+    setStep("pick");
+    setShowResume(false);
+    setShowClear(false);
+    setPdfError(null);
+    window.scrollTo(0, 0);
+  }
+
   function resumeContinue() {
     setShowResume(false);
-    setStep(state.step || "intro");
+    setStep(normalizeResumeStep(state.step));
   }
 
   function resumeRestart() {
-    localStorage.removeItem(STORAGE_KEY);
+    if (storageKey) localStorage.removeItem(storageKey);
     const empty = createEmptyConfessionState();
     setState(empty);
-    setStep("intro");
+    setStep("setup");
     setShowResume(false);
   }
 
@@ -102,9 +170,9 @@ export function ConfessionClient({
   }
 
   function resetAll() {
-    localStorage.removeItem(STORAGE_KEY);
+    if (storageKey) localStorage.removeItem(storageKey);
     setState(createEmptyConfessionState());
-    setStep("intro");
+    setStep("setup");
     setShowClear(false);
   }
 
@@ -161,12 +229,13 @@ export function ConfessionClient({
   }
 
   async function onGeneratePdf() {
+    if (!version) return;
     setPdfBusy(true);
     setPdfError(null);
     try {
       await generateConfessionPdf({
-        appData,
-        pdfData,
+        appData: version.appData,
+        pdfData: version.pdfData,
         state: { ...state, step },
       });
     } catch (err) {
@@ -179,39 +248,119 @@ export function ConfessionClient({
 
   if (!ready) {
     return (
-      <main className="confession-app mx-auto max-w-2xl px-6 pb-8 pt-2">
+      <main className={`confession-app ${toneClass} mx-auto max-w-2xl px-6 pb-8 pt-2`}>
         <p className="text-[var(--ink-soft)]">Ielādē…</p>
       </main>
     );
   }
 
-  const intro = appData.content.intro;
+  if (step === "welcome") {
+    return (
+      <main className={`confession-app ${toneClass} mx-auto max-w-2xl px-6 pb-8 pt-2`}>
+        <section className="confession-screen mt-2">
+          <h2 className="confession-kicker">GRĒKSŪDZE</h2>
+          <h2 className="confession-title">{WELCOME_INTRO.title}</h2>
+          <div className="confession-prose mt-3">
+            {WELCOME_INTRO.text.map((t) => (
+              <p key={t.slice(0, 40)}>{t}</p>
+            ))}
+          </div>
+
+          <label className="confession-check mt-5">
+            <input
+              type="checkbox"
+              checked={hideWelcomeChecked}
+              onChange={(e) => setHideWelcomeChecked(e.target.checked)}
+            />
+            <span>Nerādīt vairs šo ievadu</span>
+          </label>
+
+          <button
+            type="button"
+            className="confession-btn confession-btn-primary"
+            onClick={continueFromWelcome}
+          >
+            Turpināt
+          </button>
+        </section>
+      </main>
+    );
+  }
+
+  if (step === "pick" || !version) {
+    return (
+      <main className={`confession-app ${toneClass} mx-auto max-w-2xl px-6 pb-8 pt-2`}>
+        <section className="confession-screen mt-2">
+          <h2 className="confession-kicker">GRĒKSŪDZE</h2>
+          <h2 className="confession-title">Izvēlies versiju</h2>
+          <p className="mt-3 text-[var(--ink-soft)] leading-relaxed">
+            Sirdsapziņas izmeklēšana ir pielāgota vecumam. Izvēle šeit nav saistīta
+            ar dienas nodarbības vecuma grupu.
+          </p>
+          <div className="version-list mt-6">
+            {CONFESSION_VERSIONS.map((v) => (
+              <button
+                key={v.id}
+                type="button"
+                className="version-card"
+                onClick={() => selectVersion(v.id)}
+              >
+                <span className="version-card-title">{v.title}</span>
+                <span className="version-card-sub">{v.subtitle}</span>
+              </button>
+            ))}
+          </div>
+          {welcomeHidden ? (
+            <label className="confession-check confession-check-quiet">
+              <input
+                type="checkbox"
+                checked={false}
+                onChange={(e) => {
+                  if (!e.target.checked) return;
+                  saveHideWelcomePreference(false);
+                  setWelcomeHidden(false);
+                  setHideWelcomeChecked(false);
+                  setStep("welcome");
+                  window.scrollTo(0, 0);
+                }}
+              />
+              <span>Rādīt ievadu</span>
+            </label>
+          ) : null}
+        </section>
+      </main>
+    );
+  }
+
+  const appData = version.appData;
   const prayer = appData.content.preparation_prayer;
   const closing = appData.content.after_examination_prayer;
 
   return (
-    <main className="confession-app mx-auto max-w-2xl px-6 pb-8 pt-2">
+    <main
+      className={`confession-app ${toneClass} mx-auto max-w-2xl px-6 pb-8 pt-2`}
+    >
       <header className="confession-header flex items-center justify-between gap-3">
-        <p className="text-sm leading-none text-[var(--ink-soft)]">{ageLabel}</p>
-        {canChangeAge ? (
-          <a
-            href="/?changeAge=1"
-            className="btn btn-secondary shrink-0 !px-3 !py-1.5 text-sm"
-          >
-            Mainīt vecumu
-          </a>
-        ) : null}
+        <p className="text-sm leading-none text-[var(--ink-soft)]">
+          {version.title}
+        </p>
+        <button
+          type="button"
+          className="btn btn-secondary shrink-0 !px-3 !py-1.5 text-sm"
+          onClick={changeVersion}
+        >
+          Mainīt versiju
+        </button>
       </header>
 
-      {step === "intro" && (
+      {step === "setup" && (
         <section className="confession-screen mt-6">
           <h2 className="confession-kicker">SIRDSAPZIŅAS IZMEKLĒŠANA</h2>
-          <h2 className="confession-title">{intro.title}</h2>
-          <div className="confession-prose">
-            {intro.text.map((t) => (
-              <p key={t.slice(0, 40)}>{t}</p>
-            ))}
-          </div>
+          <h2 className="confession-title">Pirms sākuma</h2>
+          <p className="mt-3 text-[var(--ink-soft)] leading-relaxed">
+            Atzīmē, vai šī ir Tava pirmā grēksūdze, un izvēlies, vai īslaicīgi
+            saglabāt pierakstus ierīcē.
+          </p>
 
           <label className="confession-check mt-5">
             <input
@@ -255,18 +404,27 @@ export function ConfessionClient({
 
       {step === "prayer" && (
         <section className="confession-screen mt-6">
-          <h2 className="confession-kicker">SIRDSAPZIŅAS IZMEKLĒŠANA</h2>
-          <h2 className="confession-title mt-4">{prayer.title}</h2>
-          <div className="confession-prose prayer-text">
+          <p className="confession-kicker">SIRDSAPZIŅAS IZMEKLĒŠANA</p>
+          <h2 className="confession-title mt-3">{prayer.title}</h2>
+          {prayer.attribution ? (
+            <p className="prep-attribution">{prayer.attribution}</p>
+          ) : null}
+
+          <div className="prep-advice">
             {prayer.text.map((t) => (
               <p key={t.slice(0, 40)}>{t}</p>
             ))}
-            <hr />
-            <h3>{prayer.prayer.title}</h3>
-            {prayer.prayer.text.map((t) => (
-              <p key={t}>{t}</p>
-            ))}
           </div>
+
+          <div className="prep-prayer">
+            <h3 className="prep-prayer-title">{prayer.prayer.title}</h3>
+            <div className="prep-prayer-body">
+              {prayer.prayer.text.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+            </div>
+          </div>
+
           <button
             type="button"
             className="confession-btn confession-btn-primary"
@@ -280,12 +438,13 @@ export function ConfessionClient({
       {step === "questions" && (
         <section className="confession-screen mt-6">
           <h2 className="confession-kicker">SIRDSAPZIŅAS IZMEKLĒŠANA</h2>
-          <h2 className="confession-title mb-3">Vai tas attiecas uz mani?</h2>
+          <h2 className="confession-title mb-3">{version.questionsHeading}</h2>
 
           <div className="questions-container">
             {appData.content.commandments.map((cmd) => (
               <div key={cmd.id} className="commandment">
                 <h3>{cmd.title}</h3>
+                {cmd.note ? <p className="commandment-note">{cmd.note}</p> : null}
                 {cmd.questions.map((q) => {
                   const checked = !!state.answers[q.id];
                   const note = state.notes[q.id] || "";
@@ -388,10 +547,18 @@ export function ConfessionClient({
         <div className="confession-modal" role="dialog" aria-modal="true">
           <div className="confession-modal-box">
             <p>Ko tu vēlies darīt?</p>
-            <button type="button" className="modal-cancel" onClick={() => setShowClear(false)}>
+            <button
+              type="button"
+              className="modal-cancel"
+              onClick={() => setShowClear(false)}
+            >
               Atcelt
             </button>
-            <button type="button" className="modal-content" onClick={resetOnlyContent}>
+            <button
+              type="button"
+              className="modal-content"
+              onClick={resetOnlyContent}
+            >
               Dzēst tikai saturu
             </button>
             <button type="button" className="modal-all" onClick={resetAll}>
@@ -405,7 +572,11 @@ export function ConfessionClient({
         <div className="confession-modal" role="dialog" aria-modal="true">
           <div className="confession-modal-box">
             <p>Vai turpināt iepriekšējo sagatavošanos?</p>
-            <button type="button" className="modal-cancel" onClick={resumeContinue}>
+            <button
+              type="button"
+              className="modal-cancel"
+              onClick={resumeContinue}
+            >
               Turpināt
             </button>
             <button type="button" className="modal-all" onClick={resumeRestart}>

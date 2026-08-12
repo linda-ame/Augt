@@ -6,6 +6,7 @@ export type ConfessionQuestion = {
 export type ConfessionCommandment = {
   id: string;
   title: string;
+  note?: string;
   questions: ConfessionQuestion[];
 };
 
@@ -19,6 +20,7 @@ export type ConfessionContent = {
     id: string;
     title: string;
     text: string[];
+    attribution?: string;
     prayer: {
       id: string;
       title: string;
@@ -38,6 +40,8 @@ export type ConfessionAppData = {
     type: string;
     version: string;
     language: string;
+    source?: string;
+    sourceLabel?: string;
   };
   content: ConfessionContent;
 };
@@ -82,7 +86,12 @@ export type CustomSin = {
   text: string;
 };
 
-export type ConfessionStep = "intro" | "prayer" | "questions";
+export type ConfessionStep =
+  | "welcome"
+  | "pick"
+  | "setup"
+  | "prayer"
+  | "questions";
 
 export type ConfessionState = {
   firstConfession: boolean;
@@ -94,8 +103,6 @@ export type ConfessionState = {
   updatedAt: number;
 };
 
-export const STORAGE_KEY = "augt-confession";
-
 export function createEmptyConfessionState(): ConfessionState {
   return {
     firstConfession: false,
@@ -103,7 +110,27 @@ export function createEmptyConfessionState(): ConfessionState {
     answers: {},
     notes: {},
     customSins: [],
-    step: "intro",
+    step: "setup",
     updatedAt: Date.now(),
   };
+}
+
+/** Device preference: skip the section welcome intro next time. */
+export const CONFESSION_HIDE_WELCOME_KEY = "augt-confession-hide-welcome";
+
+export function loadHideWelcomePreference(): boolean {
+  try {
+    return localStorage.getItem(CONFESSION_HIDE_WELCOME_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function saveHideWelcomePreference(hide: boolean) {
+  try {
+    if (hide) localStorage.setItem(CONFESSION_HIDE_WELCOME_KEY, "1");
+    else localStorage.removeItem(CONFESSION_HIDE_WELCOME_KEY);
+  } catch {
+    /* ignore quota / private mode */
+  }
 }
