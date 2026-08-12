@@ -5,12 +5,12 @@ self.addEventListener("push", function (event) {
   try {
     data = event.data.json();
   } catch {
-    data = { title: "Šodienas citāts", body: event.data.text() };
+    data = { title: "Šodienas Dieva Vārds", body: event.data.text() };
   }
 
-  const title = data.title || "Šodienas citāts";
+  const title = data.title || "Šodienas Dieva Vārds";
   const options = {
-    body: data.body || "Šodienas Dieva Vārds tevi gaida.",
+    body: data.body || "Atver un izlasi šodienas Evaņģēliju.",
     icon: data.icon || "/icons/icon-192.png",
     badge: data.badge || "/icons/badge-96.png",
     data: {

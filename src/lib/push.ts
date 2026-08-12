@@ -61,11 +61,13 @@ function truncate(text: string, max: number) {
 }
 
 export function buildMorningPayload(quote: string | null) {
-  const quotePart = quote ? truncate(quote, 180) : null;
+  const quotePart = quote ? truncate(quote, 140) : null;
+  const nudge = "Atver un izlasi šodienas Evaņģēliju.";
+  const body = quotePart ? `${quotePart} — ${nudge}` : nudge;
   return {
-    // Not "Augt" — OS already shows the app/site name ("from Augt").
-    title: "Šodienas citāts",
-    body: quotePart || "Šodienas Dieva Vārds tevi gaida.",
+    // Not "Augt" — OS already shows the app/site name.
+    title: "Šodienas Dieva Vārds",
+    body: truncate(body, 180),
     icon: "/icons/icon-192.png",
     badge: "/icons/badge-96.png",
     url: "/kid",
