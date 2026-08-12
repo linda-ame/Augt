@@ -2,8 +2,8 @@ name: Morning push notifications
 
 on:
   schedule:
-    # TEMP TEST: ~11:25 Europe/Riga (EEST = UTC+3 → 08:25 UTC). Revert after verifying.
-    - cron: "25 8 * * *"
+    # TEMP TEST: ~13:45 Europe/Riga (EEST = UTC+3 → 10:45 UTC). Revert after verifying.
+    - cron: "45 10 * * *"
   workflow_dispatch:
 
 jobs:
