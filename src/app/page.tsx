@@ -1,6 +1,7 @@
 import { AuthCodeRedirect } from "@/components/AuthCodeRedirect";
 import { HomeLanding } from "@/components/HomeLanding";
 import { getGuestAgeBand } from "@/lib/guest-age";
+import { getAppVersionLabel } from "@/lib/app-version";
 
 export default async function HomePage({
   searchParams,
@@ -14,7 +15,11 @@ export default async function HomePage({
   return (
     <>
       <AuthCodeRedirect />
-      <HomeLanding initialBand={band} forcePicker={forcePicker} />
+      <HomeLanding
+        initialBand={band}
+        forcePicker={forcePicker}
+        appVersion={getAppVersionLabel()}
+      />
     </>
   );
 }

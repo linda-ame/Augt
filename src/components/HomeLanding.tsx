@@ -14,9 +14,12 @@ import { BrandLogo } from "@/components/BrandLogo";
 export function HomeLanding({
   initialBand,
   forcePicker,
+  appVersion,
 }: {
   initialBand: AgeBandId | null;
   forcePicker: boolean;
+  /** Short deploy git SHA (e.g. c403d90), or "dev" locally */
+  appVersion?: string;
 }) {
   const router = useRouter();
   const [saving, setSaving] = useState<AgeBandId | null>(null);
@@ -196,6 +199,14 @@ export function HomeLanding({
             VECĀKIEM — kā Augt veido saturu
           </Link>
         </p>
+        {appVersion ? (
+          <p
+            className="mt-10 pb-2 text-center font-mono text-[0.65rem] tracking-[0.08em] text-[var(--ink-soft)]/45"
+            title="Deploy versija"
+          >
+            {appVersion}
+          </p>
+        ) : null}
       </div>
     </main>
   );
