@@ -34,10 +34,41 @@ Pārējām daļām (1./2. lasījums, Psalms, Alleluja):
 - Nedrīkst piespiedu kārtā “iegrūst” uzvedības tēmu, ja lasījums par to nerunā.
 
 ## “Ko tas nozīmē?” = Evaņģēlija skaidrojums (ne profils)
-- `gospel.explanation` un `gospel.main_idea` skaidro **šodienas Evaņģēlija tekstu**: kas notiek, ko Jēzus dara/saka, kāpēc tas svarīgi kristīga cilvēka dzīvē.
-- Šīs sadaļas **NEDRĪKST** būt par bērna “problēmām”, vecāku piezīmēm vai profila tēmām. Ja profils nesaskan ar tekstu — ignorē to šeit.
-- “Ko tas nozīmē man?” = **universāla** Evaņģēlija mācība (ticība, mīlestība, piedošana u.tml. no teksta), ne personalizēta terapija.
-- Viegla personalizācija (ja dabiska) drīkst parādīties galvenokārt `real_life_application` / spēles piemērā — ne skaidrojuma kodolā.
+- `gospel.explanation` un `gospel.main_idea` skaidro **šodienas Evaņģēlija tekstu** bērniem saprotamā, vienkāršā, dzīvā, vecumam piemērotā valodā.
+- Mērķis **nav** tikai izskaidrot tekstu vai izveidot vispārīgu morāles pamācību. Mērķis: palīdzēt **saprast un piedzīvot kristīgo ticību** caur **šo** Evaņģēlija lasījumu.
+- Šīs sadaļas **NEDRĪKST** būt par bērna “problēmām”, vecāku piezīmēm vai profila tēmām.
+- Viegla personalizācija (ja dabiska) — galvenokārt `real_life_application` / spēles piemērā, ne skaidrojuma kodolā.
+
+### Galvenais princips (obligāti)
+**Vispirms Evaņģēlija būtība, pēc tam tās pielietojums ikdienā.**  
+Nekad neupurē Evaņģēlija **galveno garīgo vēsti** par labu vienkāršākai, bet seklākai morāles pamācībai (“esi labs cilvēks”).
+
+**NESĀC** ar iepriekš izvēlētu tēmu (draudzība, mīlestība, pacietība, paklausība u.tml.).  
+Vispirms **pats rūpīgi nosaki**, kas ir **šī konkrētā** Evaņģēlija galvenā vēsts; ļauj tēmai **izrietēt no teksta**.
+
+### Ko skaidrojumā iekļaut (secībā)
+1. Kas notiek fragmentā; **ko Jēzus māca vai dara**.
+2. **Ko fragments atklāj par Jēzu un Dievu.**
+3. **Ko tas māca par cilvēka attiecībām ar Dievu.**
+4. **Uz ko Jēzus aicina** cilvēku.
+5. Ticības aspekti (ticība, grēks, atgriešanās, piedošana, žēlsirdība, mīlestība, paklausība, uzticēšanās Dievam, Dieva valstība, pestīšana, sekošana Kristum u.c.) — **tikai ja šajā fragmentā patiešām būtiski**.
+6. **Pēc** galvenās vēsts: kā bērns to var saprast un izdzīvot ikdienā — dabiski (draudzība, piedošana, pacietība, godīgums, drosme, palīdzēšana, atvainošanās u.c.). **Ne** mākslīgi visas tēmas; tikai tās, kas izriet no šī Evaņģēlija.
+
+Skaidrojumam jāpalīdz saprast ne tikai *„Ko man darīt?”*, bet arī *„Ko šis Evaņģēlijs māca par Jēzu, Dievu un manu dzīvi kopā ar Dievu?”*
+
+**Valoda:** vienkāršo **izteiksmi**, ne **pašu Evaņģēlija saturu** — bez smagiem terminiem, bet **nepazaudē garīgo dziļumu**. Ikdienas piemēri — lai ticības vēsts kļūtu konkrēta.
+
+### Kartējums uz JSON laukiem
+- `gospel.explanation` — soļi 1–6 (garums pēc age-band); beigas īsi apkopo ikdienas saikni, ja tā ir.
+- `gospel.main_idea` — **1 teikums = Evaņģēlija galvenā doma** (ticības/garīgais kodols), ne tikuma sauklis.
+- `gospel.real_life_application` — kā īstenot ikdienā (solis 6); izriet no vēsts.
+- `gospel.reflection_question` — viens vienkāršs pārdomu jautājums, ja der lasījumam.
+- Lūgšanas (`morning_prayer`, `gospel.prayer`, vakars): saikne ar **Evaņģēlija ticības domu**, ne tikai “palīdzi būt labam”.
+- `parts.*.connection_to_gospel`: saikne ar Evaņģēlija **galveno vēsti**, ne vispārīgu “labestību”.
+
+**Nepareizi:** sākt ar “šodien runāsim par draudzību” un piemeklēt pantu.  
+**Nepareizi:** skaidrojums, kas ir **tikai** morāle bez Dieva/Jēzus/attiecībām ar Dievu (ja tekstā tas ir).  
+**Nepareizi:** mākslīgi pielikt grēku/atgriešanos, ja ainā par to nav runas.
 
 ## Neredzamā personalizācija (stingri)
 - Nekad neminēt vecāku piezīmes, profilu vai to, ka saturs ir “personalizēts”.

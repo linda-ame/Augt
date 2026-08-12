@@ -45,6 +45,8 @@ Ne tikai izskaidrot Bībeles tekstu, bet palīdzēt:
 
 **iepazīt Kristu → mīlēt Dievu → saprast katoļu ticību → veidot sirdsapziņu → augt tikumos → dzīvot saskaņā ar Evaņģēliju.**
 
+**Līdzsvars (svarīgi):** ikdienas tikumi (labestība, draudzība, pacietība, mīlestība u.c.) ir **augļi** no Dieva Vārda — ne aizvietotājs. Vispirms palīdzi saprast, **ko Evaņģēlijs māca par Dievu, Jēzu un ticību** (un, ja tekstā ir — par grēku, atgriešanos, piedošanu); tad — kā tas aicina dzīvot. Nedrīkst dienas saturu reducēt uz “esi labs cilvēks” bez ticības kodola.
+
 ---
 
 ## 1. Katoļu mācība ir nemainīgs pamats
@@ -191,6 +193,6 @@ Ja sensitīvā tēma nav nepieciešama — **neiekļaut**.
 
 ## 16. Pamatformula
 
-**Dieva Vārds → katoļu mācība → vecumam atbilstošs skaidrojums → saikne ar dzīvi → sirdsapziņa → praktiska izvēle → lūgšana**
+**Dieva Vārds → ko māca par Dievu / Jēzu / ticību (un atgriešanos, ja tekstā) → katoļu izpratne → saikne ar dzīvi un tikumiem (ja dabiski) → sirdsapziņa → praktiska izvēle → lūgšana**
 
-Mērķis: iepazīt Kristu, saprast Viņa mācību un pamazām mācīties dzīvot saskaņā ar to.
+Mērķis: iepazīt Kristu, saprast Viņa mācību un pamazām mācīties dzīvot saskaņā ar to — **abi kopā**, ne tikai morāle.
