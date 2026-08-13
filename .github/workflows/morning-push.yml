@@ -1,11 +1,8 @@
 name: Morning push notifications
 
+# Scheduled push is handled by cron-job.org → POST /api/cron/morning-push.
+# Keep workflow_dispatch only (manual). Do not dual-schedule — push is not idempotent.
 on:
-  schedule:
-    # ~09:00 Europe/Riga.
-    # Summer (EEST, UTC+3): 06:00 UTC. Winter (EET, UTC+2): switch to "0 7 * * *".
-    # (Only one cron — push is not idempotent; dual schedules would notify twice.)
-    - cron: "0 6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -22,5 +19,6 @@ jobs:
             exit 1
           fi
           curl -fsS -X POST \
+            --max-time 60 \
             -H "Authorization: Bearer ${CRON_SECRET}" \
             "${APP_URL%/}/api/cron/morning-push"
