@@ -2,10 +2,8 @@ name: Daily Augt generation
 
 on:
   schedule:
-    # TEST today: ~10:15 and ~10:30 Europe/Riga (GH cron often lags).
-    # Summer (EEST, UTC+3): 07:15 / 07:30 UTC.
+    # TEST: ~10:15 Europe/Riga (07:15 UTC in summer).
     - cron: "15 7 * * *"
-    - cron: "30 7 * * *"
     # Steady: ~05:00 Europe/Riga.
     # Summer 02:00 UTC · Winter 03:00 UTC.
     - cron: "0 2 * * *"
@@ -28,7 +26,6 @@ jobs:
             exit 1
           fi
           echo "Calling ${APP_URL%/}/api/cron/generate-daily"
-          # Generation can take several minutes (all age bands + children).
           curl -fsS -X POST \
             --max-time 600 \
             -H "Authorization: Bearer ${CRON_SECRET}" \
