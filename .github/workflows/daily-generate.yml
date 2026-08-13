@@ -1,21 +1,14 @@
 name: Daily Augt generation
 
+# Scheduled generation is handled by cron-job.org → POST /api/cron/generate-daily.
+# This workflow remains for manual runs only.
 on:
-  schedule:
-    # TEST: ~10:15 Europe/Riga (07:15 UTC in summer).
-    - cron: "15 7 * * *"
-    # Steady: ~05:00 Europe/Riga.
-    # Summer 02:00 UTC · Winter 03:00 UTC.
-    - cron: "0 2 * * *"
-    - cron: "0 3 * * *"
   workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      # Run on the deployed app (not the Actions runner). GitHub IPs often
-      # timeout or get empty HTML from mieramtuvu.lv; the app host can fetch it.
       - name: Generate daily lessons via app cron
         env:
           APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
@@ -27,7 +20,7 @@ jobs:
           fi
           echo "Calling ${APP_URL%/}/api/cron/generate-daily"
           curl -fsS -X POST \
-            --max-time 600 \
+            --max-time 60 \
             -H "Authorization: Bearer ${CRON_SECRET}" \
             -H "Content-Type: application/json" \
             "${APP_URL%/}/api/cron/generate-daily"
