@@ -2,11 +2,11 @@ name: Daily Augt generation
 
 on:
   schedule:
-    # ~00:10 Europe/Riga — shortly after Mieram tuvu midnight rollover.
-    # Summer (EEST, UTC+3): 21:10 UTC · Winter (EET, UTC+2): 22:10 UTC.
+    # ~05:00 Europe/Riga — Mieram tuvu already rolled over; kids wake later.
+    # Summer (EEST, UTC+3): 02:00 UTC · Winter (EET, UTC+2): 03:00 UTC.
     # Both fire; generation is idempotent per date (skips if already done).
-    - cron: "10 21 * * *"
-    - cron: "10 22 * * *"
+    - cron: "0 2 * * *"
+    - cron: "0 3 * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,6 +19,8 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      # Secrets are injected as env vars — do not use `npm run generate:daily`
+      # (that script loads `.env.local`, which does not exist on the runner).
       - name: Generate daily lessons
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
@@ -28,4 +30,4 @@ jobs:
           AI_MODEL: ${{ secrets.AI_MODEL }}
           AI_MODELS: ${{ secrets.AI_MODELS }}
           KID_SESSION_SECRET: ${{ secrets.KID_SESSION_SECRET }}
-        run: npm run generate:daily
+        run: npx tsx scripts/generate-daily.ts
