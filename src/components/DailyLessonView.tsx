@@ -36,6 +36,7 @@ import {
 } from "@/lib/day-progress";
 import { NotificationSoftPrompt } from "@/components/NotificationSoftPrompt";
 import { GospelListenButton } from "@/components/GospelListenButton";
+import { DayContentResumeRefresh } from "@/components/DayContentResumeRefresh";
 
 function DateSwitcher({
   date,
@@ -1476,6 +1477,7 @@ export function DailyLessonView({
   gospelAudioUrl?: string | null;
 }) {
   const gospel = normalizeGospelContent(content);
+  const contentReady = status === "success" && Boolean(content);
   const byRole = useMemo(() => {
     const map = new Map<ReadingRole, ScriptureReading>();
     for (const r of readings) {
@@ -1574,6 +1576,7 @@ export function DailyLessonView({
 
   return (
     <main className="mx-auto max-w-2xl px-6 pb-8 pt-2">
+      <DayContentResumeRefresh date={date} contentReady={contentReady} />
       <section className="flex items-center justify-between gap-3">
         <p className="truncate text-sm leading-none text-[var(--ink-soft)]">
           {isGuest

@@ -10,6 +10,7 @@ import {
 } from "@/lib/dates";
 import { DayHeroArt } from "@/components/DayHeroArt";
 import { SectionHeading } from "@/components/SectionHeading";
+import { DayContentResumeRefresh } from "@/components/DayContentResumeRefresh";
 import { keepParentheticalsTogether } from "@/lib/citation";
 import {
   parseAlleluiaDisplay,
@@ -197,6 +198,7 @@ export function GuestDayView({
 
   return (
     <main className="relative mx-auto max-w-2xl px-6 pb-8 pt-2">
+      <DayContentResumeRefresh date={date} contentReady={false} />
       <section className="flex items-center justify-between gap-3">
         <p className="text-sm leading-none text-[var(--ink-soft)]">{band.label}</p>
         <Link
