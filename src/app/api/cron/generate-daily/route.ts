@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { generateDailyForAllActiveChildren } from "@/services/generation";
 
+/** Full daily generation (readings + age bands + children) can take several minutes. */
+export const maxDuration = 300;
+
 export async function POST(req: Request) {
   const auth = req.headers.get("authorization");
   const secret = process.env.CRON_SECRET;

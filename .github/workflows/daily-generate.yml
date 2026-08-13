@@ -2,9 +2,12 @@ name: Daily Augt generation
 
 on:
   schedule:
-    # ~05:00 Europe/Riga — Mieram tuvu already rolled over; kids wake later.
-    # Summer (EEST, UTC+3): 02:00 UTC · Winter (EET, UTC+2): 03:00 UTC.
-    # Both fire; generation is idempotent per date (skips if already done).
+    # TEST today: ~10:15 and ~10:30 Europe/Riga (GH cron often lags).
+    # Summer (EEST, UTC+3): 07:15 / 07:30 UTC.
+    - cron: "15 7 * * *"
+    - cron: "30 7 * * *"
+    # Steady: ~05:00 Europe/Riga.
+    # Summer 02:00 UTC · Winter 03:00 UTC.
     - cron: "0 2 * * *"
     - cron: "0 3 * * *"
   workflow_dispatch:
@@ -13,21 +16,21 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
-      - run: npm ci
-      # Secrets are injected as env vars — do not use `npm run generate:daily`
-      # (that script loads `.env.local`, which does not exist on the runner).
-      - name: Generate daily lessons
+      # Run on the deployed app (not the Actions runner). GitHub IPs often
+      # timeout or get empty HTML from mieramtuvu.lv; the app host can fetch it.
+      - name: Generate daily lessons via app cron
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
-          AI_API_KEY: ${{ secrets.AI_API_KEY }}
-          AI_MODEL: ${{ secrets.AI_MODEL }}
-          AI_MODELS: ${{ secrets.AI_MODELS }}
-          KID_SESSION_SECRET: ${{ secrets.KID_SESSION_SECRET }}
-        run: npx tsx scripts/generate-daily.ts
+          APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$APP_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "Missing NEXT_PUBLIC_APP_URL or CRON_SECRET secret"
+            exit 1
+          fi
+          echo "Calling ${APP_URL%/}/api/cron/generate-daily"
+          # Generation can take several minutes (all age bands + children).
+          curl -fsS -X POST \
+            --max-time 600 \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            -H "Content-Type: application/json" \
+            "${APP_URL%/}/api/cron/generate-daily"
