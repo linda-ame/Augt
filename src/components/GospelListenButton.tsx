@@ -15,7 +15,7 @@ export function GospelListenButton({ audioUrl }: { audioUrl: string }) {
   useEffect(() => {
     const audio = document.createElement("audio");
     audio.preload = "none";
-    audio.playsInline = true;
+    // iOS inline playback — attribute only (not on HTMLAudioElement typings)
     audio.setAttribute("playsinline", "true");
     audio.setAttribute("webkit-playsinline", "true");
     audio.src = audioUrl;
