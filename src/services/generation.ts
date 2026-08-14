@@ -457,3 +457,120 @@ export async function generateDailyForAllActiveChildren(trigger: string) {
     throw err;
   }
 }
+
+/**
+ * Cron slice: shared Scripture fetch (once into daily_readings), then either
+ * one age band or personalized children lessons. Safe to call repeatedly —
+ * successful bands/children are skipped.
+ */
+export async function generateDailyCronSlice(options: {
+  trigger: string;
+  band?: AgeBandId;
+  children?: boolean;
+}) {
+  const admin = createServiceClient();
+  const date = todayInRiga();
+  const slice =
+    options.band ?? (options.children ? "children" : "all");
+  const { data: run } = await admin
+    .from("generation_runs")
+    .insert({
+      run_date: date,
+      trigger: `${options.trigger}:${slice}`,
+      status: "running",
+    })
+    .select("*")
+    .single();
+
+  const details: Record<string, unknown> = {};
+
+  try {
+    await ensureTodaysReading(date);
+
+    if (options.band) {
+      details.ageBand = options.band;
+      details.result = await generateLessonForAgeBand(options.band, { date });
+    }
+
+    if (options.children) {
+      const { data: children, error } = await admin
+        .from("children")
+        .select("id, display_name")
+        .eq("active", true);
+      if (error) throw error;
+
+      const childResults: unknown[] = [];
+      for (const child of children ?? []) {
+        try {
+          const result = await generateLessonForChild(child.id);
+          childResults.push({
+            id: child.id,
+            name: child.display_name,
+            result,
+          });
+        } catch (err) {
+          childResults.push({
+            id: child.id,
+            name: child.display_name,
+            error: err instanceof Error ? err.message : String(err),
+          });
+        }
+      }
+      details.children = childResults;
+    }
+
+    if (!options.band && !options.children) {
+      details.ageBands = await generateLessonsForAllAgeBands({ date });
+      const { data: children, error } = await admin
+        .from("children")
+        .select("id, display_name")
+        .eq("active", true);
+      if (error) throw error;
+      const childResults: unknown[] = [];
+      for (const child of children ?? []) {
+        try {
+          const result = await generateLessonForChild(child.id);
+          childResults.push({
+            id: child.id,
+            name: child.display_name,
+            result,
+          });
+        } catch (err) {
+          childResults.push({
+            id: child.id,
+            name: child.display_name,
+            error: err instanceof Error ? err.message : String(err),
+          });
+        }
+      }
+      details.children = childResults;
+    }
+
+    if (run) {
+      await admin
+        .from("generation_runs")
+        .update({
+          status: "success",
+          finished_at: new Date().toISOString(),
+          details,
+        })
+        .eq("id", run.id);
+    }
+    return details;
+  } catch (err) {
+    if (run) {
+      await admin
+        .from("generation_runs")
+        .update({
+          status: "failed",
+          finished_at: new Date().toISOString(),
+          details: {
+            ...details,
+            error: err instanceof Error ? err.message : String(err),
+          },
+        })
+        .eq("id", run.id);
+    }
+    throw err;
+  }
+}
