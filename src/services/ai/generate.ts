@@ -310,6 +310,7 @@ ${bandGuide}
     ? `- PUBLISKAIS STANDARTA saturs: BEZ bērna profila. PRIORITĀTE: vecuma grupas specifikācija + vadlīnijas (garumi, tonis, examen).
 - gospel.explanation: DIVI LĪMEŅI iekšēji — (A) ko ŠIS fragments konkrēti māca; (B) kā aicina tuvoties Dievam / ļaut sevi pārveidot (ja tekstā — arī rūpe par tuvāko ceļu ar Dievu). Tad ikdienas augļi. Output = **plūstošs teksts BEZ** etiķetēm „Līmenis A/B”, „A:”, „B:”. Nē: tikai “esi labs” / konfliktu menedžments; nē: uzspiest “atgriešanos” katrai dienai.
 - system-rules JSON struktūra (rīts/evaņģēlijs/spēle/vakars/parts) PALIEK, bet GARUMI un examen_questions SEKO vecuma grupai, ne “vienam izmēram visiem”.
+- parts.*.summary / connection_to_gospel: 13–15 un 16–19 — **garāki pārdomu apskati** (skat. vadlīnijas); 7–12 — īsi–vidēji. Evaņģēlijs joprojām garāks/centrālāks par parts.
 - JA system-rules saka “tieši 3 examen_questions” vai fiksētus ~60–90 vārdus — šajā režīmā UZVAR vecuma grupas vadlīnijas.
 - Saturs ŠAI grupai nedrīkst būt gandrīz identisks citai vecuma grupai (cits dziļums, citi piemēri, cits garums).`
     : `- PERSONALIZĒTS saturs: bāze = VECUMA GRUPAS specifikācija + vadlīnijas (garumi, tonis, examen, tēmas).
@@ -369,7 +370,7 @@ Noteikumi:
 - gospel.activity: EVAŅĢĒLIJA teksts (ne vispārīga ikdiena). Ietver "type", "instruction"; explanation katrā jautājumā vai activity līmenī.
 - multiple_choice / true_false: questions masīvs ar **tieši 2** īsiem punktiem par šodienas Evaņģēliju (katram: question, options, correct_answer indekss, explanation). UI rāda abus vienā panelī. true_false options: Patiess / Nepatiess.
 - fill_blank: blanks masīvs ar **2–3** teikumiem (___), katram answer + explanation. UI pārbauda visus kopā.
-- word_scramble: tieši 1 īss Evaņģēlija vārds (scrambled + answer + explanation).
+- word_scramble: tieši 1 īss Evaņģēlija vārds (scrambled + answer + explanation). ORTOGRAFIJA: answer ar pareizām garumzīmēm; scrambled = tieši tie paši burti (ī≠i, ā≠a); preferē mazo burtu; burtu kopām jāsakrīt 1:1.
 - who_am_i: 1 persona; clues[2–3] progresīvi mājieni + answer + explanation.
 - put_in_order: 3–4 notikumi no šodienas Evaņģēlija (items + correct_answer secība + explanation).
 - matching: tieši 3 pāri no šodienas Evaņģēlija (pairs + explanation).

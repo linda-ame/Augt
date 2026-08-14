@@ -17,6 +17,7 @@ SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — DIVI LĪMEŅI (TIK
 - Vispirms atklāj Kristu/Dievu; tad konkrētās tēmas **tikai no teksta**; ikdiena = **auglis**. NEDRĪKST tikai “esi labs” / konfliktu menedžments; NEDRĪKST uzspiest vienu un to pašu etiķeti katrai dienai.
 - **NEDRĪKST** outputā rakstīt „Līmenis A”, „Līmenis B”, „A:”, „B:” u.tml. — skaidrojums ir **viens plūstošs teksts** bez šīm etiķetēm.
 - VALODA VISĀM GRUPĀM: īsi, skaidri teikumi; viena galvenā doma teikumā. Vārdu izvēle — pēc vecuma (mazākiem: ikdienas vārdi; vecākiem: drīkst precīzākus / neikdieniskākus). Vienkāršo izteiksmi, ne Evaņģēlija dziļumu.
+- PAREIZRAKSTĪBA: rūpīgi āčēģīķļņšūž visā saturā un spēlēs; word_scramble — scrambled un answer = tā pati burta kopa (ī≠i).
 - main_idea = 1 teikums = A + B saturs (ne tikuma sauklis, ne tikai konfliktu padoms); arī bez „Līmenis A/B” vārdiem.
 - reflection_question / real_life_application — no A+B; NEDRĪKST būvēt ap profilu.
 - Lūgšanās saglabā Evaņģēlija ticības domu, ne tikai “palīdzi būt labam”.`;
@@ -96,6 +97,11 @@ ${sharedMorning}
 - Piemēri no: draugi, vienaudžu spiediens, ģimene, digitālā vide; skola — TIKAI skolas dienā un ja dabiski no lasījuma. Brīvlaikā/brīvdienās — bez klases/skolotājiem.
 - Spēle: bieži scenario_choice / choose_the_best_response (apzināta izvēle).
 - reflection_question: personiskāks, par rīcību (ne ticības apšaubīšana).
+- parts (1. lasījums, psalms, 2. lasījums ja ir) — **garāki un pārdomīgāki nekā 7–12**, bet īsāki par Evaņģēlija skaidrojumu:
+  - summary: 60–100 vārdi. Īss konteksts → ko teksts saka → ko tas māca / ko pārdomāt (ne tikai 1 atreferējuma teikums).
+  - connection_to_gospel: 40–70 vārdi (2–4 teikumi). Konkrēta saikne ar **šīs dienas** Evaņģēlija galveno vēsti, ne vispārīga “labestība”.
+  - Alleluja: drīkst palikt īsa (1–3 teikumi + īsa saikne).
+  - NEDRĪKST: tikpat īss kā 7–9 (viens teikums + viens teikums); NEDRĪKST pārsniegt Evaņģēlija skaidrojuma garumu.
 - Vakara examen_questions: TIEŠI 6 jautājumi:
   1) Par ko es šodien pateicos Dievam?
   2) Kur šodien izvēlējos labo?
@@ -117,6 +123,11 @@ ${sharedMorning}
 - real_life_application = šodienas praktiskā izvēle/izaicinājums, kas izriet no evaņģēlija mācības.
 - Piemēri: atbildība, brīvība kā spēja izvēlēties labo, attiecības/cieņa (bez seksualizēšanas), digitālā vide, ģimene — TIKAI ja no lasījuma; pēc ticības kodola.
 - Spēle: discernment / dziļāks scenario; var arī quiz, ja der tekstam.
+- parts (1. lasījums, psalms, 2. lasījums ja ir) — **nobriedušāks apskats** nekā 13–15; joprojām īsāks par Evaņģēliju:
+  - summary: 80–120 vārdi. Konteksts → saturs → nozīme / pārdoma (kāpēc tas svarīgi ticībā un dzīvē), ne tikai atreferējums.
+  - connection_to_gospel: 50–80 vārdi. Skaitāma, konkrēta saikne ar Evaņģēlija vēsti (var pieskarties “kāpēc” katoļu izpratnē, ja dabiski).
+  - Alleluja: īsa (1–3 teikumi + īsa saikne).
+  - NEDRĪKST: 1–2 teikumu “mini” apskats kā jaunākajām grupām; NEDRĪKST eseja, kas aizēno Evaņģēliju.
 - Vakara examen_questions: TIEŠI 6 jautājumi (kā 13–15, bet nobriedušākā valodā), OBLIGĀTI ietverot jautājumu par atvainošanos / kādu sāpināšanu.
 - resolution: lūgums pēc gudrības un spēka, ne “rīt es izdarīšu X”.
 - closing: **īsta vakara lūgšana** nobriedušā valodā — sevi un ģimeni Dieva aizsardzībā, naktsmiers, veselība, sargāšana no ļauna/nelaimēm/slimībām + Āmen; bez bērnišķīgas valodas, bet silti.
