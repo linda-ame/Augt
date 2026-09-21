@@ -24,8 +24,9 @@ export function KidPrayersClient({
 
   const tabs = useMemo(() => {
     const base = book.map((c) => ({ id: c.id, title: c.title }));
+    if (!canUseMyPrayers) return base;
     return [...base, { id: "manas", title: "Manas lūgšanas" }];
-  }, [book]);
+  }, [book, canUseMyPrayers]);
 
   const initialCat =
     tabs.find((c) => c.id === catParam)?.id ?? book[0]?.id ?? "pamata";
@@ -41,16 +42,26 @@ export function KidPrayersClient({
   const [error, setError] = useState<string | null>(null);
 
   const category = book.find((c) => c.id === catId);
-  const isManas = catId === "manas";
+  const isManas = canUseMyPrayers && catId === "manas";
 
   useEffect(() => {
     if (catParam === "manas") {
-      setCatId("manas");
+      if (canUseMyPrayers) {
+        setCatId("manas");
+      } else {
+        setCatId(book[0]?.id ?? "pamata");
+      }
       return;
     }
     const nextCat = book.find((c) => c.id === catParam)?.id;
     if (nextCat) setCatId(nextCat);
-  }, [catParam, book]);
+  }, [catParam, book, canUseMyPrayers]);
+
+  useEffect(() => {
+    if (!canUseMyPrayers && catId === "manas") {
+      setCatId(book[0]?.id ?? "pamata");
+    }
+  }, [canUseMyPrayers, catId, book]);
 
   useEffect(() => {
     if (isManas) {
@@ -145,7 +156,9 @@ export function KidPrayersClient({
   return (
     <main className="mx-auto max-w-2xl px-6 py-8 pb-28">
       <p className="text-[var(--ink-soft)]">
-        Mācāmies un skaitām kopā — klasiskās lūgšanas un tavas personīgās.
+        {canUseMyPrayers
+          ? "Mācāmies un skaitām kopā — klasiskās lūgšanas un tavas personīgās."
+          : "Mācāmies un skaitām kopā — klasiskās lūgšanas vienā vietā."}
       </p>
 
       <div
@@ -182,19 +195,6 @@ export function KidPrayersClient({
 
       {isManas ? (
         <div className="mt-5 space-y-3">
-          {!canUseMyPrayers ? (
-            <p className="text-[var(--ink-soft)]">
-              Savas lūgšanas ir privātas — tās redz un pievieno tikai pieslēgts
-              bērns.{" "}
-              <a
-                href="/login"
-                className="font-semibold text-[var(--bg-deep)] underline"
-              >
-                Pieslēgties
-              </a>
-            </p>
-          ) : (
-            <>
               {!showForm ? (
                 <button
                   type="button"
@@ -289,8 +289,6 @@ export function KidPrayersClient({
                   onSave={(next) => savePrayerEdit(prayer.id, next)}
                 />
               ))}
-            </>
-          )}
         </div>
       ) : (
         <div className="mt-5 space-y-3">
