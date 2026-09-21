@@ -298,6 +298,32 @@ function parseFromHtml(html: string): {
   return { readings, dailyQuote };
 }
 
+const FETCH_HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (compatible; AugtBot/1.0; +https://augt.app; public liturgical readings)",
+  Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+  "Accept-Language": "lv,en;q=0.8",
+} as const;
+
+const FETCH_TIMEOUT_MS = 30_000;
+const FETCH_ATTEMPTS = 3;
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchHtml(url: string): Promise<string> {
+  const res = await fetch(url, {
+    headers: FETCH_HEADERS,
+    cache: "no-store",
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status} no ${url}`);
+  }
+  return res.text();
+}
+
 export class MieramTuvuSource implements ScriptureSource {
   async fetchForDate(date: string): Promise<DailyScripture> {
     const candidates = [
@@ -309,40 +335,33 @@ export class MieramTuvuSource implements ScriptureSource {
 
     let lastError: unknown;
     const tried = new Set<string>();
-    for (const url of candidates) {
-      if (tried.has(url)) continue;
-      tried.add(url);
-      try {
-        const res = await fetch(url, {
-          headers: {
-            "User-Agent":
-              "AugtBot/1.0 (+family faith app; public Scripture readings only)",
-            Accept: "text/html",
-          },
-          cache: "no-store",
-        });
-        if (!res.ok) {
-          lastError = new Error(`HTTP ${res.status} no ${url}`);
-          continue;
+    for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+      for (const url of candidates) {
+        if (tried.has(`${attempt}:${url}`)) continue;
+        tried.add(`${attempt}:${url}`);
+        try {
+          const html = await fetchHtml(url);
+          if (!/Lasījums no/i.test(html) && !/Svēto Rakstu lasījumi/i.test(html)) {
+            lastError = new Error("Lapa nesatur lasījumu tekstu.");
+            continue;
+          }
+          const { readings, dailyQuote } = parseFromHtml(html);
+          const sourceText = readings
+            .map((r) => `[${r.role}] ${r.label} (${r.reference})\n${r.text}`)
+            .join("\n\n");
+          return {
+            date,
+            sourceUrl: url,
+            readings,
+            sourceText,
+            dailyQuote,
+          };
+        } catch (err) {
+          lastError = err;
         }
-        const html = await res.text();
-        if (!/Lasījums no/i.test(html) && !/Svēto Rakstu lasījumi/i.test(html)) {
-          lastError = new Error("Lapa nesatur lasījumu tekstu.");
-          continue;
-        }
-        const { readings, dailyQuote } = parseFromHtml(html);
-        const sourceText = readings
-          .map((r) => `[${r.role}] ${r.label} (${r.reference})\n${r.text}`)
-          .join("\n\n");
-        return {
-          date,
-          sourceUrl: url,
-          readings,
-          sourceText,
-          dailyQuote,
-        };
-      } catch (err) {
-        lastError = err;
+      }
+      if (attempt < FETCH_ATTEMPTS) {
+        await sleep(2_000 * attempt);
       }
     }
 

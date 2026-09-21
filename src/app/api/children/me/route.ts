@@ -25,7 +25,9 @@ export async function PATCH(req: Request) {
       typeof body.avatar_emoji === "string" &&
       isAllowedAvatarEmoji(body.avatar_emoji)
     ) {
+      // Emoji replaces photo (same either-or rule as BeeMazing).
       patch.avatar_emoji = body.avatar_emoji;
+      patch.avatar_url = null;
     } else {
       return NextResponse.json(
         { error: "Šis emoji nav atļauts profilam." },
@@ -39,6 +41,17 @@ export async function PATCH(req: Request) {
   }
 
   const admin = createServiceClient();
+
+  let previousAvatarUrl: string | null = null;
+  if (patch.avatar_url === null && patch.avatar_emoji) {
+    const { data: existing } = await admin
+      .from("children")
+      .select("avatar_url")
+      .eq("id", active.childId)
+      .single();
+    previousAvatarUrl = existing?.avatar_url ?? null;
+  }
+
   const { data, error } = await admin
     .from("children")
     .update(patch)
@@ -51,5 +64,17 @@ export async function PATCH(req: Request) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  if (previousAvatarUrl) {
+    const marker = "/child-avatars/";
+    const idx = previousAvatarUrl.indexOf(marker);
+    if (idx >= 0) {
+      const oldPath = decodeURIComponent(
+        previousAvatarUrl.slice(idx + marker.length).split("?")[0],
+      );
+      await admin.storage.from("child-avatars").remove([oldPath]);
+    }
+  }
+
   return NextResponse.json({ ok: true, child: data });
 }

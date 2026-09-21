@@ -113,7 +113,35 @@ export const activitySchema = z
       }
     }
 
-    return { ...a, instruction, questions, blanks, clues };
+    let scrambled = a.scrambled;
+    let answer = a.answer;
+    if (a.type === "word_scramble" && answer && answer.trim()) {
+      const normalizedAnswer = answer.trim().toLocaleLowerCase("lv");
+      answer = normalizedAnswer;
+      const answerLetters = [...normalizedAnswer];
+      const letterBag = (s: string) =>
+        [...s.replace(/\s+/g, "").toLocaleLowerCase("lv")].sort().join("");
+      const scrambledOk =
+        typeof scrambled === "string" &&
+        scrambled.trim().length > 0 &&
+        letterBag(scrambled) === letterBag(normalizedAnswer);
+      if (!scrambledOk) {
+        const arr = [...answerLetters];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        if (arr.join("") === normalizedAnswer && arr.length > 1) {
+          [arr[0], arr[1]] = [arr[1], arr[0]];
+        }
+        scrambled = arr.join("");
+      } else {
+        const raw = scrambled ?? normalizedAnswer;
+        scrambled = [...raw.replace(/\s+/g, "").toLocaleLowerCase("lv")].join("");
+      }
+    }
+
+    return { ...a, instruction, questions, blanks, clues, scrambled, answer };
   });
 
 export const gospelContentSchema = z.object({

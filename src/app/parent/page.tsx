@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ParentDashboard } from "@/components/ParentDashboard";
-import { generateFamilyCode } from "@/lib/codes";
 import { todayInRiga } from "@/lib/dates";
+import { getParentViewChild } from "@/lib/kid-session";
+import { ensureOwnedFamily } from "@/lib/family";
 import {
   normalizeParentNotes,
   type ProfileStatus,
@@ -20,29 +21,14 @@ export default async function ParentPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login?mode=parent");
 
-  let { data: family } = await supabase
-    .from("families")
-    .select("id, name, family_code")
-    .eq("owner_user_id", user.id)
-    .maybeSingle();
+  // Parental gate: while previewing as a child, parent dashboard requires unlock PIN.
+  const parentViewChildId = await getParentViewChild();
+  if (parentViewChildId) redirect("/kid");
 
-  if (!family) {
-    const familyName =
-      (user.user_metadata?.family_name as string | undefined)?.trim() ||
-      "Mana ģimene";
-    for (let i = 0; i < 5 && !family; i++) {
-      const { data, error } = await supabase
-        .from("families")
-        .insert({
-          name: familyName,
-          family_code: generateFamilyCode(),
-          owner_user_id: user.id,
-        })
-        .select("id, name, family_code")
-        .single();
-      if (!error && data) family = data;
-    }
-  }
+  const familyName =
+    (user.user_metadata?.family_name as string | undefined)?.trim() ||
+    "Mana ģimene";
+  const family = await ensureOwnedFamily(supabase, user.id, familyName);
 
   if (!family) {
     redirect(
@@ -75,7 +61,12 @@ export default async function ParentPage() {
 
   return (
     <ParentDashboard
-      family={family}
+      family={{
+        id: family.id,
+        name: family.name,
+        family_code: family.family_code,
+      }}
+      hasParentGatePin={Boolean(family.parent_gate_pin_hash)}
       childrenList={(children ?? []).map((c) => {
         const status = asProfileStatus(c.profile_status);
         const hasLegacyProfile =

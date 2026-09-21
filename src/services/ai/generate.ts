@@ -7,6 +7,7 @@ import {
   type AgeBandId,
 } from "@/lib/age-bands";
 import { schoolDayContextForPrompt, todayInRiga } from "@/lib/dates";
+import { dayVariationBrief } from "@/lib/day-variation";
 import {
   dailyLessonContentSchema,
   type DailyLessonContent,
@@ -251,20 +252,70 @@ Atbildi JSON: { "profile": "..." }`;
   return parsed.profile.trim();
 }
 
+/**
+ * Best-effort: narrow a quote to precise verse numbers within a reading span.
+ * Falls back to null → callers keep the full liturgical reference.
+ */
+export async function locateQuoteVerses(input: {
+  readingReference: string;
+  readingText: string;
+  quoteText: string;
+}): Promise<string | null> {
+  const reference = input.readingReference.trim();
+  const quote = input.quoteText.trim();
+  const readingText = input.readingText.trim();
+  if (!reference || !quote || quote.length < 12 || !readingText) return null;
+
+  try {
+    const { content: raw } = await chatCompletion([
+      {
+        role: "system",
+        content: `Tu esi Bībeles atsauču palīgs. Atbildi TIKAI JSON: { "precise_reference": string | null }.
+Dots lasījuma diapazons (piem. "Mt 28, 16-20") un citāts no tā teksta.
+Ja vari droši noteikt pantu(-us) šajā diapazonā, atgriez precīzu atsauci tajā pašā stilā (piem. "Mt 28, 18-19" vai "Mt 28, 18").
+Ja neesi drošs — null. NEizdomā pantus ārpus diapazona.`,
+      },
+      {
+        role: "user",
+        content: JSON.stringify({
+          reading_reference: reference,
+          quote,
+          reading_text: readingText.slice(0, 3500),
+        }),
+      },
+    ]);
+    const parsed = extractJson(raw) as { precise_reference?: string | null };
+    const precise =
+      typeof parsed.precise_reference === "string"
+        ? parsed.precise_reference.trim()
+        : "";
+    if (!precise || precise.toLowerCase() === "null") return null;
+    return precise;
+  } catch {
+    return null;
+  }
+}
+
 export async function generateDailyLesson(input: {
   age: number;
   profile: string;
   scriptureText: string;
   readings?: ScriptureReading[];
   recentGameTypes: string[];
+  /** Excerpts from recent days so prayers and actions do not repeat. */
+  recentAvoidance?: string;
   /** Calendar day for school/weekend/summer context (yyyy-MM-dd, Europe/Riga). */
   date?: string;
   /** When set: public standard content for that age band (no child personalization). */
   ageBandId?: AgeBandId;
+  /** One-off parent note for this regenerate only (does not replace profile/rules). */
+  parentFeedback?: string;
 }): Promise<{ content: DailyLessonContent; provider: string; model: string }> {
   const models = resolveModelChain();
   const date = input.date ?? todayInRiga();
-  const dayContext = schoolDayContextForPrompt(date);
+  const dayContext = `${schoolDayContextForPrompt(date)}
+
+${dayVariationBrief(date)}`;
   const games = loadGameLibrary().games.filter(
     (g) => input.age >= g.age_range[0] && input.age <= g.age_range[1],
   );
@@ -378,8 +429,9 @@ Noteikumi:
 - Quiz spēlēm: "correct_answer" vai "answer"; explanation NEUTRĀLS (bez „Lieliski!” / „Pareizi!”).
 - scenario_choice / choose_the_best_response: ŠAURI — tikai ja tekstā ir skaidra rīcība/runa; ko Jēzus/nosaukts tēls no ŠĪ teksta darītu/teiktu šajā ainā. Bez skolas/ikdienas “ko tu darītu”. Ja šaubies — cits spēles tips. options (2–3), correct_answer, silts explanation.
 - gospel.real_life_application: **mazs, izpildāms** ierosinājums šodienai (īsa izvēle / dažas minūtes). Nedrīkst: “rīt pirmo pusstundu…”, “visu dienu bez…”, nereāli laika bloki.
-- morning_prayer: katrā rītā vismaz VIENS īss aizlūgums par citiem (ģimene/draugi/skola*/satiktie) — rotē; *skola tikai ja SKOLAS KONTEKSTS atļauj.
-- evening_prayer: examen = atskats; resolution = īss spēka lūgums; **closing = GALVENĀ vakara lūgšana** (sargā mani un ģimeni, naktsmiers, veselība, sargā no ļauna/nelaimēm/slimībām + Āmen). Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.
+- morning_prayer: katrā rītā vismaz VIENS īss aizlūgums par citiem — šodien TIKAI virziens no ŠODIENAS VARIĀCIJAS; *skola tikai ja SKOLAS KONTEKSTS atļauj. Obligātie gabali paliek, bet pirmais teikums un Evaņģēlija tēls katru dienu ir citi.
+- evening_prayer: examen = atskats; jautājumu TĒMAS un skaits pēc vecuma grupas, bet teikumi katru dienu pārfrāzēti (ne iekopēti). resolution = īss spēka lūgums. **closing = GALVENĀ vakara lūgšana** ar visiem pieciem elementiem (sargā mani un ģimeni, naktsmiers, veselība, sargā no ļauna/nelaimēm/slimībām + Āmen), bet kārtība un ritms — pēc ŠODIENAS VARIĀCIJAS. Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.
+- gospel.real_life_application un parts.connection_to_gospel: forma un saiknes veids — pēc ŠODIENAS VARIĀCIJAS. Neatkārto nesenās dienas.
 - STINGRI ievēro SKOLAS KONTEKSTU augstāk: brīvlaikā un sestdienā–svētdienā bez skolas/klasesbiedru/skolotāju situācijām.
 ${lengthRules}
 `;
@@ -396,6 +448,17 @@ ${lengthRules}
     2,
   );
 
+  const feedback = input.parentFeedback?.trim() || "";
+  const feedbackBlock = feedback
+    ? `
+VECĀKA KOMENTĀRS TIKAI ŠAI ĢENERĒŠANAI (ņem vērā kā papildu norādi, BET:
+- NEPĀRKĀP system-rules, katoļu principus, vecuma grupas vadlīnijas un JSON shēmu;
+- NEMAINI ticības kodolu / Evaņģēlija prioritāti;
+- ja komentārs konfliktē ar obligātajām instrukcijām — uzvar instrukcijas):
+${feedback}
+`
+    : "";
+
   const user = isPublicBand
     ? `REŽĪMS: publiskais standarta saturs (nav vecāku personalizācijas; nav precīza vecuma gados — tikai josla)
 VECUMA GRUPA: ${bandMeta?.label ?? bandId} (aptuvenais vecums promptam: ${input.age})
@@ -409,6 +472,8 @@ ${readingsPayload ? JSON.stringify(readingsPayload, null, 2) : input.scriptureTe
 
 NESENĀS SPĒLES ŠAI GRUPAI (izvairies no atkārtošanas):
 ${input.recentGameTypes.join(", ") || "nav"}
+
+${input.recentAvoidance?.trim() || ""}
 
 SPĒĻU KATALOGS (tā pati spēļu sistēma kā personalizētajā lietotnē; izvēlies vecumam derīgu tipu):
 ${gamesJson}
@@ -424,12 +489,14 @@ ${bandGuide}
 
 PERSONALIZĒTS PROFILS (neredzams bērnam; TIKAI ja dabiski saskan ar Evaņģēliju):
 ${input.profile.trim() || "(tukšs — izmanto tikai vecuma grupas bāzi)"}
-
+${feedbackBlock}
 ŠODIENAS LITURĢISKIE TEKSTI:
 ${readingsPayload ? JSON.stringify(readingsPayload, null, 2) : input.scriptureText}
 
 NESENĀS SPĒLES (izvairies no atkārtošanas):
 ${input.recentGameTypes.join(", ") || "nav"}
+
+${input.recentAvoidance?.trim() || ""}
 
 SPĒĻU KATALOGS:
 ${gamesJson}

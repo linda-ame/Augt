@@ -5,11 +5,11 @@ export function ageBandGenerationGuide(bandId: AgeBandId): string {
   const sharedMorning = `
 RĪTA LŪGŠANA — ARĪ PAR CITIEM (ne tikai “svētī manu dienu”):
 - morning_prayer joprojām īsa un saistīta ar dienas Evaņģēlija domu.
-- Katrā rītā iekļauj **vismaz vienu** īsu aizlūgumu / lūgumu par citiem — rotē, NE katru rītu visu sarakstu.
+- Katrā rītā iekļauj **vismaz vienu** īsu aizlūgumu / lūgumu par citiem — **šodien tikai viens virziens** no ŠODIENAS VARIĀCIJAS, NE katru rītu visu sarakstu.
 - Iespējamie virzieni: ģimene; draugi; cilvēki, kurus šodien satikšu; kāds, kam šodien grūti; miera / labestības lūgums citiem.
 - Skolasbiedri / skolotāji / skola — **TIKAI** ja SKOLAS KONTEKSTS atļauj (nav vasaras brīvlaiks jūnijs–augusts un nav sestdiena/svētdiena). Brīvlaikā un brīvdienās šos virzienus NELIETOT.
-- LABI: 1–2 teikumi body vai closing daļā (“Kungs, svētī manu ģimeni…” / “palīdzi tiem, kurus šodien satikšu…”).
-- NEDRĪKST: katru rītu mehāniski visi punkti; gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās.
+- LABI: 1–2 teikumi body vai closing daļā, ar konkrētu cilvēku, ne “svētī visus”.
+- NEDRĪKST: katru rītu mehāniski visi punkti; gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās; katru rītu tas pats “Paldies par jauno dienu” + “palīdzi būt labam”.
 
 SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — DIVI LĪMEŅI (TIKAI iekšēji):
 - Iekšēji **A:** ko ŠIS fragments konkrēti māca (no teksta). Iekšēji **B:** kā tas aicina **tuvoties Dievam** un ļaut Viņam pārveidot dzīvi (Dievam katrs ir svarīgs; ja tekstā — arī rūpe par tuvāko ceļu ar Dievu).
@@ -25,12 +25,12 @@ SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — DIVI LĪMEŅI (TIK
   const sharedEvening = `
 DIENAS APŅEMŠANĀS vs VAKARS:
 - Praktiskais ierosinājums ir gospel.real_life_application (+ spēle) — ŠODIENAI (vai atlikušajai dienai), ne “rītdienas plāns”.
-- real_life_application jābūt **vieglam un reāli izpildāmam** 1–5 minūtēs vai vienā īsa izvēlē:
-  LABI: īss labs vārds; viena reize nolikt telefonu un palīdzēt ģimenei; 10–15 min bez ekrāna pirms miega; neiesaistīties aprunāšanā; atvainoties.
-  SLIKTI / NEDRĪKST: “pirmo pusstundu rīt veltīt palīdzībai”; “visu dienu bez telefona”; “vienmēr būšu…”; lieli laika bloki skolas rītā; **klasesbiedru / skolas uzdevumi vasarā vai sestdienā–svētdienā**.
+- real_life_application jābūt **vieglam un reāli izpildāmam** 1–5 minūtēs vai vienā īsa izvēlē, un **katru dienu citā formā** (ŠODIENAS VARIĀCIJA): teikums, ko pateikt; neredzama palīdzība; apstāšanās pirms reakcijas; īss kluss lūgums; pateicība vienam cilvēkam; noklausīties; atteikties no viena maza komforta. NEDRĪKST katru dienu “esi laipns / palīdzi kādam”.
+  LABI: īss labs vārds; viena reize nolikt telefonu un palīdzēt ģimenei; 10–15 min bez ekrāna pirms miega; neiesaistīties aprunāšanā; atvainoties — **bet tikai ja tā ir šodienas forma un tā izriet no Evaņģēlija**.
+  SLIKTI / NEDRĪKST: “pirmo pusstundu rīt veltīt palīdzībai”; “visu dienu bez telefona”; “vienmēr būšu…”; lieli laika bloki skolas rītā; **klasesbiedru / skolas uzdevumi vasarā vai sestdienā–svētdienā**; tas pats “šodien palīdzi kādam” katru dienu.
   Ja tēma saistās ar ekrāniem/tīkliem — labāk “izvēlies šodien vienu reizi palīdzēt / būt klātesošam NEVISēdēt ekrānā”, nevis milzīgs “bez ekrāna” maratons.
-- evening_prayer.resolution NAV “Rīt es izdarīšu X”. Tā ir ĪSA LŪGŠANA pēc spēka/palīdzības (“Jēzu, palīdzi man…”).
-- Vakara jautājumi = atskats un sirds, ne jauns uzdevumu saraksts.
+- evening_prayer.resolution NAV “Rīt es izdarīšu X”. Tā ir ĪSA LŪGŠANA pēc spēka/palīdzības (“Jēzu, palīdzi man…”) ar šodienas Evaņģēlija tēlu, ne vispārīgu “būt labākam”.
+- Vakara jautājumi = atskats un sirds, ne jauns uzdevumu saraksts. Zemāk grupās dotie jautājumi ir **tēmas un secība, ne gatavi teikumi** — katru dienu pārfrāzē, un vismaz viens piemin šodienas Evaņģēlija ainu.
 
 VAKARĀ OBLIGĀTA ĪSTA LŪGŠANA (ne tikai atskats):
 - examen_* = dienas atskats (jautājumi).
@@ -42,8 +42,8 @@ VAKARĀ OBLIGĀTA ĪSTA LŪGŠANA (ne tikai atskats):
   3) dod mierīgu miegu / naktsmieru;
   4) dod veselību man un tiem, kurus mīlu;
   5) sargā no ļauna, nelaimēm un slimībām.
-  Beidzas ar Āmen.
-- NEDRĪKST: closing, kas ir tikai “labu nakti” vienā teikumā; closing, kas atkārto examen; closing bez īstas lūgšanas uzrunas.`;
+  Beidzas ar Āmen. VISI pieci elementi paliek; **kārtība un tas, kurš teikums ir garākais, mainās** pēc ŠODIENAS VARIĀCIJAS. NEDRĪKST katru vakaru tas pats “Sargā mani un manu ģimeni. Dod mierīgu miegu.”
+- NEDRĪKST: closing, kas ir tikai “labu nakti” vienā teikumā; closing, kas atkārto examen; closing bez īstas lūgšanas uzrunas; izlaist kādu no pieciem elementiem.`;
 
   switch (bandId) {
     case "age_7_9":

@@ -5,6 +5,7 @@ import "./globals.css";
 const display = Literata({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const body = Source_Sans_3({

@@ -31,7 +31,7 @@
       "best_for": ["vocabulary", "key_words"],
       "age_range": [8, 14],
       "mode": "quiz",
-      "notes": "GOSPEL-FIRST: exactly ONE important word/name from today's Gospel. REQUIRED: scrambled, answer, explanation (neutral; no „Lieliski!” / „Pareizi!”). Keep short (prefer 4–10 letters). UI: type guess + Check; retries then reveal."
+      "notes": "GOSPEL-FIRST: exactly ONE important word/name from today's Gospel. REQUIRED: scrambled, answer, explanation (neutral; no „Lieliski!” / „Pareizi!”). Keep short (prefer 4–10 letters). LATVIAN ORTHOGRAPHY CRITICAL: answer must be correctly spelled with diacritics (āčēģīķļņšūž) — e.g. baznīca not baznica. scrambled = exact same letter multiset as answer (same ī/ā/ē…), only shuffled — never replace ī with i, never mix a and Ā if answer has two a's. Prefer all-lowercase. Before output: verify letter bags match 1:1. UI: type guess + Check; retries then reveal."
     },
     {
       "id": "who_am_i",

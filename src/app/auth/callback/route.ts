@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/admin";
-import { generateFamilyCode } from "@/lib/codes";
+import { ensureOwnedFamily, getOwnedFamily } from "@/lib/family";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -34,30 +34,12 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser();
 
   if (user) {
-    const { data: existing } = await supabase
-      .from("families")
-      .select("id")
-      .eq("owner_user_id", user.id)
-      .maybeSingle();
-
+    const existing = await getOwnedFamily(supabase, user.id);
     if (!existing) {
-      let created = false;
-      for (let i = 0; i < 5 && !created; i++) {
-        const { error: insertError } = await supabase.from("families").insert({
-          name: "Mana ģimene",
-          family_code: generateFamilyCode(),
-          owner_user_id: user.id,
-        });
-        if (!insertError) created = true;
-      }
-
+      const created = await ensureOwnedFamily(supabase, user.id);
       if (!created) {
         const admin = createServiceClient();
-        await admin.from("families").insert({
-          name: "Mana ģimene",
-          family_code: generateFamilyCode(),
-          owner_user_id: user.id,
-        });
+        await ensureOwnedFamily(admin, user.id);
       }
     }
   }

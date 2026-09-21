@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { BrandLogo } from "@/components/BrandLogo";
 
@@ -14,7 +14,6 @@ export default function LoginPage({
   initiallyUnlocked: boolean;
 }) {
   const params = useSearchParams();
-  const router = useRouter();
   const initial = (params.get("mode") as Mode) || "parent";
   const [unlocked, setUnlocked] = useState(initiallyUnlocked);
   const [accessCode, setAccessCode] = useState("");
@@ -64,6 +63,18 @@ export default function LoginPage({
     }
   }
 
+  async function ensureFamily(name: string) {
+    const res = await fetch("/api/family/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
+    const json = (await res.json().catch(() => ({}))) as { error?: string };
+    if (!res.ok) {
+      throw new Error(json.error || "Ģimenes izveide neizdevās.");
+    }
+  }
+
   async function parentAuth(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -90,34 +101,26 @@ export default function LoginPage({
           return;
         }
 
-        const res = await fetch("/api/family/create", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: familyName || "Mana ģimene" }),
-        });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json.error || "Ģimenes izveide neizdevās.");
-        router.push("/parent");
-        router.refresh();
+        await ensureFamily(familyName || "Mana ģimene");
+        // Full navigation so auth cookies are always sent to /parent.
+        window.location.assign("/parent");
         return;
       }
-      const { error: loginErr } = await supabase.auth.signInWithPassword({
+
+      const { data, error: loginErr } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
       if (loginErr) throw loginErr;
+      if (!data.session) {
+        throw new Error("Sesija netika izveidota. Mēģini vēlreiz.");
+      }
 
-      await fetch("/api/family/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: familyName || "Mana ģimene" }),
-      });
-
-      router.push("/parent");
-      router.refresh();
+      await ensureFamily(familyName || "Mana ģimene");
+      window.location.assign("/parent");
+      return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Kļūda");
-    } finally {
       setLoading(false);
     }
   }
@@ -159,11 +162,10 @@ export default function LoginPage({
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Ieeja neizdevās.");
-      router.push("/kid");
-      router.refresh();
+      window.location.assign("/kid");
+      return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Kļūda");
-    } finally {
       setLoading(false);
     }
   }
@@ -178,8 +180,6 @@ export default function LoginPage({
           <>
             <p className="mt-3 text-[var(--ink-soft)] leading-relaxed">
               Personalizētais ģimenes konts pagaidām nav publiski pieejams.
-              Plānojam to atvērt pakāpeniski — ar pielāgotu saturu bērniem un
-              vecākiem.
             </p>
             <p className="mt-3 text-[var(--ink-soft)] leading-relaxed">
               Ja tev ir piekļuves kods, ievadi to zemāk, lai atvērtu

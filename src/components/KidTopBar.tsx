@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { resolveActiveChild } from "@/lib/active-child";
-import { ChildAvatar } from "@/components/ChildAvatar";
+import { KidProfileMenu } from "@/components/KidProfileMenu";
 import { KidTopBarTitle } from "@/components/KidTopBarTitle";
 
 function BellIcon({ className }: { className?: string }) {
@@ -49,44 +49,31 @@ export async function KidTopBar() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          <Link
-            href="/kid/settings"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--bg-deep)] outline-offset-2 hover:bg-[var(--bg-deep)]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--bg-deep)]"
-            aria-label="Paziņojumi"
-            title="Paziņojumi"
-          >
-            <BellIcon className="h-5 w-5" />
-          </Link>
           {isGuest || !active ? (
-            <Link
-              href="/login"
-              className="btn btn-secondary !px-3 !py-1.5 text-sm"
-            >
-              Pieslēgties
-            </Link>
-          ) : (
             <>
-              {isParent ? (
-                <Link
-                  href="/parent"
-                  className="btn btn-secondary !px-3 !py-1.5 text-sm"
-                >
-                  Atpakaļ
-                </Link>
-              ) : null}
               <Link
-                href="/kid/profile"
-                className="rounded-full outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--bg-deep)]"
-                aria-label="Profils"
-                title="Profils"
+                href="/kid/settings"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--bg-deep)] outline-offset-2 hover:bg-[var(--bg-deep)]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--bg-deep)]"
+                aria-label="Paziņojumi"
+                title="Paziņojumi"
               >
-                <ChildAvatar
-                  avatar_emoji={active.avatar_emoji}
-                  avatar_url={active.avatar_url}
-                  size="sm"
-                />
+                <BellIcon className="h-5 w-5" />
+              </Link>
+              <Link
+                href="/login"
+                className="btn btn-secondary !px-3 !py-1.5 text-sm"
+              >
+                Pieslēgties
               </Link>
             </>
+          ) : (
+            <KidProfileMenu
+              displayName={active.displayName}
+              avatar_emoji={active.avatar_emoji}
+              avatar_url={active.avatar_url}
+              showLogout={!isParent}
+              showBackToParent={isParent}
+            />
           )}
         </div>
       </div>

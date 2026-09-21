@@ -36,14 +36,18 @@ import {
 } from "@/lib/day-progress";
 import { NotificationSoftPrompt } from "@/components/NotificationSoftPrompt";
 import { GospelListenButton } from "@/components/GospelListenButton";
+import { SaveQuoteControl } from "@/components/SaveQuoteControl";
 import { DayContentResumeRefresh } from "@/components/DayContentResumeRefresh";
 
 function DateSwitcher({
   date,
   dates,
+  parentContentChildId,
 }: {
   date: string;
   dates: string[];
+  /** When set, day links stay on /parent/content for this child. */
+  parentContentChildId?: string;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -69,8 +73,11 @@ function DateSwitcher({
   function goTo(d: string) {
     setOpen(false);
     if (d === date) return;
+    const href = parentContentChildId
+      ? `/parent/content?childId=${encodeURIComponent(parentContentChildId)}&date=${encodeURIComponent(d)}`
+      : `/kid?date=${d}`;
     startTransition(() => {
-      router.push(`/kid?date=${d}`);
+      router.push(href);
     });
   }
 
@@ -178,11 +185,48 @@ function AlleluiaText({ text }: { text: string }) {
   );
 }
 
-function ReadingBody({ reading }: { reading: ScriptureReading }) {
-  if (reading.role === "psalm") return <PsalmText text={reading.text} />;
-  if (reading.role === "alleluia") return <AlleluiaText text={reading.text} />;
+function ReadingBody({
+  reading,
+  readingDate,
+  canSaveQuote,
+}: {
+  reading: ScriptureReading;
+  readingDate: string;
+  canSaveQuote?: boolean;
+}) {
+  if (reading.role === "psalm") {
+    return (
+      <>
+        <PsalmText text={reading.text} />
+        <SaveQuoteControl
+          reading={reading}
+          readingDate={readingDate}
+          enabled={Boolean(canSaveQuote)}
+        />
+      </>
+    );
+  }
+  if (reading.role === "alleluia") {
+    return (
+      <>
+        <AlleluiaText text={reading.text} />
+        <SaveQuoteControl
+          reading={reading}
+          readingDate={readingDate}
+          enabled={Boolean(canSaveQuote)}
+        />
+      </>
+    );
+  }
   return (
-    <p className="mt-4 whitespace-pre-wrap leading-relaxed">{reading.text}</p>
+    <>
+      <p className="mt-4 whitespace-pre-wrap leading-relaxed">{reading.text}</p>
+      <SaveQuoteControl
+        reading={reading}
+        readingDate={readingDate}
+        enabled={Boolean(canSaveQuote)}
+      />
+    </>
   );
 }
 
@@ -1405,9 +1449,13 @@ function partIcon(
 function PartPanel({
   reading,
   insight,
+  readingDate,
+  canSaveQuote,
 }: {
   reading: ScriptureReading;
   insight?: PartInsight;
+  readingDate: string;
+  canSaveQuote?: boolean;
 }) {
   return (
     <div className="space-y-5">
@@ -1422,7 +1470,11 @@ function PartPanel({
               : `${reading.label} (${reading.reference})`}
           </p>
         )}
-        <ReadingBody reading={reading} />
+        <ReadingBody
+          reading={reading}
+          readingDate={readingDate}
+          canSaveQuote={canSaveQuote}
+        />
       </section>
 
       <section className="panel section-enter p-6" style={{ animationDelay: "60ms" }}>
@@ -1459,6 +1511,8 @@ export function DailyLessonView({
   status,
   isParentPreview,
   isGuest,
+  /** Parent reviewing child's day outside kid profile shell. */
+  isParentContentReview,
   /** 7–9 / 10–12: primary row = Rīts·Evaņģēlijs·Vakars; optional readings on second row */
   splitOptionalReadings,
   gospelAudioUrl,
@@ -1473,6 +1527,7 @@ export function DailyLessonView({
   status: string;
   isParentPreview?: boolean;
   isGuest?: boolean;
+  isParentContentReview?: boolean;
   splitOptionalReadings?: boolean;
   gospelAudioUrl?: string | null;
 }) {
@@ -1579,9 +1634,11 @@ export function DailyLessonView({
       <DayContentResumeRefresh date={date} contentReady={contentReady} />
       <section className="flex items-center justify-between gap-3">
         <p className="truncate text-sm leading-none text-[var(--ink-soft)]">
-          {isGuest
-            ? displayName
-            : `Sveiks, ${displayName}${isParentPreview ? " (vecāka skats)" : ""}`}
+          {isParentContentReview
+            ? `Saturs — ${displayName}`
+            : isGuest
+              ? displayName
+              : `Sveiks, ${displayName}${isParentPreview ? " (vecāka skats)" : ""}`}
         </p>
         {isGuest ? (
           <a
@@ -1594,7 +1651,13 @@ export function DailyLessonView({
       </section>
 
       <section className="section-enter relative z-30 mt-5">
-        <DateSwitcher date={date} dates={dates} />
+        <DateSwitcher
+          date={date}
+          dates={dates}
+          parentContentChildId={
+            isParentContentReview ? childId : undefined
+          }
+        />
       </section>
 
       {!lessonGospel && !scriptureGospel ? (
@@ -1702,6 +1765,10 @@ export function DailyLessonView({
                   reading={
                     byRole.get(activeTab as ReadingRole) || scriptureGospel!
                   }
+                  readingDate={date}
+                  canSaveQuote={
+                    !isGuest && !isParentPreview && !isParentContentReview
+                  }
                 />
               </div>
             </section>
@@ -1801,6 +1868,19 @@ export function DailyLessonView({
                       readings.find((r) => /evaņģēlij/i.test(r.label))?.text ||
                       ""}
                   </p>
+                  {byRole.get("gospel") ||
+                  readings.find((r) => /evaņģēlij/i.test(r.label)) ? (
+                    <SaveQuoteControl
+                      reading={
+                        byRole.get("gospel") ||
+                        readings.find((r) => /evaņģēlij/i.test(r.label))!
+                      }
+                      readingDate={date}
+                      enabled={
+                        !isGuest && !isParentPreview && !isParentContentReview
+                      }
+                    />
+                  ) : null}
                 </section>
 
                 <section
@@ -1848,6 +1928,10 @@ export function DailyLessonView({
             ) : byRole.get(activeTab as ReadingRole) ? (
               <PartPanel
                 reading={byRole.get(activeTab as ReadingRole)!}
+                readingDate={date}
+                canSaveQuote={
+                  !isGuest && !isParentPreview && !isParentContentReview
+                }
                 insight={
                   activeTab === "first_reading"
                     ? parts?.first_reading

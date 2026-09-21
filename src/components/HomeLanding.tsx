@@ -87,7 +87,7 @@ export function HomeLanding({
               <span className="block">Katru dienu.</span>
             </span>
           </h1>
-          <p className="mx-auto mt-4 max-w-lg text-center text-[0.95rem] leading-snug text-[var(--ink-soft)] sm:mt-5 sm:text-base sm:leading-relaxed">
+          <p className="mx-auto mt-8 max-w-lg text-center text-[0.95rem] leading-snug text-[var(--ink-soft)] sm:mt-10 sm:text-base sm:leading-relaxed">
             Ikdienas palīgs katoļu ģimenēm, lai palīdzētu bērniem un jauniešiem
             augt ticībā — ar dienas lasījumiem, skaidrojumu, pārdomām, lūgšanām
             un uzdevumiem. Izvēlies vecuma grupu un sāc.

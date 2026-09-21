@@ -22,6 +22,9 @@ export function resolveKidHeaderTitle(pathname: string): KidHeaderTitle {
   if (path.startsWith("/kid/confession")) {
     return { title: "Grēksūdze", href: "/kid/confession", isBrand: false };
   }
+  if (path.startsWith("/kid/quotes")) {
+    return { title: "Mani citāti", href: "/kid/quotes", isBrand: false };
+  }
   if (path.startsWith("/kid/profile")) {
     return { title: "Profils", href: "/kid/profile", isBrand: false };
   }

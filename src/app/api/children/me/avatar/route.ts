@@ -56,6 +56,7 @@ export async function POST(req: Request) {
     .from("children")
     .update({
       avatar_url,
+      avatar_emoji: null,
       updated_at: new Date().toISOString(),
     })
     .eq("id", active.childId)

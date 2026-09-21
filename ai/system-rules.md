@@ -109,10 +109,10 @@ Skaidrojumam jāpalīdz saprast ne tikai *„Ko man darīt?”*, bet arī *„Ko
 ### Kartējums uz JSON laukiem
 - `gospel.explanation` — soļi 1–6 (garums pēc age-band); beigas īsi apkopo ikdienas saikni, ja tā ir.
 - `gospel.main_idea` — **1 teikums**, kas savieno **Līmeni A** (šī fragmenta konkrēto mācību) ar **Līmeni B** (ceļš ar Dievu) — ne tikuma sauklis un ne tīrs “risināsim konfliktus mierīgi”.
-- `gospel.real_life_application` — solis 6; izriet no A+B, ne tikai no “esi mierīgs”.
-- `gospel.reflection_question` — labāk par ceļu ar Dievu / tuvināšanos Viņam (kā tekstā), ne tikai par “kā es jūtos”.
-- Lūgšanas (`morning_prayer`, `gospel.prayer`, vakars): saikne ar **Evaņģēlija ticības domu**, ne tikai “palīdzi būt labam”.
-- `parts.*.connection_to_gospel`: saikne ar Evaņģēlija **galveno vēsti**, ne vispārīgu “labestību”.
+- `gospel.real_life_application` — solis 6; izriet no A+B, ne tikai no “esi mierīgs”. **Forma katru dienu cita** (vārds, klusums, viena palīdzība, pateicība cilvēkam, īss lūgums brīdī…) — pēc ŠODIENAS VARIĀCIJAS. NEDRĪKST katru dienu “šodien esi laipns / pacietīgs / palīdzi kādam”.
+- `gospel.reflection_question` — labāk par ceļu ar Dievu / tuvināšanos Viņam (kā tekstā), ne tikai par “kā es jūtos”. Jautājums piemin šodienas ainu, ne vispārīgu tikumu.
+- Lūgšanas (`morning_prayer`, `gospel.prayer`, vakars): saikne ar **Evaņģēlija ticības domu**, ne tikai “palīdzi būt labam”. Rīts, Evaņģēlija lūgšana un vakars **nedrīkst** lietot to pašu teikumu un to pašu tēlu.
+- `parts.*.connection_to_gospel`: saikne ar Evaņģēlija **galveno vēsti**, ne vispārīgu “labestību”. Katru dienu cits saiknes veids (kopīgs vārds, pretstats, tas pats Dieva darbs, sagatavošana/piepildījums) — un konkrēta detaļa no **šī** lasījuma, ne “arī šis lasījums aicina būt labiem”.
 
 **Nepareizi:** sākt ar “šodien runāsim par draudzību” un piemeklēt pantu.  
 **Nepareizi:** skaidrojums, kas ir **tikai** morāle / konfliktu risināšana bez Dieva.  
@@ -159,19 +159,20 @@ Struktūra pēc katoļu ikdienas lūgšanu loģikas, bet **bērnam īsi**. Labā
 
 ### `morning_prayer`
 - `opening` — Dieva klātbūtne / mīlestība (1–2 teikumi)
-- `body` — pateicība par nakti un jauno dienu + **ne vairāk kā viena** īsa saikne ar Evaņģēlija tēmu + **īss aizlūgums par citiem** (skat. zemāk)
-- `offering` — upurēt šodienas domas, vārdus, darbus (1–2 teikumi)
+- `body` — pateicība par nakti un jauno dienu + **ne vairāk kā viena** īsa saikne ar Evaņģēlija tēmu + **īss aizlūgums par citiem** (skat. zemāk). Saikne ir **konkrēts tēls no šodienas teksta** (vārds, persona, žests), ne “palīdzi būt labam / pacietīgam”.
+- `offering` — upurēt šodienas domas, vārdus, darbus (1–2 teikumi), piekarinot tos šodienas ainai, ne tukšai formulai, kas atkārtojas katru rītu.
 - `closing` — īsa žēlastības lūgšana + Āmen (1–2 teikumi); var šeit vai `body` ietvert aizlūgumu
-- **Par citiem:** katrā rītā **vismaz vienu** īsu lūgumu/aizlūgumu — rotē, ne katru rītu visu: ģimene; draugi; skola/skolotāji (**tikai skolas dienā**, skat. **Skolas / brīvlaika konteksts**); cilvēki, kurus šodien satikšu; kāds, kam grūti. 1–2 teikumi. Brīvlaikā / sestdienā–svētdienā — bez skolas virziena.
+- **Par citiem:** katrā rītā **vismaz vienu** īsu lūgumu/aizlūgumu — **šodien tikai viens** virziens no ŠODIENAS VARIĀCIJAS (ne katru rītu “ģimene un draugi un skola”): ģimene; draugi; skola/skolotāji (**tikai skolas dienā**, skat. **Skolas / brīvlaika konteksts**); cilvēki, kurus šodien satikšu; kāds, kam grūti. 1–2 teikumi. Brīvlaikā / sestdienā–svētdienā — bez skolas virziena.
+- **Mainās no dienas uz dienu:** pirmais teikums, Evaņģēlija tēls un aizlūguma virziens. **Nemainās:** īsums, pateicība, viena saikne ar Evaņģēliju, upurēšana, Āmen. NEDRĪKST sākt katru rītu ar “Paldies, Kungs, par jauno dienu”.
 - **Kopā ~60–90 vārdi** (publiskajās grupās skat. age-band). Negenerē Tēvreizi / Esi sveicināta / Gods lai ir / Es ticu (UI liek fiksēti).
 
 ### `evening_prayer`
 - `thanksgiving` — pateicība par dienu (1–2 teikumi)
 - `mercy` — maiga piedošanas lūgšana, bez kaunināšanas (1–2 teikumi)
 - `examen_intro` — 1 teikums ievadam sirdsapziņai
-- `examen_questions` — **3 vai 4** īsi jautājumi (viena rinda katrs). Ieteicamās tēmas: pateicība / labs darbs / **vai kādam vajadzētu atvainoties** / ko vēlos uzticēt Dievam vai kur vēlos rīt augt (kā **pārdoma**, ne kā uzdevumu saraksts). Ja tieši 3 — iekļauj atvainošanos kā vienu no tiem. Publiskajās vecuma grupās skaits un secība — pēc age-band vadlīnijām.
-- `resolution` — **ne** “rīt es izdarīšu X” (to aizmirst). Tā vietā: **īss lūgums pēc Dieva palīdzības / spēka** saistībā ar šodienas Evaņģēliju vai to, kas vakara atskatā izcēlās (piem. “Jēzu, dod man spēku rīt būt pacietīgākam…”). Dienas praktiskā apņemšanās ir `gospel.real_life_application` (un spēle), ne vakara “to-do”.
-- `closing` — **GALVENĀ vakara lūgšana** (ne atskats). Silta uzruna Dievam; OBLIGĀTI iekļauj (var apvienot teikumos, vecumam atbilstoši): sargā mani; sargā manu ģimeni; dod mierīgu miegu / naktsmieru; dod veselību man un tiem, kurus mīlu; sargā no ļauna, nelaimēm un slimībām; beidzas ar Āmen. NEDRĪKST: tikai “labu nakti” vienā teikumā; closing, kas atkārto examen.
+- `examen_questions` — **3 vai 4** īsi jautājumi (viena rinda katrs). Ieteicamās tēmas: pateicība / labs darbs / **vai kādam vajadzētu atvainoties** / ko vēlos uzticēt Dievam vai kur vēlos rīt augt (kā **pārdoma**, ne kā uzdevumu saraksts). Ja tieši 3 — iekļauj atvainošanos kā vienu no tiem. Publiskajās vecuma grupās skaits un secība — pēc age-band vadlīnijām. **Tēmas un secība ir stabilas; teikumi nav.** Katru dienu pārfrāzē. Vismaz viens jautājums piemin šodienas Evaņģēlija konkrētu ainu, ne vispārīgu tikumu.
+- `resolution` — **ne** “rīt es izdarīšu X” (to aizmirst). Tā vietā: **īss lūgums pēc Dieva palīdzības / spēka** saistībā ar šodienas Evaņģēliju vai to, kas vakara atskatā izcēlās (piem. “Jēzu, dod man spēku rīt būt pacietīgākam…”). Dienas praktiskā apņemšanās ir `gospel.real_life_application` (un spēle), ne vakara “to-do”. Katru vakaru cits Evaņģēlija tēls, ne tas pats “palīdzi man būt labākam”.
+- `closing` — **GALVENĀ vakara lūgšana** (ne atskats). Silta uzruna Dievam; OBLIGĀTI iekļauj (var apvienot teikumos, vecumam atbilstoši): sargā mani; sargā manu ģimeni; dod mierīgu miegu / naktsmieru; dod veselību man un tiem, kurus mīlu; sargā no ļauna, nelaimēm un slimībām; beidzas ar Āmen. **Kārtība un ritms mainās** pēc ŠODIENAS VARIĀCIJAS — ne katru vakaru tas pats “Sargā mani. Sargā manu ģimeni. Dod man mieru.” NEDRĪKST: tikai “labu nakti” vienā teikumā; closing, kas atkārto examen; izlaist kādu no pieciem elementiem.
 - **Teksts bez jautājumiem ~70–120 vārdi** (publiskajās grupās skat. age-band). Negenerē Tēvreizi u.c. pilnos tekstus (UI).
 - **Svarīgi:** examen = atskats; closing = īsta lūgšana. Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.
 

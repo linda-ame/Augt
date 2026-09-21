@@ -18,17 +18,23 @@ const HEADER_SIZES = {
   },
 } as const;
 
+/** Landing: tree + live Literata wordmark — same lockup proportions as augt-logo.png. */
 const LANDING = {
-  height: 420,
-  width: 292,
-  className:
-    "h-[min(42dvh,18rem)] w-auto max-w-[min(70vw,16rem)] sm:h-[min(48dvh,22rem)] sm:max-w-[18rem]",
+  height: 637,
+  width: 621,
+  /** Parent font-size = tree width; word uses em so size tracks the mark. */
+  shellClass:
+    "inline-flex w-[min(58vw,13rem)] flex-col items-center text-[length:min(58vw,13rem)] sm:w-[min(52vw,15rem)] sm:text-[length:min(52vw,15rem)]",
+  markClass: "block h-auto w-full object-contain",
+  /** ~0.85× tree width; -mt cancels Literata ascent so caps sit under the arc. */
+  textClass:
+    "brand-mark block w-full text-center font-light text-[length:0.32em] leading-none tracking-[-0.02em] -mt-[0.22em] text-[color:var(--bg-deep)]",
 };
 
 /**
  * Brand mark.
  * - sm/md (header): tree mark + label text beside it
- * - lg (landing): full wordmark PNG (tree + Augt baked in)
+ * - lg (landing): tree mark + label stacked (same Literata as headers)
  */
 export function BrandLogo({
   href = "/",
@@ -43,20 +49,23 @@ export function BrandLogo({
   className?: string;
   as?: "link" | "span";
   priority?: boolean;
-  /** Text beside the tree (header sizes only). */
+  /** Text beside / below the tree. */
   label?: string;
 }) {
   const content =
     size === "lg" ? (
-      <Image
-        src="/brand/augt-logo.png"
-        alt=""
-        width={LANDING.width}
-        height={LANDING.height}
-        priority={priority}
-        unoptimized
-        className={`${LANDING.className} object-contain`}
-      />
+      <span className={LANDING.shellClass}>
+        <Image
+          src="/brand/augt-tree.png"
+          alt=""
+          width={LANDING.width}
+          height={LANDING.height}
+          priority={priority}
+          unoptimized
+          className={LANDING.markClass}
+        />
+        <span className={LANDING.textClass}>{label}</span>
+      </span>
     ) : (
       <>
         <Image

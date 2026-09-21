@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { hashPersonalCode } from "@/lib/personal-code";
-import { normalizeParentNotes } from "@/lib/parent-notes";
-import { draftChildProfile } from "@/services/generation";
+import {
+  normalizeParentNotes,
+  parentNotesHaveContent,
+} from "@/lib/parent-notes";
+import { getOwnedFamily } from "@/lib/family";
+import { approveChildProfile, draftChildProfile } from "@/services/generation";
 
 export async function POST(req: Request) {
   const supabase = await createClient();
@@ -18,22 +22,27 @@ export async function POST(req: Request) {
     age?: number;
     personalCode?: string;
     parentNotes?: unknown;
+    /** Pre-generated / edited profile text from the add form. */
+    profileText?: string;
+    /** Approve profile and generate today's lesson (default: true if profileText). */
+    approveProfile?: boolean;
   };
 
   const displayName = body.displayName?.trim();
   const age = Number(body.age);
   const personalCode = body.personalCode?.trim();
   const parentNotes = normalizeParentNotes(body.parentNotes);
+  const profileText = body.profileText?.trim() || "";
+  const approveProfile =
+    body.approveProfile !== undefined
+      ? Boolean(body.approveProfile)
+      : Boolean(profileText);
 
   if (!displayName || !personalCode || !age || age < 3 || age > 20) {
     return NextResponse.json({ error: "Nepilnīgi bērna dati." }, { status: 400 });
   }
 
-  const { data: family } = await supabase
-    .from("families")
-    .select("id")
-    .eq("owner_user_id", user.id)
-    .maybeSingle();
+  const family = await getOwnedFamily(supabase, user.id);
   if (!family) {
     return NextResponse.json({ error: "Vispirms izveido ģimeni." }, { status: 400 });
   }
@@ -48,8 +57,9 @@ export async function POST(req: Request) {
       personal_code_hash,
       selected_goal_ids: [],
       parent_notes: parentNotes,
-      notes_version: 1,
-      profile_status: "none",
+      notes_version: parentNotesHaveContent(parentNotes) ? 1 : 0,
+      profile_status: profileText ? "draft" : "none",
+      profile_draft: profileText || null,
     })
     .select("*")
     .single();
@@ -61,17 +71,34 @@ export async function POST(req: Request) {
     );
   }
 
-  let draft = child;
+  let resultChild = child;
   let draftError: string | null = null;
-  try {
-    draft = await draftChildProfile(child.id);
-  } catch (err) {
-    draftError = err instanceof Error ? err.message : String(err);
+
+  // Legacy path: notes present but no preview text → generate draft server-side.
+  if (!profileText && parentNotesHaveContent(parentNotes)) {
+    try {
+      resultChild = await draftChildProfile(child.id, parentNotes);
+    } catch (err) {
+      draftError = err instanceof Error ? err.message : String(err);
+    }
+  }
+
+  if (profileText && approveProfile) {
+    try {
+      const approved = await approveChildProfile(child.id, {
+        profileText,
+        generateToday: true,
+      });
+      resultChild = approved.child;
+    } catch (err) {
+      draftError = err instanceof Error ? err.message : String(err);
+    }
   }
 
   return NextResponse.json({
-    child: draft,
-    profileDraft: draft.profile_draft ?? null,
+    child: resultChild,
+    profileDraft: resultChild.profile_draft ?? null,
     draftError,
+    approved: resultChild.profile_status === "approved",
   });
 }

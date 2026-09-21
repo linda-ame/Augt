@@ -6,7 +6,16 @@ export type AvatarEmojiGroup = {
   emojis: string[];
 };
 
+/**
+ * Augt base set + friendly picks from BeeMazing.
+ * Dropped from BeeMazing: 🤖 🔥 🦖 (robot / fire / “monster” vibe).
+ */
 export const AVATAR_EMOJI_GROUPS: AvatarEmojiGroup[] = [
+  {
+    id: "faces",
+    name: "Sejas",
+    emojis: ["😊", "🥰", "😇", "🙂", "😄", "🤗", "😀", "😎", "🥳", "🤩", "😺"],
+  },
   {
     id: "nature",
     name: "Daba",
@@ -33,12 +42,41 @@ export const AVATAR_EMOJI_GROUPS: AvatarEmojiGroup[] = [
   {
     id: "animals",
     name: "Dzīvnieki",
-    emojis: ["🐑", "🐟", "🐦", "🐤", "🐰", "🐻", "🐼", "🦊", "🐨", "🦋", "🐝"],
+    emojis: [
+      "🐑",
+      "🐟",
+      "🐦",
+      "🐤",
+      "🐰",
+      "🐻",
+      "🐼",
+      "🦊",
+      "🐨",
+      "🦋",
+      "🐝",
+      "🐶",
+      "🐱",
+      "🐯",
+      "🦁",
+      "🐸",
+      "🐧",
+      "🦄",
+    ],
+  },
+  {
+    id: "food",
+    name: "Ēdiens",
+    emojis: ["🍎", "🍓", "🍉", "🥑", "🍕", "🍔", "🍦", "🍪", "🍩", "🍭"],
+  },
+  {
+    id: "sports",
+    name: "Sports",
+    emojis: ["⚽", "🏀", "🎾", "⛷️"],
   },
   {
     id: "joy",
     name: "Prieks",
-    emojis: ["😊", "🥰", "😇", "🙂", "😄", "🤗", "💛", "💖", "🤍", "🎈"],
+    emojis: ["💛", "💖", "🤍", "❤️", "🎈", "🎨", "🎵", "📚", "💎", "🚀"],
   },
   {
     id: "faith",

@@ -1,5 +1,6 @@
 import { createServiceClient } from "@/lib/supabase/admin";
 import { todayInRiga } from "@/lib/dates";
+import { recentVariationAvoidance } from "@/lib/day-variation";
 import {
   AGE_BANDS,
   approximateAge,
@@ -9,6 +10,7 @@ import {
   normalizeParentNotes,
   type ParentNotes,
 } from "@/lib/parent-notes";
+import { isChildDailyGenerationEnabled } from "@/lib/features";
 import { getScriptureSource } from "@/services/scriptureSource";
 import {
   generateChildProfile,
@@ -143,11 +145,16 @@ export async function regenerateChildProfile(childId: string) {
 
 export async function generateLessonForChild(
   childId: string,
-  options?: { date?: string; force?: boolean },
+  options?: { date?: string; force?: boolean; parentFeedback?: string },
 ) {
+  if (!isChildDailyGenerationEnabled()) {
+    return { skipped: true as const, reason: "feature_disabled" as const };
+  }
+
   const admin = createServiceClient();
   const date = options?.date ?? todayInRiga();
   const force = options?.force ?? false;
+  const parentFeedback = options?.parentFeedback?.trim() || undefined;
 
   const { data: child, error } = await admin
     .from("children")
@@ -183,11 +190,11 @@ export async function generateLessonForChild(
       ? (child.generated_profile as string)
       : "";
 
-  const reading = await ensureTodaysReading(date, { forceRefresh: force });
+  const reading = await ensureTodaysReading(date);
 
   const { data: recent } = await admin
     .from("daily_lessons")
-    .select("content_json")
+    .select("content_json, reading_date")
     .eq("child_id", childId)
     .eq("generation_status", "success")
     .order("reading_date", { ascending: false })
@@ -212,6 +219,8 @@ export async function generateLessonForChild(
       scriptureText: reading.source_text,
       readings: (reading.readings as import("@/lib/types").ScriptureReading[]) ?? [],
       recentGameTypes,
+      recentAvoidance: recentVariationAvoidance(recent ?? []),
+      parentFeedback,
     });
 
     const { data: lesson, error: lessonErr } = await admin
@@ -260,7 +269,8 @@ export async function generateLessonForAgeBand(
   const date = options?.date ?? todayInRiga();
   const force = options?.force ?? false;
 
-  const reading = await ensureTodaysReading(date, { forceRefresh: force });
+  // Reuse stored liturgy; force only re-runs AI (mieramtuvu scrape can 403).
+  const reading = await ensureTodaysReading(date);
   const readings = (reading.readings as ScriptureReading[]) ?? [];
 
   if (!force) {
@@ -288,7 +298,7 @@ export async function generateLessonForAgeBand(
 
   const { data: recent } = await admin
     .from("age_band_lessons")
-    .select("content_json")
+    .select("content_json, reading_date")
     .eq("age_band", ageBandId)
     .eq("generation_status", "success")
     .order("reading_date", { ascending: false })
@@ -313,6 +323,7 @@ export async function generateLessonForAgeBand(
       scriptureText: reading.source_text,
       readings,
       recentGameTypes,
+      recentAvoidance: recentVariationAvoidance(recent ?? []),
     });
 
     const { data: lesson, error: lessonErr } = await admin
