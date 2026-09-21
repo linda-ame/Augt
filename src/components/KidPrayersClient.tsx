@@ -292,6 +292,15 @@ export function KidPrayersClient({
         </div>
       ) : (
         <div className="mt-5 space-y-3">
+          <p className="text-sm text-[var(--ink-soft)]">
+            Gribi saprast, kas ir lūgšana?{" "}
+            <a
+              className="font-semibold text-[var(--bg-deep)] underline"
+              href="/kid/faith/learn/prayers"
+            >
+              Mācīties Mana ticībā
+            </a>
+          </p>
           {(category?.items ?? []).map((prayer) => (
             <PrayerPanel
               key={prayer.id}
@@ -304,16 +313,6 @@ export function KidPrayersClient({
           ))}
         </div>
       )}
-
-      <p className="mt-8 text-sm text-[var(--ink-soft)]">
-        Gribi saprast, kas ir lūgšana?{" "}
-        <a
-          className="font-semibold text-[var(--bg-deep)] underline"
-          href="/kid/faith/learn/prayers"
-        >
-          Mācīties Mana ticībā
-        </a>
-      </p>
     </main>
   );
 }
