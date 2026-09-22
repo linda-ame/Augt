@@ -3,7 +3,11 @@ import { parseISO } from "date-fns";
 import { isSchoolDayContext, RIGA_TZ } from "@/lib/dates";
 
 function dayOfYear(dateStr: string): number {
-  return Number(formatInTimeZone(parseISO(dateStr), RIGA_TZ, "D"));
+  return Number(
+    formatInTimeZone(parseISO(dateStr), RIGA_TZ, "D", {
+      useAdditionalDayOfYearTokens: true,
+    }),
+  );
 }
 
 function pick<T>(items: readonly T[], index: number): T {
