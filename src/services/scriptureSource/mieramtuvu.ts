@@ -103,27 +103,84 @@ function extractAccordionSection(
   return best;
 }
 
+/** Site chrome / paywall copy that must never become the daily quote. */
+export function isSiteChromeQuote(text: string | null | undefined): boolean {
+  if (!text) return false;
+  const t = text.replace(/\s+/g, " ").trim();
+  return /abonement|Mēnesim|Pieslēgties|Dalīties|Iegādāties|bezmaksas abonement|tehniskas problēmas|aizpildiet formu|sazināsimies un palīdzēsim|atbalstīt mūsu darbu|pilno .{0,40}mājaslapas versiju/i.test(
+    t,
+  );
+}
+
+/** Drop paywall/support chrome that was wrongly stored as daily_quote. */
+export function sanitizeDailyQuote(
+  quote: string | null | undefined,
+): string | null {
+  const t = quote?.replace(/\s+/g, " ").trim() || null;
+  if (!t || isSiteChromeQuote(t)) return null;
+  return t;
+}
+
+/** Looks like a Mieram tuvu day motto with a short Scripture cite, e.g. "Seko man! (Mt 9, 9)". */
+function looksLikeCitedMotto(text: string): boolean {
+  return (
+    text.length >= 8 &&
+    text.length <= 120 &&
+    /\([A-Za-zĀČĒĢĪĶĻŅŠŪŽāčēģīķļņšūž]{1,12}\.?\s*\d/u.test(text)
+  );
+}
+
 function extractDailyQuote($: cheerio.CheerioAPI, html: string): string | undefined {
-  // Prefer short italic / block-like lines near the top of the page
+  // Prefer short italic / block-like lines near the top of the page.
+  // Feast-day mottos can be very short (e.g. "Seko man! (Mt 9, 9)" = 19 chars).
   const candidates: string[] = [];
-  $("em, i, blockquote, .mt-wrapper p").each((_, el) => {
-    const t = stripNoise($(el).text());
-    if (t.length >= 20 && t.length <= 220) candidates.push(t);
+  $("em, i, blockquote, .mt-wrapper p, h1, h2, h3, h4, h5, h6, strong").each(
+    (_, el) => {
+      const t = stripNoise($(el).text());
+      if (t.length >= 8 && t.length <= 220) candidates.push(t);
+    },
+  );
+
+  const usable = candidates.filter((c) => {
+    if (isSiteChromeQuote(c)) return false;
+    if (/Lasījums no|Evaņģēlij|Psalms|Alleluja|Svēto Rakstu|gada \d/i.test(c)) {
+      return false;
+    }
+    return true;
   });
 
-  // Heuristic: first short distinctive line that is not a heading/nav
-  for (const c of candidates.slice(0, 12)) {
-    if (/abonement|Mēnesim|Pieslēgties|Dalīties/i.test(c)) continue;
-    if (/Lasījums no|Evaņģēlij|Psalms|Alleluja/i.test(c)) continue;
-    return c;
+  // Prefer short mottos that already include a Scripture reference
+  const cited = usable.find(looksLikeCitedMotto);
+  if (cited) return cited;
+
+  for (const c of usable.slice(0, 12)) {
+    if (c.length >= 12) return c;
   }
 
-  // Fallback: look for a line after a date-like pattern in raw HTML text
+  // Fallback: line immediately after the liturgical date heading
   const plain = cheerio.load(html).text().replace(/\s+/g, " ");
-  const m = plain.match(
-    /\d{4}\.?\s*(gada)?\s*\d{1,2}\.?\s*\w+\s+([“"«][^”"»]{15,180}[”"»]|[^.]{25,160}\.)/i,
+  const afterDate = plain.match(
+    /\d{4}\.?\s*(gada)?\s*\d{1,2}\.?\s*\w+\s+(.+?)(?=\s*(?:Svēto Rakstu|Lasījums no|Gloria|Lūgšana|Dienas lasījumi))/i,
   );
-  if (m?.[2]) return stripNoise(m[2]);
+  if (afterDate?.[2]) {
+    const quote = stripNoise(afterDate[2]);
+    if (
+      quote &&
+      quote.length >= 8 &&
+      quote.length <= 220 &&
+      !isSiteChromeQuote(quote)
+    ) {
+      return quote;
+    }
+  }
+
+  const m = plain.match(
+    /\d{4}\.?\s*(gada)?\s*\d{1,2}\.?\s*\w+\s+([“"«][^”"»]{8,180}[”"»]|[^.]{12,160}\.)/i,
+  );
+  if (m?.[2]) {
+    const quote = stripNoise(m[2]);
+    if (!isSiteChromeQuote(quote)) return quote;
+  }
   return undefined;
 }
 
@@ -300,9 +357,8 @@ function parseFromHtml(html: string): {
 
 const FETCH_HEADERS = {
   "User-Agent":
-    "Mozilla/5.0 (compatible; AugtBot/1.0; +https://augt.app; public liturgical readings)",
-  Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
-  "Accept-Language": "lv,en;q=0.8",
+    "AugtBot/1.0 (+family faith app; public Scripture readings only)",
+  Accept: "text/html",
 } as const;
 
 const FETCH_TIMEOUT_MS = 30_000;

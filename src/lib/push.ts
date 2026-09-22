@@ -2,6 +2,7 @@ import webpush from "web-push";
 import type { AgeBandId } from "@/lib/age-bands";
 import { createServiceClient } from "@/lib/supabase/admin";
 import { todayInRiga } from "@/lib/dates";
+import { sanitizeDailyQuote } from "@/services/scriptureSource";
 
 export type PushSubscriptionRow = {
   id: string;
@@ -84,7 +85,7 @@ export async function resolveMorningContent(date = todayInRiga()) {
 
   return {
     date,
-    quote: (reading?.daily_quote as string | null)?.trim() || null,
+    quote: sanitizeDailyQuote(reading?.daily_quote as string | null),
   };
 }
 

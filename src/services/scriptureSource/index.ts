@@ -1,1 +1,7 @@
-export { getScriptureSource, fetchTodayScripture, MieramTuvuSource } from "./mieramtuvu";
+export {
+  getScriptureSource,
+  fetchTodayScripture,
+  MieramTuvuSource,
+  isSiteChromeQuote,
+  sanitizeDailyQuote,
+} from "./mieramtuvu";

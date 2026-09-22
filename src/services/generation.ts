@@ -11,7 +11,10 @@ import {
   type ParentNotes,
 } from "@/lib/parent-notes";
 import { isChildDailyGenerationEnabled } from "@/lib/features";
-import { getScriptureSource } from "@/services/scriptureSource";
+import {
+  getScriptureSource,
+  isSiteChromeQuote,
+} from "@/services/scriptureSource";
 import {
   generateChildProfile,
   generateDailyLesson,
@@ -32,7 +35,12 @@ export async function ensureTodaysReading(
 
   const readings = (existing?.readings as { role?: string }[] | null) ?? [];
   const hasRoles = readings.some((r) => Boolean(r.role));
-  if (existing && hasRoles && !options?.forceRefresh) {
+  const quoteIsChrome = isSiteChromeQuote(
+    (existing?.daily_quote as string | null | undefined) ?? null,
+  );
+  // Re-fetch when the stored "quote" is Mieram tuvu paywall/support chrome
+  // (seen especially on Mondays when the real quote is missing from the page).
+  if (existing && hasRoles && !options?.forceRefresh && !quoteIsChrome) {
     return existing;
   }
 

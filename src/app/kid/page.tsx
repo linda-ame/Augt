@@ -17,6 +17,7 @@ import {
   guestChildId,
   type AgeBandId,
 } from "@/lib/age-bands";
+import { sanitizeDailyQuote } from "@/services/scriptureSource";
 
 export const dynamic = "force-dynamic";
 
@@ -66,7 +67,7 @@ export default async function KidPage({
     .filter((row) => Array.isArray(row.readings) && row.readings.length > 0)
     .map((row) => row.reading_date as string);
   const dates = filterDatesWithReadings(weekDates, datesWithReadings, new Date());
-  const dailyQuote = reading?.daily_quote ?? null;
+  const dailyQuote = sanitizeDailyQuote(reading?.daily_quote);
 
   // Deep link to an empty past day → send to today.
   if (!dates.includes(date)) {

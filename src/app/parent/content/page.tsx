@@ -16,6 +16,7 @@ import { ensureOwnedFamily } from "@/lib/family";
 import { ensureReadingRoles } from "@/lib/reading-roles";
 import { ageBandFromAge, type AgeBandId } from "@/lib/age-bands";
 import type { DailyLessonContent, ScriptureReading } from "@/lib/types";
+import { sanitizeDailyQuote } from "@/services/scriptureSource";
 
 export const dynamic = "force-dynamic";
 
@@ -116,7 +117,7 @@ export default async function ParentContentPage({
     .filter((row) => Array.isArray(row.readings) && row.readings.length > 0)
     .map((row) => row.reading_date as string);
   const dates = filterDatesWithReadings(weekDates, datesWithReadings, new Date());
-  const dailyQuote = reading?.daily_quote ?? null;
+  const dailyQuote = sanitizeDailyQuote(reading?.daily_quote);
 
   if (!dates.includes(date)) {
     redirect(
