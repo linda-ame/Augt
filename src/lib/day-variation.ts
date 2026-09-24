@@ -1,6 +1,6 @@
 import { formatInTimeZone } from "date-fns-tz";
 import { parseISO } from "date-fns";
-import { isSchoolDayContext, RIGA_TZ } from "@/lib/dates";
+import { RIGA_TZ } from "@/lib/dates";
 
 function dayOfYear(dateStr: string): number {
   return Number(
@@ -14,21 +14,15 @@ function pick<T>(items: readonly T[], index: number): T {
   return items[((index % items.length) + items.length) % items.length]!;
 }
 
-const SCHOOL_INTERCESSION = [
-  "ģimene — viens konkrēts cilvēks mājās, ko šodien redzēsi, ne “visa ģimene” vispārīgi",
-  "draugi — viens draugs, ne “visi draugi”",
-  "skola — viens skolotājs vai klasesbiedrs, ja tas dabiski izriet no dienas; ne “visa skola”",
-  "cilvēki, kurus šodien satiksi — viens satikums, ne saraksts",
-  "kāds, kam šodien grūti — bez minēšanas, kas vainīgs",
-] as const;
-
-const HOME_INTERCESSION = [
-  "ģimene — viens konkrēts cilvēks mājās, ne “visa ģimene”",
-  "draugi — viens draugs",
-  "kāds, ko šodien satiksi ārpus skolas",
-  "kāds, kam šodien grūti",
-  "cilvēki, ar kuriem būsi pie galda vai mājās — viens no viņiem",
-  "kāds, kuru sen neesi redzējis, vai kurš ir slims",
+const GOSPEL_GIFT = [
+  "Dāvā/dod mums mieru — īsi, no šodienas Evaņģēlija vēsts; ne “palīdzi būt labiem”",
+  "Dāvā/dod mums drosmi — saistīts ar šodienas Evaņģēlija vēsti",
+  "Dāvā/dod mums piedošanu vai spēku piedot — ja tas izriet no Evaņģēlija",
+  "Dāvā/dod mums uzticēšanos Tev — no šodienas vēsts, ne abstrakti",
+  "Dāvā/dod mums dziedināšanu / spēku nogurušajiem — tikai ja Evaņģēlijs to nes",
+  "Dāvā/dod mums gudrību vai skaidrību — no šodienas vēsts",
+  "Dāvā/dod mums pateicīgu sirdi — saistīts ar Evaņģēlija vēsti",
+  "Dāvā/dod mums mīlestību tuvākajiem — īsi, no vēsts, ne lekcija",
 ] as const;
 
 const MORNING_VOICE = [
@@ -77,8 +71,7 @@ const LINK_STYLES = [
 /** Today's assigned angles. Required prayer elements stay; the shape must change. */
 export function dayVariationBrief(dateStr: string): string {
   const n = dayOfYear(dateStr);
-  const school = isSchoolDayContext(dateStr);
-  const intercession = pick(school ? SCHOOL_INTERCESSION : HOME_INTERCESSION, n);
+  const gift = pick(GOSPEL_GIFT, n);
   const voice = pick(MORNING_VOICE, n + 2);
   const evening = pick(EVENING_LEAD, n + 4);
   const action = pick(ACTION_SHAPES, n + 1);
@@ -86,7 +79,7 @@ export function dayVariationBrief(dateStr: string): string {
 
   return `ŠODIENAS VARIĀCIJA (obligāti šai dienai; struktūra un obligātie elementi paliek, bet FORMA mainās):
 - Rīta balss: ${voice}
-- Rīta aizlūgums par citiem — TIKAI šis virziens: ${intercession}.
+- Rīta “Dāvā/dod mums …” — TIKAI šis Evaņģēlija virziens: ${gift}. Ikdienas aplis (sevi, ģimene, draugi; skola tikai ja SKOLAS KONTEKSTS atļauj) paliek. “Jo īpaši … par…” VIENMĒR atstāj neaizpildītu — NEDRĪKST izdomāt cilvēku vai situāciju.
 - Vakara closing: VISI pieci elementi joprojām ir tekstā (sargā mani; sargā ģimeni; naktsmiers; veselība; sargā no ļauna, nelaimēm un slimībām) un beidzas ar Āmen. Mainās kārtība un ritms: ${evening}
 - Vakara jautājumi: saglabā vecuma grupas tēmu SKAITU un secību, bet NEDRĪKST iekopēt vadlīniju teikumus vārds vārdā. Katru jautājumu pārfrāzē. Vismaz viens jautājums piemin šodienas Evaņģēlija konkrētu ainu (personu, vārdu, žestu), ne tikumu “pacietība / mīlestība / labestība”.
 - gospel.real_life_application — šī forma: ${action} Ja forma neder šodienas Evaņģēlijam, izvēlies tuvāko mazo rīcību, kas IZRIET no teksta, bet NEDRĪKST krist atpakaļ uz “šodien esi laipns / pacietīgs / palīdzi kādam”.

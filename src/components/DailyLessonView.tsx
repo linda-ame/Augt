@@ -1375,6 +1375,10 @@ function MorningPanel({
   prayer?: MorningPrayer;
   onContinueToGospel: () => void;
 }) {
+  const body = prayer?.body?.trim() ?? "";
+  const hasOpenIntentionSlot =
+    /par…\s*$/u.test(body) || /par\.\.\.\s*$/u.test(body);
+
   return (
     <div className="space-y-5">
       <section className="panel section-enter p-6">
@@ -1383,6 +1387,11 @@ function MorningPanel({
           <div className="mt-4 space-y-4 leading-relaxed">
             <p>{prayer.opening}</p>
             <p>{prayer.body}</p>
+            {hasOpenIntentionSlot ? (
+              <p className="text-sm italic text-[var(--ink-soft)]">
+                (cilvēks, situācija vai nodoms — ko tu šodien vēlies aizlūgt)
+              </p>
+            ) : null}
             <p>{prayer.offering}</p>
             <p>{prayer.closing}</p>
             <ClassicPrayerClose />

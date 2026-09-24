@@ -3,13 +3,15 @@ import type { AgeBandId } from "@/lib/age-bands";
 /** Hard constraints for public age-band generation (overrides one-size system-rules lengths). */
 export function ageBandGenerationGuide(bandId: AgeBandId): string {
   const sharedMorning = `
-RĪTA LŪGŠANA — ARĪ PAR CITIEM (ne tikai “svētī manu dienu”):
-- morning_prayer joprojām īsa un saistīta ar dienas Evaņģēlija domu.
-- Katrā rītā iekļauj **vismaz vienu** īsu aizlūgumu / lūgumu par citiem — **šodien tikai viens virziens** no ŠODIENAS VARIĀCIJAS, NE katru rītu visu sarakstu.
-- Iespējamie virzieni: ģimene; draugi; cilvēki, kurus šodien satikšu; kāds, kam šodien grūti; miera / labestības lūgums citiem.
-- Skolasbiedri / skolotāji / skola — **TIKAI** ja SKOLAS KONTEKSTS atļauj (nav vasaras brīvlaiks jūnijs–augusts un nav sestdiena/svētdiena). Brīvlaikā un brīvdienās šos virzienus NELIETOT.
-- LABI: 1–2 teikumi body vai closing daļā, ar konkrētu cilvēku, ne “svētī visus”.
-- NEDRĪKST: katru rītu mehāniski visi punkti; gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās; katru rītu tas pats “Paldies par jauno dienu” + “palīdzi būt labam”.
+RĪTA LŪGŠANA — PIRMS EVAŅĢĒLIJA (JAUNAIS FORMĀTS):
+- morning_prayer tiek lasīta **pirms** Evaņģēlija. Tai jābūt saprotamai, ja lasījums vēl nav lasīts.
+- Forma: uzruna Dievam — lūgums, pateicība, uzticēšana. **NULLE jautājumu:** neviena “?” rīta lūgšanā, arī ne Dievam. Jautājumi pieder pēc Evaņģēlija.
+- \`body\` **tieši šādā kārtībā** (īsi, ne saraksts):
+  1) **Pateicība** par nakti un jauno dienu.
+  2) **Ikdienas aplis:** “Lūdzu par sevi, ģimeni un draugiem”. Skola / skolotāji / klasesbiedri — **TIKAI** ja SKOLAS KONTEKSTS atļauj, vienā īsā teikumā. Brīvlaikā un brīvdienās skolu NELIETOT.
+  3) **Evaņģēlija virziens:** “Dāvā mums …” / “Dod mums …” — viena žēlastība no šodienas Evaņģēlija vēsts (miers, drosme, piedošana, uzticēšanās…). **Bez** ainas, citāta, personu vārda. NEDRĪKST katru dienu tā pati žēlastība.
+  4) **Atvērtais slots:** beidz ar “Jo īpaši šodien vēlos lūgt par…”. **Apstājies pie “par…”** — NEDRĪKST aizpildīt ar izdomātu cilvēku, situāciju vai “kādu, kurš…”. Bērns pats ieliek.
+- NEDRĪKST: gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās; katru rītu tas pats “Paldies par jauno dienu” + “palīdzi būt labam”; viltus-konkrēts “jo īpaši par klasesbiedru, kuram…”.
 
 SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — DIVI LĪMEŅI (TIKAI iekšēji):
 - Iekšēji **A:** ko ŠIS fragments konkrēti māca (no teksta). Iekšēji **B:** kā tas aicina **tuvoties Dievam** un ļaut Viņam pārveidot dzīvi (Dievam katrs ir svarīgs; ja tekstā — arī rūpe par tuvāko ceļu ar Dievu).
@@ -49,7 +51,7 @@ VAKARĀ OBLIGĀTA ĪSTA LŪGŠANA (ne tikai atskats):
     case "age_7_9":
       return `VECUMA GRUPA 7–9 — OBLIGĀTI ŠAURĀK UN ĪSĀK NEKĀ VECĀKAJĀM GRUPĀM:
 - VALODA: ļoti vienkārši, īsi teikumi; ikdienas vārdi; grūtus jēdzienus pārfrāzē. NEDRĪKST: gari “pieaugušo” teikumi, abstrakti termini bez skaidrojuma.
-- Rīta lūgšana: 40–70 vārdi. Vienkārša valoda (ne “mazuļu” žargons). Īss aizlūgums par ģimeni / draugiem / kādu, ko šodien satikšu (1 virziens, ne viss saraksts; skola tikai ja SKOLAS KONTEKSTS atļauj).
+- Rīta lūgšana: 40–70 vārdi. Vienkārša valoda (ne “mazuļu” žargons). Formāts: pateicība → lūdzu par sevi, ģimeni, draugiem (skola tikai ja SKOLAS KONTEKSTS atļauj) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši šodien vēlos lūgt par…” (neaizpildīts).
 ${sharedMorning}
 - Evaņģēlija skaidrojums (explanation): 80–120 vārdi. Kas notiek → ko Jēzus / Dievs māca (vienkārši) → (ja der) ko tas nozīmē manā ikdienā. BEZ smagas teoloģijas; BEZ skaidrojuma, kas ir tikai “esi labs”. Īsi teikumi.
 - main_idea: 1 īss teikums ar evaņģēlija/ticības domu. real_life_application: 2–4 īsi teikumi = **mazs, šodien izpildāms** ierosinājums no tās pašas mācības (ne pusstundas projekti; brīvlaikā/brīvdienās — bez skolas/klasesbiedriem).
@@ -69,7 +71,7 @@ ${sharedEvening}`;
     case "age_10_12":
       return `VECUMA GRUPA 10–12 — VIDĒJS DZIĻUMS (garāks un nopietnāks nekā 7–9, vienkāršāks nekā 13+):
 - VALODA: skaidri īsi–vidēji teikumi; galvenokārt ikdienas vārdi; atsevišķi ticības termini OK, ja konteksts skaidrs. NEDRĪKST: smaga “grāmatu” valoda kā 16+.
-- Rīta lūgšana: 50–90 vārdi. Īss aizlūgums par citiem (ģimene / draugi / skola* — 1 virziens, rotē; *skola tikai ja SKOLAS KONTEKSTS atļauj).
+- Rīta lūgšana: 50–90 vārdi. Formāts: pateicība → lūdzu par sevi, ģimeni, draugiem (skola tikai ja SKOLAS KONTEKSTS atļauj) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši šodien vēlos lūgt par…” (neaizpildīts).
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 120–180 vārdi. Kas notiek / ko Jēzus dara / ko māca par Dievu un ticību / kāpēc svarīgi / (ja dabiski) ko nozīmē attiecībās un rīcībā. Nē: tikai tikumu lekcija. Teikumi skaidri, ne sapinušies.
 - real_life_application = šodienas praktiskā apņemšanās no evaņģēlija mācības (brīvlaikā/brīvdienās — bez skolas situācijām).
@@ -90,7 +92,7 @@ ${sharedEvening}`;
     case "age_13_15":
       return `VECUMA GRUPA 13–15 — DZIĻĀK, PUSAUDŽA IKDIENA:
 - VALODA: skaidri, lasāmi teikumi (drīkst garāki nekā 7–12); drīkst neikdieniskākus / precīzākus vārdus, ja palīdz. NEDRĪKST: mazuļu leksika.
-- Rīta lūgšana: 60–100 vārdi; personiska. Īss aizlūgums par ģimeni/draugiem/kādu no ikdienas (1 virziens).
+- Rīta lūgšana: 60–100 vārdi; personiska. Formāts: pateicība → lūdzu par sevi, ģimeni, draugiem (skola tikai ja SKOLAS KONTEKSTS atļauj) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši šodien vēlos lūgt par…” (neaizpildīts).
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 150–250 vārdi. Vispirms: ko teksts saka par Kristu, Dievu, ticību (atgriešanos/piedošanu — ja tekstā). Tad: “Ko tas saka par manu dzīvi?” (draugi, spiediens, ģimene…) — ja dabiski. Nē: tikai “esi labs pusaudzis”.
 - real_life_application / izaicinājums = šodienas apņemšanās no evaņģēlija mācības (konkrēta).
@@ -117,7 +119,7 @@ ${sharedEvening}`;
     case "age_16_19":
       return `VECUMA GRUPA 16–19 — NOBRIEDUŠĀKAIS DZIĻUMS:
 - VALODA: nobriedusi; drīkst precīzus / neikdieniskākus ticības un ētikas terminus; teikumi skaidri (ne “sapinušies”). NEDRĪKST: bērnu leksika.
-- Rīta lūgšana: 70–110 vārdi. Īss aizlūgums par citiem (ģimene, draugi, kāds, kam grūti — 1 virziens, rotē).
+- Rīta lūgšana: 70–110 vārdi. Formāts: pateicība → lūdzu par sevi, ģimeni, draugiem (skola tikai ja SKOLAS KONTEKSTS atļauj) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši šodien vēlos lūgt par…” (neaizpildīts).
 ${sharedMorning}
 - Evaņģēlija skaidrojums: 180–280 vārdi. Iekļauj “kāpēc” (katoļu izpratne par Dievu/Kristu/ticību), ne tikai “ko darīt” un ne tikai tikumu katalogs.
 - real_life_application = šodienas praktiskā izvēle/izaicinājums, kas izriet no evaņģēlija mācības.

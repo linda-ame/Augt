@@ -382,7 +382,7 @@ Izveido šodienas pieredzi JSON shēmā:
   "day_overview": string,
   "morning_prayer": {
     "opening": string,
-    "body": string,  // pateicība + Evaņģēlija saikne + īss aizlūgums par citiem (1 virziens)
+    "body": string,  // pateicība → lūdzu par sevi, ģimeni, draugiem (skola*) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši šodien vēlos lūgt par…” NEAIZPILDĪTS
     "offering": string,
     "closing": string
   },
@@ -429,7 +429,7 @@ Noteikumi:
 - Quiz spēlēm: "correct_answer" vai "answer"; explanation NEUTRĀLS (bez „Lieliski!” / „Pareizi!”).
 - scenario_choice / choose_the_best_response: ŠAURI — tikai ja tekstā ir skaidra rīcība/runa; ko Jēzus/nosaukts tēls no ŠĪ teksta darītu/teiktu šajā ainā. Bez skolas/ikdienas “ko tu darītu”. Ja šaubies — cits spēles tips. options (2–3), correct_answer, silts explanation.
 - gospel.real_life_application: **mazs, izpildāms** ierosinājums šodienai (īsa izvēle / dažas minūtes). Nedrīkst: “rīt pirmo pusstundu…”, “visu dienu bez…”, nereāli laika bloki.
-- morning_prayer: katrā rītā vismaz VIENS īss aizlūgums par citiem — šodien TIKAI virziens no ŠODIENAS VARIĀCIJAS; *skola tikai ja SKOLAS KONTEKSTS atļauj. Obligātie gabali paliek, bet pirmais teikums un Evaņģēlija tēls katru dienu ir citi.
+- morning_prayer: lasa PIRMS Evaņģēlija — saprotama bez lasījuma. **Neviena jautājumzīme** (arī ne Dievam). Nav citātu, nav “kā šodienas lasījumā”, nav personu no Evaņģēlija. \`body\` kārtība: (1) pateicība; (2) “Lūdzu par sevi, ģimeni un draugiem” (skola TIKAI ja SKOLAS KONTEKSTS atļauj); (3) “Dāvā/dod mums …” — viena žēlastība no Evaņģēlija vēsts; (4) beidz ar “Jo īpaši šodien vēlos lūgt par…” — **apstājies pie “par…”**, neizdomā cilvēku/situāciju.
 - evening_prayer: examen = atskats; jautājumu TĒMAS un skaits pēc vecuma grupas, bet teikumi katru dienu pārfrāzēti (ne iekopēti). resolution = īss spēka lūgums. **closing = GALVENĀ vakara lūgšana** ar visiem pieciem elementiem (sargā mani un ģimeni, naktsmiers, veselība, sargā no ļauna/nelaimēm/slimībām + Āmen), bet kārtība un ritms — pēc ŠODIENAS VARIĀCIJAS. Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.
 - gospel.real_life_application un parts.connection_to_gospel: forma un saiknes veids — pēc ŠODIENAS VARIĀCIJAS. Neatkārto nesenās dienas.
 - STINGRI ievēro SKOLAS KONTEKSTU augstāk: brīvlaikā un sestdienā–svētdienā bez skolas/klasesbiedru/skolotāju situācijām.

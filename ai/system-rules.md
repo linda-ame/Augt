@@ -139,10 +139,10 @@ Katru dienu ņem vērā **šodienas datumu un nedēļas dienu** (promptā: `ŠOD
 Kad ir vasaras brīvlaiks **vai** sestdiena/svētdiena:
 - **NEDRĪKST** rīta/vakara lūgšanās, `real_life_application`, spēļu scenārijos vai piemēros balstīties uz **skolu, klasi, klasesbiedriem, skolotājiem** vai uzdevumiem tipa “palīdzi klasesbiedram / skolā / starpbrīdī”.
 - **DRĪKST** (un jāizvēlas): **ģimene**, mājas, draugi (ne kā “klasesbiedri”), brīvlaika/brīvdienas ikdiena, cilvēki, kurus šodien satikšu, kāds, kam grūti.
-- Aizlūgumu rotācijā **izlaid** “skola / skolotāji / klasesbiedri”; izmanto ģimeni, draugus, satiktos.
+- Aizlūguma ikdienas aplī **izlaid** skolu / skolotājus / klasesbiedrus; paliek ģimene un draugi. Evaņģēlija virziens = “Dāvā/dod mums…”, ne izdomāts “jo īpaši” cilvēks.
 
 Kad ir skolas diena (ārpus jūnija–augusta un ne sestdiena/svētdiena):
-- skola / klasesbiedri / skolotāji **drīkst** parādīties rotācijā un piemēros, ja dabiski — bet ne katru rītu tikai skola.
+- skola / klasesbiedri / skolotāji **drīkst** būt īsi ikdienas aplī — bet ne katru rītu tikai skola. “Dāvā/dod mums…” nāk no Evaņģēlija; “Jo īpaši… par…” paliek atvērts.
 
 ## Dienas satura struktūra
 JSON ar:
@@ -158,12 +158,18 @@ JSON ar:
 Struktūra pēc katoļu ikdienas lūgšanu loģikas, bet **bērnam īsi**. Labāk par īsu nekā par garu.
 
 ### `morning_prayer`
-- `opening` — Dieva klātbūtne / mīlestība (1–2 teikumi)
-- `body` — pateicība par nakti un jauno dienu + **ne vairāk kā viena** īsa saikne ar Evaņģēlija tēmu + **īss aizlūgums par citiem** (skat. zemāk). Saikne ir **konkrēts tēls no šodienas teksta** (vārds, persona, žests), ne “palīdzi būt labam / pacietīgam”.
-- `offering` — upurēt šodienas domas, vārdus, darbus (1–2 teikumi), piekarinot tos šodienas ainai, ne tukšai formulai, kas atkārtojas katru rītu.
-- `closing` — īsa žēlastības lūgšana + Āmen (1–2 teikumi); var šeit vai `body` ietvert aizlūgumu
-- **Par citiem:** katrā rītā **vismaz vienu** īsu lūgumu/aizlūgumu — **šodien tikai viens** virziens no ŠODIENAS VARIĀCIJAS (ne katru rītu “ģimene un draugi un skola”): ģimene; draugi; skola/skolotāji (**tikai skolas dienā**, skat. **Skolas / brīvlaika konteksts**); cilvēki, kurus šodien satikšu; kāds, kam grūti. 1–2 teikumi. Brīvlaikā / sestdienā–svētdienā — bez skolas virziena.
-- **Mainās no dienas uz dienu:** pirmais teikums, Evaņģēlija tēls un aizlūguma virziens. **Nemainās:** īsums, pateicība, viena saikne ar Evaņģēliju, upurēšana, Āmen. NEDRĪKST sākt katru rītu ar “Paldies, Kungs, par jauno dienu”.
+Rīta lūgšana tiek lasīta **pirms** Evaņģēlija. Tai jābūt saprotamai, ja lasījums vēl nav lasīts.
+
+- `opening` — Dieva klātbūtne / mīlestība (1–2 teikumi). **Uzruna Dievam**, ne jautājums klausītājam.
+- `body` — **šādā kārtībā**, īsi (ne lūgšanu saraksts):
+  1. **Pateicība** par nakti un jauno dienu (1 teikums).
+  2. **Ikdienas aplis:** “Lūdzu par sevi, ģimeni un draugiem” (ģimenei: “Lūdzam…”, “mēs”). Skolas dienā tajā pašā vai nākamajā īsajā teikumā drīkst īsi pievienot skolu / skolotājus / klasesbiedrus. Brīvlaikā un sestdienā–svētdienā — **bez** skolas.
+  3. **Evaņģēlija virziens:** “Dāvā mums …” / “Dod mums …” — **viena** īsa žēlastība no šodienas Evaņģēlija **vēsts** (miers, drosme, piedošana, uzticēšanās, dziedināšana…), **ne** stāsts par ainu, personu vai Jēzus vārdiem. NEDRĪKST katru dienu tā pati žēlastība.
+  4. **Atvērtais slots (OBLIGĀTI neaizpildīts):** beidz `body` ar “Jo īpaši šodien vēlos lūgt par…” (ģimenei: “Jo īpaši šodien mēs vēlamies lūgt par…”). **Apstājies pie “par…”** — neliec vārdu, situāciju, “kādu, kurš…”, klasesbiedru biogrāfiju. Bērns / ģimene paši ieliek cilvēku, situāciju vai nodomu. UI rāda hintu.
+- `offering` — upurēt šodienas domas, vārdus, darbus (1–2 teikumi). Ne tukša formula, kas atkārtojas katru rītu, un **ne** “kā šodienas Evaņģēlijā”.
+- `closing` — īsa žēlastības lūgšana + Āmen (1–2 teikumi).
+- **NEDRĪKST rīta lūgšanā:** jautājumi (arī retoriski) par lasījumu vai Evaņģēliju; “ko Jēzus teica / vai dzirdējāt / atceries ainu”; citāti un personu vārdi no teksta; “kā rakstīts šodienas Evaņģēlijā”; **izdomāts cilvēks/situācija aiz “Jo īpaši… par…”**. Jautājumi par lasījumu pieder **pēc** Evaņģēlija (pārdomas / “Runājam”), ne rītam.
+- **Mainās no dienas uz dienu:** pirmais teikums un “Dāvā/dod mums …” virziens. **Nemainās:** īsums, pateicība, ikdienas aplis, atvērtais “par…”, upurēšana, Āmen. NEDRĪKST sākt katru rītu ar “Paldies, Kungs, par jauno dienu”.
 - **Kopā ~60–90 vārdi** (publiskajās grupās skat. age-band). Negenerē Tēvreizi / Esi sveicināta / Gods lai ir / Es ticu (UI liek fiksēti).
 
 ### `evening_prayer`

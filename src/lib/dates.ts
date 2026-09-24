@@ -92,8 +92,8 @@ SKOLAS KONTEKSTS: BRĪVDIENA (sestdiena vai svētdiena) — šodien nav skolas d
 
   return `ŠODIENAS DATUMS UN DIENA: ${label}
 SKOLAS KONTEKSTS: skolas diena (ārpus vasaras brīvlaika, darba diena).
-- DRĪKST rotēt aizlūgumus un piemērus arī ar skolu / klasesbiedriem / skolotājiem, ja dabiski.
-- Joprojām rotē: ģimene, draugi, skola — ne katru rītu tikai skola.`;
+- DRĪKST ikdienas aplī īsi pieminēt arī skolu / klasesbiedrus / skolotājus.
+- “Dāvā/dod mums …” nāk no Evaņģēlija; “Jo īpaši … par…” paliek atvērts. Ne katru rītu tikai skola.`;
 }
 
 /** Shorter label for history dropdown: "10. augusts 2026" */
