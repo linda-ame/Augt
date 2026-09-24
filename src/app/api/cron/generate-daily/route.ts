@@ -12,7 +12,7 @@ export const maxDuration = 300;
  * Cron entrypoint (cron-job.org).
  *
  * Preferred (avoids timeouts):
- *   ?band=age_7_9 | age_10_12 | age_13_15 | age_16_19
+ *   ?band=age_7_9 | age_10_12 | age_13_15 | age_16_19 | family
  *   ?children=1
  *
  * Scripture is fetched once into daily_readings (first caller); later slices reuse it.
@@ -35,7 +35,13 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error: "Invalid band",
-        allowed: ["age_7_9", "age_10_12", "age_13_15", "age_16_19"],
+        allowed: [
+          "age_7_9",
+          "age_10_12",
+          "age_13_15",
+          "age_16_19",
+          "family",
+        ],
       },
       { status: 400 },
     );

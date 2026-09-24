@@ -17,6 +17,7 @@ import {
   guestChildId,
   type AgeBandId,
 } from "@/lib/age-bands";
+import { isFamilyModeId } from "@/lib/family-content";
 import { sanitizeDailyQuote } from "@/services/scriptureSource";
 
 export const dynamic = "force-dynamic";
@@ -136,6 +137,7 @@ export default async function KidPage({
           status={status}
           gospelAudioUrl={bandLesson?.gospel_audio_url ?? null}
           isGuest
+          isFamilyMode={isFamilyModeId(guestBand)}
           splitOptionalReadings={
             guestBand === "age_7_9" || guestBand === "age_10_12"
           }

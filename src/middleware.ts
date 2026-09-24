@@ -1,12 +1,27 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+function hasSupabaseAuthCookie(request: NextRequest) {
+  return request.cookies
+    .getAll()
+    .some(
+      (c) =>
+        c.name.startsWith("sb-") &&
+        (c.name.includes("auth-token") || c.name.includes("access-token")),
+    );
+}
+
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) return supabaseResponse;
+
+  // Guest home / public pages: skip remote auth refresh when no session cookie.
+  if (!hasSupabaseAuthCookie(request)) {
+    return supabaseResponse;
+  }
 
   const supabase = createServerClient(url, key, {
     cookies: {

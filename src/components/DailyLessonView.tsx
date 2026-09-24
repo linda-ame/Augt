@@ -1371,25 +1371,30 @@ function ClassicPrayerClose() {
 function MorningPanel({
   prayer,
   onContinueToGospel,
+  familyMorning = false,
 }: {
   prayer?: MorningPrayer;
   onContinueToGospel: () => void;
+  familyMorning?: boolean;
 }) {
   const body = prayer?.body?.trim() ?? "";
-  const hasOpenIntentionSlot =
-    /par…\s*$/u.test(body) || /par\.\.\.\s*$/u.test(body);
+  const hasOpenIntentionSlot = /par…\s*$/u.test(body) || /par\.\.\.\s*$/u.test(body);
 
   return (
     <div className="space-y-5">
       <section className="panel section-enter p-6">
-        <SectionHeading icon="morning">Rīta lūgšana</SectionHeading>
+        <SectionHeading icon="morning">
+          {familyMorning ? "Ģimenes rīta lūgšana" : "Rīta lūgšana"}
+        </SectionHeading>
         {prayer ? (
           <div className="mt-4 space-y-4 leading-relaxed">
             <p>{prayer.opening}</p>
             <p>{prayer.body}</p>
             {hasOpenIntentionSlot ? (
               <p className="text-sm italic text-[var(--ink-soft)]">
-                (cilvēks, situācija vai nodoms — ko tu šodien vēlies aizlūgt)
+                {familyMorning
+                  ? "(kopējs ģimenes nodoms — vai katrs var izteikt savu)"
+                  : "(cilvēks, situācija vai nodoms — ko tu šodien vēlies aizlūgt)"}
               </p>
             ) : null}
             <p>{prayer.offering}</p>
@@ -1413,29 +1418,69 @@ function MorningPanel({
   );
 }
 
-function EveningPanel({ prayer }: { prayer?: EveningPrayer }) {
+function EveningPanel({
+  prayer,
+  familyCircle = false,
+}: {
+  prayer?: EveningPrayer;
+  familyCircle?: boolean;
+}) {
   return (
     <div className="space-y-5">
       <section className="panel section-enter p-6">
-        <SectionHeading icon="evening">Vakara lūgšana</SectionHeading>
+        <SectionHeading icon="evening">
+          {familyCircle ? "Vakara aplītis" : "Vakara lūgšana"}
+        </SectionHeading>
         {prayer ? (
           <div className="mt-4 space-y-4 leading-relaxed">
-            <p>{prayer.thanksgiving}</p>
-            <p>{prayer.mercy}</p>
-            <div className="mt-2">
-              <h3 className="font-semibold text-[var(--bg-deep)]">
-                Sirdsapziņas izmeklēšana
-              </h3>
-              <p className="mt-2 text-[var(--ink-soft)]">{prayer.examen_intro}</p>
-              <ol className="mt-3 list-decimal space-y-2 pl-5">
-                {prayer.examen_questions.map((q) => (
-                  <li key={q}>{q}</li>
-                ))}
-              </ol>
-            </div>
-            <p className="font-medium italic leading-relaxed">{prayer.resolution}</p>
-            <p>{prayer.closing}</p>
-            <ClassicPrayerClose />
+            {familyCircle ? (
+              <>
+                <p className="text-[var(--ink-soft)]">{prayer.examen_intro}</p>
+                <div className="mt-2">
+                  <h3 className="font-semibold text-[var(--bg-deep)]">
+                    Saruna aplītī
+                  </h3>
+                  <ol className="mt-3 list-decimal space-y-2 pl-5">
+                    {prayer.examen_questions.map((q) => (
+                      <li key={q}>{q}</li>
+                    ))}
+                  </ol>
+                </div>
+                <h3 className="pt-2 font-semibold text-[var(--bg-deep)]">
+                  Vakara lūgšana
+                </h3>
+                <p>{prayer.thanksgiving}</p>
+                <p>{prayer.mercy}</p>
+                <p className="font-medium italic leading-relaxed">
+                  {prayer.resolution}
+                </p>
+                <p>{prayer.closing}</p>
+                <ClassicPrayerClose />
+              </>
+            ) : (
+              <>
+                <p>{prayer.thanksgiving}</p>
+                <p>{prayer.mercy}</p>
+                <div className="mt-2">
+                  <h3 className="font-semibold text-[var(--bg-deep)]">
+                    Sirdsapziņas izmeklēšana
+                  </h3>
+                  <p className="mt-2 text-[var(--ink-soft)]">
+                    {prayer.examen_intro}
+                  </p>
+                  <ol className="mt-3 list-decimal space-y-2 pl-5">
+                    {prayer.examen_questions.map((q) => (
+                      <li key={q}>{q}</li>
+                    ))}
+                  </ol>
+                </div>
+                <p className="font-medium italic leading-relaxed">
+                  {prayer.resolution}
+                </p>
+                <p>{prayer.closing}</p>
+                <ClassicPrayerClose />
+              </>
+            )}
           </div>
         ) : (
           <p className="mt-4 text-[var(--ink-soft)]">
@@ -1525,6 +1570,7 @@ export function DailyLessonView({
   /** 7–9 / 10–12: primary row = Rīts·Evaņģēlijs·Vakars; optional readings on second row */
   splitOptionalReadings,
   gospelAudioUrl,
+  isFamilyMode = false,
 }: {
   date: string;
   dates: string[];
@@ -1539,6 +1585,8 @@ export function DailyLessonView({
   isParentContentReview?: boolean;
   splitOptionalReadings?: boolean;
   gospelAudioUrl?: string | null;
+  /** Ģimene: no game, discussion questions, evening circle */
+  isFamilyMode?: boolean;
 }) {
   const gospel = normalizeGospelContent(content);
   const contentReady = status === "success" && Boolean(content);
@@ -1654,7 +1702,7 @@ export function DailyLessonView({
             href="/?changeAge=1"
             className="btn btn-secondary shrink-0 !px-3 !py-1.5 text-sm"
           >
-            Mainīt vecumu
+            {isFamilyMode ? "Mainīt režīmu" : "Mainīt vecumu"}
           </a>
         ) : null}
       </section>
@@ -1857,9 +1905,13 @@ export function DailyLessonView({
               <MorningPanel
                 prayer={content?.morning_prayer}
                 onContinueToGospel={continueToGospel}
+                familyMorning={isFamilyMode}
               />
             ) : activeTab === "evening" ? (
-              <EveningPanel prayer={content?.evening_prayer} />
+              <EveningPanel
+                prayer={content?.evening_prayer}
+                familyCircle={isFamilyMode}
+              />
             ) : activeTab === "gospel" ? (
               <div className="space-y-5">
                 <section className="panel section-enter p-6">
@@ -1896,7 +1948,9 @@ export function DailyLessonView({
                   className="panel section-enter p-6"
                   style={{ animationDelay: "50ms" }}
                 >
-                  <SectionHeading icon="meaning">Ko tas nozīmē?</SectionHeading>
+                  <SectionHeading icon="meaning">
+                    {isFamilyMode ? "Ko dzirdam?" : "Ko tas nozīmē?"}
+                  </SectionHeading>
                   <p className="mt-3 leading-relaxed">{lessonGospel!.explanation}</p>
                   <p className="mt-4 font-medium">{lessonGospel!.main_idea}</p>
                   <p className="mt-3 text-[var(--ink-soft)]">
@@ -1904,6 +1958,7 @@ export function DailyLessonView({
                   </p>
                 </section>
 
+                {!isFamilyMode && lessonGospel!.activity ? (
                 <section
                   className="panel section-enter p-6"
                   style={{ animationDelay: "100ms" }}
@@ -1915,15 +1970,56 @@ export function DailyLessonView({
                     <ActivityGame activity={lessonGospel!.activity} />
                   </div>
                 </section>
+                ) : null}
 
                 <section
                   className="panel section-enter p-6"
                   style={{ animationDelay: "150ms" }}
                 >
-                  <SectionHeading icon="reflect">Pārdomas</SectionHeading>
-                  <p className="mt-3 leading-relaxed">
-                    {lessonGospel!.reflection_question}
-                  </p>
+                  <SectionHeading icon="reflect">
+                    {isFamilyMode ? "Runājam" : "Pārdomas"}
+                  </SectionHeading>
+                  {lessonGospel!.discussion_questions &&
+                  lessonGospel!.discussion_questions.length > 0 ? (
+                    isFamilyMode &&
+                    lessonGospel!.discussion_questions.length >= 2 ? (
+                      <div className="mt-4 space-y-5">
+                        <div>
+                          <p className="text-sm font-medium text-[var(--ink-soft)]">
+                            Ko dzirdējām?
+                          </p>
+                          <ol className="mt-2 list-decimal space-y-3 pl-5 leading-relaxed">
+                            <li>{lessonGospel!.discussion_questions[0]}</li>
+                          </ol>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-[var(--ink-soft)]">
+                            Ko tas mums?
+                          </p>
+                          <ol
+                            className="mt-2 list-decimal space-y-3 pl-5 leading-relaxed"
+                            start={2}
+                          >
+                            {lessonGospel!.discussion_questions
+                              .slice(1)
+                              .map((q) => (
+                                <li key={q}>{q}</li>
+                              ))}
+                          </ol>
+                        </div>
+                      </div>
+                    ) : (
+                      <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
+                        {lessonGospel!.discussion_questions.map((q) => (
+                          <li key={q}>{q}</li>
+                        ))}
+                      </ol>
+                    )
+                  ) : (
+                    <p className="mt-3 leading-relaxed">
+                      {lessonGospel!.reflection_question}
+                    </p>
+                  )}
                 </section>
 
                 <section

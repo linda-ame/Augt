@@ -12,6 +12,7 @@ export function visualToneFromAgeBand(band: AgeBandId): VisualTone {
     case "age_7_9":
       return "vivid";
     case "age_10_12":
+    case "family":
       return "soft";
     case "age_13_15":
     case "age_16_19":

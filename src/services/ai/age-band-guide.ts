@@ -1,4 +1,5 @@
 import type { AgeBandId } from "@/lib/age-bands";
+import { FIXED_FAMILY_EVENING_QUESTIONS } from "@/lib/family-content";
 
 /** Hard constraints for public age-band generation (overrides one-size system-rules lengths). */
 export function ageBandGenerationGuide(bandId: AgeBandId): string {
@@ -8,9 +9,9 @@ RĪTA LŪGŠANA — PIRMS EVAŅĢĒLIJA (JAUNAIS FORMĀTS):
 - Forma: uzruna Dievam — lūgums, pateicība, uzticēšana. **NULLE jautājumu:** neviena “?” rīta lūgšanā, arī ne Dievam. Jautājumi pieder pēc Evaņģēlija.
 - \`body\` **tieši šādā kārtībā** (īsi, ne saraksts):
   1) **Pateicība** par nakti un jauno dienu.
-  2) **Ikdienas aplis:** “Lūdzu par sevi, ģimeni un draugiem”. Skola / skolotāji / klasesbiedri — **TIKAI** ja SKOLAS KONTEKSTS atļauj, vienā īsā teikumā. Brīvlaikā un brīvdienās skolu NELIETOT.
+  2) **Ikdienas aplis:** “Lūdzu par sevi, ģimeni un draugiem” (ģimenei: “Lūdzam…”, “mēs”). Skola / skolotāji / klasesbiedri — **TIKAI** ja SKOLAS KONTEKSTS atļauj, vienā īsā teikumā. Brīvlaikā un brīvdienās skolu NELIETOT.
   3) **Evaņģēlija virziens:** “Dāvā mums …” / “Dod mums …” — viena žēlastība no šodienas Evaņģēlija vēsts (miers, drosme, piedošana, uzticēšanās…). **Bez** ainas, citāta, personu vārda. NEDRĪKST katru dienu tā pati žēlastība.
-  4) **Atvērtais slots:** beidz ar “Jo īpaši šodien vēlos lūgt par…”. **Apstājies pie “par…”** — NEDRĪKST aizpildīt ar izdomātu cilvēku, situāciju vai “kādu, kurš…”. Bērns pats ieliek.
+  4) **Atvērtais slots:** beidz ar “Jo īpaši šodien vēlos lūgt par…” (ģimenei: “Jo īpaši šodien mēs vēlamies lūgt par…”). **Apstājies pie “par…”** — NEDRĪKST aizpildīt ar izdomātu cilvēku, situāciju vai “kādu, kurš…”. Bērns / ģimene paši ieliek.
 - NEDRĪKST: gara “lūgšanu lista”; aizlūgums bez īstas uzrunas Dievam; skolas situācijas brīvlaikā/brīvdienās; katru rītu tas pats “Paldies par jauno dienu” + “palīdzi būt labam”; viltus-konkrēts “jo īpaši par klasesbiedru, kuram…”.
 
 SKAIDROJUMS (“Ko tas nozīmē?” / gospel.explanation) — DIVI LĪMEŅI (TIKAI iekšēji):
@@ -46,6 +47,36 @@ VAKARĀ OBLIGĀTA ĪSTA LŪGŠANA (ne tikai atskats):
   5) sargā no ļauna, nelaimēm un slimībām.
   Beidzas ar Āmen. VISI pieci elementi paliek; **kārtība un tas, kurš teikums ir garākais, mainās** pēc ŠODIENAS VARIĀCIJAS. NEDRĪKST katru vakaru tas pats “Sargā mani un manu ģimeni. Dod mierīgu miegu.”
 - NEDRĪKST: closing, kas ir tikai “labu nakti” vienā teikumā; closing, kas atkārto examen; closing bez īstas lūgšanas uzrunas; izlaist kādu no pieciem elementiem.`;
+
+  if (bandId === "family") {
+    const fixedQ = FIXED_FAMILY_EVENING_QUESTIONS.map((q) => `«${q}»`).join(
+      "; ",
+    );
+    return `REŽĪMS: ĢIMENE — KOPĪGS DIENAS BRĪDIS (jaukti vecumi, lasa un runā BALSĪ)
+- NAV individuāla bērna stunda; NAV pieaugušo solo; NAV spēle; NAV audio/TTS skripts; NAV grēksūdze.
+- Valoda: “mēs / mūsu” lūgšanās; skaidrojums saprotams ~7–9 gadu bērnam; īsi teikumi.
+- Rīta lūgšana: 50–90 vārdi; ģimenes tonis (“mēs”). Formāts: pateicība → lūdzam par sevi, ģimeni, draugiem (skola tikai ja SKOLAS KONTEKSTS atļauj) → “Dāvā mums …” no Evaņģēlija → “Jo īpaši šodien mēs vēlamies lūgt par…” (neaizpildīts).
+${sharedMorning}
+- Evaņģēlija skaidrojums: 100–160 vārdi; plūstošs A+B bez etiķetēm; stāsta balsī ģimenei.
+- main_idea: 1 teikums, ko visi var atkārtot.
+- real_life_application: 2–5 teikumi = VIENS kopīgs, šodien izpildāms solis ģimenei (ne skolas uzdevumi brīvlaikā/brīvdienās).
+- discussion_questions: TIEŠI 3 stringi secībā (UI rāda 2 daļās: «Ko dzirdējām?» = 1.; «Ko tas mums?» = 2.–3.):
+  1) vienkāršais (jaunākajiem) — kas notika / ko Jēzus darīja (no šīs dienas teksta);
+  2) kopīgais — ko tas nozīmē MUMS kā ģimenei ŠODIEN (mājas, viens otram); silts, praktisks, ne lekcija;
+  3) dziļākais — vecākie/vecāki, bez “pareizās” atbildes.
+  Vismaz 2. vai 3. ar konkrētu Evaņģēlija tēlu.
+- reflection_question: īss kopsavilkums no 2. jautājuma (fallback; UI galvenokārt rāda discussion_questions).
+- gospel.activity: **NEIEKĻAUJ** (nav spēles).
+- gospel.prayer: īsa kopīga lūgšana 30–50 vārdi, “mēs”.
+- parts: summary 40–80 vārdi; connection 1–3 teikumi ja dabiski.
+- Vakars = **vakara aplītis**:
+  - examen_intro: 1 teikums, aicina uz aplīti (ne “izmeklēsim sirdsapziņu”).
+  - examen_questions: ievieto TIEŠI šos četrus fiksētos tekstus (nepārfrāzē): ${fixedQ}
+  - thanksgiving / mercy / resolution / closing: **katru dienu JAUNI**; “mēs”; mercy = maiga kopīga piedošana, ne grēksaraksts; resolution = lūgums pēc spēka; closing ar 5 elementiem (sargā mūs/ģimeni, miegs, veselība, no ļauna… + Āmen).
+  - Vakara lūgšanas teksts bez jautājumiem: 70–120 vārdi.
+- NEDRĪKST: spēle; quiz; individuāls examen; kaunināšana; atsevišķas versijas katram bērna vecumam.
+${sharedEvening}`;
+  }
 
   switch (bandId) {
     case "age_7_9":

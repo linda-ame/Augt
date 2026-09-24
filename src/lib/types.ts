@@ -150,8 +150,11 @@ export const gospelContentSchema = z.object({
   explanation: z.string().min(1),
   main_idea: z.string().min(1),
   real_life_application: z.string().min(1),
-  activity: activitySchema,
+  /** Optional: omitted for Ģimene (no game). */
+  activity: activitySchema.optional(),
   reflection_question: z.string().min(1),
+  /** Ģimene: 3 spoken discussion prompts (easy → together → deeper). */
+  discussion_questions: z.array(z.string().min(1)).min(3).max(3).optional(),
   prayer: z.string().min(1),
 });
 
@@ -251,7 +254,6 @@ export function normalizeGospelContent(
     content.explanation &&
     content.main_idea &&
     content.real_life_application &&
-    content.activity &&
     content.reflection_question &&
     content.prayer
   ) {

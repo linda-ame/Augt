@@ -22,6 +22,7 @@ import {
   type ScriptureReading,
 } from "@/lib/types";
 import { getAgeBand, type AgeBandId } from "@/lib/age-bands";
+import { isFamilyModeId } from "@/lib/family-content";
 import { NotificationSoftPrompt } from "@/components/NotificationSoftPrompt";
 
 const GUEST_TABS: Array<"gospel" | "first_reading" | "psalm" | "alleluia"> = [
@@ -205,7 +206,7 @@ export function GuestDayView({
           href="/?changeAge=1"
           className="btn btn-secondary shrink-0 !px-3 !py-1.5 text-sm"
         >
-          Mainīt vecumu
+          {isFamilyModeId(ageBandId) ? "Mainīt režīmu" : "Mainīt vecumu"}
         </Link>
       </section>
 

@@ -5,7 +5,12 @@ import {
   AGE_BANDS,
   ageBandFromAge,
   type AgeBandId,
+  type ChildAgeBandId,
 } from "@/lib/age-bands";
+import {
+  FIXED_FAMILY_EVENING_QUESTIONS,
+  isFamilyModeId,
+} from "@/lib/family-content";
 import { schoolDayContextForPrompt, todayInRiga } from "@/lib/dates";
 import { dayVariationBrief } from "@/lib/day-variation";
 import {
@@ -70,7 +75,7 @@ export function loadCatholicPrinciples(): string {
   return readFileSync(file, "utf8");
 }
 
-const AGE_BAND_FILES: Record<AgeBandId, string> = {
+const AGE_BAND_FILES: Record<ChildAgeBandId, string> = {
   age_7_9: "7-9.md",
   age_10_12: "10-12.md",
   age_13_15: "13-15.md",
@@ -78,6 +83,9 @@ const AGE_BAND_FILES: Record<AgeBandId, string> = {
 };
 
 export function loadAgeBandSpec(bandId: AgeBandId): string {
+  if (isFamilyModeId(bandId)) {
+    return readFileSync(path.join(process.cwd(), "ai", "family.md"), "utf8");
+  }
   const file = path.join(
     process.cwd(),
     "ai",
@@ -296,6 +304,48 @@ Ja neesi drošs — null. NEizdomā pantus ārpus diapazona.`,
   }
 }
 
+function assertMorningPrayerHasNoQuestions(content: DailyLessonContent) {
+  const m = content.morning_prayer;
+  if (!m) return;
+  const text = [m.opening, m.body, m.offering, m.closing].join("\n");
+  if (text.includes("?")) {
+    throw new Error("morning_prayer satur jautājumu");
+  }
+}
+
+function finalizeFamilyLessonContent(
+  bandId: AgeBandId,
+  content: DailyLessonContent,
+): DailyLessonContent {
+  if (!isFamilyModeId(bandId)) return content;
+
+  const gospel = content.gospel
+    ? {
+        ...content.gospel,
+        activity: undefined,
+        discussion_questions:
+          content.gospel.discussion_questions?.length === 3
+            ? content.gospel.discussion_questions
+            : content.gospel.discussion_questions,
+      }
+    : content.gospel;
+
+  if (gospel && gospel.activity === undefined) {
+    delete (gospel as { activity?: unknown }).activity;
+  }
+
+  return {
+    ...content,
+    gospel,
+    evening_prayer: content.evening_prayer
+      ? {
+          ...content.evening_prayer,
+          examen_questions: [...FIXED_FAMILY_EVENING_QUESTIONS],
+        }
+      : content.evening_prayer,
+  };
+}
+
 export async function generateDailyLesson(input: {
   age: number;
   profile: string;
@@ -333,7 +383,10 @@ ${dayVariationBrief(date)}`;
   // Public guest path passes ageBandId; personalized children get band from exact age.
   const isPublicBand = Boolean(input.ageBandId);
   const bandId = input.ageBandId ?? ageBandFromAge(input.age);
-  const bandMeta = AGE_BANDS.find((b) => b.id === bandId);
+  const isFamily = isFamilyModeId(bandId);
+  const bandMeta = isFamily
+    ? { id: bandId, label: "Ģimene" }
+    : AGE_BANDS.find((b) => b.id === bandId);
   const bandSpec = loadAgeBandSpec(bandId);
   const bandGuide = ageBandGenerationGuide(bandId);
   const principles = loadCatholicPrinciples();
@@ -346,7 +399,7 @@ ${loadSystemRules()}
 
 ---
 
-VECUMA GRUPAS SPECIFIKĀCIJA (${bandMeta?.label ?? bandId}):
+${isFamily ? "ĢIMENES" : "VECUMA GRUPAS"} SPECIFIKĀCIJA (${bandMeta?.label ?? bandId}):
 ${bandSpec}
 
 ---
@@ -355,9 +408,40 @@ ${bandGuide}
 
 ---`;
 
-  const examenSchemaHint = `"examen_questions": string[]  // skaits un tēmas — skat. VECUMA GRUPAS vadlīnijas (3–6 jautājumi)`;
+  const examenSchemaHint = isFamily
+    ? `"examen_questions": string[]  // TIEŠI 4 fiksētie vakara aplīša jautājumi no vadlīnijām (nepārfrāzē)`
+    : `"examen_questions": string[]  // skaits un tēmas — skat. VECUMA GRUPAS vadlīnijas (3–6 jautājumi)`;
 
-  const lengthRules = isPublicBand
+  const gospelSchemaBlock = isFamily
+    ? `"gospel": {
+    "title": string,
+    "scripture_reference": string,
+    "explanation": string,
+    "main_idea": string,
+    "real_life_application": string,
+    "discussion_questions": [string, string, string],  // easy → together → deeper
+    "reflection_question": string,
+    "prayer": string
+    // NAV activity / spēles
+  }`
+    : `"gospel": {
+    "title": string,
+    "scripture_reference": string,
+    "explanation": string,
+    "main_idea": string,
+    "real_life_application": string,
+    "activity": { ...spēle... },
+    "reflection_question": string,
+    "prayer": string
+  }`;
+
+  const lengthRules = isFamily
+    ? `- REŽĪMS ĢIMENE: BEZ bērna profila; BEZ spēles; BEZ audio. PRIORITĀTE: ai/family.md + ģimenes vadlīnijas.
+- gospel.activity: NERAĢĒ / NEIEKĻAUJ.
+- gospel.discussion_questions: obligāti tieši 3.
+- evening_prayer.examen_questions: fiksētie 4 (UI pārņem); ievads + lūgšana katru dienu jauni.
+- Valoda “mēs”; skaidrojums jauktam vecumam.`
+    : isPublicBand
     ? `- PUBLISKAIS STANDARTA saturs: BEZ bērna profila. PRIORITĀTE: vecuma grupas specifikācija + vadlīnijas (garumi, tonis, examen).
 - gospel.explanation: DIVI LĪMEŅI iekšēji — (A) ko ŠIS fragments konkrēti māca; (B) kā aicina tuvoties Dievam / ļaut sevi pārveidot (ja tekstā — arī rūpe par tuvāko ceļu ar Dievu). Tad ikdienas augļi. Output = **plūstošs teksts BEZ** etiķetēm „Līmenis A/B”, „A:”, „B:”. Nē: tikai “esi labs” / konfliktu menedžments; nē: uzspiest “atgriešanos” katrai dienai.
 - system-rules JSON struktūra (rīts/evaņģēlijs/spēle/vakars/parts) PALIEK, bet GARUMI un examen_questions SEKO vecuma grupai, ne “vienam izmēram visiem”.
@@ -382,7 +466,7 @@ Izveido šodienas pieredzi JSON shēmā:
   "day_overview": string,
   "morning_prayer": {
     "opening": string,
-    "body": string,  // pateicība → lūdzu par sevi, ģimeni, draugiem (skola*) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši šodien vēlos lūgt par…” NEAIZPILDĪTS
+    "body": string,  // pateicība → lūdzu/lūdzam par sevi, ģimeni, draugiem (skola*) → “Dāvā/dod mums …” no Evaņģēlija → “Jo īpaši … vēlos/vēlamies lūgt par…” NEAIZPILDĪTS
     "offering": string,
     "closing": string
   },
@@ -394,16 +478,7 @@ Izveido šodienas pieredzi JSON shēmā:
     "resolution": string,  // īss lūgums pēc spēka, ne rītdienas plāns
     "closing": string  // ĪSTA vakara lūgšana: sargā mani+ģimeni, naktsmiers, veselība, no ļauna/nelaimēm/slimībām + Āmen
   },
-  "gospel": {
-    "title": string,
-    "scripture_reference": string,
-    "explanation": string,
-    "main_idea": string,
-    "real_life_application": string,
-    "activity": { ...spēle... },
-    "reflection_question": string,
-    "prayer": string
-  },
+  ${gospelSchemaBlock},
   "parts": {
     "first_reading"?: { "summary": string, "connection_to_gospel": string },
     "psalm"?: { "summary": string, "connection_to_gospel": string },
@@ -417,7 +492,12 @@ Noteikumi:
 - gospel.scripture_reference: TIKAI par Evaņģēliju (atsauce + īss teikums). NEIEJAUC 1. lasījumu / Pāvilu utt.
 - gospel.explanation: iekšēji A (ko ŠIS teksts māca) + B (ceļš ar Dievu: tuvoties Viņam, ļaut sevi pārveidot; Dievam katrs svarīgs; rūpe par citiem — ja tekstā). Tad ikdienas auglis. **NEDRĪKST** tekstā rakstīt „Līmenis A”, „Līmenis B”, „A:”, „B:” — viens plūstošs skaidrojums. NESĀC ar gatavu tēmu. NEpārvērst par konfliktu menedžmentu vai profila lekciju. Neuzspiest atgriešanos/dvēseli, ja tekstā nav. Vienkāršo valodu, ne dziļumu.
 - gospel.main_idea: 1 teikums = A + B saturs — ne tikuma sauklis, ne tīrs “risināsim strīdus”; ne no profila; bez „Līmenis A/B” vārdiem.
-- Spēle un Evaņģēlija lūgšana TIKAI gospel objektā. gospel.prayer / rīts / vakars: saglabā ticības domu no Evaņģēlija, ne tikai “palīdzi būt labam”.
+${
+  isFamily
+    ? `- ĢIMENE: gospel.discussion_questions obligāti (3); NAV gospel.activity; gospel.prayer / rīts / vakars — “mēs”.
+- gospel.real_life_application: VIENS kopīgs ģimenes solis šodienai.
+- evening_prayer: vakara aplītis — ievads jauns; examen_questions = fiksētie 4; lūgšana jauna.`
+    : `- Spēle un Evaņģēlija lūgšana TIKAI gospel objektā. gospel.prayer / rīts / vakars: saglabā ticības domu no Evaņģēlija, ne tikai “palīdzi būt labam”.
 - gospel.activity: EVAŅĢĒLIJA teksts (ne vispārīga ikdiena). Ietver "type", "instruction"; explanation katrā jautājumā vai activity līmenī.
 - multiple_choice / true_false: questions masīvs ar **tieši 2** īsiem punktiem par šodienas Evaņģēliju (katram: question, options, correct_answer indekss, explanation). UI rāda abus vienā panelī. true_false options: Patiess / Nepatiess.
 - fill_blank: blanks masīvs ar **2–3** teikumiem (___), katram answer + explanation. UI pārbauda visus kopā.
@@ -429,8 +509,9 @@ Noteikumi:
 - Quiz spēlēm: "correct_answer" vai "answer"; explanation NEUTRĀLS (bez „Lieliski!” / „Pareizi!”).
 - scenario_choice / choose_the_best_response: ŠAURI — tikai ja tekstā ir skaidra rīcība/runa; ko Jēzus/nosaukts tēls no ŠĪ teksta darītu/teiktu šajā ainā. Bez skolas/ikdienas “ko tu darītu”. Ja šaubies — cits spēles tips. options (2–3), correct_answer, silts explanation.
 - gospel.real_life_application: **mazs, izpildāms** ierosinājums šodienai (īsa izvēle / dažas minūtes). Nedrīkst: “rīt pirmo pusstundu…”, “visu dienu bez…”, nereāli laika bloki.
-- morning_prayer: lasa PIRMS Evaņģēlija — saprotama bez lasījuma. **Neviena jautājumzīme** (arī ne Dievam). Nav citātu, nav “kā šodienas lasījumā”, nav personu no Evaņģēlija. \`body\` kārtība: (1) pateicība; (2) “Lūdzu par sevi, ģimeni un draugiem” (skola TIKAI ja SKOLAS KONTEKSTS atļauj); (3) “Dāvā/dod mums …” — viena žēlastība no Evaņģēlija vēsts; (4) beidz ar “Jo īpaši šodien vēlos lūgt par…” — **apstājies pie “par…”**, neizdomā cilvēku/situāciju.
-- evening_prayer: examen = atskats; jautājumu TĒMAS un skaits pēc vecuma grupas, bet teikumi katru dienu pārfrāzēti (ne iekopēti). resolution = īss spēka lūgums. **closing = GALVENĀ vakara lūgšana** ar visiem pieciem elementiem (sargā mani un ģimeni, naktsmiers, veselība, sargā no ļauna/nelaimēm/slimībām + Āmen), bet kārtība un ritms — pēc ŠODIENAS VARIĀCIJAS. Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.
+- morning_prayer: lasa PIRMS Evaņģēlija — saprotama bez lasījuma. **Neviena jautājumzīme** (arī ne Dievam). Nav citātu, nav “kā šodienas lasījumā”, nav personu no Evaņģēlija. \`body\` kārtība: (1) pateicība; (2) “Lūdzu/Lūdzam par sevi, ģimeni un draugiem” (skola TIKAI ja SKOLAS KONTEKSTS atļauj); (3) “Dāvā/dod mums …” — viena žēlastība no Evaņģēlija vēsts; (4) beidz ar “Jo īpaši šodien vēlos lūgt par…” (ģimenei: “mēs vēlamies lūgt par…”) — **apstājies pie “par…”**, neizdomā cilvēku/situāciju.
+- evening_prayer: examen = atskats; jautājumu TĒMAS un skaits pēc vecuma grupas, bet teikumi katru dienu pārfrāzēti (ne iekopēti). resolution = īss spēka lūgums. **closing = GALVENĀ vakara lūgšana** ar visiem pieciem elementiem (sargā mani un ģimeni, naktsmiers, veselība, sargā no ļauna/nelaimēm/slimībām + Āmen), bet kārtība un ritms — pēc ŠODIENAS VARIĀCIJAS. Nedrīkst, ka vakars ir tikai jautājumi bez īstas lūgšanas.`
+}
 - gospel.real_life_application un parts.connection_to_gospel: forma un saiknes veids — pēc ŠODIENAS VARIĀCIJAS. Neatkārto nesenās dienas.
 - STINGRI ievēro SKOLAS KONTEKSTU augstāk: brīvlaikā un sestdienā–svētdienā bez skolas/klasesbiedru/skolotāju situācijām.
 ${lengthRules}
@@ -459,7 +540,19 @@ ${feedback}
 `
     : "";
 
-  const user = isPublicBand
+  const user = isFamily
+    ? `REŽĪMS: ĢIMENE — kopīgs lasījums / pārdomas / lūgšana (bez spēles, bez audio)
+${dayContext}
+
+${bandGuide}
+
+ŠODIENAS LITURĢISKIE TEKSTI:
+${readingsPayload ? JSON.stringify(readingsPayload, null, 2) : input.scriptureText}
+
+${input.recentAvoidance?.trim() || ""}
+
+Uzdevums: izveido šodienas ĢIMENES saturu latviešu valodā. Evaņģēlijs ir galvenais. discussion_questions (3) + rīta/vakara lūgšanas; vakara aplīša jautājumi fiksēti; NAV activity.`
+    : isPublicBand
     ? `REŽĪMS: publiskais standarta saturs (nav vecāku personalizācijas; nav precīza vecuma gados — tikai josla)
 VECUMA GRUPA: ${bandMeta?.label ?? bandId} (aptuvenais vecums promptam: ${input.age})
 
@@ -515,7 +608,9 @@ Uzdevums: izveido šodienas saturu latviešu valodā. Evaņģēlijs ir galvenais
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const raw = await chatCompletionWithModel(messages, model);
-        const content = dailyLessonContentSchema.parse(extractJson(raw));
+        const parsed = dailyLessonContentSchema.parse(extractJson(raw));
+        assertMorningPrayerHasNoQuestions(parsed);
+        const content = finalizeFamilyLessonContent(bandId, parsed);
         if (i > 0) {
           console.warn(`[ai] Nodarbībai izmanto fallback modeli: ${model}`);
         }

@@ -7,6 +7,8 @@ import Image from "next/image";
 import {
   AGE_BANDS,
   AGE_BAND_STORAGE_KEY,
+  FAMILY_MODE,
+  getAgeBand,
   type AgeBandId,
 } from "@/lib/age-bands";
 import { BrandLogo } from "@/components/BrandLogo";
@@ -14,10 +16,13 @@ import { BrandLogo } from "@/components/BrandLogo";
 export function HomeLanding({
   initialBand,
   forcePicker,
+  showFamilyMode = false,
   appVersion,
 }: {
   initialBand: AgeBandId | null;
   forcePicker: boolean;
+  /** When false, hide Ģimene from the guest picker */
+  showFamilyMode?: boolean;
   /** Short deploy git SHA (e.g. c403d90), or "dev" locally */
   appVersion?: string;
 }) {
@@ -107,7 +112,7 @@ export function HomeLanding({
                 onClick={() => chooseBand(initialBand)}
                 disabled={saving !== null}
               >
-                Turpināt · {AGE_BANDS.find((b) => b.id === initialBand)?.label}
+                Turpināt · {getAgeBand(initialBand).label}
               </button>
               <p className="mt-3 text-sm text-[var(--ink-soft)]">
                 Vai izvēlies citu vecuma grupu:
@@ -142,6 +147,28 @@ export function HomeLanding({
               );
             })}
           </ul>
+
+          {showFamilyMode ? (
+            <div className="mt-5 border-t border-[var(--line)]/70 pt-4">
+              <p className="mb-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-[var(--accent-deep)]">
+                Kopā
+              </p>
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  disabled={saving !== null}
+                  onClick={() => chooseBand(FAMILY_MODE.id)}
+                  className={`rounded-xl border px-3.5 py-2 text-sm font-medium transition ${
+                    initialBand === FAMILY_MODE.id
+                      ? "border-[var(--bg-deep)] bg-[var(--bg-deep)] text-white"
+                      : "border-[var(--line)] bg-white/70 text-[var(--ink)] hover:border-[var(--bg-mid)]"
+                  }`}
+                >
+                  {saving === FAMILY_MODE.id ? "Atver…" : FAMILY_MODE.label}
+                </button>
+              </div>
+            </div>
+          ) : null}
 
           {error && (
             <p className="mt-3 text-center text-sm text-[var(--danger)]" role="alert">

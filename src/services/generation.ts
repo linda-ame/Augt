@@ -11,6 +11,7 @@ import {
   type ParentNotes,
 } from "@/lib/parent-notes";
 import { isChildDailyGenerationEnabled } from "@/lib/features";
+import { isFamilyModeId, FAMILY_MODE_ID } from "@/lib/family-content";
 import {
   getScriptureSource,
   isSiteChromeQuote,
@@ -289,6 +290,14 @@ export async function generateLessonForAgeBand(
       .eq("reading_date", date)
       .maybeSingle();
     if (existing?.generation_status === "success" && existing.content_json) {
+      if (isFamilyModeId(ageBandId)) {
+        return {
+          skipped: true as const,
+          reason: "already_exists",
+          audio: { skipped: true as const, reason: "family_no_audio" },
+          lesson: existing,
+        };
+      }
       const audio = await ensureAgeBandGospelAudio({
         date,
         ageBandId,
@@ -354,6 +363,14 @@ export async function generateLessonForAgeBand(
       .single();
     if (lessonErr) throw lessonErr;
 
+    if (isFamilyModeId(ageBandId)) {
+      return {
+        skipped: false as const,
+        lesson,
+        audio: { skipped: true as const, reason: "family_no_audio" },
+      };
+    }
+
     // Soft-fail: content stays even if TTS quota/API fails.
     const audio = await ensureAgeBandGospelAudio({
       date,
@@ -386,17 +403,18 @@ export async function generateLessonsForAllAgeBands(options?: {
   force?: boolean;
 }) {
   const results: unknown[] = [];
-  for (let i = 0; i < AGE_BANDS.length; i++) {
-    const band = AGE_BANDS[i]!;
+  const bands: AgeBandId[] = [...AGE_BANDS.map((b) => b.id), FAMILY_MODE_ID];
+  for (let i = 0; i < bands.length; i++) {
+    const ageBandId = bands[i]!;
     if (i > 0) {
       await new Promise((r) => setTimeout(r, 12_000));
     }
     try {
-      const result = await generateLessonForAgeBand(band.id, options);
-      results.push({ ageBand: band.id, result });
+      const result = await generateLessonForAgeBand(ageBandId, options);
+      results.push({ ageBand: ageBandId, result });
     } catch (err) {
       results.push({
-        ageBand: band.id,
+        ageBand: ageBandId,
         error: err instanceof Error ? err.message : String(err),
       });
     }

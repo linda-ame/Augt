@@ -1,3 +1,6 @@
+import { FAMILY_MODE_ID } from "@/lib/family-content";
+
+/** Child age bands only (cron “all bands”, age-from-age mapping). */
 export const AGE_BANDS = [
   {
     id: "age_7_9",
@@ -17,16 +20,30 @@ export const AGE_BANDS = [
   },
 ] as const;
 
-export type AgeBandId = (typeof AGE_BANDS)[number]["id"];
+export const FAMILY_MODE = {
+  id: FAMILY_MODE_ID,
+  label: "Ģimene",
+} as const;
+
+export type ChildAgeBandId = (typeof AGE_BANDS)[number]["id"];
+/** Public content mode id stored in cookie / age_band_lessons (includes Ģimene). */
+export type AgeBandId = ChildAgeBandId | typeof FAMILY_MODE_ID;
 
 export const AGE_BAND_COOKIE = "augt_age_band";
 export const AGE_BAND_STORAGE_KEY = "augt:age_band";
 
-export function isAgeBandId(value: string | null | undefined): value is AgeBandId {
+export function isChildAgeBandId(
+  value: string | null | undefined,
+): value is ChildAgeBandId {
   return AGE_BANDS.some((b) => b.id === value);
 }
 
+export function isAgeBandId(value: string | null | undefined): value is AgeBandId {
+  return isChildAgeBandId(value) || value === FAMILY_MODE_ID;
+}
+
 export function getAgeBand(id: AgeBandId) {
+  if (id === FAMILY_MODE_ID) return FAMILY_MODE;
   return AGE_BANDS.find((b) => b.id === id)!;
 }
 
@@ -53,11 +70,14 @@ export function approximateAge(band: AgeBandId): number {
       return 14;
     case "age_16_19":
       return 17;
+    case "family":
+      // Prompt depth midpoint for mixed-age family wording (~7–9 readable).
+      return 10;
   }
 }
 
-/** Map a child's age to the public age-band lesson bucket. */
-export function ageBandFromAge(age: number): AgeBandId {
+/** Map a child's age to the public age-band lesson bucket (never family). */
+export function ageBandFromAge(age: number): ChildAgeBandId {
   if (age <= 9) return "age_7_9";
   if (age <= 12) return "age_10_12";
   if (age <= 15) return "age_13_15";

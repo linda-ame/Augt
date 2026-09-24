@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAgeBandId } from "@/lib/age-bands";
+import { isFamilyModeEnabled } from "@/lib/dev-features";
+import { isFamilyModeId } from "@/lib/family-content";
 import {
   clearGuestAgeBandCookie,
   setGuestAgeBandCookie,
@@ -16,6 +18,16 @@ export async function POST(req: Request) {
 
   if (!isAgeBandId(band)) {
     return NextResponse.json({ error: "Nezināma vecuma grupa." }, { status: 400 });
+  }
+
+  if (isFamilyModeId(band)) {
+    const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
+    if (!isFamilyModeEnabled(host)) {
+      return NextResponse.json(
+        { error: "Ģimenes režīms šobrīd pieejams tikai lokāli." },
+        { status: 403 },
+      );
+    }
   }
 
   await setGuestAgeBandCookie(band);
