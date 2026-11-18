@@ -23,9 +23,56 @@ export const fillBlankItemSchema = z.object({
   explanation: z.string().optional(),
 });
 
+/** When AI omits activity.type, infer from payload shape (never invent from thin air). */
+export function inferActivityType(a: {
+  type?: string | null;
+  options?: string[];
+  items?: string[];
+  pairs?: unknown[];
+  scrambled?: string;
+  answer?: string;
+  questions?: Array<{ options?: string[] }>;
+  blanks?: unknown[];
+  clues?: string[];
+}): string | undefined {
+  const explicit = typeof a.type === "string" ? a.type.trim() : "";
+  if (explicit) return explicit;
+
+  if (a.pairs && a.pairs.length > 0) return "matching";
+  if (a.blanks && a.blanks.length > 0) return "fill_blank";
+  if (a.clues && a.clues.length > 0) return "who_am_i";
+  if (
+    (typeof a.scrambled === "string" && a.scrambled.trim()) ||
+    (typeof a.answer === "string" &&
+      a.answer.trim() &&
+      !a.questions?.length &&
+      !a.options?.length &&
+      !a.items?.length &&
+      !a.pairs?.length &&
+      !a.blanks?.length &&
+      !a.clues?.length)
+  ) {
+    return "word_scramble";
+  }
+  if (a.items && a.items.length >= 2) return "put_in_order";
+  if (a.questions && a.questions.length > 0) {
+    const opts = a.questions[0]?.options ?? [];
+    const isTrueFalse =
+      opts.length === 2 &&
+      opts.every((o) =>
+        /^(patiess|nepatiess|true|false)$/i.test(String(o).trim()),
+      );
+    return isTrueFalse ? "true_false" : "multiple_choice";
+  }
+  // Flat options: quiz or discernment — UI handles both; prefer multiple_choice (synth).
+  if (a.options && a.options.length >= 2) return "multiple_choice";
+  return undefined;
+}
+
 export const activitySchema = z
   .object({
-    type: z.string(),
+    /** Optional on input — inferred from shape when AI omits it. */
+    type: z.string().optional(),
     instruction: z.string().optional(),
     question: z.string().optional(),
     options: z.array(z.string()).optional(),
@@ -47,6 +94,8 @@ export const activitySchema = z
     clues: z.array(z.string().min(1)).min(1).max(3).optional(),
   })
   .transform((a) => {
+    // Empty string if unknown — .refine below rejects; keeps output type as string.
+    const type = inferActivityType(a) ?? "";
     const instruction =
       (a.instruction && a.instruction.trim()) ||
       (a.question && a.question.trim()) ||
@@ -54,7 +103,7 @@ export const activitySchema = z
 
     let questions = a.questions;
     const needsSynth =
-      (a.type === "multiple_choice" || a.type === "true_false") &&
+      (type === "multiple_choice" || type === "true_false") &&
       (!questions || questions.length === 0);
 
     if (needsSynth) {
@@ -62,7 +111,7 @@ export const activitySchema = z
       const options =
         a.options && a.options.length >= 2
           ? a.options
-          : a.type === "true_false"
+          : type === "true_false"
             ? ["Patiess", "Nepatiess"]
             : null;
       if (options) {
@@ -80,7 +129,7 @@ export const activitySchema = z
 
     let blanks = a.blanks;
     if (
-      a.type === "fill_blank" &&
+      type === "fill_blank" &&
       (!blanks || blanks.length === 0) &&
       (a.answer || typeof a.correct_answer === "string")
     ) {
@@ -99,7 +148,7 @@ export const activitySchema = z
     }
 
     let clues = a.clues;
-    if (a.type === "who_am_i" && (!clues || clues.length === 0)) {
+    if (type === "who_am_i" && (!clues || clues.length === 0)) {
       const raw =
         (a.question && a.question.trim()) ||
         (a.instruction && a.instruction.trim()) ||
@@ -115,7 +164,7 @@ export const activitySchema = z
 
     let scrambled = a.scrambled;
     let answer = a.answer;
-    if (a.type === "word_scramble" && answer && answer.trim()) {
+    if (type === "word_scramble" && answer && answer.trim()) {
       const normalizedAnswer = answer.trim().toLocaleLowerCase("lv");
       answer = normalizedAnswer;
       const answerLetters = [...normalizedAnswer];
@@ -141,7 +190,11 @@ export const activitySchema = z
       }
     }
 
-    return { ...a, instruction, questions, blanks, clues, scrambled, answer };
+    return { ...a, type, instruction, questions, blanks, clues, scrambled, answer };
+  })
+  .refine((a) => typeof a.type === "string" && a.type.length > 0, {
+    message: "gospel.activity.type trūkst un to nevar noteikt no satura",
+    path: ["type"],
   });
 
 export const gospelContentSchema = z.object({

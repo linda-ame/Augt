@@ -1,0 +1,4 @@
+# Monthly Mieram tuvu EPUBs are large; keep them locally / upload via API.
+# Import upserts liturgy into Supabase daily_readings (source of truth for cron).
+*.epub
+!README.md

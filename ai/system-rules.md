@@ -187,6 +187,11 @@ Rīta lūgšana tiek lasīta **pirms** Evaņģēlija. Tai jābūt saprotamai, ja
 - **EVAŅĢĒLIJS PIRMĀKĀRT:** spēle pārbauda / nostiprina **šodienas Evaņģēlija tekstu** (kas notiek, kas ko saka, galvenā doma, tēli). NEpārvērst par vispārīgu ikdienas situāciju spēli; praktiskā ikdiena ir `real_life_application`, ne spēles kodols.
 - Izvēlies tipu no kataloga, kas der Evaņģēlijam.
 - Izvairies no atkārtošanas, ja dots nesenais vēstures saraksts.
+- **JSON lauki — NEVIENS NAV “pašsaprotams” (kritiski):**
+  - `gospel.activity.type` ir **OBLIGĀTS string** — vienmēr ieraksti to ekspliciti (piem. `"multiple_choice"`, `"true_false"`, `"fill_blank"`, `"word_scramble"`, `"who_am_i"`, `"put_in_order"`, `"matching"`, `"find_the_mistake"`, `"scenario_choice"`, `"choose_the_best_response"`).
+  - **NEDRĪKST** atstāt `type` ārā, tukšu vai null, pat ja tips “redzams” no `questions` / `blanks` / `pairs`. Validācija lasa **tikai** `type` lauku.
+  - Līdzīgi: neatlaid citus tipam vajadzīgos laukus (`instruction`, `questions`, `blanks`, `pairs`, `scrambled`+`answer`, `clues`, `items`+`correct_answer` u.tml.) — “saprotams no konteksta” ≠ derīgs JSON.
+  - Pirms atbildes: pārbaudi, ka `activity` satur `type` un visus šim tipam obligātos laukus.
 - **Quiz** tipi (`multiple_choice`, `true_false`, `fill_blank`, `word_scramble`, `who_am_i`, `find_the_mistake`, `put_in_order`): vienmēr `correct_answer`/`answer` + īss `explanation`.
   - `multiple_choice`: **tieši 2** īsi jautājumi masīvā `questions` (katram: `question`, `options`, `correct_answer` indekss, `explanation`). UI rāda abus vienā panelī zem otra. Par tekstu, ne par “ko tu darītu skolā”.
   - `true_false`: **tieši 2** apgalvojumi masīvā `questions` (katram: `question` = apgalvojums, `options`: ["Patiess","Nepatiess"], `correct_answer` 0/1, `explanation`). UI rāda abus zem otra; rezultāts uzreiz (bez 3 mēģinājumiem).
@@ -218,3 +223,4 @@ Rīta lūgšana tiek lasīta **pirms** Evaņģēlija. Tai jābūt saprotamai, ja
 
 ## Formāts
 - Atbildi **tikai** ar derīgu JSON objektu (bez markdown nožogojuma).
+- **Nekad neizlaid obligātos atslēgvārdus**, pat ja saturs šķiet acīmredzams. Īpaši: `gospel.activity.type` (kad ir spēle), `morning_prayer` / `evening_prayer` lauki, `gospel` lauki (`title`, `scripture_reference`, `explanation`, `main_idea`, `real_life_application`, `reflection_question`, `prayer`).

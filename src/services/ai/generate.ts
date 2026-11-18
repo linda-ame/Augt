@@ -430,7 +430,11 @@ ${bandGuide}
     "explanation": string,
     "main_idea": string,
     "real_life_application": string,
-    "activity": { ...spēle... },
+    "activity": {
+      "type": string,  // OBLIGĀTS — nekad neizlaid / neuzskati par pašsaprotamu
+      "instruction": string,
+      // + tipam atbilstošie lauki (questions / blanks / pairs / …)
+    },
     "reflection_question": string,
     "prayer": string
   }`;
@@ -498,7 +502,7 @@ ${
 - gospel.real_life_application: VIENS kopīgs ģimenes solis šodienai.
 - evening_prayer: vakara aplītis — ievads jauns; examen_questions = fiksētie 4; lūgšana jauna.`
     : `- Spēle un Evaņģēlija lūgšana TIKAI gospel objektā. gospel.prayer / rīts / vakars: saglabā ticības domu no Evaņģēlija, ne tikai “palīdzi būt labam”.
-- gospel.activity: EVAŅĢĒLIJA teksts (ne vispārīga ikdiena). Ietver "type", "instruction"; explanation katrā jautājumā vai activity līmenī.
+- gospel.activity: EVAŅĢĒLIJA teksts (ne vispārīga ikdiena). **OBLIGĀTI** eksplicīts "type" (string no kataloga) + "instruction". NEDRĪKST izlaist "type", pat ja tips “redzams” no questions/blanks/pairs — validācija to neuzmin. Explanation katrā jautājumā vai activity līmenī.
 - multiple_choice / true_false: questions masīvs ar **tieši 2** īsiem punktiem par šodienas Evaņģēliju (katram: question, options, correct_answer indekss, explanation). UI rāda abus vienā panelī. true_false options: Patiess / Nepatiess.
 - fill_blank: blanks masīvs ar **2–3** teikumiem (___), katram answer + explanation. UI pārbauda visus kopā.
 - word_scramble: tieši 1 īss Evaņģēlija vārds (scrambled + answer + explanation). ORTOGRAFIJA: answer ar pareizām garumzīmēm; scrambled = tieši tie paši burti (ī≠i, ā≠a); preferē mazo burtu; burtu kopām jāsakrīt 1:1.
