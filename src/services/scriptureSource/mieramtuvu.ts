@@ -343,16 +343,55 @@ function parseLiturgicalParts(bodyText: string): ScriptureReading[] {
   return readings;
 }
 
+const MONTHS_LV_NOM: Record<string, number> = {
+  janvāris: 1,
+  februāris: 2,
+  marts: 3,
+  aprīlis: 4,
+  maijs: 5,
+  jūnijs: 6,
+  jūlijs: 7,
+  augusts: 8,
+  septembris: 9,
+  oktobris: 10,
+  novembris: 11,
+  decembris: 12,
+};
+
+/**
+ * Date shown at the top of /lasit/ ("2026. gada 18. novembris").
+ * Used to refuse saving yesterday's liturgy under today's key when MT
+ * has not rolled over yet.
+ */
+export function extractPageDate(html: string): string | null {
+  const plain = cheerio
+    .load(html)
+    .text()
+    .replace(/\u00a0/g, " ")
+    .replace(/\s+/g, " ");
+  const m = plain.match(
+    /(\d{4})\.?\s*gada\s+(\d{1,2})\.?\s*(janvāris|februāris|marts|aprīlis|maijs|jūnijs|jūlijs|augusts|septembris|oktobris|novembris|decembris)/i,
+  );
+  if (!m) return null;
+  const year = m[1];
+  const day = m[2]!.padStart(2, "0");
+  const month = MONTHS_LV_NOM[m[3]!.toLowerCase()];
+  if (!month) return null;
+  return `${year}-${String(month).padStart(2, "0")}-${day}`;
+}
+
 function parseFromHtml(html: string): {
   readings: ScriptureReading[];
   dailyQuote?: string;
+  pageDate: string | null;
 } {
   const $ = cheerio.load(html);
   const accordion = extractAccordionSection($, /Svēto Rakstu lasījumi/i);
   const bodyText = accordion || $.text();
   const readings = parseLiturgicalParts(bodyText);
   const dailyQuote = extractDailyQuote($, html);
-  return { readings, dailyQuote };
+  const pageDate = extractPageDate(html);
+  return { readings, dailyQuote, pageDate };
 }
 
 const FETCH_HEADERS = {
@@ -401,7 +440,13 @@ export class MieramTuvuSource implements ScriptureSource {
             lastError = new Error("Lapa nesatur lasījumu tekstu.");
             continue;
           }
-          const { readings, dailyQuote } = parseFromHtml(html);
+          const { readings, dailyQuote, pageDate } = parseFromHtml(html);
+          if (pageDate && pageDate !== date) {
+            lastError = new Error(
+              `Mieram tuvu lapa rāda ${pageDate}, gaidīts ${date} — saturs vēl nav pārslēgts.`,
+            );
+            continue;
+          }
           const sourceText = readings
             .map((r) => `[${r.role}] ${r.label} (${r.reference})\n${r.text}`)
             .join("\n\n");

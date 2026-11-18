@@ -4,4 +4,5 @@ export {
   MieramTuvuSource,
   isSiteChromeQuote,
   sanitizeDailyQuote,
+  extractPageDate,
 } from "./mieramtuvu";
